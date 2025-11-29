@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="bg-gray-900 text-white flex items-center justify-center min-h-screen">
-      <div className="container mx-auto px-5 text-center">
+    <section className="bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center min-h-screen">
+      <div className="mx-auto px-5 text-center max-w-4xl">
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4"
+          className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -15,7 +15,7 @@ const Hero = () => {
           Creative Developer & Designer
         </motion.h1>
         <motion.p
-          className="mb-8 leading-relaxed text-lg text-gray-400 max-w-3xl mx-auto"
+          className="mb-8 leading-relaxed text-lg text-gray-400 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
