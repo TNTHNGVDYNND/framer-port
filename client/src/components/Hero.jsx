@@ -3,19 +3,44 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
+  const title = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const word = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const titleText = "Creative Developer & Designer";
+
   return (
-    <section className="bg-linear-to-br from-gray-600 to-black text-white flex items-center justify-center min-h-screen">
+    <section className="text-white flex items-center justify-center h-screen">
       <div className="mx-auto px-5 text-center max-w-4xl">
         <motion.h1
           className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          variants={title}
+          initial="hidden"
+          animate="visible"
         >
-          Creative Developer & Designer
+          {titleText.split(" ").map((char, index) => (
+            <motion.span
+              key={index}
+              variants={word}
+              style={{ display: "inline-block", whiteSpace: "pre" }}
+            >
+              {char}{" "}
+            </motion.span>
+          ))}
         </motion.h1>
         <motion.p
-          className="mb-8 leading-relaxed text-lg text-gray-400 max-w-2xl mx-auto"
+          className="mb-8 leading-relaxed text-lg text-red-500 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}

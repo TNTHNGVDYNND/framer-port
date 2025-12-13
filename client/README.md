@@ -11,6 +11,25 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+The site is a masterclass in modern, minimalist web design with a
+strong focus on motion and micro-interactions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Overall Feel: Dark, moody, and cinematic. It feels less like a
+  static page and more like an interactive experience.
+- Key Features:
+  1.  Preloader: A loading animation that covers the screen
+      initially and then elegantly reveals the main content.
+  2.  Custom Cursor: A circular cursor that follows the mouse,
+      changing its appearance on hover over interactive
+      elements.
+  3.  Smooth Scrolling: The scrolling is incredibly fluid and
+      not the browser's default "jerky" scroll. This is likely
+      achieved with a library like lenis.
+  4.  Hero Section: Full-screen, with large, impactful
+      typography. The title text animates in, word by word or
+      character by character.
+  5.  Horizontal Scroll: The project section scrolls
+      horizontally, creating a unique "gallery" feel.
+  6.  Subtle Animations: Elements fade in and slide up as you
+      scroll into view. Hover effects on links and projects are
+      smooth and provide clear feedback.
