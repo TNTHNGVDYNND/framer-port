@@ -27,11 +27,11 @@ const HeroContent = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className='h-screen flex items-center justify-center bg-linear-to-br from-gray-950 via-gray-900 to-black'
+      className='h-screen flex items-center justify-center bg-linear-to-br from-stone-950 from-15% via-stone-900 via-50% to-stone-950 to-80%'
     >
       <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
-          className='text-5xl md:text-7xl font-bold mb-4 leading-tight text-white'
+          className='text-5xl md:text-7xl font-bold mb-4 leading-tight text-dusk font-zodiak'
           variants={title}
           initial='hidden'
           animate='visible'
@@ -47,7 +47,7 @@ const HeroContent = () => {
           ))}
         </motion.h1>
         <motion.p
-          className='mb-8 leading-relaxed text-lg text-gray-400 max-w-2xl mx-auto'
+          className='mb-8 leading-relaxed text-lg text-driftwood max-w-2xl mx-auto'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
@@ -63,13 +63,13 @@ const HeroContent = () => {
         >
           <Link
             to='/work'
-            className='inline-flex text-white bg-sky-700 border-0 py-2 px-6 focus:outline-none hover:bg-sky-500 rounded text-lg'
+            className='inline-flex text-white bg-tide/70 border-0 py-2 px-6 focus:outline-none hover:bg-tide rounded-full text-lg'
           >
             View My Work
           </Link>
           <Link
             to='/contact'
-            className='ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg'
+            className='ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-white rounded-full text-lg items-center'
           >
             Get In Touch
           </Link>
