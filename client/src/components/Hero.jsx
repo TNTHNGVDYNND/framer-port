@@ -27,7 +27,7 @@ const HeroContent = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className='h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-black/60'
+      className='h-screen flex items-center justify-center bg-linear-to-br from-gray-950 via-gray-900 to-black'
     >
       <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
