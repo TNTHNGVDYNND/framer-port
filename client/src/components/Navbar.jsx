@@ -12,21 +12,36 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-8">
             <Link
               to="/work"
-              className="text-gray-300 hover:text-white transition-colors"
+              className="relative overflow-hidden group text-gray-300 transition-colors duration-300 hover:text-white"
             >
-              Work
+              <span className="block transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                Work
+              </span>
+              <span className="block absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0">
+                Work
+              </span>
             </Link>
             <Link
               to="/about"
-              className="text-gray-300 hover:text-white transition-colors"
+              className="relative overflow-hidden group text-gray-300 transition-colors duration-300 hover:text-white"
             >
-              About
+              <span className="block transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                About
+              </span>
+              <span className="block absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0">
+                About
+              </span>
             </Link>
             <Link
               to="/contact"
-              className="text-gray-300 hover:text-white transition-colors"
+              className="relative overflow-hidden group text-gray-300 transition-colors duration-300 hover:text-white"
             >
-              Contact
+              <span className="block transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                Contact
+              </span>
+              <span className="block absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0">
+                Contact
+              </span>
             </Link>
           </div>
         </div>
