@@ -1,35 +1,48 @@
-# React + Vite
+# MyPortfolio - A Modern Animated Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a modern, single-page portfolio website designed to showcase creative work with a strong emphasis on fluid animations and a polished user experience. It was built from the ground up using React, Vite, and Tailwind CSS, and features advanced animations powered by Framer Motion.
 
-Currently, two official plugins are available:
+The user interface and animation sequences are inspired by high-quality design portfolios, aiming for a cinematic and interactive feel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Core Technologies
 
-## React Compiler
+-   **Frontend:** [React](https://react.dev/) (with [Vite](https://vitejs.dev/))
+-   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+-   **Animation:** [Framer Motion](https://www.framer.com/motion/)
+-   **Smooth Scrolling:** [Lenis](https://lenis.studiofreight.com/)
+-   **Routing:** [React Router](https://reactrouter.com/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Key Features
 
-The site is a masterclass in modern, minimalist web design with a
-strong focus on motion and micro-interactions.
+-   **Multi-Stage Entry Animation:** A sophisticated, self-contained loading sequence in the `Hero` component that includes:
+    -   A progress-bar style preloader.
+    -   A "curtain reveal" transition effect.
+-   **Advanced Hover Effects:** Custom "double text" sliding hover animations on navigation links.
+-   **Animated Active Link Indicator:** A sliding underline in the navbar that smoothly animates to the currently active page.
+-   **Staggered Text Animation:** The main headline in the Hero section animates in word by word.
+-   **Horizontal Project Gallery:** A horizontally scrolling showcase for projects with scroll-snapping for a clean browsing experience.
+-   **Dark, Minimalist UI:** A modern, dark-themed UI configured with Tailwind CSS v4's `@theme` directive.
+-   **Component-Based Architecture:** A clean and organized codebase with reusable components for the Navbar, Hero, Project List, and more.
 
-- Overall Feel: Dark, moody, and cinematic. It feels less like a
-  static page and more like an interactive experience.
-- Key Features:
-  1.  Preloader: A loading animation that covers the screen
-      initially and then elegantly reveals the main content.
-  2.  Custom Cursor: A circular cursor that follows the mouse,
-      changing its appearance on hover over interactive
-      elements.
-  3.  Smooth Scrolling: The scrolling is incredibly fluid and
-      not the browser's default "jerky" scroll. This is likely
-      achieved with a library like lenis.
-  4.  Hero Section: Full-screen, with large, impactful
-      typography. The title text animates in, word by word or
-      character by character.
-  5.  Horizontal Scroll: The project section scrolls
-      horizontally, creating a unique "gallery" feel.
-  6.  Subtle Animations: Elements fade in and slide up as you
-      scroll into view. Hover effects on links and projects are
-      smooth and provide clear feedback.
+## Getting Started
+
+To run this project locally, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    ```
+2.  **Navigate to the client directory:**
+    ```bash
+    cd client
+    ```
+3.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+The application will be available at `http://localhost:5173` (or the next available port).
