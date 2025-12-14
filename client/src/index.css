@@ -1,9 +1,12 @@
 @import url("https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=zodiak@400,800,900,1&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --theme-font-sans: "General Sans", sans-serif;
+  --font-sans: "General Sans", sans-serif;
+  --font-zodiak: "Zodiak", sans-serif;
   --theme-colors-dark-primary: #111111;
+  --theme-color-dark-secondary: #0b0b0c;
   --theme-colors-text-main: gainsboro;
   --theme-colors-light-primary: #ffffff;
 }
@@ -11,7 +14,7 @@
 body {
   background-color: var(--theme-colors-dark-primary);
   color: var(--theme-colors-text-main);
-  font-family: var(--theme-font-sans);
+  font-family: var(--font-zodiak);
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
@@ -24,17 +27,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 h1 {
-  font-size: 3.2em;
   line-height: 1.1;
 }
 
@@ -55,4 +48,19 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Custom scrollbar styles */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
