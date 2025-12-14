@@ -6,13 +6,15 @@ const NavItem = ({ to, children }) => {
   return (
     <NavLink to={to} className="relative group text-gray-300 transition-colors duration-300 hover:text-white">
       {({ isActive }) => (
-        <div className="relative overflow-hidden">
-          <span className="block transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-            {children}
-          </span>
-          <span className="block absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0">
-            {children}
-          </span>
+        <>
+          <div className="relative overflow-hidden">
+            <span className="block transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+              {children}
+            </span>
+            <span className="block absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0">
+              {children}
+            </span>
+          </div>
           {isActive && (
             <motion.div
               className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-white"
@@ -21,7 +23,7 @@ const NavItem = ({ to, children }) => {
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
           )}
-        </div>
+        </>
       )}
     </NavLink>
   );
