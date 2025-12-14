@@ -17,7 +17,7 @@ const Curtain = () => {
       variants={reveal}
       initial="initial"
       exit="exit"
-      className="h-screen w-screen fixed top-0 left-0 z-40 bg-gray-800"
+      className="h-screen w-screen fixed top-0 left-0 z-40 bg-zinc-900"
     />
   );
 };
