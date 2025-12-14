@@ -7,7 +7,7 @@ const NavItem = ({ to, children }) => {
   return (
     <NavLink
       to={to}
-      className='relative group text-gray-300 transition-colors duration-300 hover:text-white'
+      className='relative group text-driftwood/60 transition-colors duration-300 hover:text-driftwood px-3 py-2 font-medium text-lg'
     >
       {({ isActive }) => (
         <>
@@ -21,7 +21,7 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-red-500'
+              className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-coral'
               layoutId='underline'
               initial={false}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
@@ -40,17 +40,17 @@ NavItem.propTypes = {
 
 const Navbar = () => {
   return (
-    <nav className='bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50'>
-      <div className='container mx-auto px-4'>
+    <nav className='bg-gray-900/10 backdrop-blur-sm sticky top-0 z-50'>
+      <div className='container mx-auto px-4 py-2'>
         <div className='flex items-center justify-between h-16'>
-          <div className='text-2xl font-bold text-white'>
+          <div className='text-2xl font-bold text-coral'>
             <NavLink to='/'>
               {({ isActive }) => (
                 <div className='relative'>
                   MyPortfolio
                   {isActive && (
                     <motion.div
-                      className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-red-500'
+                      className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-driftwood'
                       layoutId='underline'
                       initial={false}
                       transition={{

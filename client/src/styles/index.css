@@ -1,10 +1,12 @@
-@import url("https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap");
-@import url("https://api.fontshare.com/v2/css?f[]=zodiak@400,800,900,1&display=swap");
-@import "tailwindcss";
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=zodiak@400,800,900,1&display=swap');
+
+@import 'tailwindcss';
+@import './theme.css';
 
 @theme {
-  --font-sans: "General Sans", sans-serif;
-  --font-zodiak: "Zodiak", sans-serif;
+  --font-sans: 'General Sans', sans-serif;
+  --font-zodiak: 'Zodiak', sans-serif;
   --theme-colors-dark-primary: #111111;
   --theme-color-dark-secondary: #0b0b0c;
   --theme-colors-text-main: gainsboro;
@@ -14,7 +16,7 @@
 body {
   background-color: var(--theme-colors-dark-primary);
   color: var(--theme-colors-text-main);
-  font-family: var(--font-zodiak);
+  font-family: var(--font-sans);
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
