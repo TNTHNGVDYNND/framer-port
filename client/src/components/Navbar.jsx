@@ -1,10 +1,13 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const NavItem = ({ to, children }) => {
   return (
-    <NavLink to={to} className="relative group text-gray-300 transition-colors duration-300 hover:text-white">
+    <NavLink
+      to={to}
+      className="relative group text-gray-300 transition-colors duration-300 hover:text-white"
+    >
       {({ isActive }) => (
         <>
           <div className="relative overflow-hidden">
@@ -20,7 +23,7 @@ const NavItem = ({ to, children }) => {
               className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-white"
               layoutId="underline"
               initial={false}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
         </>
@@ -44,7 +47,11 @@ const Navbar = () => {
                       className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-white"
                       layoutId="underline"
                       initial={false}
-                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     />
                   )}
                 </div>
