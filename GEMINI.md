@@ -8,17 +8,17 @@ To create a visually appealing, animated, and responsive portfolio website to sh
 
 ## 2. Core Technologies
 
-*   **Backend:** Node.js, Express.js
-*   **Frontend:** React (using Vite for setup)
-*   **Database:** MongoDB (with Mongoose for modeling)
-*   **Styling:** Tailwind CSS
-*   **Animation:** Framer Motion
+* **Backend:** Node.js, Express.js
+* **Frontend:** React (using Vite for setup)
+* **Database:** MongoDB (with Mongoose for modeling)
+* **Styling:** Tailwind CSS
+* **Animation:** Framer Motion
 
 ## 3. Project Structure
 
 A monorepo-style structure will be used to keep the client and server code separate but within the same project.
 
-```
+```md
 /
 ├── client/
 │   ├── public/
@@ -59,6 +59,7 @@ The server will be a simple RESTful API.
 ### Data Models (Mongoose Schemas)
 
 **`Project` Model (`server/models/Project.js`)**
+
 ```javascript
 {
   title: String,
@@ -71,9 +72,9 @@ The server will be a simple RESTful API.
 
 ### API Endpoints (`server/routes/api.js`)
 
-*   `GET /api/projects`: Fetches all portfolio projects from the database.
-*   `GET /api/projects/:id`: Fetches a single project by its ID.
-*   `POST /api/contact`: Receives data from the contact form (for now, it will log to the console; later, it can be configured to send an email).
+* `GET /api/projects`: Fetches all portfolio projects from the database.
+* `GET /api/projects/:id`: Fetches a single project by its ID.
+* `POST /api/contact`: Receives data from the contact form (for now, it will log to the console; later, it can be configured to send an email).
 
 ## 5. Frontend (Client) Architecture
 
@@ -81,39 +82,39 @@ The client will be a React-based SPA.
 
 ### Component Breakdown (`client/src/components/`)
 
-*   **`Navbar.jsx`**: Top navigation bar, with links to different sections.
-*   **`Hero.jsx`**: The main landing view with a headline and intro text.
-*   **`ProjectList.jsx`**: A container that fetches project data from the backend and maps over it.
-*   **`ProjectCard.jsx`**: A reusable card to display a single project, with an image, title, and description.
-*   **`ContactForm.jsx`**: A form for users to send a message.
+* **`Navbar.jsx`**: Top navigation bar, with links to different sections.
+* **`Hero.jsx`**: The main landing view with a headline and intro text.
+* **`ProjectList.jsx`**: A container that fetches project data from the backend and maps over it.
+* **`ProjectCard.jsx`**: A reusable card to display a single project, with an image, title, and description.
+* **`ContactForm.jsx`**: A form for users to send a message.
 
 ### Animation Strategy
 
-*   **Framer Motion** will be used for:
-    *   **Page Transitions:** Smooth fades or slides between sections.
-    *   **Scroll-Triggered Animations:** Elements animating into view as the user scrolls.
-    *   **Micro-interactions:** Hover effects on `ProjectCard`s, button press effects, etc.
+* **Framer Motion** will be used for:
+  * **Page Transitions:** Smooth fades or slides between sections.
+  * **Scroll-Triggered Animations:** Elements animating into view as the user scrolls.
+  * **Micro-interactions:** Hover effects on `ProjectCard`s, button press effects, etc.
 
 ## 6. Development & Deployment Plan
 
-*   **Development:**
-    1.  Use `npm install` in both `/client` and `/server` directories.
-    2.  Run the backend server with `nodemon server.js`.
-    3.  Run the frontend development server with `npm run dev`.
-    4.  Use a tool like `concurrently` to run both with a single command from the root.
-*   **Deployment:**
-    *   **Frontend (Client):** Deploy as a static site on services like **Vercel** or **Netlify**.
-    *   **Backend (Server):** Deploy as a Node.js application on services like **Render** or **Heroku**.
+* **Development:**
+    1. Use `npm install` in both `/client` and `/server` directories.
+    2. Run the backend server with `nodemon server.js`.
+    3. Run the frontend development server with `npm run dev`.
+    4. Use a tool like `concurrently` to run both with a single command from the root.
+* **Deployment:**
+  * **Frontend (Client):** Deploy as a static site on services like **Vercel** or **Netlify**.
+  * **Backend (Server):** Deploy as a Node.js application on services like **Render** or **Heroku**.
 
 ## 7. Action Plan (Next Steps)
 
-1.  Set up the folder structure as defined above.
-2.  Initialize the Node.js/Express server.
-3.  Initialize the React client using Vite.
-4.  Integrate Tailwind CSS into the React client.
-5.  Build the basic backend API endpoints and test with sample data.
-6.  Build the frontend components and connect them to the backend API.
-7.  Implement animations with Framer Motion.
+1. Set up the folder structure as defined above.
+2. Initialize the Node.js/Express server.
+3. Initialize the React client using Vite.
+4. Integrate Tailwind CSS into the React client.
+5. Build the basic backend API endpoints and test with sample data.
+6. Build the frontend components and connect them to the backend API.
+7. Implement animations with Framer Motion.
 
 ---
 
@@ -122,37 +123,42 @@ The client will be a React-based SPA.
 This section documents the major development steps completed.
 
 ### 1. Project Initialization
+
 - Initialized the project as a Git repository.
-- Created the initial `GEMINI.md` blueprint.
-- Set up a `.gitignore` file to exclude `node_modules`, build artifacts, and environment variables.
+* Created the initial `GEMINI.md` blueprint.
+* Set up a `.gitignore` file to exclude `node_modules`, build artifacts, and environment variables.
 
 ### 2. Backend Setup
+
 - Initialized a Node.js project in the `/server` directory.
-- Installed dependencies: `express`, `mongoose`, `cors`, `dotenv`, and `nodemon`.
-- Configured the server to use ES Modules (`"type": "module"`).
-- Created the basic Express server setup in `server.js`.
-- Implemented a basic API endpoint (`/api/projects`) with a controller and route.
+* Installed dependencies: `express`, `mongoose`, `cors`, `dotenv`, and `nodemon`.
+* Configured the server to use ES Modules (`"type": "module"`).
+* Created the basic Express server setup in `server.js`.
+* Implemented a basic API endpoint (`/api/projects`) with a controller and route.
 
 ### 3. Frontend Setup
+
 - Set up a React project in the `/client` directory using Vite.
-- Installed and configured Tailwind CSS v4, including the `@tailwindcss/vite` plugin for proper integration.
-- Installed and configured ESLint for a React project, including `eslint-plugin-react` and custom rules for a better development experience.
+* Installed and configured Tailwind CSS v4, including the `@tailwindcss/vite` plugin for proper integration.
+* Installed and configured ESLint for a React project, including `eslint-plugin-react` and custom rules for a better development experience.
 
 ### 4. Component & Layout Implementation
+
 - Developed a component-based architecture with the following components:
-  - `Navbar.jsx`: For site navigation.
-  - `Hero.jsx`: For the main landing page view.
-  - `ProjectCard.jsx`: To display individual projects.
-  - `ProjectList.jsx`: To display a grid of projects.
-  - `Footer.jsx`: For the site footer.
-  - `Layout.jsx`: A main layout component to wrap all pages.
-- Implemented client-side routing using `react-router-dom`.
-- Created pages for `Home`, `Work`, and `About`.
-- Structured the application to use a main `Layout` with page content rendered via `Outlet`.
+  * `Navbar.jsx`: For site navigation.
+  * `Hero.jsx`: For the main landing page view.
+  * `ProjectCard.jsx`: To display individual projects.
+  * `ProjectList.jsx`: To display a grid of projects.
+  * `Footer.jsx`: For the site footer.
+  * `Layout.jsx`: A main layout component to wrap all pages.
+* Implemented client-side routing using `react-router-dom`.
+* Created pages for `Home`, `Work`, and `About`.
+* Structured the application to use a main `Layout` with page content rendered via `Outlet`.
 
 ### 5. Animation & Data
+
 - Integrated `framer-motion` for animations.
-- Added page transitions using `AnimatePresence`.
-- Implemented entry animations for the `Hero` component.
-- Created a staggered animation for the `ProjectList` where cards animate in as they are scrolled into view.
-- Refactored the project to use local mock data from `/client/src/constants/index.js` for the project list, decoupling it from the backend for the initial build.
+* Added page transitions using `AnimatePresence`.
+* Implemented entry animations for the `Hero` component.
+* Created a staggered animation for the `ProjectList` where cards animate in as they are scrolled into view.
+* Refactored the project to use local mock data from `/client/src/constants/index.js` for the project list, decoupling it from the backend for the initial build.
