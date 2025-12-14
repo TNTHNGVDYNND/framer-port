@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import Preloader from "./Preloader";
-import Curtain from "./Curtain";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import Preloader from './Preloader';
+import Curtain from './Curtain';
 
 const HeroContent = () => {
   const title = {
@@ -20,56 +20,56 @@ const HeroContent = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  const titleText = "Creative Developer & Designer";
+  const titleText = 'Creative Developer & Designer';
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="h-screen flex items-center justify-center"
+      className='h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-black/60'
     >
-      <div className="mx-auto px-5 text-center max-w-4xl">
+      <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 leading-tight text-white"
+          className='text-5xl md:text-7xl font-bold mb-4 leading-tight text-white'
           variants={title}
-          initial="hidden"
-          animate="visible"
+          initial='hidden'
+          animate='visible'
         >
-          {titleText.split(" ").map((char, index) => (
+          {titleText.split(' ').map((char, index) => (
             <motion.span
               key={index}
               variants={word}
-              style={{ display: "inline-block", whiteSpace: "pre" }}
+              style={{ display: 'inline-block', whiteSpace: 'pre' }}
             >
-              {char}{" "}
+              {char}{' '}
             </motion.span>
           ))}
         </motion.h1>
         <motion.p
-          className="mb-8 leading-relaxed text-lg text-gray-400 max-w-2xl mx-auto"
+          className='mb-8 leading-relaxed text-lg text-gray-400 max-w-2xl mx-auto'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
         >
           I design and code beautifully simple things, and I love what I do.
           Welcome to my digital garden.
         </motion.p>
         <motion.div
-          className="flex justify-center"
+          className='flex justify-center'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 1, ease: 'easeOut' }}
         >
           <Link
-            to="/work"
-            className="inline-flex text-white bg-sky-600 border-0 py-2 px-6 focus:outline-none hover:bg-sky-500 rounded text-lg"
+            to='/work'
+            className='inline-flex text-white bg-sky-700 border-0 py-2 px-6 focus:outline-none hover:bg-sky-500 rounded text-lg'
           >
             View My Work
           </Link>
           <Link
-            to="/contact"
-            className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
+            to='/contact'
+            className='ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg'
           >
             Get In Touch
           </Link>
@@ -95,18 +95,18 @@ const Hero = () => {
   const renderContent = () => {
     switch (loadingState) {
       case 0:
-        return <Preloader key="preloader" />;
+        return <Preloader key='preloader' />;
       case 1:
-        return <Curtain key="curtain" />;
+        return <Curtain key='curtain' />;
       case 2:
       default:
-        return <HeroContent key="hero-content" />;
+        return <HeroContent key='hero-content' />;
     }
   };
 
   return (
     <section>
-      <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
+      <AnimatePresence mode='wait'>{renderContent()}</AnimatePresence>
     </section>
   );
 };
