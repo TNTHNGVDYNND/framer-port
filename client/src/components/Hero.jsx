@@ -27,7 +27,7 @@ const HeroContent = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className='h-screen flex items-center justify-center bg-linear-to-br from-stone-950 from-15% via-stone-900 via-50% to-stone-950 to-80%'
+      className='h-screen flex items-center justify-center bg-linear-to-br from-stone-900 from-45% via-dusk/30 via-50% to-black to-50%'
     >
       <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
@@ -63,13 +63,13 @@ const HeroContent = () => {
         >
           <Link
             to='/work'
-            className='inline-flex text-white bg-tide/70 border-0 py-2 px-6 focus:outline-none hover:bg-tide rounded-full text-lg'
+            className='inline-flex text-gray-400 bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-teal-300 rounded-full text-lg hover:text-white'
           >
             View My Work
           </Link>
           <Link
             to='/contact'
-            className='ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-white rounded-full text-lg items-center'
+            className='ml-4 inline-flex text-gray-400 bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-white rounded-full text-lg items-center'
           >
             Get In Touch
           </Link>
