@@ -40,17 +40,17 @@ const themeCard = () => {
   const icons = { dark: lightIcon, light: darkIcon };
 
   return (
-    <div className="flex min-h-screen min-w-full flex-col items-center justify-center bg-neutral-50">
-      <article className="relative w-[80%] max-w-[500px] rounded-lg border border-neutral-200 p-8 text-neutral-900 shadow-2xl border-primary-100">
+    <div className="flex min-h-screen min-w-full flex-col items-center justify-center bg-neutral-950">
+      <article className="relative w-[80%] max-w-[500px] rounded-lg border border-neutral-500 bg-neutral-900 p-8 shadow-2xl text-neutral-300">
         <div
           onClick={toggleTheme}
-          className="absolute top-0 right-0 mr-8 mt-8 h-6 w-6 cursor-pointer"
+          className="absolute top-0 right-0 mr-8 mt-8 cursor-pointer w-6 h-6"
         >
           <SvgImage src={icons[theme]} />
         </div>
         <h1 className="text-2xl font-bold text-primary-400">{heading}</h1>
-        <p className="py-8 text-neutral-700">{text}</p>
-        <div className={"grid grid-cols-11 gap-[2px]"}>
+        <p className=" py-8">{text}</p>
+        <div className={"grid grid-cols-11 gap-[2px] z-50"}>
           {["neutral", "primary", "ok", "warn", "fail"].map(
             (color, colorIndex) =>
               [

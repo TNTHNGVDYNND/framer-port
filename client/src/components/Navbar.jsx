@@ -6,7 +6,7 @@ const NavItem = ({ to, children }) => {
   return (
     <NavLink
       to={to}
-      className="relative group text-gray-300 transition-colors duration-300 hover:text-white"
+      className="relative group text-neutral-500 transition-colors duration-300 hover:text-primary-500"
     >
       {({ isActive }) => (
         <>
@@ -20,7 +20,7 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-white"
+              className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-primary-100"
               layoutId="underline"
               initial={false}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -37,14 +37,14 @@ const Navbar = () => {
     <nav className="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-neutral-500">
             <NavLink to="/">
               {({ isActive }) => (
                 <div className="relative">
                   MyPortfolio
                   {isActive && (
                     <motion.div
-                      className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-white"
+                      className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-ok-500"
                       layoutId="underline"
                       initial={false}
                       transition={{
