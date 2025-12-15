@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=zodiak@400,800,900,1&display=swap');
 
@@ -5,15 +7,20 @@
 @import './theme.css';
 
 @theme {
+  --font-display: 'Playfair Display', serif;
   --font-sans: 'General Sans', sans-serif;
   --font-zodiak: 'Zodiak', sans-serif;
-  --theme-colors-dark-primary: #111111;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --theme-colors-dark-primary: #1b1b1b;
   --theme-color-dark-secondary: #0b0b0c;
   --theme-colors-text-main: gainsboro;
   --theme-colors-light-primary: #ffffff;
 }
 
 body {
+  @apply leading-relaxed;
   background-color: var(--theme-colors-dark-primary);
   color: var(--theme-colors-text-main);
   font-family: var(--font-sans);
