@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const NavItem = ({ to, children }) => {
   return (
@@ -58,10 +59,11 @@ const Navbar = () => {
               )}
             </NavLink>
           </div>
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             <NavItem to="/work">Work</NavItem>
             <NavItem to="/about">About</NavItem>
             <NavItem to="/contact">Contact</NavItem>
+            <ThemeToggle />
           </div>
         </div>
       </div>
