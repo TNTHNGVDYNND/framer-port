@@ -31,7 +31,7 @@ const HeroContent = () => {
     >
       <div className="mx-auto px-5 text-center max-w-4xl">
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 leading-tight text-neutral-100"
+          className="text-5xl md:text-7xl font-bold mb-4 leading-tight text-primary-500"
           variants={title}
           initial="hidden"
           animate="visible"

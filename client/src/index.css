@@ -144,7 +144,7 @@ body {
 }
 
 :root {
-  background-color: var(--color-neutral-950);
+  background-color: var(--color-neutral-50);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
