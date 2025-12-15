@@ -40,17 +40,17 @@ NavItem.propTypes = {
 
 const Navbar = () => {
   return (
-    <nav className='bg-gray-900/10 backdrop-blur-sm sticky top-0 z-50'>
+    <nav className='bg-stone-950 sticky top-0 z-50 px-4 py-2 shadow-md shadow-black/20'>
       <div className='container mx-auto px-4 py-2'>
         <div className='flex items-center justify-between h-16'>
-          <div className='text-2xl font-bold text-coral'>
+          <div className='text-2xl font-display font-bold text-center text-transparent py-4 size-12 rounded-full bg-radial-[at_25%_25%] from-dusk to-zinc-900 to-75%'>
             <NavLink to='/'>
               {({ isActive }) => (
                 <div className='relative'>
-                  MyPortfolio
+                  O_O
                   {isActive && (
                     <motion.div
-                      className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-driftwood'
+                      className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-dusk'
                       layoutId='underline'
                       initial={false}
                       transition={{
