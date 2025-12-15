@@ -3,21 +3,48 @@
 @import "tailwindcss";
 
 @theme {
+  /* Using the LIGHT oklch values you provided for the default theme */
+  --color-neutral-50:  oklch(0.985 0.001 106.423);
+  --color-neutral-100: oklch(0.970 0.001 106.424);
+  --color-neutral-200: oklch(0.923 0.003  48.717);
+  --color-neutral-300: oklch(0.869 0.005  56.366);
+  --color-neutral-400: oklch(0.709 0.010  56.259);
+  --color-neutral-500: oklch(0.65 0.010 56.259);
+  --color-neutral-600: oklch(0.50 0.010 56.259);
+  --color-neutral-700: oklch(0.40 0.010 56.259);
+  --color-neutral-800: oklch(0.30 0.010 56.259);
+  --color-neutral-900: oklch(0.20 0.010 56.259);
+  --color-neutral-950: oklch(0.10 0.010 56.259);
+
   --font-sans: "General Sans", sans-serif;
   --font-zodiak: "Zodiak", sans-serif;
-  --theme-colors-dark-primary: #111111;
-  --theme-color-dark-secondary: #0b0b0c;
-  --theme-colors-text-main: gainsboro;
-  --theme-colors-light-primary: #ffffff;
+}
+
+@layer base {
+  [data-theme="dark"] {
+    /* Using the DARK oklch values you provided for the dark theme */
+    --color-neutral-50:  oklch(0.147 0.004  49.250);
+    --color-neutral-100: oklch(0.216 0.006  56.043);
+    --color-neutral-200: oklch(0.268 0.007  34.298);
+    --color-neutral-300: oklch(0.374 0.010  67.558);
+    --color-neutral-400: oklch(0.444 0.011  73.639);
+    --color-neutral-500: oklch(0.544 0.011 73.639);
+    --color-neutral-600: oklch(0.644 0.011 73.639);
+    --color-neutral-700: oklch(0.744 0.011 73.639);
+    --color-neutral-800: oklch(0.844 0.011 73.639);
+    --color-neutral-900: oklch(0.944 0.011 73.639);
+    --color-neutral-950: oklch(0.985 0.001 106.423);
+  }
 }
 
 body {
-  background-color: var(--theme-colors-dark-primary);
-  color: var(--theme-colors-text-main);
   font-family: var(--font-zodiak);
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root {
