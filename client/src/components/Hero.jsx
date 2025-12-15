@@ -26,8 +26,8 @@ const HeroContent = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className='h-screen flex items-center justify-center bg-linear-to-br from-stone-900 from-45% via-dusk/30 via-50% to-black to-50%'
+      transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
+      className='h-screen flex items-center justify-center bg-linear-to-br from-stone-950 from-45% via-dusk/30 via-50% to-black to-50% transition-all duration-700'
     >
       <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
@@ -50,10 +50,9 @@ const HeroContent = () => {
           className='mb-8 leading-relaxed text-lg text-driftwood max-w-2xl mx-auto'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
         >
-          I design and code beautifully simple things, and I love what I do.
-          Welcome to my digital garden.
+          Welcome to my digital garden. I design and code with curiosity.
         </motion.p>
         <motion.div
           className='flex justify-center'
@@ -84,29 +83,21 @@ const Hero = () => {
 
   useEffect(() => {
     if (loadingState === 0) {
-      const timer = setTimeout(() => setLoadingState(1), 2000);
+      const timer = setTimeout(() => setLoadingState(1), 700);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
-      const timer = setTimeout(() => setLoadingState(2), 500); // User-specified duration
+      const timer = setTimeout(() => setLoadingState(2), 600); // User-specified duration
       return () => clearTimeout(timer);
     }
   }, [loadingState]);
 
-  const renderContent = () => {
-    switch (loadingState) {
-      case 0:
-        return <Preloader key='preloader' />;
-      case 1:
-        return <Curtain key='curtain' />;
-      case 2:
-      default:
-        return <HeroContent key='hero-content' />;
-    }
-  };
-
   return (
     <section>
-      <AnimatePresence mode='wait'>{renderContent()}</AnimatePresence>
+      <AnimatePresence mode='wait'>
+        {loadingState === 0 && <Preloader key='preloader' />}
+        {loadingState === 1 && <Curtain key='curtain' />}
+        {loadingState === 2 && <HeroContent key='hero' />}
+      </AnimatePresence>
     </section>
   );
 };
