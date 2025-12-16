@@ -13,20 +13,24 @@
   --font-mono:
     'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  --theme-colors-dark-primary: #1b1b1b;
+  /* --theme-colors-dark-primary: #1b1b1b;
   --theme-color-dark-secondary: #0b0b0c;
   --theme-colors-text-main: gainsboro;
-  --theme-colors-light-primary: #ffffff;
+  --theme-colors-light-primary: #ffffff; */
 }
 
 body {
   @apply leading-relaxed;
-  background-color: var(--theme-colors-dark-primary);
-  color: var(--theme-colors-text-main);
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-900);
   font-family: var(--font-sans);
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--color-neutral-900);
+  transition:
+    background-color 0.7s ease,
+    color 0.7s ease;
 }
 
 :root {
@@ -38,25 +42,6 @@ body {
 
 h1 {
   line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 /* Custom scrollbar styles */
