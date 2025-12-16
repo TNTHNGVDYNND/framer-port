@@ -1,3 +1,5 @@
+import React from "react";
+
 const themeCard = () => {
   const heading = "Theme Toggle Test";
   const text =
@@ -37,4 +39,3 @@ const themeCard = () => {
 };
 
 export default themeCard;
-
