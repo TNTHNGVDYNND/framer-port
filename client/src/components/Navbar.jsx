@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-
 const NavItem = ({ to, children }) => {
   return (
     <NavLink
@@ -21,7 +21,7 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-primary-100"
+              className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-primary-100"
               layoutId="underline"
               initial={false}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -31,6 +31,11 @@ const NavItem = ({ to, children }) => {
       )}
     </NavLink>
   );
+};
+
+NavItem.propTypes = {
+  to: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 const Navbar = () => {
@@ -45,7 +50,7 @@ const Navbar = () => {
                   MyPortfolio
                   {isActive && (
                     <motion.div
-                      className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-ok-500"
+                      className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-ok-500"
                       layoutId="underline"
                       initial={false}
                       transition={{
