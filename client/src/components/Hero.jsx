@@ -27,11 +27,11 @@ const HeroContent = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
-      className='h-screen flex items-center justify-center bg-linear-to-br from-stone-950 from-45% via-dusk/30 via-50% to-black to-50% transition-all duration-700'
+      className='text-heading h-screen flex items-center justify-center bg-linear-to-b from-bg-tl from-15% via-bg-md via-50% to-bg-br to-55%'
     >
       <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
-          className='text-5xl md:text-7xl font-bold mb-4 leading-tight text-dusk font-zodiak'
+          className='text-5xl md:text-7xl font-bold mb-4 leading-tight font-zodiak'
           variants={title}
           initial='hidden'
           animate='visible'
@@ -62,13 +62,13 @@ const HeroContent = () => {
         >
           <Link
             to='/work'
-            className='inline-flex text-gray-400 bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-teal-300 rounded-full text-lg hover:text-white'
+            className='inline-flex text-neutral-900 bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-avocado-200 rounded-full text-lg hover:text-neutral-950 items-center'
           >
             View My Work
           </Link>
           <Link
             to='/contact'
-            className='ml-4 inline-flex text-gray-400 bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-white rounded-full text-lg items-center'
+            className='ml-4 inline-flex text-neutral-900 bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-neutral-950 rounded-full text-lg items-center'
           >
             Get In Touch
           </Link>
