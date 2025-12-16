@@ -7,7 +7,7 @@ const NavItem = ({ to, children }) => {
   return (
     <NavLink
       to={to}
-      className="relative group text-neutral-500 transition-colors duration-300 hover:text-primary-500"
+      className="relative group text-neutral-500 transition-colors duration-300 hover:text-neutral-950"
     >
       {({ isActive }) => (
         <>
@@ -21,7 +21,7 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-primary-100"
+              className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-neutral-950"
               layoutId="underline"
               initial={false}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -43,7 +43,7 @@ const Navbar = () => {
     <nav className="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="text-2xl font-bold text-neutral-500">
+          <div className="flex items-center text-2xl font-bold text-neutral-500 space-x-4">
             <NavLink to="/">
               {({ isActive }) => (
                 <div className="relative">
@@ -63,12 +63,13 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
+            <ThemeToggle />
           </div>
           <div className="hidden md:flex items-center space-x-8">
+            <NavItem to="/theme">Theme</NavItem>
             <NavItem to="/work">Work</NavItem>
             <NavItem to="/about">About</NavItem>
             <NavItem to="/contact">Contact</NavItem>
-            <ThemeToggle />
           </div>
         </div>
       </div>
