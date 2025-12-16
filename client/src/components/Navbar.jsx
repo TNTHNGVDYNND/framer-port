@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
+import ThemeToggleBtn from './ThemeToggleBtn';
 const NavItem = ({ to, children }) => {
   return (
     <NavLink
@@ -43,7 +43,7 @@ const Navbar = () => {
     <nav className='bg-stone-950 sticky top-0 z-50 px-4 py-2 shadow-md shadow-black/20'>
       <div className='container mx-auto'>
         <div className='flex items-center justify-between h-16'>
-          <div className='text-2xl font-display font-bold text-center text-transparent py-4 size-12 rounded-full bg-radial-[at_25%_25%] from-dusk to-zinc-900 to-75%'>
+          <div className='flex items-center text-2xl space-x-4 font-display font-bold text-center text-transparent py-4 size-12 rounded-full bg-radial-[at_25%_25%] from-dusk to-warn-50 to-75%'>
             <NavLink to='/'>
               {({ isActive }) => (
                 <div className='relative'>
@@ -63,6 +63,7 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
+            <ThemeToggleBtn />
           </div>
           <div className='hidden md:flex space-x-8'>
             <NavItem to='/work'>Work</NavItem>
