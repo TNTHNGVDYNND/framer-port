@@ -38,4 +38,4 @@ const themeCard = () => {
   );
 };
 
-export default themeCard;
+export default ThemeCard;

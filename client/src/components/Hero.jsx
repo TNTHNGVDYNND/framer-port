@@ -27,11 +27,11 @@ const HeroContent = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="h-screen flex items-center justify-center bg-linear-to-br from-neutral-100 from-45% via-warn-950/30 via-50% to-black to-50%"
+      className="h-screen flex items-center justify-center bg-linear-to-br from-stone-bg-tl from-45% via-dusk/30 via-50% to-stone-bg-br to-50%"
     >
       <div className="mx-auto px-5 text-center max-w-4xl">
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 leading-tight text-ok-500"
+          className="text-5xl md:text-7xl font-bold mb-4 leading-tight text-heading"
           variants={title}
           initial="hidden"
           animate="visible"
