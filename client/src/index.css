@@ -4,6 +4,24 @@
 
 @theme {
   --color-*: initial;
+  /* Using color definition */
+  --color-lagoon: oklch(0.72 0.11 221.19);
+  --color-coral: oklch(0.74 0.17 40.24);
+  --color-driftwood: oklch(0.79 0.06 74.59);
+  --color-tide: oklch(0.49 0.08 205.88);
+  --color-dusk: oklch(0.82 0.15 72.09);
+
+  --color--stone-bg-tl: oklch(0.98 0.002 106.423);
+  --color--stone-bg-br: oklch(0.95 0.003 48.717);
+
+  --color-heading: var(--color-coral);
+  /* Additional Greens */
+  --color-avocado-100: oklch(0.99 0 0);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+  --color-avocado-300: oklch(0.94 0.11 115.03);
+  --color-avocado-400: oklch(0.92 0.19 114.08);
+  --color-avocado-500: oklch(0.84 0.18 117.33);
+  --color-avocado-600: oklch(0.53 0.12 118.34);
   /* Using the LIGHT oklch values you provided for the default theme */
   --color-neutral-50: oklch(0.985 0.001 106.423);
   --color-neutral-100: oklch(0.97 0.001 106.424);
@@ -83,6 +101,10 @@
     --color-neutral-800: oklch(0.844 0.011 73.639);
     --color-neutral-900: oklch(0.944 0.011 73.639);
     --color-neutral-950: oklch(0.985 0.001 106.423);
+
+    --color-heading: var(--color-dusk);
+    --color-stone-bg-tl: oklch(19.6% 0.005 56.04);
+    --color-stone-bg-br: oklch(14.7% 0.004 49.25);
 
     --color-primary-50: oklch(0.45 0.3 260);
     --color-primary-100: oklch(0.5 0.3 260);
