@@ -1,17 +1,49 @@
 import React, { useState, useLayoutEffect } from 'react';
-import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const THEME_KEY = 'color-theme-toggle';
 
-// Inline SVG so we can take advantage of currentColor (text-color)
-const SvgImage = ({ src }) => {
-  const svgContent = atob(src.split(',')[1]);
-  return <div dangerouslySetInnerHTML={{ __html: svgContent }} />;
-};
+const SunIcon = (props) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    {...props}
+  >
+    <circle cx='12' cy='12' r='5' />
+    <line x1='12' y1='1' x2='12' y2='3' />
+    <line x1='12' y1='21' x2='12' y2='23' />
+    <line x1='4.22' y1='4.22' x2='5.64' y2='5.64' />
+    <line x1='18.36' y1='18.36' x2='19.78' y2='19.78' />
+    <line x1='1' y1='12' x2='3' y2='12' />
+    <line x1='21' y1='12' x2='23' y2='12' />
+    <line x1='4.22' y1='19.78' x2='5.64' y2='18.36' />
+    <line x1='18.36' y1='5.64' x2='19.78' y2='4.22' />
+  </svg>
+);
 
-SvgImage.propTypes = {
-  src: PropTypes.string.isRequired,
-};
+const MoonIcon = (props) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    {...props}
+  >
+    <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' />
+  </svg>
+);
 
 const ThemeToggle = () => {
   const lightTheme = 'light';
@@ -24,6 +56,7 @@ const ThemeToggle = () => {
 
   const initialTheme = localStorage.getItem(THEME_KEY) || lightTheme;
   const [theme, setTheme] = useState(initialTheme);
+  const [key, setKey] = useState(0);
 
   useLayoutEffect(() => {
     document.documentElement.setAttribute('data-theme', getDataTheme(theme));
@@ -33,20 +66,29 @@ const ThemeToggle = () => {
     const newTheme = getToggledTheme(theme);
     setTheme(newTheme);
     localStorage.setItem(THEME_KEY, getDataTheme(newTheme));
+    setKey((prevKey) => prevKey + 1);
   };
 
-  const lightIcon =
-    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iNSI+PC9jaXJjbGU+CiAgICA8bGluZSB4MT0iMTIiIHkxPSIxIiB4Mj0iMTIiIHkyPSIzIj48L2xpbmU+CiAgICA8bGluZSB4MT0iMTIiIHkxPSIyMSIgeDI9IjEyIiB5Mj0iMjMiPjwvbGluZT4KICAgIDxsaW5lIHgxPSI0LjIyIiB5MT0iNC4yMiIgeDI9IjUuNjQiIHkyPSI1LjY0Ij48L2xpbmU+CiAgICA8bGluZSB4MT0iMTguMzYiIHkxPSIxOC4zNiIgeDI9IjE5Ljc4IiB5Mj0iMTkuNzgiPjwvbGluZT4KICAgIDxsaW5lIHgxPSIxIiB5MT0iMTIiIHgyPSIzIiB5Mj0iMTIiPjwvbGluZT4KICAgIDxsaW5lIHgxPSIyMSIgeTE9IjEyIiB4Mj0iMjMiIHkyPSIxMiI+PC9saW5lPgogICAgPGxpbmUgeDE9IjQuMjIiIHkxPSIxOS43OCIgeDI9IjUuNjQiIHkyPSIxOC4zNiI+PC9saW5lPgogICAgPGxpbmUgeDE9IjE4LjM2IiB5MT0iNS42NCIgeDI9IjE5Ljc4IiB5Mj0iNC4yMiI+PC9saW5lPgo8L3N2Zz4=';
-  const darkIcon =
-    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1rJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgPHBhdGggZD0iTTIxIDEyLjc5QTkgOSAwIDEgMSAxMS4yMSAzIDcgNyAwIDAgMCAyMSAxMi43OXoiPjwvcGF0aD4KPC9zdmc+';
-  const icons = { dark: lightIcon, light: darkIcon };
-
   return (
-    <div
-      onClick={toggleTheme}
-      className='w-6 h-6 cursor-pointer border border-neutral-500 bg-ok-500'
-    >
-      <SvgImage src={icons[theme]} />
+    <div className='relative w-8 h-8'>
+      <AnimatePresence mode='wait' initial={false}>
+        <motion.button
+          key={key}
+          onClick={toggleTheme}
+          className='flex items-center justify-center w-full h-full p-1 rounded-md border border-neutral-500 hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500'
+          aria-label='Toggle theme'
+          initial={{ opacity: 0, rotate: -90, scale: 0 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          exit={{ opacity: 0, rotate: 90, scale: 0 }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
+          {theme === 'light' ? (
+            <SunIcon className='w-full h-full text-neutral-900' />
+          ) : (
+            <MoonIcon className='w-full h-full text-dusk' />
+          )}
+        </motion.button>
+      </AnimatePresence>
     </div>
   );
 };
