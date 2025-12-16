@@ -1,16 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const themeCard = () => {
+const ThemeCard = () => {
   const heading = "Theme Toggle Test";
   const text =
     "This is a test page for the dark/light theme toggle functionality.";
 
   return (
-    <div className="flex min-h-screen min-w-full flex-col items-center justify-center bg-neutral-950">
-      <article className="relative w-[80%] max-w-[500px] rounded-lg border border-neutral-500 bg-neutral-900 p-8 shadow-2xl text-neutral-300">
+    <div className="flex min-h-screen min-w-full flex-col items-center justify-center p-4">
+      <article className="relative w-[80%] max-w-[500px] rounded-lg border border-neutral-500 bg-neutral-50 p-8 shadow-2xl text-neutral-900">
         <h1 className="text-2xl font-bold text-primary-400">{heading}</h1>
         <p className=" py-8">{text}</p>
-        <div className={"grid grid-cols-11 gap-[2px] z-50"}>
+        <div className={"grid grid-cols-11 gap-0.5 z-50"}>
           {["neutral", "primary", "ok", "warn", "fail"].map(
             (color, colorIndex) =>
               [
