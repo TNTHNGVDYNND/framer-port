@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "tailwind:build": "tailwindcss -i ./src/index.css -o ./src/tailwind-output.css --minify"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",

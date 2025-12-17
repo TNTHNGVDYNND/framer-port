@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
+import React from "react";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 const NavItem = ({ to, children }) => {
   return (
     <NavLink
       to={to}
-      className='relative group text-driftwood/60 transition-colors duration-300 hover:text-driftwood px-3 py-2 font-medium text-lg'
+      className="relative group text-neutral-500 transition-colors duration-300 hover:text-neutral-950"
     >
       {({ isActive }) => (
         <>
@@ -21,8 +21,8 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-coral'
-              layoutId='underline'
+              className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-neutral-950"
+              layoutId="underline"
               initial={false}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
@@ -40,18 +40,18 @@ NavItem.propTypes = {
 
 const Navbar = () => {
   return (
-    <nav className='bg-stone-950 sticky top-0 z-50 px-4 py-2 shadow-md shadow-black/20'>
-      <div className='container mx-auto'>
-        <div className='flex items-center justify-between h-16'>
-          <div className='text-2xl font-display font-bold text-center text-transparent py-4 size-12 rounded-full bg-radial-[at_25%_25%] from-dusk to-zinc-900 to-75%'>
-            <NavLink to='/'>
+    <nav className="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center text-2xl font-bold text-neutral-500 space-x-4">
+            <NavLink to="/">
               {({ isActive }) => (
                 <div className='relative'>
                   O_O
                   {isActive && (
                     <motion.div
-                      className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-dusk'
-                      layoutId='underline'
+                      className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-ok-500"
+                      layoutId="underline"
                       initial={false}
                       transition={{
                         type: 'spring',
@@ -63,11 +63,13 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
+            <ThemeToggle />
           </div>
-          <div className='hidden md:flex space-x-8'>
-            <NavItem to='/work'>Work</NavItem>
-            <NavItem to='/about'>About</NavItem>
-            <NavItem to='/contact'>Contact</NavItem>
+          <div className="hidden md:flex items-center space-x-8">
+            <NavItem to="/theme">Theme</NavItem>
+            <NavItem to="/work">Work</NavItem>
+            <NavItem to="/about">About</NavItem>
+            <NavItem to="/contact">Contact</NavItem>
           </div>
         </div>
       </div>

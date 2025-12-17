@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -35,6 +36,16 @@ const ProjectCard = ({ project }) => {
       </div>
     </motion.div>
   );
+};
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    imageUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    projectUrl: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ProjectCard;

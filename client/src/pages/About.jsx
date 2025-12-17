@@ -15,13 +15,13 @@ const About = () => {
       </div>
       <div className="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
         <p className="mb-4">
-          Hello! I'm a passionate and creative developer with a love for building beautiful, interactive, and user-friendly web applications. My journey into the world of code started with a fascination for how things work on the internet, and it has since grown into a full-fledged passion for crafting digital experiences.
+          Hello! I&apos;m a passionate and creative developer with a love for building beautiful, interactive, and user-friendly web applications. My journey into the world of code started with a fascination for how things work on the internet, and it has since grown into a full-fledged passion for crafting digital experiences.
         </p>
         <p className="mb-4">
           With a background in design and a strong foundation in modern frontend technologies like React, I strive to bridge the gap between aesthetics and functionality. I believe that great software is not just about powerful features, but also about providing a seamless and enjoyable experience for the end-user.
         </p>
         <p>
-          When I'm not coding, you can find me exploring new design trends, contributing to open-source projects, or enjoying a good cup of coffee.
+          When I&apos;m not coding, you can find me exploring new design trends, contributing to open-source projects, or enjoying a good cup of coffee.
         </p>
       </div>
     </motion.div>
