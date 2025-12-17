@@ -3,22 +3,34 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/tvatdci.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="A modern, interactive, and responsive personal portfolio website showcasing creative development skills." />
+
     <script>
         (function () {
-            const saved = localStorage.getItem('theme');
-            const system = window.matchMedia(
-                '(prefers-color-scheme: dark)'
-            ).matches;
-            const theme = saved || (system ? 'dark' : 'light');
-
-            document.documentElement.classList.toggle('dark', theme === 'dark');
-            document.documentElement.dataset.theme = theme;
+            try {
+                const theme = localStorage.getItem('theme');
+                if (theme === 'dark') {
+                    document.documentElement.dataset.theme = 'dark';
+                    document.documentElement.classList.add('dark');
+                } else if (theme === 'light') {
+                    document.documentElement.dataset.theme = 'light';
+                } else if (
+                    window.matchMedia &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches
+                ) {
+                    document.documentElement.dataset.theme = 'dark';
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.dataset.theme = 'light';
+                }
+            } catch { }
         })();
-
     </script>
-    <title>client</title>
+
+    <title>myPortfolio</title>
 </head>
 
 <body>
