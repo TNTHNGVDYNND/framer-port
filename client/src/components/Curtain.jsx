@@ -17,7 +17,7 @@ const Curtain = () => {
       variants={reveal}
       initial='initial'
       exit='exit'
-      className='h-screen w-screen fixed top-0 left-0 z-40 bg-black/50'
+      className='h-screen w-screen fixed top-0 left-0 z-40 bg-stone-950'
     />
   );
 };
