@@ -10,7 +10,7 @@ const HeroContent = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.3,
       },
     },
   };
@@ -58,7 +58,7 @@ const HeroContent = () => {
           className='flex justify-center'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1, ease: 'easeOut' }}
+          transition={{ duration: 1, delay: 1, ease: 'easeOut' }}
         >
           <Link
             to='/work'
@@ -83,7 +83,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (loadingState === 0) {
-      const timer = setTimeout(() => setLoadingState(1), 700);
+      const timer = setTimeout(() => setLoadingState(1), 750);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
       const timer = setTimeout(() => setLoadingState(2), 600); // User-specified duration
