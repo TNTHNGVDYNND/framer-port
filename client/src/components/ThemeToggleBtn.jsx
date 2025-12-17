@@ -47,12 +47,12 @@ const MoonIcon = (props) => (
 const ThemeToggleBtn = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   return (
-    <div className='relative w-8 h-8'>
+    <div className='relative w-8 h-8 flex items-center justify-center  bg-radial-[at_25%_25%] from-dusk to-warn-50 to-75% rounded-full shadow-lg shadow-neutral-900/20 hover:shadow-neutral-900/50 transition-shadow duration-300'>
       <AnimatePresence mode='wait' initial={false}>
         <motion.button
-          key={isDarkMode}
+          key={isDarkMode ? 'dark' : 'light'}
           onClick={toggleDarkMode}
-          className='flex items-center justify-center w-full h-full p-1 rounded-md border border-neutral-500 hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500'
+          className='flex items-center justify-center w-full h-full p-1 cursor-pointer rounded-full'
           aria-label='Toggle theme'
           initial={{ opacity: 0, rotate: -90, scale: 0 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -60,9 +60,9 @@ const ThemeToggleBtn = () => {
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
           {isDarkMode ? (
-            <MoonIcon className='w-full h-full text-dusk' />
+            <SunIcon className='w-full h-full text-fail-950' />
           ) : (
-            <SunIcon className='w-full h-full text-neutral-900' />
+            <MoonIcon className='w-full h-full text-fail-950' />
           )}
         </motion.button>
       </AnimatePresence>
