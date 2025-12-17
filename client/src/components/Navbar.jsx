@@ -43,11 +43,11 @@ const Navbar = () => {
     <nav className='bg-stone-950 sticky top-0 z-50 px-4 py-2 shadow-md shadow-black/20'>
       <div className='container mx-auto'>
         <div className='flex items-center justify-between h-16'>
-          <div className='flex items-center text-2xl space-x-4 font-display font-bold text-center text-transparent py-4 size-12 rounded-full bg-radial-[at_25%_25%] from-dusk to-warn-50 to-75%'>
+          <div className='flex items-center text-2xl space-x-4 font-display font-bold text-center text-neutral-950 py-4 size-12 rounded-full'>
             <NavLink to='/'>
               {({ isActive }) => (
                 <div className='relative'>
-                  O_O
+                  myPortfolio
                   {isActive && (
                     <motion.div
                       className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-dusk'
@@ -63,9 +63,9 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
-            <ThemeToggleBtn />
           </div>
           <div className='hidden md:flex space-x-8'>
+            <ThemeToggleBtn />
             <NavItem to='/work'>Work</NavItem>
             <NavItem to='/about'>About</NavItem>
             <NavItem to='/contact'>Contact</NavItem>
