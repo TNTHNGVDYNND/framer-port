@@ -1,3 +1,10 @@
+/**
+ * hooks/useDarkMode.js
+ * A hook to manage dark mode preference
+ * keep React in sync
+ * update storage when toggled
+ * update DOM when toggled
+ */
 import { useLayoutEffect, useState, useCallback } from 'react';
 
 const THEME_KEY = 'theme';
