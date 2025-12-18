@@ -29,7 +29,7 @@ const HeroContent = () => {
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
       className='text-heading h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61%'
     >
-      <div className='mx-auto px-5 text-center max-w-4xl'>
+      <div className='mx-auto px-5 text-center max-w-4xl border border-red-500'>
         <motion.h1
           className='text-5xl md:text-7xl font-dune mb-6 leading-tight text-heading'
           variants={title}
