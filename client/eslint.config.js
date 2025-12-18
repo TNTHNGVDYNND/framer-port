@@ -21,6 +21,11 @@ export default [
         ...globals.browser,
       },
     },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     rules: {
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
