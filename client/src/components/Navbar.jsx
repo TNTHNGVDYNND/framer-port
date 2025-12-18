@@ -21,8 +21,8 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-coral'
-              layoutId='underline'
+              className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-neutral-950"
+              layoutId="underline"
               initial={false}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
@@ -50,8 +50,8 @@ const Navbar = () => {
                   myPortfolio
                   {isActive && (
                     <motion.div
-                      className='absolute -bottom-1.25 left-0 right-0 h-0.5 bg-dusk'
-                      layoutId='underline'
+                      className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-ok-500"
+                      layoutId="underline"
                       initial={false}
                       transition={{
                         type: 'spring',
@@ -63,6 +63,7 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
+            <ThemeToggle />
           </div>
           <div className='hidden md:flex space-x-8'>
             <ThemeToggleBtn />
