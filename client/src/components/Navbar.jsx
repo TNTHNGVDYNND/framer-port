@@ -66,6 +66,7 @@ const Navbar = () => {
           </div>
           <div className='hidden md:flex space-x-8'>
             <ThemeToggleBtn />
+            <NavItem to='/theme'>Theme</NavItem>
             <NavItem to='/work'>Work</NavItem>
             <NavItem to='/about'>About</NavItem>
             <NavItem to='/contact'>Contact</NavItem>
