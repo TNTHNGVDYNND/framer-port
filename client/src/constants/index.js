@@ -1,42 +1,50 @@
 export const projects = [
   {
     _id: '1',
-    title: 'Interactive Portfolio Website',
-    description: 'A personal portfolio showcasing creative development skills with interactive animations and a modern design.',
-    imageUrl: 'https://via.placeholder.com/400x250/FF5733/FFFFFF?text=Project+1',
-    projectUrl: 'https://github.com/yourusername/project1',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite']
+    title: 'Four Flavors Express',
+    description:
+      'Four Flavors Express is designed to provide a seamless food ordering experience. We partner with a wide range of restaurants, ensuring you have access to diverse menus and delicious meals, all delivered fast and fresh.',
+    imageUrl:
+      'https://via.placeholder.com/400x250/FF5733/FFFFFF?text=Project+1',
+    projectUrl: 'https://github.com/TVATDCI/Food-Delivery-Service-App',
+    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
   },
   {
     _id: '2',
-    title: 'E-commerce Storefront',
-    description: 'A full-stack e-commerce application with product listings, shopping cart functionality, and user authentication.',
-    imageUrl: 'https://via.placeholder.com/400x250/33FF57/FFFFFF?text=Project+2',
-    projectUrl: 'https://github.com/yourusername/project2',
-    tags: ['MERN Stack', 'Redux', 'Stripe API']
+    title: 'Algorithm-challenges',
+    description:
+      'A very good place to practice algorithms is LeetCode - this exercise contains practice challenges similar to the problems found on LeetCode. It covers a variety of topics including arrays, strings, linked lists, trees, graphs, dynamic programming, and more. Each challenge is designed to help you improve your problem-solving skills and prepare for technical interviews.',
+    imageUrl:
+      'https://via.placeholder.com/400x250/33FF57/FFFFFF?text=Project+2',
+    projectUrl: 'https://github.com/TVATDCI/Algorithm-challenge',
+    tags: ['MERN Stack', 'Redux', 'Stripe API'],
   },
   {
     _id: '3',
-    title: 'Real-time Chat Application',
-    description: 'A real-time chat application built with WebSockets, allowing users to communicate in various rooms.',
-    imageUrl: 'https://via.placeholder.com/400x250/3357FF/FFFFFF?text=Project+3',
-    projectUrl: 'https://github.com/yourusername/project3',
-    tags: ['Node.js', 'Express', 'Socket.io', 'React']
+    title: 'Signup-Login-Render',
+    description:
+      'A full-stack authentication project demonstrating secure user login and registration using email and password, JWT, and HTTP-only cookies. It features a React + Vite frontend, and an Express + MongoDB backend, structured for clarity and scalability.',
+    imageUrl:
+      'https://via.placeholder.com/400x250/3357FF/FFFFFF?text=Project+3',
+    projectUrl: 'https://signup-login-render.onrender.com/',
+    tags: ['Node.js', 'Express', 'MongoDB', 'React'],
   },
   {
     _id: '4',
-    title: 'Task Management Tool',
-    description: 'A simple and intuitive task management application to help users organize their daily tasks and boost productivity.',
-    imageUrl: 'https://via.placeholder.com/400x250/FF33A1/FFFFFF?text=Project+4',
-    projectUrl: 'https://github.com/yourusername/project4',
-    tags: ['React', 'Context API', 'CSS Modules']
+    title: 'Natours 2025',
+    description:
+      'This project is a deep dive into building a real-world, production-ready Node.js application using modern backend tools like Express, MongoDB, and Mongoose. Along the way, including, clean API architect, powerful, and ready to scale.. It covers all essential concepts to master full-stack backend development using modern technologies.',
+    imageUrl: 'https://natours-2025.onrender.com/',
+    projectUrl: 'https://github.com/TVATDCI/natours-2025',
+    tags: ['Express', 'React', 'Node.js', 'MongoDB', 'Mongoose', 'Pug'],
   },
   {
     _id: '5',
     title: 'Weather Dashboard',
-    description: 'A weather application that displays current weather conditions and forecasts for any city using a third-party API.',
-    imageUrl: 'https://via.placeholder.com/400x250/A1FF33/FFFFFF?text=Project+5',
-    projectUrl: 'https://github.com/yourusername/project5',
-    tags: ['React', 'API Integration', 'Axios']
-  }
+    description:
+      'A weather application. This version of the project is a full-stack weather application that allows users to search for the current weather of a city. It fetches weather data from the OpenWeatherMap API and displays it in a user-friendly interface.',
+    imageUrl: 'https://github.com/TVATDCI/weather-CLI',
+    projectUrl: 'https://github.com/TVATDCI/weather-CLI',
+    tags: ['React', 'API Integration', 'Axios'],
+  },
 ];
