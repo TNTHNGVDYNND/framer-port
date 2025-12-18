@@ -23,7 +23,7 @@
 
 body {
   @apply leading-relaxed;
-  background-color: var(--color-neutral-50);
+  background-color: var(--color-bg-body);
   color: var(--color-neutral-900);
   font-family: var(--font-display);
   margin: 0;
@@ -31,8 +31,8 @@ body {
   min-height: 100vh;
   color: var(--color-neutral-900);
   transition:
-    background-color 0.7s ease,
-    color 0.7s ease-in-out;
+    background-color 0.9s ease,
+    color 0.9s ease-in-out;
 }
 
 :root {
@@ -49,15 +49,23 @@ h1 {
 /* Custom scrollbar styles */
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  display: none;
 }
 
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: none;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #546cff;
+  background: var(--color-bg-md);
 }
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-bg-b);
+}
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar-corner {
+  background: none;
+} */
