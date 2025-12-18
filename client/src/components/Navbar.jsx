@@ -7,7 +7,7 @@ const NavItem = ({ to, children }) => {
   return (
     <NavLink
       to={to}
-      className='relative group font-dune text-driftwood/60 transition-colors duration-300 hover:text-driftwood px-3 py-2 font-medium text-xs uppercase'
+      className='relative group font-dune text-driftwood/60 transition-colors duration-300 hover:text-highlight px-3 py-2 font-medium text-xs uppercase'
     >
       {({ isActive }) => (
         <>
@@ -21,8 +21,8 @@ const NavItem = ({ to, children }) => {
           </div>
           {isActive && (
             <motion.div
-              className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-neutral-950"
-              layoutId="underline"
+              className='absolute -bottom-2.5 left-0 right-0 h-0.5 bg-text-primary'
+              layoutId='underline'
               initial={false}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
@@ -43,15 +43,15 @@ const Navbar = () => {
     <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2 shadow-xs shadow-dusk'>
       <div className='container px-4 rounded-4xl bg-neutral-500/10 mx-auto'>
         <div className='flex items-center justify-between h-16'>
-          <div className='flex items-center text-base--line-height space-x-4 font-dune text-center text-heading bg-dusk/10 size-16 rounded-full px-4'>
+          <div className='flex items-center text-base--line-height space-x-4 font-dune text-center text-highlight bg-dusk/10 size-16 rounded-full px-4'>
             <NavLink to='/'>
               {({ isActive }) => (
                 <div className='relative'>
                   myPortfolio
                   {isActive && (
                     <motion.div
-                      className="absolute -bottom-2.5 left-0 right-0 h-0.5 bg-ok-500"
-                      layoutId="underline"
+                      className='absolute -bottom-2.5 left-0 right-0 h-0.5 bg-bg-md'
+                      layoutId='underline'
                       initial={false}
                       transition={{
                         type: 'spring',
@@ -63,7 +63,7 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
-            <ThemeToggle />
+            <ThemeToggleBtn />
           </div>
           <div className='hidden md:flex space-x-8'>
             <ThemeToggleBtn />
