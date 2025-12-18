@@ -6,8 +6,8 @@ const reveal = {
     y: 0,
   },
   exit: {
-    y: '-100vh',
-    transition: { duration: 0.5, ease: [0.75, 0, 0.24, 1] },
+    x: '-100vw',
+    transition: { duration: 0.6, ease: [0.15, 0, 0.24, 1] },
   },
 };
 
@@ -17,7 +17,7 @@ const Curtain = () => {
       variants={reveal}
       initial='initial'
       exit='exit'
-      className='h-screen w-screen fixed top-0 left-0 z-40 bg-black/50'
+      className='h-screen w-screen fixed top-0 left-0 z-40 bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61%'
     />
   );
 };

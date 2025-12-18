@@ -10,7 +10,7 @@ const HeroContent = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.3,
       },
     },
   };
@@ -26,12 +26,12 @@ const HeroContent = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="h-screen flex items-center justify-center bg-linear-to-br from-stone-bg-tl from-45% via-dusk/30 via-50% to-stone-bg-br to-50%"
+      transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
+      className='text-heading h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61%'
     >
       <div className='mx-auto px-5 text-center max-w-4xl'>
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 leading-tight text-heading"
+          className='text-5xl md:text-7xl font-dune mb-6 leading-tight text-heading'
           variants={title}
           initial='hidden'
           animate='visible'
@@ -47,28 +47,29 @@ const HeroContent = () => {
           ))}
         </motion.h1>
         <motion.p
-          className='mb-8 leading-relaxed text-lg text-driftwood max-w-2xl mx-auto'
+          className='mb-8 leading-relaxed text-base--line-height font-dune text-sub-title max-w-2xl mx-auto'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
         >
-          Welcome to my digital garden. I design and code with curiosity.
+          .............................................................................................................................................
+          Welcome to my digital garden, where code grows with curiosity.
         </motion.p>
         <motion.div
           className='flex justify-center'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1, ease: 'easeOut' }}
+          transition={{ duration: 1, delay: 1, ease: 'easeOut' }}
         >
           <Link
             to='/work'
-            className='inline-flex text-gray-400 bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-teal-300 rounded-full text-lg hover:text-white'
+            className='inline-flex text-primary-accent bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-tide/80 rounded-full text-sm hover:text-avocado-100 items-center transition-colors duration-500'
           >
             View My Work
           </Link>
           <Link
             to='/contact'
-            className='ml-4 inline-flex text-gray-400 bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-white rounded-full text-lg items-center'
+            className='ml-4 inline-flex text-muted-text bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/40 hover:text-avocado-100 rounded-full text-sm items-center transition-colors duration-500'
           >
             Get In Touch
           </Link>
@@ -83,7 +84,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (loadingState === 0) {
-      const timer = setTimeout(() => setLoadingState(1), 700);
+      const timer = setTimeout(() => setLoadingState(1), 750);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
       const timer = setTimeout(() => setLoadingState(2), 600); // User-specified duration

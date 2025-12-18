@@ -2,8 +2,7 @@ import React from 'react';
 
 const ThemeCard = () => {
   const heading = 'Theme Toggle Test';
-  const text =
-    'This is a test page for the dark/light theme toggle functionality.';
+  const text = 'Testing dark/light theme toggle functionality.';
 
   const colorMap = {
     neutral: {
@@ -31,6 +30,19 @@ const ThemeCard = () => {
       800: 'bg-primary-800',
       900: 'bg-primary-900',
       950: 'bg-primary-950',
+    },
+    teal: {
+      50: 'bg-teal-50',
+      100: 'bg-teal-100',
+      200: 'bg-teal-200',
+      300: 'bg-teal-300',
+      400: 'bg-teal-400',
+      500: 'bg-teal-500',
+      600: 'bg-teal-600',
+      700: 'bg-teal-700',
+      800: 'bg-teal-800',
+      900: 'bg-teal-900',
+      950: 'bg-teal-950',
     },
     ok: {
       50: 'bg-ok-50',
@@ -71,34 +83,68 @@ const ThemeCard = () => {
       900: 'bg-fail-900',
       950: 'bg-fail-950',
     },
+    fuchsia: {
+      50: 'bg-fuchsia-50',
+      100: 'bg-fuchsia-100',
+      200: 'bg-fuchsia-200',
+      300: 'bg-fuchsia-300',
+      400: 'bg-fuchsia-400',
+      500: 'bg-fuchsia-500',
+      600: 'bg-fuchsia-600',
+      700: 'bg-fuchsia-700',
+      800: 'bg-fuchsia-800',
+      900: 'bg-fuchsia-900',
+      950: 'bg-fuchsia-950',
+    },
+    red: {
+      50: 'bg-red-50',
+      100: 'bg-red-100',
+      200: 'bg-red-200',
+      300: 'bg-red-300',
+      400: 'bg-red-400',
+      500: 'bg-red-500',
+      600: 'bg-red-600',
+      700: 'bg-red-700',
+      800: 'bg-red-800',
+      900: 'bg-red-900',
+      950: 'bg-red-950',
+    },
   };
 
   return (
-    <div className='flex min-h-screen min-w-full flex-col items-center justify-center p-4'>
-      <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-8 shadow-2xl text-neutral-900'>
-        <h1 className='text-2xl font-bold text-primary-400'>{heading}</h1>
-        <p className=' py-8'>{text}</p>
+    <div className='flex bg-neutral-50 min-h-screen min-w-full flex-col items-center justify-center p-4'>
+      <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-4 shadow-2xl shadow-neutral-500 text-neutral-500 transition-colors duration-500'>
+        <h1 className='text-2xl font-bold text-primary-500'>{heading}</h1>
+        <p className=' py-4'>{text}</p>
         <div className={'grid grid-cols-11 gap-0.5 z-50'}>
-          {['neutral', 'primary', 'ok', 'warn', 'fail'].map(
-            (color, colorIndex) =>
-              [
-                '50',
-                '100',
-                '200',
-                '300',
-                '400',
-                '500',
-                '600',
-                '700',
-                '800',
-                '900',
-                '950',
-              ].map((tone, toneIndex) => (
-                <div
-                  key={`key-${colorIndex}-${toneIndex}`}
-                  className={`${colorMap[color][tone]} m-0 p-0 h-8`}
-                ></div>
-              ))
+          {[
+            'neutral',
+            'primary',
+            'teal',
+            'ok',
+            'warn',
+            'fail',
+            'fuchsia',
+            'red',
+          ].map((color, colorIndex) =>
+            [
+              '50',
+              '100',
+              '200',
+              '300',
+              '400',
+              '500',
+              '600',
+              '700',
+              '800',
+              '900',
+              '950',
+            ].map((tone, toneIndex) => (
+              <div
+                key={`key-${colorIndex}-${toneIndex}`}
+                className={`${colorMap[color][tone]} m-0 p-0 h-8 transition-colors duration-1000`}
+              ></div>
+            ))
           )}
         </div>
       </article>
