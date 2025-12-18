@@ -52,7 +52,7 @@ const HeroContent = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
         >
-          Welcome to my digital garden. <br /> I design and code with curiosity.
+          Welcome to my digital garden of code and curiosity.
         </motion.p>
         <motion.div
           className='flex justify-center'
