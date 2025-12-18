@@ -195,6 +195,16 @@ This is a classic “hero stack.” It works, but it’s **structurally rigid**.
 
 into one monolith.
 
+```scss
+AnimatePresence
+└─ HeroContent (mount / unmount)
+   └─ HeroContainer (global stagger)
+      ├─ TitleBlock (word-level stagger lives here)
+      │  └─ h1 → spans
+      ├─ Paragraph
+      └─ Actions
+```
+
 That’s fine for static layouts. It becomes limiting the moment when i want to:
 
 * asymmetry
