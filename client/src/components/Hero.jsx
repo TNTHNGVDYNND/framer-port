@@ -47,12 +47,12 @@ const HeroContent = () => {
           ))}
         </motion.h1>
         <motion.p
-          className='mb-8 leading-relaxed text-lg font-dune text-sub-title max-w-2xl mx-auto'
+          className='mb-8 leading-relaxed text-base--line-height font-dune text-sub-title max-w-2xl mx-auto'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
         >
-          Welcome to my digital garden. I design and code with curiosity.
+          Welcome to my digital garden. <br /> I design and code with curiosity.
         </motion.p>
         <motion.div
           className='flex justify-center'
