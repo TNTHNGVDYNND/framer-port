@@ -52,7 +52,8 @@ const HeroContent = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
         >
-          Welcome to my digital garden of code and curiosity.
+          .............................................................................................................................................
+          Welcome to my digital garden, where code grows with curiosity.
         </motion.p>
         <motion.div
           className='flex justify-center'
@@ -62,13 +63,13 @@ const HeroContent = () => {
         >
           <Link
             to='/work'
-            className='inline-flex text-primary-accent bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-tide/80 rounded-full text-lg hover:text-avocado-100 items-center transition-colors duration-500'
+            className='inline-flex text-primary-accent bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-tide/80 rounded-full text-sm hover:text-avocado-100 items-center transition-colors duration-500'
           >
             View My Work
           </Link>
           <Link
             to='/contact'
-            className='ml-4 inline-flex text-muted-text bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/40 hover:text-avocado-100 rounded-full text-lg items-center transition-colors duration-500'
+            className='ml-4 inline-flex text-muted-text bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/40 hover:text-avocado-100 rounded-full text-sm items-center transition-colors duration-500'
           >
             Get In Touch
           </Link>
