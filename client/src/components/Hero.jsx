@@ -47,7 +47,7 @@ const HeroContent = () => {
           ))}
         </motion.h1>
         <motion.p
-          className='mb-8 leading-relaxed text-lg font-dune text-neutral-800 max-w-2xl mx-auto'
+          className='mb-8 leading-relaxed text-lg font-dune text-sub-title max-w-2xl mx-auto'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
@@ -62,13 +62,13 @@ const HeroContent = () => {
         >
           <Link
             to='/work'
-            className='inline-flex text-neutral-900 bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-avocado-200 rounded-full text-lg hover:text-neutral-950 items-center'
+            className='inline-flex text-primary-accent bg-linear-to-b from-tide/90 from-5% via-tide/40 via-60% to-tide/20 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-tide/80 rounded-full text-lg hover:text-avocado-100 items-center transition-colors duration-500'
           >
             View My Work
           </Link>
           <Link
             to='/contact'
-            className='ml-4 inline-flex text-neutral-900 bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/50 hover:text-neutral-950 rounded-full text-lg items-center'
+            className='ml-4 inline-flex text-muted-text bg-linear-to-b from-dusk/30 from-15% via-dusk/10 via-60% to-dusk/5 to-90% border-0 py-2 px-6 focus:outline-none hover:bg-dusk/40 hover:text-avocado-100 rounded-full text-lg items-center transition-colors duration-500'
           >
             Get In Touch
           </Link>
