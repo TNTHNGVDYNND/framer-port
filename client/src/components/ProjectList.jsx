@@ -46,10 +46,10 @@ const ProjectList = () => {
   // }
 
   return (
-    <section className="py-12 px-4">
-      <div className="container mx-auto">
+    <section className='py-12 px-4'>
+      <div className='container mx-auto'>
         <motion.h2
-          className="text-4xl font-bold text-center mb-12 text-white"
+          className='text-4xl font-bold text-center mb-12 text-white'
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -58,16 +58,16 @@ const ProjectList = () => {
           My Work
         </motion.h2>
         <motion.div
-          className="flex overflow-x-auto scroll-snap-x-mandatory p-4 gap-8"
+          className='flex overflow-x-auto scroll-snap-x-mandatory p-4 gap-8'
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial='hidden'
+          whileInView='visible'
           viewport={{ once: true, amount: 0.2 }} // Re-added viewport to container
         >
-          {projects.map(project => (
+          {projects.map((project) => (
             <motion.div
               key={project._id}
-              className="flex-shrink-0 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 scroll-snap-align-center"
+              className='flex-shrink-0 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 scroll-snap-align-center'
               // Removed variants={cardVariants} from here
               // Removed viewport={{ once: true, amount: 0.5 }} from here as ProjectCard handles its own
             >
@@ -81,4 +81,3 @@ const ProjectList = () => {
 };
 
 export default ProjectList;
-
