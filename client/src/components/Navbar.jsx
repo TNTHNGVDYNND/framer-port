@@ -7,7 +7,7 @@ const NavItem = ({ to, children }) => {
   return (
     <NavLink
       to={to}
-      className='relative group text-driftwood/60 transition-colors duration-300 hover:text-driftwood px-3 py-2 font-medium text-lg'
+      className='relative group font-dune text-driftwood/60 transition-colors duration-300 hover:text-driftwood px-3 py-2 font-medium text-xs uppercase'
     >
       {({ isActive }) => (
         <>
@@ -40,10 +40,10 @@ NavItem.propTypes = {
 
 const Navbar = () => {
   return (
-    <nav className='bg-stone-950 sticky top-0 z-50 px-4 py-2 shadow-md shadow-black/20'>
-      <div className='container mx-auto'>
+    <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2 shadow-xs shadow-dusk'>
+      <div className='container px-4 rounded-4xl bg-neutral-500/10 mx-auto'>
         <div className='flex items-center justify-between h-16'>
-          <div className='flex items-center text-2xl space-x-4 font-display font-bold text-center text-neutral-950 py-4 size-12 rounded-full'>
+          <div className='flex items-center text-base--line-height space-x-4 font-dune text-center text-heading bg-dusk/10 size-16 rounded-full px-4'>
             <NavLink to='/'>
               {({ isActive }) => (
                 <div className='relative'>
