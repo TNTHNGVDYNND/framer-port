@@ -10,7 +10,7 @@ const Preloader = () => {
     >
       <div className='w-24 h-1 bg-white rounded-full overflow-hidden'>
         <motion.div
-          className='h-full bg-avocado-500 rounded-full'
+          className='h-full bg-red-500 rounded-full'
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, ease: 'easeInOut' }}
