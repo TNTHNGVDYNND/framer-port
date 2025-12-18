@@ -40,62 +40,78 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-gray-300 text-sm font-bold mb-2">
+    <form
+      onSubmit={handleSubmit}
+      className='bg-gray-800 p-8 rounded-lg shadow-lg'
+    >
+      <div className='mb-4'>
+        <label
+          htmlFor='name'
+          className='block text-gray-300 text-sm font-bold mb-2'
+        >
           Name
         </label>
         <input
-          type="text"
-          id="name"
-          name="name"
+          type='text'
+          id='name'
+          name='name'
           value={formData.name}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-600"
+          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-600'
           required
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
+      <div className='mb-4'>
+        <label
+          htmlFor='email'
+          className='block text-gray-300 text-sm font-bold mb-2'
+        >
           Email
         </label>
         <input
-          type="email"
-          id="email"
-          name="email"
+          type='email'
+          id='email'
+          name='email'
           value={formData.email}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-600"
+          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-600'
           required
         />
       </div>
-      <div className="mb-6">
-        <label htmlFor="message" className="block text-gray-300 text-sm font-bold mb-2">
+      <div className='mb-6'>
+        <label
+          htmlFor='message'
+          className='block text-gray-300 text-sm font-bold mb-2'
+        >
           Message
         </label>
         <textarea
-          id="message"
-          name="message"
+          id='message'
+          name='message'
           value={formData.message}
           onChange={handleChange}
-          rows="5"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-600"
+          rows='5'
+          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-600'
           required
         ></textarea>
       </div>
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         <button
-          type="submit"
-          className="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type='submit'
+          className='bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
           disabled={status === 'submitting'}
         >
           {status === 'submitting' ? 'Sending...' : 'Send Message'}
         </button>
         {status === 'success' && (
-          <p className="text-green-500 text-sm ml-4">Message sent successfully!</p>
+          <p className='text-green-500 text-sm ml-4'>
+            Message sent successfully!
+          </p>
         )}
         {status === 'error' && (
-          <p className="text-red-500 text-sm ml-4">Failed to send message. Please try again.</p>
+          <p className='text-red-500 text-sm ml-4'>
+            Failed to send message. Please try again.
+          </p>
         )}
       </div>
     </form>
