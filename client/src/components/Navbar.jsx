@@ -40,8 +40,10 @@ NavItem.propTypes = {
 
 const Navbar = () => {
   return (
-    <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2 shadow-xs shadow-dusk'>
-      <div className='container px-4 rounded-4xl bg-neutral-500/10 mx-auto'>
+    <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2'>
+      {/* <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2 shadow-xs shadow-dusk'> */}
+      {/* <div className='container px-4 rounded-4xl bg-neutral-500/10 mx-auto'> */}
+      <div className='container px-4 mx-auto'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center text-base--line-height space-x-4 font-dune text-center text-highlight bg-dusk/10 size-16 rounded-full px-4'>
             <NavLink to='/'>
