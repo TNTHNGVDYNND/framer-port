@@ -4,6 +4,7 @@
 @import url('https://fonts.cdnfonts.com/css/dune-rise');
 
 @import 'tailwindcss';
+@import './theme.css';
 
 @theme {
   --font-display: 'Playfair Display', serif;
@@ -35,7 +36,6 @@ body {
 }
 
 :root {
-  background-color: var(--color-neutral-50);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -51,21 +51,3 @@ h1 {
 ::-webkit-scrollbar {
   display: none;
 }
-
-/* ::-webkit-scrollbar-thumb {
-  background: none;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-bg-md);
-}
-::-webkit-scrollbar-thumb:active {
-  background: var(--color-bg-b);
-}
-::-webkit-scrollbar-track {
-  background: none;
-}
-::-webkit-scrollbar-corner {
-  background: none;
-} */
