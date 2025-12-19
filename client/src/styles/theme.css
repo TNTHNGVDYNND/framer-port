@@ -23,6 +23,7 @@
   --light-bg-primary: oklch(27.9% 0.077 45.635);
   --light-text-primary: #3b5360;
   --light-text-secondary: #5c6a72;
+  --light-text-accent-alt: #f1f1f1;
   --light-primary-accent: #a7c080;
   --light-secondary-accent: #e69875;
   --light-highlight: #7fbbb3;
@@ -30,7 +31,7 @@
   --light-card-bg: #fff8dc;
 
   --color-heading: var(--color-lagoon);
-  --color-sub-title: var(--color-tide);
+  --color-sub-title: var(--light-text-accent-alt);
   --color-text-primary: var(--light-text-primary);
   --color-text-secondary: var(--light-text-secondary);
   --color-muted-text: var(--color-driftwood);
@@ -170,6 +171,7 @@
     --dark-bg-primary: oklch(12.2% 0.05 38.18);
     --dark-text-primary: #e0e0e0;
     --dark-text-secondary: #a0b0a0;
+    --dark-text-accent-alt: #303030;
     --dark-primary-accent: #8fbc8f;
     --dark-secondary-accent: #d2b48c;
     --dark-highlight: #f0e68c;
