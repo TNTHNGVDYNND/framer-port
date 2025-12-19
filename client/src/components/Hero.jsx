@@ -45,20 +45,69 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61%'
+      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61% relative'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
     >
+      {/* 1. Deep water */}
       <motion.div
-        className='mx-auto px-5 max-w-5xl w-full text-center'
+        className='absolute inset-0 bg-cover bg-center'
+        style={{
+          backgroundImage: `
+        radial-gradient(
+          ellipse at top, 
+          var(--color-inner-glow) 5%,
+          var(--color-md-glow) 25%,
+          var(--color-outer-glow) 35%,
+          var(--color-border-glow) 90%
+        )
+      `,
+        }}
+        animate={{
+          backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
+        }}
+        transition={{
+          duration: 30,
+          ease: 'easeInOut',
+          repeat: Infinity,
+        }}
+      />
+
+      {/* 2. Surface shimmer */}
+      <motion.div
+        className='absolute inset-0 pointer-events-none h-10 opacity-15'
+        style={{
+          backgroundImage: `
+        repeating-linear-gradient(
+          -0deg,
+          var(--color-outer-glow) 5px,
+          var(--color-inner-glow) 4px,
+            var(--color-md-glow) 20px
+        )
+      `,
+          filter: 'blur(10px)',
+        }}
+        animate={{
+          backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
+          y: ['-6%', '6%', '-6%'],
+        }}
+        transition={{
+          duration: 40,
+          ease: 'easeInOut',
+          repeat: Infinity,
+        }}
+      />
+
+      <motion.div
+        className='mx-auto px-5 max-w-5xl w-full text-center z-20'
         variants={container}
         initial='hidden'
         animate='visible'
       >
         {/* TITLE BLOCK */}
         <motion.div variants={titleContainer} className='mb-6'>
-          <motion.h1 className='text-5xl md:text-7xl font-dune leading-tight bg-clip-text text-transparent bg-linear-to-b from-heading to-night font-bold'>
+          <motion.h1 className='text-5xl md:text-7xl font-dune leading-tight bg-clip-text text-transparent bg-linear-to-b from-heading to-mid-glow'>
             {titleText.split(' ').map((wordText, index) => (
               <motion.span
                 key={index}
