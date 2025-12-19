@@ -50,7 +50,7 @@ const HeroContent = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
     >
-      {/* 1. Deep water */}
+      {/* 1. Gradient atmosphere */}
       <motion.div
         className='absolute inset-0 bg-cover bg-center'
         style={{
@@ -76,24 +76,24 @@ const HeroContent = () => {
 
       {/* 2. Surface shimmer */}
       <motion.div
-        className='absolute inset-0 pointer-events-none h-10 opacity-15'
+        className='absolute top-0 left-0 right-0 h-[55%] pointer-events-none'
         style={{
           backgroundImage: `
-        repeating-linear-gradient(
-          -0deg,
-          var(--color-outer-glow) 5px,
-          var(--color-inner-glow) 4px,
-            var(--color-md-glow) 20px
-        )
-      `,
-          filter: 'blur(10px)',
+      repeating-linear-gradient(
+        -12deg,
+        rgba(255,255,255,0.18) 0px,
+        rgba(255,255,255,0.04) 18px,
+        rgba(255,255,255,0.18) 36px
+      )
+    `,
+          filter: 'blur(14px)',
+          mixBlendMode: 'soft-light',
         }}
         animate={{
-          backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
-          y: ['-6%', '6%', '-6%'],
+          x: ['-8%', '8%', '-8%'],
         }}
         transition={{
-          duration: 40,
+          duration: 36,
           ease: 'easeInOut',
           repeat: Infinity,
         }}
@@ -160,7 +160,7 @@ const Hero = () => {
       const timer = setTimeout(() => setLoadingState(1), 750);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
-      const timer = setTimeout(() => setLoadingState(2), 600); // User-specified duration
+      const timer = setTimeout(() => setLoadingState(2), 600);
       return () => clearTimeout(timer);
     }
   }, [loadingState]);
