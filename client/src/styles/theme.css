@@ -45,6 +45,11 @@
   --color-bg-md: oklch(82.8% 0.189 84.429);
   --color-bg-b: oklch(14.7% 0.004 49.25);
 
+  --color-inner-glow: rgba(180, 220, 255, 0.8);
+  --color-md-glow: rgba(40, 120, 180, 0.8);
+  --color-outer-glow: rgba(10, 40, 80, 0.3);
+  --color-border-glow: rgba(0, 0, 0, 0.11);
+
   /* Primary, Ok, Warn, Fail color scales */
   --color-primary-50: oklch(0.95 0.05 260);
   --color-primary-100: oklch(0.9 0.1 260);
@@ -183,9 +188,14 @@
 
     /* Dark theme landing bg colors */
     --color-bg-body: var(--dark-bg-primary);
-    --color-bg-t: --color-neutral-900: oklch(20.5% 0 0);
+    --color-bg-t: oklch(0.1 0.01 56.259);
     --color-bg-md: oklch(82.8% 0.189 84.429);
-    --color-bg-b: oklch(14.7% 0.004 49.25);
+    --color-bg-b: oklch(12.2% 0.05 38.18);
+
+    --color-inner-glow: rgb(255, 185, 0, 0.9);
+    --color-md-glow: rgb(98, 0, 0, 0.8);
+    --color-outer-glow: rgb(70, 25, 10, 0.3);
+    --color-border-glow: rgba(0, 0, 0, 1);
 
     /* Primary, Ok, Warn, Fail color scales for dark theme */
     --color-primary-50: oklch(0.45 0.3 260);

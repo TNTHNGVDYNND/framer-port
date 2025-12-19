@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const ThemeCard = () => {
   const heading = 'Theme Toggle Test';
@@ -112,43 +113,88 @@ const ThemeCard = () => {
   };
 
   return (
-    <div className='flex bg-neutral-50 min-h-screen min-w-full flex-col items-center justify-center p-4'>
-      <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-4 shadow-2xl shadow-neutral-500 text-neutral-500 transition-colors duration-500'>
-        <h1 className='text-2xl font-bold text-primary-500'>{heading}</h1>
-        <p className=' py-4'>{text}</p>
-        <div className={'grid grid-cols-11 gap-0.5 z-50'}>
-          {[
-            'neutral',
-            'primary',
-            'teal',
-            'ok',
-            'warn',
-            'fail',
-            'fuchsia',
-            'red',
-          ].map((color, colorIndex) =>
-            [
-              '50',
-              '100',
-              '200',
-              '300',
-              '400',
-              '500',
-              '600',
-              '700',
-              '800',
-              '900',
-              '950',
-            ].map((tone, toneIndex) => (
-              <div
-                key={`key-${colorIndex}-${toneIndex}`}
-                className={`${colorMap[color][tone]} m-0 p-0 h-8 transition-colors duration-1000`}
-              ></div>
-            ))
-          )}
-        </div>
-      </article>
-    </div>
+    <motion.div
+      className='flex bg-neutral-50 min-h-screen min-w-full flex-col items-center justify-center absolute inset-0'
+      style={{
+        backgroundImage: `
+      radial-gradient(
+        ellipse at top,
+        rgba(180, 220, 255, 0.9) 0%,
+        rgba(40, 120, 180, 0.8) 35%,
+        rgba(10, 40, 80, 0.95) 70%,
+        rgba(5, 15, 30, 1) 100%
+      )
+    `,
+      }}
+      animate={{
+        backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
+      }}
+      transition={{
+        duration: 20,
+        ease: 'easeInOut',
+        repeat: Infinity,
+      }}
+    >
+      <motion.div
+        className='absolute top-0 left-0 right-0 h-[35%] opacity-20 pointer-events-none'
+        style={{
+          background: `
+      repeating-linear-gradient(
+        -12deg,
+        rgba(255,255,255,0.25) 0px,
+        rgba(255,255,255,0.05) 20px,
+        rgba(255,255,255,0.25) 40px
+      )
+    `,
+          filter: 'blur(10px)',
+        }}
+        animate={{
+          x: ['-6%', '6%', '-6%'],
+        }}
+        transition={{
+          duration: 28,
+          ease: 'easeInOut',
+          repeat: Infinity,
+        }}
+      />
+      <div className='relative z-10 p-8'>
+        <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-4 shadow-2xl shadow-neutral-500 text-neutral-500 transition-colors duration-500'>
+          <h1 className='text-2xl font-bold text-primary-500'>{heading}</h1>
+          <p className=' py-4'>{text}</p>
+          <div className={'grid grid-cols-11 gap-0.5 z-50'}>
+            {[
+              'neutral',
+              'primary',
+              'teal',
+              'ok',
+              'warn',
+              'fail',
+              'fuchsia',
+              'red',
+            ].map((color, colorIndex) =>
+              [
+                '50',
+                '100',
+                '200',
+                '300',
+                '400',
+                '500',
+                '600',
+                '700',
+                '800',
+                '900',
+                '950',
+              ].map((tone, toneIndex) => (
+                <div
+                  key={`key-${colorIndex}-${toneIndex}`}
+                  className={`${colorMap[color][tone]} m-0 p-0 h-8 transition-colors duration-1000`}
+                ></div>
+              ))
+            )}
+          </div>
+        </article>
+      </div>
+    </motion.div>
   );
 };
 

@@ -45,20 +45,69 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61%'
+      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61% relative'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
     >
+      {/* 1. Gradient atmosphere */}
       <motion.div
-        className='mx-auto px-5 max-w-5xl w-full text-center'
+        className='absolute inset-0 bg-cover bg-center'
+        style={{
+          backgroundImage: `
+        radial-gradient(
+          ellipse at top, 
+          var(--color-inner-glow) 5%,
+          var(--color-md-glow) 25%,
+          var(--color-outer-glow) 35%,
+          var(--color-border-glow) 90%
+        )
+      `,
+        }}
+        animate={{
+          backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
+        }}
+        transition={{
+          duration: 30,
+          ease: 'easeInOut',
+          repeat: Infinity,
+        }}
+      />
+
+      {/* 2. Surface shimmer */}
+      <motion.div
+        className='absolute top-0 left-0 right-0 h-[55%] pointer-events-none'
+        style={{
+          backgroundImage: `
+      repeating-linear-gradient(
+        -12deg,
+        rgba(255,255,255,0.18) 0px,
+        rgba(255,255,255,0.04) 18px,
+        rgba(255,255,255,0.18) 36px
+      )
+    `,
+          filter: 'blur(14px)',
+          mixBlendMode: 'soft-light',
+        }}
+        animate={{
+          x: ['-8%', '8%', '-8%'],
+        }}
+        transition={{
+          duration: 36,
+          ease: 'easeInOut',
+          repeat: Infinity,
+        }}
+      />
+
+      <motion.div
+        className='mx-auto px-5 max-w-5xl w-full text-center z-20'
         variants={container}
         initial='hidden'
         animate='visible'
       >
         {/* TITLE BLOCK */}
         <motion.div variants={titleContainer} className='mb-6'>
-          <motion.h1 className='text-5xl md:text-7xl font-dune leading-tight bg-clip-text text-transparent bg-linear-to-b from-heading to-night font-bold'>
+          <motion.h1 className='text-5xl md:text-7xl font-dune leading-tight bg-clip-text text-transparent bg-linear-to-b from-heading to-mid-glow'>
             {titleText.split(' ').map((wordText, index) => (
               <motion.span
                 key={index}
@@ -111,7 +160,7 @@ const Hero = () => {
       const timer = setTimeout(() => setLoadingState(1), 750);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
-      const timer = setTimeout(() => setLoadingState(2), 600); // User-specified duration
+      const timer = setTimeout(() => setLoadingState(2), 600);
       return () => clearTimeout(timer);
     }
   }, [loadingState]);
