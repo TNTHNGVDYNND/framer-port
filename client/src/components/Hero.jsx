@@ -125,7 +125,7 @@ const HeroContent = () => {
           variants={fadeUp}
           className='mb-8 leading-relaxed text-base--line-height font-dune text-sub-title max-w-2xl mx-auto'
         >
-          Welcome to my digital garden, where code grows with curiosity.
+          Curiosity - Creativity - Code === quality digital.
         </motion.p>
 
         {/* ACTIONS */}
