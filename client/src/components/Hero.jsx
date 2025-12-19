@@ -45,7 +45,7 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-61% relative'
+      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-62% relative'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
