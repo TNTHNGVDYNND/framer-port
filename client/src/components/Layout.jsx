@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <ReactLenis root>
         {/* Noticeable bg - future infrastructure */}
-      <div className='bg-teal-500 min-h-screen flex flex-col'>
+      <div className='bg-transparent min-h-screen flex flex-col'>
         <Navbar />
         <main className='grow'>
           <Outlet />
