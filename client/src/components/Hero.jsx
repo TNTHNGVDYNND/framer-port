@@ -8,7 +8,7 @@ const container = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.4,
+      staggerChildren: 0.5,
     },
   },
 };
@@ -27,7 +27,7 @@ const word = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { ease: 'easeOut', duration: 0.6 },
+    transition: { duration: 0.6 , ease: 'easeInOut' },
   },
 };
 
@@ -45,7 +45,7 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      className='h-screen flex items-center justify-center bg-linear-to-b from-bg-t from-55% via-bg-md via-50% to-bg-b to-62% relative'
+      className='hero'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
@@ -106,13 +106,13 @@ const HeroContent = () => {
         animate='visible'
       >
         {/* TITLE BLOCK */}
-        <motion.div variants={titleContainer} className='mb-6'>
-          <motion.h1 className='text-5xl md:text-7xl font-dune leading-tight bg-clip-text text-transparent bg-linear-to-b from-heading to-mid-glow'>
+        <motion.div variants={titleContainer} className='hero__content'>
+          <motion.h1 className='hero__title'>
             {titleText.split(' ').map((wordText, index) => (
               <motion.span
                 key={index}
                 variants={word}
-                className='inline-block mr-2'
+                className='hero__title-word'
               >
                 {wordText}
               </motion.span>
@@ -123,15 +123,15 @@ const HeroContent = () => {
         {/* PARAGRAPH */}
         <motion.p
           variants={fadeUp}
-          className='mb-8 leading-relaxed text-base--line-height font-dune text-sub-title max-w-2xl mx-auto'
+          className='hero__subtitle'
         >
-          Curiosity - Creativity - Code === quality digital.
+          Curiosity - Creativity - Code.
         </motion.p>
 
         {/* ACTIONS */}
         <motion.div
           variants={fadeUp}
-          className='flex flex-col sm:flex-row justify-center gap-4'
+          className='hero__actions'
         >
           <Link
             to='/work'
