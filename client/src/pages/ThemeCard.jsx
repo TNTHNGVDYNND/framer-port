@@ -158,7 +158,7 @@ const ThemeCard = () => {
         }}
       />
       <div className='relative z-10 p-8'>
-        <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-4 shadow-2xl shadow-neutral-500 text-neutral-500 transition-colors duration-500'>
+        <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-4 shadow-2xl shadow-neutral-500 text-neutral-500 transition-colors duration-700'>
           <h1 className='text-2xl font-bold text-primary-500'>{heading}</h1>
           <p className=' py-4'>{text}</p>
           <div className={'grid grid-cols-11 gap-0.5 z-50'}>

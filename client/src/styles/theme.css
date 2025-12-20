@@ -196,7 +196,7 @@
 
     --color-inner-glow: rgb(255, 185, 0, 0.9);
     --color-md-glow: rgb(98, 0, 0, 0.8);
-    --color-outer-glow: rgb(70, 25, 10, 0.3);
+    --color-outer-glow: rgba(70, 25, 10, 0.1);
     --color-border-glow: rgba(0, 0, 0, 1);
 
     /* Primary, Ok, Warn, Fail color scales for dark theme */
