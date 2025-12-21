@@ -78,25 +78,7 @@ body {
     @apply flex flex-col sm:flex-row justify-center gap-4 shadow-xs;
   }
 
-  /* Link Button Styles */
-  /* .hero__action {
-    @apply inline-flex items-center justify-center;
-    @apply py-4 px-6 rounded-full text-sm font-medium;
-    @apply transition-colors duration-500;
-    @apply font-dune;
-  }
-
-   .hero__action--primary {
-    @apply text-primary-accent;
-    @apply bg-linear-to-b from-tide/90 via-tide/40 to-tide/20;
-    @apply hover:bg-tide/80;
-  }
-
-  .hero__action--secondary {
-    @apply text-muted-text;
-    @apply bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5;
-    @apply hover:bg-dusk/40;
-  } */
+  /* Links Button Styles component */
 
   .prime-btn {
     @apply inline-flex items-center justify-center;
@@ -113,25 +95,42 @@ body {
   }
 
   .prime-btn--outline {
-    @apply border-2 bg-transparent;
+    @apply border-2 border-current bg-transparent;
   }
 
   .prime-btn--gradient {
-    @apply relative overflow-hidden text-neutral-50;
+    @apply relative overflow-hidden;
   }
 
   /* ---------- Tones ---------- */
 
   .prime-btn--primary {
-    @apply text-primary-accent;
+    @apply text-primary-accent hover:text-avocado-200;
   }
 
   .prime-btn--secondary {
-    @apply text-muted-text;
+    @apply text-muted-text hover:text-avocado-100;
   }
 
   .prime-btn--white {
-    @apply text-text-accent-alt;
+    @apply text-red-500;
+  }
+
+  /* ---------- Combined Styles ---------- */
+  .prime-btn--gradient.prime-btn--primary {
+    @apply bg-linear-to-b from-tide/90 via-tide/40 to-tide/20;
+    @apply hover:bg-tide/80;
+    @apply transition-colors duration-500;
+  }
+
+  .prime-btn--gradient.prime-btn--secondary {
+    @apply bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5;
+    @apply hover:bg-dusk/40;
+    @apply transition-colors duration-500;
+  }
+
+  .prime-btn--svg {
+    background: url(#prime-gradient);
   }
 }
 
