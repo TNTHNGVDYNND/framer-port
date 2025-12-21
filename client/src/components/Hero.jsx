@@ -127,11 +127,11 @@ const HeroContent = () => {
 
         {/* ACTIONS */}
         <motion.div variants={fadeUp} className='hero__actions'>
-          <Link to='/work' className='hero__action hero__action--primary'>
+          <Link to='/work' className='text-text-secondary mr-6'>
             View My Work
           </Link>
 
-          <Link to='/contact' className='hero__action hero__action--secondary'>
+          <Link to='/contact' className='text-text-secondary'>
             Get In Touch
           </Link>
         </motion.div>
