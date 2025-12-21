@@ -133,19 +133,13 @@ const HeroContent = () => {
           variants={fadeUp}
           className='hero__actions'
         >
-          <Link
-            to='/work'
-            className='inline-flex text-primary-accent bg-linear-to-b from-tide/90 via-tide/40 to-tide/20 py-2 px-6 rounded-full text-sm transition-colors duration-500 hover:bg-tide/80'
-          >
-            View My Work
-          </Link>
+         <Link to="/work" className="hero__action hero__action--primary">
+    View My Work
+  </Link>
 
-          <Link
-            to='/contact'
-            className='inline-flex text-muted-text bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5 py-2 px-6 rounded-full text-sm transition-colors duration-500 hover:bg-dusk/40'
-          >
-            Get In Touch
-          </Link>
+  <Link to="/contact" className="hero__action hero__action--secondary">
+    Get In Touch
+  </Link>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -160,7 +154,7 @@ const Hero = () => {
       const timer = setTimeout(() => setLoadingState(1), 750);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
-      const timer = setTimeout(() => setLoadingState(2), 600);
+      const timer = setTimeout(() => setLoadingState(2), 1000);
       return () => clearTimeout(timer);
     }
   }, [loadingState]);
