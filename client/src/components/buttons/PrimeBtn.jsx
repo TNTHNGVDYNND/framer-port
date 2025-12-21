@@ -10,8 +10,8 @@ const PrimeBtn = forwardRef(
       as: Component = 'button',
       to,
       href,
-      variant = 'solid',
-      tone = 'primary',
+      variant = 'solid' || 'outline' || 'gradient',
+      tone = 'primary' || 'secondary' || 'white',
       className = '',
       children,
       ...props
@@ -29,6 +29,8 @@ const PrimeBtn = forwardRef(
           'prime-btn',
           `prime-btn--${variant}`,
           `prime-btn--${tone}`,
+          `prime-btn--${variant}--${tone}`,
+          variant === 'gradient' ? 'prime-btn--svg' : '',
           className
         )}
         {...props}
