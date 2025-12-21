@@ -7,7 +7,7 @@ import { ReactLenis } from 'lenis/react';
 const Layout = () => {
   return (
     <ReactLenis root>
-        {/* Noticeable bg - future infrastructure */}
+      {/* Noticeable bg - future infrastructure */}
       <div className='bg-transparent min-h-screen flex flex-col'>
         <Navbar />
         <main className='grow'>
