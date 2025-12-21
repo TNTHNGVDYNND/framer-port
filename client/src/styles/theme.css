@@ -34,6 +34,7 @@
   --color-sub-title: var(--light-text-accent-alt);
   --color-text-primary: var(--light-text-primary);
   --color-text-secondary: var(--light-text-secondary);
+  --color-text-accent-alt: var(--light-text-accent-alt);
   --color-muted-text: var(--color-driftwood);
   --color-primary-accent: var(--light-primary-accent);
   --color-secondary-accent: var(--light-secondary-accent);
@@ -181,6 +182,8 @@
     --color-heading: var(--color-dusk);
     --color-sub-title: var(--color-driftwood);
     --color-text-primary: var(--dark-text-primary);
+    --color-text-secondary: var(--dark-text-secondary);
+    --color-text-accent-alt: var(--dark-text-accent-alt);
     --color-muted-text: var(--color-driftwood);
     --color-primary-accent: var(--dark-primary-accent);
     --color-secondary-accent: var(--dark-secondary-accent);

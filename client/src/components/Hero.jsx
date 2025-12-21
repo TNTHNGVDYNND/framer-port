@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Preloader from './Preloader';
 import Curtain from './Curtain';
+import PrimeBtn from './buttons/PrimeBtn';
+import PrimeGradient from './buttons/PrimeGradient';
 
 const container = {
   hidden: {},
@@ -27,7 +29,7 @@ const word = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6 , ease: 'easeInOut' },
+    transition: { duration: 0.6, ease: 'easeInOut' },
   },
 };
 
@@ -121,31 +123,27 @@ const HeroContent = () => {
         </motion.div>
 
         {/* PARAGRAPH */}
-        <motion.p
-          variants={fadeUp}
-          className='hero__subtitle'
-        >
+        <motion.p variants={fadeUp} className='hero__subtitle'>
           Curiosity - Creativity - Code.
         </motion.p>
 
         {/* ACTIONS */}
-        <motion.div
-          variants={fadeUp}
-          className='hero__actions'
-        >
-          <Link
-            to='/work'
-            className='inline-flex text-primary-accent bg-linear-to-b from-tide/90 via-tide/40 to-tide/20 py-2 px-6 rounded-full text-sm transition-colors duration-500 hover:bg-tide/80'
+        <motion.div variants={fadeUp} className='hero__actions'>
+          <PrimeBtn
+            as='a'
+            href='https://github.com/TNTHNGVDYNND'
+            target='_blank'
+            rel='noopener noreferrer'
+            variant='gradient'
+            tone='primary'
+            className='mr-4'
           >
-            View My Work
-          </Link>
+            Visit my GitHub
+          </PrimeBtn>
 
-          <Link
-            to='/contact'
-            className='inline-flex text-muted-text bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5 py-2 px-6 rounded-full text-sm transition-colors duration-500 hover:bg-dusk/40'
-          >
+          <PrimeBtn as={Link} to='/contact' variant='gradient' tone='secondary'>
             Get In Touch
-          </Link>
+          </PrimeBtn>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -160,7 +158,7 @@ const Hero = () => {
       const timer = setTimeout(() => setLoadingState(1), 750);
       return () => clearTimeout(timer);
     } else if (loadingState === 1) {
-      const timer = setTimeout(() => setLoadingState(2), 600);
+      const timer = setTimeout(() => setLoadingState(2), 1000);
       return () => clearTimeout(timer);
     }
   }, [loadingState]);
