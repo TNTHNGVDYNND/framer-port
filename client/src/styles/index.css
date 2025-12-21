@@ -73,6 +73,31 @@ body {
   @apply font-dune text-sub-title;
   @apply max-w-2xl mx-auto;
 }
+
+ .hero__actions {
+    @apply flex flex-col sm:flex-row justify-center gap-4 shadow-xs;
+  }
+
+/* Link Button Styles */
+.hero__action {
+    @apply inline-flex items-center justify-center;
+    @apply py-4 px-6 rounded-full text-sm font-medium;
+    @apply transition-colors duration-500;
+    @apply font-dune;
+  }
+
+   .hero__action--primary {
+    @apply text-primary-accent;
+    @apply bg-linear-to-b from-tide/90 via-tide/40 to-tide/20;
+    @apply hover:bg-tide/80;
+  }
+
+  .hero__action--secondary {
+    @apply text-muted-text;
+    @apply bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5;
+    @apply hover:bg-dusk/40;
+  }
+  
 }
 
 
