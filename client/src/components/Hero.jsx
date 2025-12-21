@@ -27,7 +27,7 @@ const word = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6 , ease: 'easeInOut' },
+    transition: { duration: 0.6, ease: 'easeInOut' },
   },
 };
 
@@ -121,25 +121,19 @@ const HeroContent = () => {
         </motion.div>
 
         {/* PARAGRAPH */}
-        <motion.p
-          variants={fadeUp}
-          className='hero__subtitle'
-        >
+        <motion.p variants={fadeUp} className='hero__subtitle'>
           Curiosity - Creativity - Code.
         </motion.p>
 
         {/* ACTIONS */}
-        <motion.div
-          variants={fadeUp}
-          className='hero__actions'
-        >
-         <Link to="/work" className="hero__action hero__action--primary">
-    View My Work
-  </Link>
+        <motion.div variants={fadeUp} className='hero__actions'>
+          <Link to='/work' className='hero__action hero__action--primary'>
+            View My Work
+          </Link>
 
-  <Link to="/contact" className="hero__action hero__action--secondary">
-    Get In Touch
-  </Link>
+          <Link to='/contact' className='hero__action hero__action--secondary'>
+            Get In Touch
+          </Link>
         </motion.div>
       </motion.div>
     </motion.div>
