@@ -1,45 +1,54 @@
 import React from 'react';
+import { useId } from 'react';
 import PropTypes from 'prop-types';
-const PrimeBtnGradient = ({ white }) => (
-  <>
-    <svg width={0} height={0} className='hidden'>
+
+const PrimeGradient = ({
+  primary = '#FF00FF',
+  secondary = '#DC2D62',
+  tertiary = '#174DC5',
+  outlineFrom = '#FF8C00',
+  outlineTo = '#FF4500',
+}) => {
+  const id = useId();
+
+  return (
+    <svg width='0' height='0' className='hidden'>
       <defs>
-        {/* Gradient Definitions */}
+        {/* Main gradient */}
         <linearGradient
-          id='prime-btn-gradient'
+          id={`prime-gradient-${id}`}
           x1='0%'
           y1='0%'
           x2='100%'
           y2='0%'
         >
-          <stop offset='0%' stopColor='#FF00FF' />
-          <stop offset='50%' stopColor='#DC2D62' />
-          <stop offset='100%' stopColor='#174DC5' />
-        </linearGradient>
-        <linearGradient id='btn-outline' x1='0%' y1='0%' x2='100%' y2='0%'>
-          <stop offset='0%' stopColor={white ? '#FFFFFF' : '#FF8C00'} />
-          <stop offset='100%' stopColor={white ? '#E0E0E0' : '#FF4500'} />
+          <stop offset='0%' stopColor={primary} />
+          <stop offset='50%' stopColor={secondary} />
+          <stop offset='100%' stopColor={tertiary} />
         </linearGradient>
 
-        {/* Polygon Shape Pattern */}
-        <pattern
-          id='btn-pattern'
-          width='10'
-          height='10'
-          patternUnits='userSpaceOnUse'
+        {/* Outline gradient */}
+        <linearGradient
+          id={`prime-outline-${id}`}
+          x1='0%'
+          y1='0%'
+          x2='100%'
+          y2='0%'
         >
-          <polygon
-            points='0,10 5,0 10,10'
-            fill={white ? '#FFFFFF' : 'url(#prime-btn-gradient)'}
-          />
-        </pattern>
+          <stop offset='0%' stopColor={outlineFrom} />
+          <stop offset='100%' stopColor={outlineTo} />
+        </linearGradient>
       </defs>
     </svg>
-  </>
-);
-
-PrimeBtnGradient.propTypes = {
-  white: PropTypes.bool,
+  );
 };
 
-export default PrimeBtnGradient;
+PrimeGradient.propTypes = {
+  primary: PropTypes.string,
+  secondary: PropTypes.string,
+  tertiary: PropTypes.string,
+  outlineFrom: PropTypes.string,
+  outlineTo: PropTypes.string,
+};
+
+export default PrimeGradient;
