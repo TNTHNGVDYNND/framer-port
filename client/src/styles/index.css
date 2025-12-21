@@ -9,7 +9,7 @@
 @theme {
   --font-display: 'Playfair Display', serif;
   --font-sans:
-    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,;
+    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
   --font-zodiak: 'Zodiak', sans-serif;
   --font-mono:
     'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -46,40 +46,40 @@ body {
      ======================================== */
 /* Hero Section Styles */
 @layer components {
-     .hero {
+  .hero {
     @apply h-screen flex items-center justify-center relative;
     @apply bg-linear-to-b 
            from-bg-t from-55% 
            via-bg-md via-50% 
            to-bg-b to-62%;
   }
-    .hero__content {
+  .hero__content {
     @apply mb-6;
-}
-.hero__title {
+  }
+  .hero__title {
     @apply text-5xl md:text-7xl font-dune leading-tight;
     @apply bg-clip-text text-transparent;
     @apply bg-linear-to-b from-heading from-25% to-md-glow to-95%;
-}
+  }
 
-.hero__title-word {
-  @apply inline-block mr-3 last:mr-0;
-  @apply shadow-xs shadow-dusk;
-}
+  .hero__title-word {
+    @apply inline-block mr-3 last:mr-0;
+    @apply shadow-xs shadow-dusk;
+  }
 
-.hero__subtitle {
-  @apply mb-8 leading-relaxed;
-  @apply text-lg md:text-xl;
-  @apply font-dune text-sub-title;
-  @apply max-w-2xl mx-auto;
-}
+  .hero__subtitle {
+    @apply mb-8 leading-relaxed;
+    @apply text-lg md:text-xl;
+    @apply font-dune text-sub-title;
+    @apply max-w-2xl mx-auto;
+  }
 
- .hero__actions {
+  .hero__actions {
     @apply flex flex-col sm:flex-row justify-center gap-4 shadow-xs;
   }
 
-/* Link Button Styles */
-.hero__action {
+  /* Link Button Styles */
+  /* .hero__action {
     @apply inline-flex items-center justify-center;
     @apply py-4 px-6 rounded-full text-sm font-medium;
     @apply transition-colors duration-500;
@@ -96,17 +96,50 @@ body {
     @apply text-muted-text;
     @apply bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5;
     @apply hover:bg-dusk/40;
-  }
-  
-}
+  } */
 
+  .prime-btn {
+    @apply inline-flex items-center justify-center;
+    @apply px-6 py-3 rounded-full;
+    @apply font-dune text-sm;
+    @apply transition-colors duration-300;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  /* ---------- Variants ---------- */
+
+  .prime-btn--solid {
+    @apply shadow-md;
+  }
+
+  .prime-btn--outline {
+    @apply border-2 bg-transparent;
+  }
+
+  .prime-btn--gradient {
+    @apply relative overflow-hidden text-neutral-50;
+  }
+
+  /* ---------- Tones ---------- */
+
+  .prime-btn--primary {
+    @apply text-primary-accent;
+  }
+
+  .prime-btn--secondary {
+    @apply text-muted-text;
+  }
+
+  .prime-btn--white {
+    @apply text-text-accent-alt;
+  }
+}
 
 /* Custom scrollbar styles */
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-
 
 /* ::-webkit-scrollbar-thumb {
     background-color: var(--color-transparent);
