@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Preloader from './Preloader';
 import Curtain from './Curtain';
+import PrimeBtn from './buttons/PrimeBtn';
+import PrimeGradient from './buttons/PrimeGradient';
 
 const container = {
   hidden: {},
@@ -127,13 +129,21 @@ const HeroContent = () => {
 
         {/* ACTIONS */}
         <motion.div variants={fadeUp} className='hero__actions'>
-          <Link to='/work' className='text-text-secondary mr-6'>
-            View My Work
-          </Link>
+          <PrimeBtn
+            as='a'
+            href='https://github.com/TNTHNGVDYNND'
+            target='_blank'
+            rel='noopener noreferrer'
+            variant='gradient'
+            tone='primary'
+            className='mr-4'
+          >
+            Visit my GitHub
+          </PrimeBtn>
 
-          <Link to='/contact' className='text-text-secondary'>
+          <PrimeBtn as={Link} to='/contact' variant='gradient' tone='secondary'>
             Get In Touch
-          </Link>
+          </PrimeBtn>
         </motion.div>
       </motion.div>
     </motion.div>
