@@ -180,7 +180,7 @@
     --dark-card-bg: #2a3a2a;
 
     --color-heading: var(--color-dusk);
-    --color-sub-title: var(--color-driftwood);
+    --color-sub-title: var(--color-text-primary);
     --color-text-primary: var(--dark-text-primary);
     --color-text-secondary: var(--dark-text-secondary);
     --color-text-accent-alt: var(--dark-text-accent-alt);
