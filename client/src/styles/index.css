@@ -47,14 +47,19 @@ body {
 /* Hero Section Styles */
 @layer components {
   .hero {
-    @apply h-screen flex items-center justify-center relative;
+    @apply h-screen flex items-end justify-center relative;
     @apply bg-linear-to-b 
            from-bg-t from-55% 
            via-bg-md via-50% 
            to-bg-b to-62%;
   }
+
+  .hero__inner {
+    @apply z-20 relative max-w-5xl mx-auto px-6 py-32 md:py-48 lg:py-56 text-center;
+    @apply shadow-xs shadow-dusk;
+  }
   .hero__content {
-    @apply mb-6;
+    @apply mb-6 shadow-xs shadow-dusk;
   }
   .hero__title {
     @apply text-5xl md:text-7xl font-dune leading-tight;
@@ -148,3 +153,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-dusk);
 } */
+
+/* ========================================
+    Utility Classes
+     ======================================== */
