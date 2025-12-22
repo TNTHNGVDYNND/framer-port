@@ -43,7 +43,7 @@ const fadeUp = {
 };
 
 const HeroContent = () => {
-  const titleText = 'Creative Developer & Designer';
+  const titleText = ['Tuan', 'Thong', '&', 'Vaidyanond'].join(' ');
 
   return (
     <motion.div
@@ -75,34 +75,8 @@ const HeroContent = () => {
           repeat: Infinity,
         }}
       />
-
-      {/* 2. Surface shimmer */}
       <motion.div
-        className='absolute top-0 left-0 right-0 h-[55%] pointer-events-none'
-        style={{
-          backgroundImage: `
-      repeating-linear-gradient(
-        -12deg,
-        rgba(255,255,255,0.18) 0px,
-        rgba(255,255,255,0.04) 18px,
-        rgba(255,255,255,0.18) 36px
-      )
-    `,
-          filter: 'blur(14px)',
-          mixBlendMode: 'soft-light',
-        }}
-        animate={{
-          x: ['-8%', '8%', '-8%'],
-        }}
-        transition={{
-          duration: 36,
-          ease: 'easeInOut',
-          repeat: Infinity,
-        }}
-      />
-
-      <motion.div
-        className='mx-auto px-5 max-w-5xl w-full text-center z-20'
+        className='hero__inner'
         variants={container}
         initial='hidden'
         animate='visible'
