@@ -62,7 +62,7 @@ const HeroContent = () => {
         var(--color-inner-glow) 1%,
         var(--color-md-glow) 25%,
         var(--color-outer-glow) 35%,
-        var(--color-border-glow) 85%
+        var(--color-border-glow) 75%
       )`,
             `radial-gradient(
         ellipse at 50% 8%,
@@ -76,7 +76,7 @@ const HeroContent = () => {
         var(--color-inner-glow) 1%,
         var(--color-md-glow) 25%,
         var(--color-outer-glow) 35%,
-        var(--color-border-glow) 85%
+        var(--color-border-glow) 75%
       )`,
           ],
         }}
