@@ -43,7 +43,7 @@ const fadeUp = {
 };
 
 const HeroContent = () => {
-  const titleText = ['Tuan', 'Thong', '&', 'Vaidyanond'].join(' ');
+  const titleText = ['Dunevxane', 'Avonce', '&', 'Vaidyanond'].join(' ');
 
   return (
     <motion.div
@@ -54,27 +54,46 @@ const HeroContent = () => {
     >
       {/* 1. Gradient atmosphere */}
       <motion.div
-        className='absolute inset-0 bg-cover bg-center'
-        style={{
-          backgroundImage: `
-        radial-gradient(
-          ellipse at top, 
-          var(--color-inner-glow) 5%,
-          var(--color-md-glow) 25%,
-          var(--color-outer-glow) 35%,
-          var(--color-border-glow) 90%
-        )
-      `,
-        }}
+        className='absolute inset-0 z-10'
         animate={{
-          backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
+          backgroundImage: [
+            `radial-gradient(
+        ellipse at 50% 0%,
+        var(--color-inner-glow) 1%,
+        var(--color-md-glow) 25%,
+        var(--color-outer-glow) 35%,
+        var(--color-border-glow) 85%
+      )`,
+            `radial-gradient(
+        ellipse at 50% 8%,
+        var(--color-inner-glow) 1%,
+        var(--color-md-glow) 26%,
+        var(--color-outer-glow) 36%,
+        var(--color-border-glow) 95%
+      )`,
+            `radial-gradient(
+        ellipse at 50% 8%,
+        var(--color-inner-glow) 1%,
+        var(--color-md-glow) 26%,
+        var(--color-outer-glow) 36%,
+        var(--color-border-glow) 95%
+      )`,
+            `radial-gradient(
+        ellipse at 50% 0%,
+        var(--color-inner-glow) 1%,
+        var(--color-md-glow) 25%,
+        var(--color-outer-glow) 35%,
+        var(--color-border-glow) 85%
+      )`,
+          ],
         }}
         transition={{
-          duration: 30,
+          duration: 60,
           ease: 'easeInOut',
           repeat: Infinity,
         }}
       />
+
       <motion.div
         className='hero__inner'
         variants={container}
