@@ -47,7 +47,7 @@ body {
 /* Hero Section Styles */
 @layer components {
   .hero {
-    @apply h-screen flex items-end justify-center relative;
+    @apply h-screen flex items-center justify-center relative;
     @apply bg-linear-to-b 
            from-bg-t from-55% 
            via-bg-md via-50% 
@@ -55,21 +55,29 @@ body {
   }
 
   .hero__inner {
-    @apply z-20 relative max-w-5xl mx-auto px-6 py-32 md:py-48 lg:py-56 text-center;
-    @apply shadow-xs shadow-dusk;
+    @apply z-20 relative max-w-5xl mx-auto text-center;
+
+    @apply px-4 py-20;
+    @apply sm:px-6 sm:py-28;
+    @apply md:py-40;
+    @apply lg:py-56;
   }
+
   .hero__content {
     @apply mb-6 shadow-xs shadow-dusk;
   }
+
   .hero__title {
-    @apply text-5xl md:text-7xl font-dune leading-tight;
-    @apply bg-clip-text text-transparent;
-    @apply bg-linear-to-b from-heading from-25% to-md-glow to-95%;
+    @apply font-dune leading-tight;
+    @apply text-4xl sm:text-5xl md:text-7xl;
   }
 
   .hero__title-word {
-    @apply inline-block mr-3 last:mr-0;
+    @apply inline-block mr-2 sm:mr-3 last:mr-0;
     @apply shadow-xs shadow-dusk;
+
+    @apply bg-clip-text text-transparent;
+    @apply bg-linear-to-b from-heading from-35% via-md-glow via-45% to-heading to-85%;
   }
 
   .hero__subtitle {
@@ -80,12 +88,16 @@ body {
   }
 
   .hero__actions {
-    @apply flex flex-col sm:flex-row justify-center gap-4 shadow-xs;
+    @apply flex flex-col justify-center gap-3;
+    @apply sm:flex-row sm:gap-4;
+    @apply mt-6;
+    @apply shadow-xs shadow-dusk;
   }
 
   /* Links Button Styles component */
 
   .prime-btn {
+    @apply w-full sm:w-auto;
     @apply inline-flex items-center justify-center;
     @apply px-6 py-3 rounded-full;
     @apply font-dune text-sm;
