@@ -138,12 +138,18 @@ body {
     @apply bg-linear-to-b from-tide/90 via-tide/40 to-tide/20;
     @apply hover:bg-tide/80;
     @apply transition-colors duration-500;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   .prime-btn--gradient.prime-btn--secondary {
     @apply bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5;
     @apply hover:bg-dusk/40;
     @apply transition-colors duration-500;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   .prime-btn--svg {

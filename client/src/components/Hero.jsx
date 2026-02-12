@@ -147,11 +147,11 @@ const HeroContent = () => {
         <FloatingElements />
 
         {/* Content pushed to bottom for "Midnight Sun in the desert" effect */}
-        <div className="flex-1" /> {/* Spacer to push content down */}
+        <div className="flex-1 min-h-[40vh]" /> {/* Spacer to push content down - increased to show more sky */}
         
         {/* TITLE BLOCK - Positioned at bottom in the darker area */}
         <motion.div
-          className='hero__content pb-12'
+          className='hero__content'
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -170,7 +170,7 @@ const HeroContent = () => {
 
           {/* Name subtitle - smaller and more elegant */}
           <motion.div
-            className='mt-4 mb-6'
+            className='mt-4 mb-8'
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
@@ -195,9 +195,9 @@ const HeroContent = () => {
           Curiosity - Creativity - Code.
         </motion.p>
 
-        {/* ACTIONS with 3D hover and magnetic effect */}
+        {/* ACTIONS with 3D hover and magnetic effect - no border */}
         <motion.div
-          className='hero__actions'
+          className='hero__actions mb-20'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.6 }}
@@ -210,7 +210,7 @@ const HeroContent = () => {
               rel='noopener noreferrer'
               variant='gradient'
               tone='primary'
-              className='font-mono'
+              className='font-mono border-0'
             >
               Visit my GitHub
             </PrimeBtn>
@@ -222,25 +222,11 @@ const HeroContent = () => {
               to='/contact'
               variant='gradient'
               tone='secondary'
-              className='font-mono'
+              className='font-mono border-0'
             >
               Get In Touch
             </PrimeBtn>
           </MagneticButton>
-        </motion.div>
-
-        {/* Barcode decoration */}
-        <motion.div
-          className='mt-12 flex justify-center'
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 3, duration: 0.5 }}
-        >
-          <Barcode
-            value='DEV-2024'
-            className='w-48'
-            lineColor='var(--color-dusk)'
-          />
         </motion.div>
       </motion.div>
     </motion.div>
