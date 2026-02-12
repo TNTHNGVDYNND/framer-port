@@ -5,9 +5,14 @@ import CustomScrollbar from './CustomScrollbar';
 import AudioToggle from './AudioToggle';
 import { AudioProvider } from './AudioToggle';
 import CustomCursor from './CustomCursor';
+import HelpButton from './HelpButton';
 import { ReactLenis } from 'lenis/react';
+import { usePerformanceMetrics } from '../hooks/useInView';
 
 const Layout = () => {
+  // Track performance metrics in development
+  usePerformanceMetrics();
+
   return (
     <AudioProvider>
       <ReactLenis root>
@@ -22,6 +27,7 @@ const Layout = () => {
           <CustomScrollbar />
           <AudioToggle />
           <CustomCursor />
+          <HelpButton />
         </div>
       </ReactLenis>
     </AudioProvider>

@@ -2,32 +2,36 @@ import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import { projects } from '../constants';
 import Barcode from './Barcode';
+import { useInView, usePrefersReducedMotion } from '../hooks/useInView';
 
 const ProjectGrid = () => {
+  const [ref, isInView] = useInView({ threshold: 0.05, once: true });
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
         delayChildren: 0.2
       }
     }
   };
 
   return (
-    <section className='py-12 px-4' style={{ perspective: 1000 }}>
+    <section ref={ref} className='py-12 px-4' style={{ perspective: 1000 }}>
       <div className='container mx-auto max-w-7xl'>
         {/* Header with barcode decoration */}
         <motion.div
           className='flex flex-col items-center mb-16'
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.6 }}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className='mb-4'
           >
@@ -58,8 +62,7 @@ const ProjectGrid = () => {
           className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          animate={isInView ? "visible" : "hidden"}
           style={{
             transformStyle: 'preserve-3d'
           }}
@@ -77,8 +80,7 @@ const ProjectGrid = () => {
         <motion.div
           className='mt-16 flex justify-center'
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.5 }}
         >
           <div 

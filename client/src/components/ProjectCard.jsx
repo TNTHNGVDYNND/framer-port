@@ -1,11 +1,14 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useState } from 'react';
 import Barcode from './Barcode';
+import { useInView, usePrefersReducedMotion } from '../hooks/useInView';
 
 const ProjectCard = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [ref, isInView] = useInView({ threshold: 0.1, once: true });
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  // 3D Tilt calculations
+  // 3D Tilt calculations (disabled for reduced motion)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -19,6 +22,7 @@ const ProjectCard = ({ project, index }) => {
   });
 
   const handleMouseMove = (e) => {
+    if (prefersReducedMotion) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -36,7 +40,7 @@ const ProjectCard = ({ project, index }) => {
     hidden: { 
       opacity: 0, 
       y: 50, 
-      rotateX: -15,
+      rotateX: prefersReducedMotion ? 0 : -15,
       scale: 0.9
     },
     visible: { 
@@ -55,8 +59,11 @@ const ProjectCard = ({ project, index }) => {
 
   return (
     <motion.div
+      ref={ref}
       className='relative group cursor-pointer'
       variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
