@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import TerminalLoader from './TerminalLoader';
 import SvgText from './SvgText';
@@ -16,11 +16,11 @@ const Hero = () => {
   };
 
   // Skip loader if already loaded once (for route navigation)
-  useEffect(() => {
+  useState(() => {
     if (hasLoaded && loadingState === 0) {
       setLoadingState(1);
     }
-  }, [hasLoaded, loadingState]);
+  });
 
   return (
     <section className='relative min-h-screen'>
@@ -39,14 +39,49 @@ const Hero = () => {
 };
 
 const HeroContent = () => {
+  // 3D Tilt effect state
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    
+    // Calculate mouse position relative to center (-1 to 1)
+    mouseX.set((clientX - innerWidth / 2) / (innerWidth / 2));
+    mouseY.set((clientY - innerHeight / 2) / (innerHeight / 2));
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setIsHovered(false);
+  };
+
+  // Smooth spring animations for 3D tilt
+  const rotateX = useSpring(useTransform(mouseY, [-1, 1], [8, -8]), {
+    stiffness: 150,
+    damping: 20
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-1, 1], [-8, 8]), {
+    stiffness: 150,
+    damping: 20
+  });
+
   return (
     <motion.div
       className='hero'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeInOut' }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: 1000 }}
     >
-      {/* Gradient atmosphere - kept from original */}
+      {/* Gradient atmosphere with 3D depth */}
       <motion.div
         className='absolute inset-0 z-10'
         animate={{
@@ -73,16 +108,24 @@ const HeroContent = () => {
               var(--color-border-glow) 75%
             )`,
           ],
+          scale: isHovered ? 1.02 : 1,
         }}
         transition={{
-          duration: 60,
-          ease: 'easeInOut',
-          repeat: Infinity,
+          backgroundImage: {
+            duration: 60,
+            ease: 'easeInOut',
+            repeat: Infinity,
+          },
+          scale: {
+            duration: 0.3,
+            ease: 'easeOut'
+          }
         }}
       />
 
+      {/* 3D Tilt Container */}
       <motion.div
-        className='hero__inner'
+        className='hero__inner relative z-20'
         initial='hidden'
         animate='visible'
         variants={{
@@ -93,7 +136,15 @@ const HeroContent = () => {
             },
           },
         }}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d',
+        }}
       >
+        {/* Floating decorative elements */}
+        <FloatingElements />
+
         {/* TITLE BLOCK - Now with SvgText */}
         <motion.div
           className='hero__content'
@@ -141,7 +192,7 @@ const HeroContent = () => {
           Curiosity - Creativity - Code.
         </motion.p>
 
-        {/* ACTIONS */}
+        {/* ACTIONS with 3D hover */}
         <motion.div
           className='hero__actions'
           initial={{ opacity: 0, y: 20 }}
@@ -186,6 +237,57 @@ const HeroContent = () => {
         </motion.div>
       </motion.div>
     </motion.div>
+  );
+};
+
+// Floating decorative elements for depth
+const FloatingElements = () => {
+  return (
+    <>
+      <motion.div
+        className="absolute top-20 left-20 w-2 h-2 rounded-full"
+        style={{ backgroundColor: 'var(--color-lagoon)' }}
+        animate={{
+          y: [0, -30, 0],
+          opacity: [0.3, 0.8, 0.3],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute top-40 right-32 w-3 h-3 rounded-full"
+        style={{ backgroundColor: 'var(--color-dusk)' }}
+        animate={{
+          y: [0, -20, 0],
+          opacity: [0.2, 0.6, 0.2],
+          scale: [1, 1.5, 1],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      <motion.div
+        className="absolute bottom-32 left-40 w-1.5 h-1.5 rounded-full"
+        style={{ backgroundColor: 'var(--color-coral)' }}
+        animate={{
+          y: [0, -25, 0],
+          opacity: [0.3, 0.7, 0.3],
+        }}
+        transition={{
+          duration: 3.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.5
+        }}
+      />
+    </>
   );
 };
 
