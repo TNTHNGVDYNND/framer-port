@@ -169,3 +169,29 @@ body {
 /* ========================================
     Utility Classes
      ======================================== */
+
+/* Custom Cursor Styles */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  a, button, [role="button"], input, textarea, select {
+    cursor: none;
+  }
+  
+  .cursor-none {
+    cursor: none;
+  }
+  
+  .magnetic {
+    cursor: none;
+  }
+}
+
+/* Fallback for touch devices */
+@media (pointer: coarse) {
+  body, a, button, input, textarea, select {
+    cursor: auto;
+  }
+}
