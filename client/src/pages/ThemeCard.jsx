@@ -1,9 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-
 const ThemeCard = () => {
-  const heading = 'Theme Toggle Test';
-  const text = 'Testing dark/light theme toggle functionality.';
+  const heading = 'Theme System';
+  const text = 'Demonstrating the OKLCH color palette used throughout the portfolio.';
 
   const colorMap = {
     neutral: {
@@ -112,89 +109,137 @@ const ThemeCard = () => {
     },
   };
 
+  const colorNames = [
+    'neutral',
+    'primary',
+    'teal',
+    'ok',
+    'warn',
+    'fail',
+    'fuchsia',
+    'red',
+  ];
+
+  const toneNames = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
+
   return (
-    <motion.div
-      className='flex bg-neutral-50 min-h-screen min-w-full flex-col items-center justify-center absolute inset-0'
-      style={{
-        backgroundImage: `
-      radial-gradient(
-        ellipse at top,
-        rgba(180, 220, 255, 0.9) 0%,
-        rgba(40, 120, 180, 0.8) 35%,
-        rgba(10, 40, 80, 0.95) 70%,
-        rgba(5, 15, 30, 1) 100%
-      )
-    `,
-      }}
-      animate={{
-        backgroundPosition: ['50% 0%', '50% 5%', '50% 0%'],
-      }}
-      transition={{
-        duration: 20,
-        ease: 'easeInOut',
-        repeat: Infinity,
-      }}
-    >
-      <motion.div
-        className='absolute top-0 left-0 right-0 h-[35%] opacity-20 pointer-events-none'
-        style={{
-          background: `
-      repeating-linear-gradient(
-        -12deg,
-        rgba(255,255,255,0.25) 0px,
-        rgba(255,255,255,0.05) 20px,
-        rgba(255,255,255,0.25) 40px
-      )
-    `,
-          filter: 'blur(10px)',
-        }}
-        animate={{
-          x: ['-6%', '6%', '-6%'],
-        }}
-        transition={{
-          duration: 28,
-          ease: 'easeInOut',
-          repeat: Infinity,
-        }}
-      />
-      <div className='relative z-10 p-8'>
-        <article className='relative w-[80%] max-w-md rounded-lg border border-neutral-500 bg-neutral-100 p-4 shadow-2xl shadow-neutral-500 text-neutral-500 transition-colors duration-700'>
-          <h1 className='text-2xl font-bold text-primary-500'>{heading}</h1>
-          <p className=' py-4'>{text}</p>
-          <div className={'grid grid-cols-11 gap-0.5 z-50'}>
-            {[
-              'neutral',
-              'primary',
-              'teal',
-              'ok',
-              'warn',
-              'fail',
-              'fuchsia',
-              'red',
-            ].map((color, colorIndex) =>
-              [
-                '50',
-                '100',
-                '200',
-                '300',
-                '400',
-                '500',
-                '600',
-                '700',
-                '800',
-                '900',
-                '950',
-              ].map((tone, toneIndex) => (
-                <div
-                  key={`key-${colorIndex}-${toneIndex}`}
-                  className={`${colorMap[color][tone]} m-0 p-0 h-8 transition-colors duration-1000`}
-                ></div>
-              ))
-            )}
+    <div className="min-h-screen py-12 px-4">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 
+            className="text-4xl md:text-5xl font-dune font-bold mb-4"
+            style={{ color: 'var(--color-heading)' }}
+          >
+            {heading}
+          </h1>
+          <p 
+            className="font-mono max-w-2xl mx-auto"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
+            {text}
+          </p>
+          <p 
+            className="font-mono text-sm mt-2"
+            style={{ color: 'var(--color-neutral-400)' }}
+          >
+            Toggle between light and dark modes to see color transitions
+          </p>
+        </div>
+
+        {/* Color Grid */}
+        <div 
+          className="rounded-xl overflow-hidden border"
+          style={{ 
+            backgroundColor: 'var(--color-card-bg)',
+            borderColor: 'var(--color-border-color)'
+          }}
+        >
+          {/* Grid Header */}
+          <div 
+            className="grid grid-cols-12 gap-1 p-4 border-b"
+            style={{ borderColor: 'var(--color-border-color)' }}
+          >
+            <div 
+              className="font-mono text-xs font-bold"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              Color
+            </div>
+            {toneNames.map((tone) => (
+              <div 
+                key={tone}
+                className="font-mono text-xs text-center"
+                style={{ color: 'var(--color-neutral-400)' }}
+              >
+                {tone}
+              </div>
+            ))}
           </div>
-        </article>
+
+          {/* Color Rows */}
+          {colorNames.map((colorName) => (
+            <div 
+              key={colorName}
+              className="grid grid-cols-12 gap-1 p-4 border-b last:border-b-0 items-center"
+              style={{ borderColor: 'var(--color-border-color)' }}
+            >
+              <div 
+                className="font-mono text-xs font-bold uppercase"
+                style={{ color: 'var(--color-text-primary)' }}
+              >
+                {colorName}
+              </div>
+              {toneNames.map((tone) => (
+                <div
+                  key={`${colorName}-${tone}`}
+                  className={`${colorMap[colorName][tone]} h-10 rounded transition-all duration-500 hover:scale-110 hover:z-10`}
+                  title={`${colorName}-${tone}`}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Additional Info */}
+        <div 
+          className="mt-8 p-6 rounded-xl border"
+          style={{ 
+            backgroundColor: 'var(--color-neutral-100)',
+            borderColor: 'var(--color-border-color)'
+          }}
+        >
+          <h2 
+            className="text-xl font-dune font-bold mb-4"
+            style={{ color: 'var(--color-heading)' }}
+          >
+            About the Color System
+          </h2>
+          <div 
+            className="font-mono text-sm space-y-2"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
+            <p>
+              <span style={{ color: 'var(--color-lagoon)' }}>OKLCH</span> color space is used throughout the portfolio for perceptually uniform colors.
+            </p>
+            <p>
+              Colors automatically adapt between light and dark themes using CSS custom properties.
+            </p>
+            <p>
+              The scale ranges from 50 (lightest) to 950 (darkest), with 500 as the base.
+            </p>
+          </div>
+        </div>
+
+        {/* Current Theme Indicator */}
+        <div 
+          className="mt-8 text-center font-mono text-xs"
+          style={{ color: 'var(--color-neutral-400)' }}
+        >
+          <span style={{ color: 'var(--color-lagoon)' }}>Tip:</span> Use the theme toggle button in the sidebar to switch between light and dark modes
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
