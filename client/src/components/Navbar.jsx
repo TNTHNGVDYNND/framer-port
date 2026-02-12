@@ -68,6 +68,7 @@ const Sidebar = () => {
   const menuItems = [
     { to: '/', label: 'Home' },
     { to: '/work', label: 'Work' },
+    { to: '/theme', label: 'Theme' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
   ];
