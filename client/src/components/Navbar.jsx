@@ -1,83 +1,138 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ThemeToggleBtn from './ThemeToggleBtn';
+
 const NavItem = ({ to, children }) => {
   return (
-    <NavLink
-      to={to}
-      className='relative group font-dune text-driftwood/60 transition-colors duration-300 hover:text-highlight px-3 py-2 font-medium text-xs uppercase'
+    <motion.li
+      variants={{
+        hidden: { opacity: 0, x: -20 },
+        visible: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 24,
+          },
+        },
+      }}
+      className="pointer-events-auto"
     >
-      {({ isActive }) => (
-        <>
-          <div className='relative overflow-hidden'>
-            <span className='block transition-transform duration-300 ease-in-out group-hover:-translate-y-full'>
+      <NavLink
+        to={to}
+        end={to === '/'}
+        className={({ isActive }) => `
+          relative block px-4 py-3 font-mono text-xs uppercase tracking-wider
+          transition-colors duration-300 pointer-events-auto
+          ${isActive 
+            ? 'text-white' 
+            : 'text-neutral-500 hover:text-neutral-300'
+          }
+        `}
+      >
+        {({ isActive }) => (
+          <>
+            {/* Vertical sliding indicator */}
+            {isActive && (
+              <motion.div
+                layoutId="activeIndicator"
+                className="absolute left-0 top-0 bottom-0 w-1 bg-lagoon"
+                initial={false}
+                transition={{
+                  type: 'spring',
+                  stiffness: 500,
+                  damping: 30,
+                }}
+              />
+            )}
+            {/* Vertical text */}
+            <span
+              className="block pointer-events-none"
+              style={{
+                writingMode: 'vertical-rl',
+                textOrientation: 'mixed',
+                transform: 'rotate(180deg)',
+              }}
+            >
               {children}
             </span>
-            <span className='block absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0'>
-              {children}
-            </span>
-          </div>
-          {isActive && (
-            <motion.div
-              className='absolute -bottom-2.5 left-0 right-0 h-0.5 bg-text-primary'
-              layoutId='underline'
-              initial={false}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            />
-          )}
-        </>
-      )}
-    </NavLink>
+          </>
+        )}
+      </NavLink>
+    </motion.li>
   );
 };
 
-NavItem.propTypes = {
-  to: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
+const Sidebar = () => {
+  const menuItems = [
+    { to: '/', label: 'Home' },
+    { to: '/work', label: 'Work' },
+    { to: '/about', label: 'About' },
+    { to: '/contact', label: 'Contact' },
+  ];
 
-const Navbar = () => {
   return (
-    <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2'>
-      {/* <nav className='bg-bg-t sticky top-0 z-50 px-4 py-2 shadow-xs shadow-dusk'> */}
-      {/* <div className='container px-4 rounded-4xl bg-neutral-500/10 mx-auto'> */}
-      <div className='container px-4 mx-auto'>
-        <div className='flex items-center justify-between h-16'>
-          <div className='flex items-center text-base--line-height space-x-4 font-dune text-center text-highlight bg-dusk/10 size-16 rounded-full px-4'>
-            <NavLink to='/'>
-              {({ isActive }) => (
-                <div className='relative'>
-                  myPortfolio
-                  {isActive && (
-                    <motion.div
-                      className='absolute -bottom-2.5 left-0 right-0 h-0.5 bg-bg-md'
-                      layoutId='underline'
-                      initial={false}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 500,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </div>
-              )}
-            </NavLink>
-            <ThemeToggleBtn />
+    <motion.nav
+      className="fixed left-0 top-0 bottom-0 w-16 bg-neutral-50/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-dusk/20"
+      variants={{
+        hidden: { x: -100, opacity: 0 },
+        visible: {
+          x: 0,
+          opacity: 1,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+            staggerChildren: 0.1,
+          },
+        },
+      }}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Logo/Brand */}
+      <motion.div
+        className="px-2 mb-8 flex justify-center"
+        variants={{
+          hidden: { opacity: 0, scale: 0.8 },
+          visible: { opacity: 1, scale: 1 },
+        }}
+      >
+        <NavLink to="/" className="block">
+          <div
+            className="w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold"
+            style={{
+              backgroundColor: 'var(--color-dusk)',
+              color: 'var(--color-neutral-50)',
+            }}
+          >
+            VN
           </div>
-          <div className='hidden md:flex space-x-8'>
-            <ThemeToggleBtn />
-            <NavItem to='/theme'>Theme</NavItem>
-            <NavItem to='/work'>Work</NavItem>
-            <NavItem to='/about'>About</NavItem>
-            <NavItem to='/contact'>Contact</NavItem>
-          </div>
-        </div>
-      </div>
-    </nav>
+        </NavLink>
+      </motion.div>
+
+      {/* Navigation Items */}
+      <ul className="flex-1 flex flex-col gap-2">
+        {menuItems.map((item) => (
+          <NavItem key={item.to} to={item.to}>
+            {item.label}
+          </NavItem>
+        ))}
+      </ul>
+
+      {/* Theme Toggle */}
+      <motion.div
+        className="px-2 mt-auto"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 },
+        }}
+      >
+        <ThemeToggleBtn />
+      </motion.div>
+    </motion.nav>
   );
 };
 
-export default Navbar;
+export default Sidebar;
