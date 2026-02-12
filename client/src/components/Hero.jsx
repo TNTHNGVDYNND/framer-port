@@ -43,7 +43,7 @@ const fadeUp = {
 };
 
 const HeroContent = () => {
-  const titleText = ['Dunevxane', 'Avonce', '&', 'Vaidyanond'].join(' ');
+  const titleText = ['HELLO', 'WORLD', '&', 'Vaidyanond'].join(' ');
 
   return (
     <motion.div
