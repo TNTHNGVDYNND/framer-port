@@ -124,9 +124,9 @@ const HeroContent = () => {
         }}
       />
 
-      {/* 3D Tilt Container */}
+      {/* 3D Tilt Container - Flex column to push content to bottom */}
       <motion.div
-        className='hero__inner relative z-20'
+        className='hero__inner relative z-20 flex flex-col justify-end h-full min-h-screen px-8 pb-16'
         initial='hidden'
         animate='visible'
         variants={{
@@ -146,9 +146,12 @@ const HeroContent = () => {
         {/* Floating decorative elements */}
         <FloatingElements />
 
-        {/* TITLE BLOCK - Now with SvgText */}
+        {/* Content pushed to bottom for "Midnight Sun in the desert" effect */}
+        <div className="flex-1" /> {/* Spacer to push content down */}
+        
+        {/* TITLE BLOCK - Positioned at bottom in the darker area */}
         <motion.div
-          className='hero__content'
+          className='hero__content pb-12'
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -157,7 +160,7 @@ const HeroContent = () => {
           <h1 className='hero__title'>
             <SvgText
               text='HELLO WORLD'
-              className='font-dune text-4xl sm:text-5xl md:text-7xl'
+              className='font-dune text-3xl sm:text-4xl md:text-5xl'
               style={{ color: 'var(--color-heading)' }}
               staggerDelay={0.08}
               withCursor={true}
@@ -165,27 +168,26 @@ const HeroContent = () => {
             />
           </h1>
 
-          {/* Subtitle with letter animation */}
+          {/* Name subtitle - smaller and more elegant */}
           <motion.div
-            className='mt-6 mb-8'
+            className='mt-4 mb-6'
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
           >
-            <SvgText
-              text='& VAIDYANOND'
-              className='font-dune text-3xl sm:text-4xl md:text-6xl'
-              style={{ color: 'var(--color-heading)' }}
-              staggerDelay={0.05}
-              startDelay={1.5}
-            />
+            <p 
+              className='font-mono text-lg sm:text-xl md:text-2xl tracking-wide'
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              My name is <span style={{ color: 'var(--color-dusk)' }}>Tuanthong Vaidyanond</span>
+            </p>
           </motion.div>
         </motion.div>
 
-        {/* PARAGRAPH */}
+        {/* PARAGRAPH - Moved to bottom section */}
         <motion.p
-          className='hero__subtitle font-mono'
-          style={{ color: 'var(--color-text-secondary)' }}
+          className='hero__subtitle font-mono text-xs sm:text-sm mb-8'
+          style={{ color: 'var(--color-neutral-400)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.6 }}
@@ -245,12 +247,12 @@ const HeroContent = () => {
   );
 };
 
-// Floating decorative elements for depth
+// Floating decorative elements for depth - positioned in the sky/upper area only
 const FloatingElements = () => {
   return (
     <>
       <motion.div
-        className="absolute top-20 left-20 w-2 h-2 rounded-full"
+        className="absolute top-[15%] left-[15%] w-2 h-2 rounded-full"
         style={{ backgroundColor: 'var(--color-lagoon)' }}
         animate={{
           y: [0, -30, 0],
@@ -264,7 +266,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className="absolute top-40 right-32 w-3 h-3 rounded-full"
+        className="absolute top-[25%] right-[20%] w-3 h-3 rounded-full"
         style={{ backgroundColor: 'var(--color-dusk)' }}
         animate={{
           y: [0, -20, 0],
@@ -279,7 +281,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-32 left-40 w-1.5 h-1.5 rounded-full"
+        className="absolute top-[40%] left-[25%] w-1.5 h-1.5 rounded-full"
         style={{ backgroundColor: 'var(--color-coral)' }}
         animate={{
           y: [0, -25, 0],
@@ -290,6 +292,21 @@ const FloatingElements = () => {
           repeat: Infinity,
           ease: "easeInOut",
           delay: 0.5
+        }}
+      />
+      <motion.div
+        className="absolute top-[10%] right-[40%] w-1 h-1 rounded-full"
+        style={{ backgroundColor: 'var(--color-lagoon)' }}
+        animate={{
+          y: [0, -15, 0],
+          opacity: [0.2, 0.5, 0.2],
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
         }}
       />
     </>
