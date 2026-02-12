@@ -5,6 +5,7 @@ import TerminalLoader from './TerminalLoader';
 import SvgText from './SvgText';
 import Barcode from './Barcode';
 import PrimeBtn from './buttons/PrimeBtn';
+import { MagneticButton } from './CustomCursor';
 
 const Hero = () => {
   const [loadingState, setLoadingState] = useState(0);
@@ -192,34 +193,38 @@ const HeroContent = () => {
           Curiosity - Creativity - Code.
         </motion.p>
 
-        {/* ACTIONS with 3D hover */}
+        {/* ACTIONS with 3D hover and magnetic effect */}
         <motion.div
           className='hero__actions'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.6 }}
         >
-          <PrimeBtn
-            as='a'
-            href='https://github.com/TNTHNGVDYNND'
-            target='_blank'
-            rel='noopener noreferrer'
-            variant='gradient'
-            tone='primary'
-            className='mr-4 font-mono'
-          >
-            Visit my GitHub
-          </PrimeBtn>
+          <MagneticButton strength={0.4} className="mr-4">
+            <PrimeBtn
+              as='a'
+              href='https://github.com/TNTHNGVDYNND'
+              target='_blank'
+              rel='noopener noreferrer'
+              variant='gradient'
+              tone='primary'
+              className='font-mono'
+            >
+              Visit my GitHub
+            </PrimeBtn>
+          </MagneticButton>
 
-          <PrimeBtn
-            as={Link}
-            to='/contact'
-            variant='gradient'
-            tone='secondary'
-            className='font-mono'
-          >
-            Get In Touch
-          </PrimeBtn>
+          <MagneticButton strength={0.4}>
+            <PrimeBtn
+              as={Link}
+              to='/contact'
+              variant='gradient'
+              tone='secondary'
+              className='font-mono'
+            >
+              Get In Touch
+            </PrimeBtn>
+          </MagneticButton>
         </motion.div>
 
         {/* Barcode decoration */}
