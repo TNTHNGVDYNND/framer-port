@@ -288,3 +288,26 @@
     --color-red-950: oklch(97.1% 0.013 17.38);
   }
 }
+
+/* ========================================
+   Terminal Aesthetic Utilities
+   ======================================== */
+
+@layer utilities {
+  /* Terminal text glow effect using existing colors */
+  .terminal-glow {
+    text-shadow: 0 0 10px var(--color-lagoon),
+                 0 0 20px var(--color-lagoon),
+                 0 0 30px var(--color-lagoon);
+  }
+  
+  /* Blinking cursor using existing colors */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .cursor-blink {
+    animation: blink 0.8s step-end infinite;
+  }
+}
