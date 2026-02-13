@@ -42,17 +42,11 @@ const ProjectGrid = () => {
             />
           </motion.div>
           
-          <h2 
-            className='text-4xl md:text-5xl font-dune font-bold text-center mb-4'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h2 className='text-4xl md:text-5xl font-dune font-bold text-heading text-center mb-4'>
             Selected Works
           </h2>
           
-          <p 
-            className='text-center font-mono max-w-2xl'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
+          <p className='text-center font-mono max-w-2xl text-text-secondary'>
             A collection of projects showcasing creativity, technical skill, and problem-solving.
           </p>
         </motion.div>
@@ -83,11 +77,8 @@ const ProjectGrid = () => {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <div 
-            className='text-center font-mono text-xs'
-            style={{ color: 'var(--color-neutral-400)' }}
-          >
-            <span style={{ color: 'var(--color-lagoon)' }}>Total Projects:</span> {String(projects.length).padStart(3, '0')}
+          <div className='text-center font-mono text-xs text-neutral-400'>
+            <span className='text-lagoon'>Total Projects:</span> {String(projects.length).padStart(3, '0')}
           </div>
         </motion.div>
       </div>
