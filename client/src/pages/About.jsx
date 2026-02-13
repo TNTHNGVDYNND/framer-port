@@ -1,18 +1,21 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
 const About = () => {
   return (
-    <div className='container mx-auto px-5 py-24' style={{ color: 'var(--color-text-primary)' }}>
+    <motion.div
+      className='container mx-auto px-5 py-24'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className='text-center mb-12'>
-        <h1 
-          className='text-4xl md:text-6xl font-dune font-bold mb-8'
-          style={{ color: 'var(--color-heading)' }}
-        >
+        <h1 className='text-heading text-4xl md:text-6xl font-dune'>
           About Me
         </h1>
       </div>
-      <div 
-        className='max-w-3xl mx-auto text-lg font-mono leading-relaxed'
-        style={{ color: 'var(--color-text-secondary)' }}
-      >
+      <div className='max-w-3xl mx-auto text-lg text-primary-accent leading-relaxed'>
         <p className='mb-4'>
           Hello! I &lsquo m a passionate and creative developer with a love for
           building beautiful, interactive, and user-friendly web applications.
@@ -33,7 +36,7 @@ const About = () => {
           coffee.
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
