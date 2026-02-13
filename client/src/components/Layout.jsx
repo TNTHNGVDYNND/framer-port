@@ -16,14 +16,14 @@ const Layout = () => {
   return (
     <AudioProvider>
       <ReactLenis root>
-        <div className="min-h-screen flex" style={{ backgroundColor: 'var(--color-bg-body)' }}>
+        <div className='min-h-screen flex bg-bg-body'>
           <Navbar />
-          
-          <main className="flex-1 ml-16 cursor-none">
+
+          <main className='flex-1 ml-16 cursor-none'>
             <Outlet />
             <Footer />
           </main>
-          
+
           <CustomScrollbar />
           <AudioToggle />
           <CustomCursor />
