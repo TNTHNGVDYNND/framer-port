@@ -72,17 +72,17 @@ body {
     @apply text-4xl sm:text-5xl md:text-7xl;
   }
 
-  .hero__title-word {
-    @apply inline-block mr-2 sm:mr-3 last:mr-0;
+  .hero__title-name {
+    @apply inline-block;
 
     @apply bg-clip-text text-transparent;
     @apply bg-linear-to-b from-heading from-35% via-md-glow via-45% to-heading to-85%;
   }
 
   .hero__subtitle {
-    @apply mb-8 leading-relaxed;
+    @apply my-2 leading-relaxed;
     @apply text-lg md:text-xl;
-    @apply font-dune text-sub-title;
+    @apply font-mono text-sub-title;
     @apply max-w-2xl mx-auto;
   }
 
