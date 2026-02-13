@@ -1,6 +1,7 @@
 const ThemeCard = () => {
   const heading = 'Theme System';
-  const text = 'Demonstrating the OKLCH color palette used throughout the portfolio.';
+  const text =
+    'Demonstrating the OKLCH color palette used throughout the portfolio.';
 
   const colorMap = {
     neutral: {
@@ -120,56 +121,50 @@ const ThemeCard = () => {
     'red',
   ];
 
-  const toneNames = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
+  const toneNames = [
+    '50',
+    '100',
+    '200',
+    '300',
+    '400',
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+    '950',
+  ];
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <div className='min-h-screen py-12 px-4'>
+      <div className='container mx-auto max-w-6xl'>
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 
-            className="text-4xl md:text-5xl font-dune font-bold mb-4"
-            style={{ color: 'var(--color-heading)' }}
-          >
+        <div className='text-center mb-12'>
+          <h1 className='text-4xl md:text-5xl font-dune font-bold mb-4 text-heading'>
             {heading}
           </h1>
-          <p 
-            className="font-mono max-w-2xl mx-auto"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
+          <p className='font-mono max-w-2xl mx-auto text-text-secondary'>
             {text}
           </p>
-          <p 
-            className="font-mono text-sm mt-2"
-            style={{ color: 'var(--color-neutral-400)' }}
-          >
+          <p className='font-mono text-sm mt-2 text-secondary-accent'>
             Toggle between light and dark modes to see color transitions
           </p>
         </div>
 
         {/* Color Grid */}
-        <div 
-          className="rounded-xl overflow-hidden border"
-          style={{ 
-            backgroundColor: 'var(--color-card-bg)',
-            borderColor: 'var(--color-border-color)'
-          }}
-        >
+        <div className='rounded-xl overflow-hidden border border-border-color bg-card-bg'>
           {/* Grid Header */}
-          <div 
-            className="grid grid-cols-12 gap-1 p-4 border-b"
-            style={{ borderColor: 'var(--color-border-color)' }}
+          <div
+            className='grid grid-cols-12 gap-1 p-4 border border-border-color'
+            // style={{ borderColor: 'var(--color-border-color)' }}
           >
-            <div 
-              className="font-mono text-xs font-bold"
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
+            <div className='font-mono text-xs font-bold text-primary '>
               Color
             </div>
             {toneNames.map((tone) => (
-              <div 
+              <div
                 key={tone}
-                className="font-mono text-xs text-center"
+                className='font-mono text-xs text-center'
                 style={{ color: 'var(--color-neutral-400)' }}
               >
                 {tone}
@@ -179,15 +174,11 @@ const ThemeCard = () => {
 
           {/* Color Rows */}
           {colorNames.map((colorName) => (
-            <div 
+            <div
               key={colorName}
-              className="grid grid-cols-12 gap-1 p-4 border-b last:border-b-0 items-center"
-              style={{ borderColor: 'var(--color-border-color)' }}
+              className='grid grid-cols-12 gap-1 p-4 items-center border-b last:border-b-0 border-border-color'
             >
-              <div 
-                className="font-mono text-xs font-bold uppercase"
-                style={{ color: 'var(--color-text-primary)' }}
-              >
+              <div className='font-mono text-xs font-bold uppercase text-text-secondary'>
                 {colorName}
               </div>
               {toneNames.map((tone) => (
@@ -202,41 +193,30 @@ const ThemeCard = () => {
         </div>
 
         {/* Additional Info */}
-        <div 
-          className="mt-8 p-6 rounded-xl border"
-          style={{ 
-            backgroundColor: 'var(--color-neutral-100)',
-            borderColor: 'var(--color-border-color)'
-          }}
-        >
-          <h2 
-            className="text-xl font-dune font-bold mb-4"
-            style={{ color: 'var(--color-heading)' }}
-          >
+        <div className='mt-8 p-6 rounded-xl bg-card-bg border border-border-color'>
+          <h2 className='text-xl font-dune mb-4 text-heading'>
             About the Color System
           </h2>
-          <div 
-            className="font-mono text-sm space-y-2"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
+          <div className='font-mono text-sm space-y-2'>
             <p>
-              <span style={{ color: 'var(--color-lagoon)' }}>OKLCH</span> color space is used throughout the portfolio for perceptually uniform colors.
+              <span className='text-highlight'>OKLCH</span> color space is used
+              throughout the portfolio for perceptually uniform colors.
             </p>
             <p>
-              Colors automatically adapt between light and dark themes using CSS custom properties.
+              Colors automatically adapt between light and dark themes using CSS
+              custom properties.
             </p>
             <p>
-              The scale ranges from 50 (lightest) to 950 (darkest), with 500 as the base.
+              The scale ranges from 50 (lightest) to 950 (darkest), with 500 as
+              the base.
             </p>
           </div>
         </div>
 
         {/* Current Theme Indicator */}
-        <div 
-          className="mt-8 text-center font-mono text-xs"
-          style={{ color: 'var(--color-neutral-400)' }}
-        >
-          <span style={{ color: 'var(--color-lagoon)' }}>Tip:</span> Use the theme toggle button in the sidebar to switch between light and dark modes
+        <div className='mt-8 text-center font-mono text-xs text-secondary-accent'>
+          <span className='text-highlight'>Tip:</span> Use the theme toggle
+          button in the sidebar to switch between light and dark modes
         </div>
       </div>
     </div>
