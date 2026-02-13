@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useBarcode } from 'react-barcodes';
 import { motion } from 'framer-motion';
 
 const Barcode = ({
@@ -11,33 +11,22 @@ const Barcode = ({
   width = 2,
   animated = true,
 }) => {
-  const svgRef = useRef(null);
-
-  useEffect(() => {
-    if (svgRef.current) {
-      // Dynamically import jsbarcode to avoid SSR issues
-      import('jsbarcode').then((JsBarcodeModule) => {
-        const JsBarcode = JsBarcodeModule.default || JsBarcodeModule;
-        try {
-          JsBarcode(svgRef.current, value || 'PORTFOLIO', {
-            format,
-            width,
-            height,
-            displayValue: false,
-            background,
-            lineColor,
-          });
-        } catch (e) {
-          console.error('Barcode generation error:', e);
-        }
-      });
-    }
-  }, [value, format, width, height, background, lineColor]);
+  const { inputRef } = useBarcode({
+    value: value || 'PORTFOLIO',
+    options: {
+      format,
+      width,
+      height,
+      displayValue: false,
+      background,
+      lineColor,
+    },
+  });
 
   if (animated) {
     return (
       <motion.svg
-        ref={svgRef}
+        ref={inputRef}
         className={className}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -49,7 +38,7 @@ const Barcode = ({
     );
   }
 
-  return <svg ref={svgRef} className={className} />;
+  return <svg ref={inputRef} className={className} />;
 };
 
 export default Barcode;
