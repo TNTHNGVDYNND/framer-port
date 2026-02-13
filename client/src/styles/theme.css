@@ -183,7 +183,7 @@
     --color-sub-title: var(--color-driftwood);
     --color-text-primary: var(--dark-text-primary);
     --color-text-secondary: var(--dark-text-secondary);
-    --color-text-accent-alt: var(--dark-text-accent-alt);
+    --color-text-accent-alt: va(--dark-text-accent-alt);
     --color-muted-text: var(--color-driftwood);
     --color-primary-accent: var(--dark-primary-accent);
     --color-secondary-accent: var(--dark-secondary-accent);
@@ -296,17 +296,23 @@
 @layer utilities {
   /* Terminal text glow effect using existing colors */
   .terminal-glow {
-    text-shadow: 0 0 10px var(--color-lagoon),
-                 0 0 20px var(--color-lagoon),
-                 0 0 30px var(--color-lagoon);
+    text-shadow:
+      0 0 10px var(--color-lagoon),
+      0 0 20px var(--color-lagoon),
+      0 0 30px var(--color-lagoon);
   }
-  
+
   /* Blinking cursor using existing colors */
   @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
-  
+
   .cursor-blink {
     animation: blink 0.8s step-end infinite;
   }
