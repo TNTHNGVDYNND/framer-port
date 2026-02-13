@@ -183,7 +183,7 @@
     --color-sub-title: var(--color-driftwood);
     --color-text-primary: var(--dark-text-primary);
     --color-text-secondary: var(--dark-text-secondary);
-    --color-text-accent-alt: va(--dark-text-accent-alt);
+    --color-text-accent-alt: var(--dark-text-accent-alt);
     --color-muted-text: var(--color-driftwood);
     --color-primary-accent: var(--dark-primary-accent);
     --color-secondary-accent: var(--dark-secondary-accent);
