@@ -152,10 +152,10 @@ const HeroContent = () => {
       >
         {/* Floating decorative elements */}
         <FloatingElements />
-        
+
         {/* Content pushed to bottom for "Midnight Sun in the desert" effect */}
         <div className='flex-1 min-h-[40vh]' />
-        
+
         {/* TITLE BLOCK - Positioned at bottom in the darker area */}
         <motion.div
           className='hero__content'
@@ -176,28 +176,26 @@ const HeroContent = () => {
 
           {/* Name subtitle - uses Tailwind semantic colors */}
           <motion.p
-            className='hero__subtitle mt-4 mb-8 text-base sm:text-lg md:text-xl text-sub-title'
+            className='hero__subtitle text-base sm:text-lg md:text-xl'
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
           >
             My name is{' '}
-            <span className='text-dusk'>
-              Tuanthong Vaidyanond
-            </span>
+            <span className='hero__title-name'>Tuanthong Vaidyanond</span>
           </motion.p>
         </motion.div>
-        
+
         {/* Tagline - uses Tailwind semantic colors */}
         <motion.p
-          className='hero__subtitle text-xs sm:text-sm mb-2 text-neutral-400'
+          className='hero__subtitle text-xs sm:text-sm text-neutral-500'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.6 }}
         >
           Curiosity - Creativity - Code.
         </motion.p>
-        
+
         {/* ACTIONS with 3D hover and magnetic effect  */}
         <motion.div
           className='hero__actions mb-20'
