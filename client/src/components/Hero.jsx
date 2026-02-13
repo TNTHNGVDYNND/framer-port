@@ -9,7 +9,6 @@ import {
 import { Link } from 'react-router-dom';
 import TerminalLoader from './TerminalLoader';
 import SvgText from './SvgText';
-import Barcode from './Barcode';
 import PrimeBtn from './buttons/PrimeBtn';
 import { MagneticButton } from './CustomCursor';
 
@@ -153,9 +152,10 @@ const HeroContent = () => {
       >
         {/* Floating decorative elements */}
         <FloatingElements />
+        
         {/* Content pushed to bottom for "Midnight Sun in the desert" effect */}
-        <div className='flex-1 min-h-[40vh]' />{' '}
-        {/* Spacer to push content down - increased to show more sky */}
+        <div className='flex-1 min-h-[40vh]' />
+        
         {/* TITLE BLOCK - Positioned at bottom in the darker area */}
         <motion.div
           className='hero__content'
@@ -167,36 +167,37 @@ const HeroContent = () => {
           <h1 className='hero__title'>
             <SvgText
               text='HELLO WORLD'
-              className='text-3xl sm:text-4xl md:text-5xl'
-              style={{ color: 'var(--color-heading)' }}
+              className='text-heading text-3xl sm:text-4xl md:text-5xl'
               staggerDelay={0.08}
               withCursor={true}
               startDelay={0.3}
             />
           </h1>
 
-          {/* Name subtitle - uses CSS .hero__subtitle styles */}
+          {/* Name subtitle - uses Tailwind semantic colors */}
           <motion.p
-            className='hero__subtitle mt-4 mb-8 text-base sm:text-lg md:text-xl'
+            className='hero__subtitle mt-4 mb-8 text-base sm:text-lg md:text-xl text-sub-title'
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
           >
             My name is{' '}
-            <span style={{ color: 'var(--color-dusk)' }}>
+            <span className='text-dusk'>
               Tuanthong Vaidyanond
             </span>
           </motion.p>
         </motion.div>
-        {/* Tagline - uses CSS .hero__subtitle with size override */}
+        
+        {/* Tagline - uses Tailwind semantic colors */}
         <motion.p
-          className='hero__subtitle text-xs sm:text-sm mb-2'
+          className='hero__subtitle text-xs sm:text-sm mb-2 text-neutral-400'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.6 }}
         >
           Curiosity - Creativity - Code.
         </motion.p>
+        
         {/* ACTIONS with 3D hover and magnetic effect  */}
         <motion.div
           className='hero__actions mb-20'
@@ -240,8 +241,7 @@ const FloatingElements = () => {
   return (
     <>
       <motion.div
-        className='absolute top-[15%] left-[15%] w-2 h-2 rounded-full'
-        style={{ backgroundColor: 'var(--color-lagoon)' }}
+        className='absolute top-[15%] left-[15%] w-2 h-2 rounded-full bg-lagoon'
         animate={{
           y: [0, -30, 0],
           opacity: [0.3, 0.8, 0.3],
@@ -254,8 +254,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className='absolute top-[25%] right-[20%] w-3 h-3 rounded-full'
-        style={{ backgroundColor: 'var(--color-dusk)' }}
+        className='absolute top-[25%] right-[20%] w-3 h-3 rounded-full bg-dusk'
         animate={{
           y: [0, -20, 0],
           opacity: [0.2, 0.6, 0.2],
@@ -269,8 +268,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className='absolute top-[40%] left-[25%] w-1.5 h-1.5 rounded-full'
-        style={{ backgroundColor: 'var(--color-coral)' }}
+        className='absolute top-[40%] left-[25%] w-1.5 h-1.5 rounded-full bg-coral'
         animate={{
           y: [0, -25, 0],
           opacity: [0.3, 0.7, 0.3],
@@ -283,8 +281,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className='absolute top-[10%] right-[40%] w-1 h-1 rounded-full'
-        style={{ backgroundColor: 'var(--color-lagoon)' }}
+        className='absolute top-[10%] right-[40%] w-1 h-1 rounded-full bg-lagoon'
         animate={{
           y: [0, -15, 0],
           opacity: [0.2, 0.5, 0.2],
