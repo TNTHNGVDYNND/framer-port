@@ -64,7 +64,7 @@ body {
   }
 
   .hero__content {
-    @apply mb-6 shadow-xs shadow-dusk;
+    @apply mb-6;
   }
 
   .hero__title {
@@ -74,7 +74,6 @@ body {
 
   .hero__title-word {
     @apply inline-block mr-2 sm:mr-3 last:mr-0;
-    @apply shadow-xs shadow-dusk;
 
     @apply bg-clip-text text-transparent;
     @apply bg-linear-to-b from-heading from-35% via-md-glow via-45% to-heading to-85%;
@@ -91,7 +90,6 @@ body {
     @apply flex flex-col justify-center gap-3;
     @apply sm:flex-row sm:gap-4;
     @apply mt-6;
-    @apply shadow-xs shadow-dusk;
   }
 
   /* Links Button Styles component */
@@ -138,18 +136,12 @@ body {
     @apply bg-linear-to-b from-tide/90 via-tide/40 to-tide/20;
     @apply hover:bg-tide/80;
     @apply transition-colors duration-500;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
   }
 
   .prime-btn--gradient.prime-btn--secondary {
     @apply bg-linear-to-b from-dusk/30 via-dusk/10 to-dusk/5;
     @apply hover:bg-dusk/40;
     @apply transition-colors duration-500;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
   }
 
   .prime-btn--svg {
@@ -181,15 +173,20 @@ body {
   body {
     cursor: none;
   }
-  
-  a, button, [role="button"], input, textarea, select {
+
+  a,
+  button,
+  [role='button'],
+  input,
+  textarea,
+  select {
     cursor: none;
   }
-  
+
   .cursor-none {
     cursor: none;
   }
-  
+
   .magnetic {
     cursor: none;
   }
@@ -197,7 +194,12 @@ body {
 
 /* Fallback for touch devices */
 @media (pointer: coarse) {
-  body, a, button, input, textarea, select {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
     cursor: auto;
   }
 }
