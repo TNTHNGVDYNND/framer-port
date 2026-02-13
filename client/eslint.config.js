@@ -36,6 +36,7 @@ export default [
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': 'warn',
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
+      'react/react-in-jsx-scope': 'off', // React 19+ uses new JSX transform
     },
   },
   {

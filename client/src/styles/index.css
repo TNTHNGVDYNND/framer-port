@@ -64,7 +64,7 @@ body {
   }
 
   .hero__content {
-    @apply mb-6 shadow-xs shadow-dusk;
+    @apply mb-6;
   }
 
   .hero__title {
@@ -72,18 +72,17 @@ body {
     @apply text-4xl sm:text-5xl md:text-7xl;
   }
 
-  .hero__title-word {
-    @apply inline-block mr-2 sm:mr-3 last:mr-0;
-    @apply shadow-xs shadow-dusk;
+  .hero__title-name {
+    @apply inline-block;
 
     @apply bg-clip-text text-transparent;
     @apply bg-linear-to-b from-heading from-35% via-md-glow via-45% to-heading to-85%;
   }
 
   .hero__subtitle {
-    @apply mb-8 leading-relaxed;
+    @apply my-2 leading-relaxed;
     @apply text-lg md:text-xl;
-    @apply font-dune text-sub-title;
+    @apply font-mono text-sub-title;
     @apply max-w-2xl mx-auto;
   }
 
@@ -91,7 +90,6 @@ body {
     @apply flex flex-col justify-center gap-3;
     @apply sm:flex-row sm:gap-4;
     @apply mt-6;
-    @apply shadow-xs shadow-dusk;
   }
 
   /* Links Button Styles component */
@@ -169,3 +167,39 @@ body {
 /* ========================================
     Utility Classes
      ======================================== */
+
+/* Custom Cursor Styles */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  [role='button'],
+  input,
+  textarea,
+  select {
+    cursor: none;
+  }
+
+  .cursor-none {
+    cursor: none;
+  }
+
+  .magnetic {
+    cursor: none;
+  }
+}
+
+/* Fallback for touch devices */
+@media (pointer: coarse) {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
+}

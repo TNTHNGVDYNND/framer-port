@@ -12,7 +12,7 @@ const Contact = () => {
       transition={{ duration: 0.5 }}
     >
       <div className='max-w-2xl w-full'>
-        <h1 className='text-4xl md:text-6xl font-bold text-center mb-12'>
+        <h1 className='text-4xl md:text-6xl text-heading text-center font-dune mb-12'>
           Get In Touch
         </h1>
         <ContactForm />
