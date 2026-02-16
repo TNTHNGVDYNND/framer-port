@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ThemeToggleBtn from './ThemeToggleBtn';
@@ -17,7 +18,7 @@ const NavItem = ({ to, children }) => {
           },
         },
       }}
-      className="pointer-events-auto"
+      className='pointer-events-auto'
     >
       <NavLink
         to={to}
@@ -25,10 +26,7 @@ const NavItem = ({ to, children }) => {
         className={({ isActive }) => `
           relative block px-4 py-3 font-mono text-xs uppercase tracking-wider
           transition-colors duration-300 pointer-events-auto
-          ${isActive 
-            ? 'text-white' 
-            : 'text-neutral-500 hover:text-neutral-300'
-          }
+          ${isActive ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}
         `}
       >
         {({ isActive }) => (
@@ -36,8 +34,8 @@ const NavItem = ({ to, children }) => {
             {/* Vertical sliding indicator */}
             {isActive && (
               <motion.div
-                layoutId="activeIndicator"
-                className="absolute left-0 top-0 bottom-0 w-1 bg-lagoon"
+                layoutId='activeIndicator'
+                className='absolute left-0 top-0 bottom-0 w-1 bg-lagoon'
                 initial={false}
                 transition={{
                   type: 'spring',
@@ -48,7 +46,7 @@ const NavItem = ({ to, children }) => {
             )}
             {/* Vertical text */}
             <span
-              className="block pointer-events-none"
+              className='block pointer-events-none'
               style={{
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
@@ -64,6 +62,11 @@ const NavItem = ({ to, children }) => {
   );
 };
 
+NavItem.propTypes = {
+  to: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 const Sidebar = () => {
   const menuItems = [
     { to: '/', label: 'Home' },
@@ -75,7 +78,7 @@ const Sidebar = () => {
 
   return (
     <motion.nav
-      className="fixed left-0 top-0 bottom-0 w-16 bg-neutral-50/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-dusk/20"
+      className='fixed left-0 top-0 bottom-0 w-16 bg-neutral-50/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-dusk/20'
       variants={{
         hidden: { x: -100, opacity: 0 },
         visible: {
@@ -89,20 +92,20 @@ const Sidebar = () => {
           },
         },
       }}
-      initial="hidden"
-      animate="visible"
+      initial='hidden'
+      animate='visible'
     >
       {/* Logo/Brand */}
       <motion.div
-        className="px-2 mb-8 flex justify-center"
+        className='px-2 mb-8 flex justify-center'
         variants={{
           hidden: { opacity: 0, scale: 0.8 },
           visible: { opacity: 1, scale: 1 },
         }}
       >
-        <NavLink to="/" className="block">
+        <NavLink to='/' className='block'>
           <div
-            className="w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold"
+            className='w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold'
             style={{
               backgroundColor: 'var(--color-dusk)',
               color: 'var(--color-neutral-50)',
@@ -114,7 +117,7 @@ const Sidebar = () => {
       </motion.div>
 
       {/* Navigation Items */}
-      <ul className="flex-1 flex flex-col gap-2">
+      <ul className='flex-1 flex flex-col gap-2'>
         {menuItems.map((item) => (
           <NavItem key={item.to} to={item.to}>
             {item.label}
@@ -124,7 +127,7 @@ const Sidebar = () => {
 
       {/* Theme Toggle */}
       <motion.div
-        className="px-2 mt-auto"
+        className='px-2 mt-auto'
         variants={{
           hidden: { opacity: 0 },
           visible: { opacity: 1 },
