@@ -22,7 +22,7 @@ Three tasks were planned:
 
 ## 1. Lenis Fix ✅ COMPLETED
 
-### Issue
+### Issue with Window.Lenis
 
 [`useScrollVelocity.js:22`](client/src/hooks/useScrollVelocity.js:22) tries to access `window.lenis`:
 
@@ -60,7 +60,7 @@ function raf(time) {
 requestAnimationFrame(raf);
 ```
 
-### Result
+### Result: Lenis Exposure
 
 The `useScrollVelocity` hook can now access Lenis velocity for smooth scroll-based WebGL effects.
 
@@ -68,7 +68,7 @@ The `useScrollVelocity` hook can now access Lenis velocity for smooth scroll-bas
 
 ## 2. CustomScrollbar Fix ✅ COMPLETED
 
-### Issue
+### Issue with .get() During Render
 
 [`CustomScrollbar.jsx:48`](client/src/components/CustomScrollbar.jsx:48) used `.get()` during render:
 
@@ -82,7 +82,7 @@ Calling `.get()` on a MotionValue during render is problematic because:
 2. It can cause React warnings about reading state during render
 3. It breaks the reactive pattern of Framer Motion
 
-### Solution Implemented
+### Solution Implemented for CustomScrollbar
 
 Rewrote [`CustomScrollbar.jsx`](client/src/components/CustomScrollbar.jsx) to use `useTransform`:
 
