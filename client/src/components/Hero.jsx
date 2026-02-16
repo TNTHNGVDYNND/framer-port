@@ -29,7 +29,7 @@ const Hero = () => {
   });
 
   return (
-    <section className='relative min-h-screen'>
+    <section className='relative min-h-screen overflow-hidden'>
       <AnimatePresence mode='sync'>
         {loadingState === 0 && !hasLoaded && (
           <TerminalLoader
@@ -80,7 +80,7 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      className='hero'
+      className='hero relative z-30'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeInOut' }}
@@ -89,51 +89,9 @@ const HeroContent = () => {
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
     >
-      {/* Gradient atmosphere with 3D depth */}
-      <motion.div
-        className='absolute inset-0 z-10'
-        animate={{
-          backgroundImage: [
-            `radial-gradient(
-              ellipse at 50% 0%,
-              var(--color-inner-glow) 1%,
-              var(--color-md-glow) 25%,
-              var(--color-outer-glow) 35%,
-              var(--color-border-glow) 75%
-            )`,
-            `radial-gradient(
-              ellipse at 50% 8%,
-              var(--color-inner-glow) 1%,
-              var(--color-md-glow) 26%,
-              var(--color-outer-glow) 36%,
-              var(--color-border-glow) 95%
-            )`,
-            `radial-gradient(
-              ellipse at 50% 0%,
-              var(--color-inner-glow) 1%,
-              var(--color-md-glow) 25%,
-              var(--color-outer-glow) 35%,
-              var(--color-border-glow) 75%
-            )`,
-          ],
-          scale: isHovered ? 1.02 : 1,
-        }}
-        transition={{
-          backgroundImage: {
-            duration: 60,
-            ease: 'easeInOut',
-            repeat: Infinity,
-          },
-          scale: {
-            duration: 0.3,
-            ease: 'easeOut',
-          },
-        }}
-      />
-
       {/* 3D Tilt Container - Flex column to push content to bottom */}
       <motion.div
-        className='hero__inner relative z-20 flex flex-col justify-end h-full min-h-screen px-8 pb-16'
+        className='hero__inner relative flex flex-col justify-end h-full min-h-screen px-8 pb-16'
         initial='hidden'
         animate='visible'
         variants={{
