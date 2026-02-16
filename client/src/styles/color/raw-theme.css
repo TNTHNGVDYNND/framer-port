@@ -138,6 +138,17 @@
   --color-highlight: var(--light-highlight);
   --color-border-color: var(--light-border-color);
   --color-card-bg: var(--light-card-bg);
+
+  /* Light theme colors token */
+  --color-bg-body: var(--light-bg-body);
+  --color-bg-t: var(--light-bg-primary);
+  --color-bg-md: var(--color-dusk);
+  --color-bg-b: oklch(14.7% 0.004 49.25); /* #0c0a09 */
+
+  --color-inner-glow: rgba(180, 220, 255, 0.8);
+  --color-md-glow: rgba(40, 120, 180, 0.8);
+  --color-outer-glow: rgba(10, 40, 80, 0.3);
+  --color-border-glow: rgba(0, 0, 0, 0.11);
 }
 
 @layer base {
