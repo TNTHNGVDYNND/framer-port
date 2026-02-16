@@ -1,6 +1,6 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './styles/index.css';
+import './styles/color/index.css';
 import 'wicg-inert';
 import App from './App';
 import ThemeProvider from './context/ThemeProvider';
