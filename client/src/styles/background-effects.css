@@ -1,0 +1,221 @@
+/* Advanced CSS Background Effects - Glass & Grain */
+
+/* Animated Film Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.03;
+  animation: grain 8s steps(10) infinite;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 10%); }
+  80% { transform: translate(-15%, 0); }
+  90% { transform: translate(10%, 5%); }
+}
+
+/* Glass Morphism Effect */
+.glass-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* Water Droplets via CSS */
+.water-droplets {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.water-droplets::before,
+.water-droplets::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 30% 30%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 70%
+  );
+  box-shadow: 
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.water-droplets::before {
+  width: 80px;
+  height: 80px;
+  top: 15%;
+  left: 20%;
+  animation: droplet-float 12s ease-in-out infinite;
+}
+
+.water-droplets::after {
+  width: 40px;
+  height: 40px;
+  top: 35%;
+  right: 25%;
+  animation: droplet-float 15s ease-in-out infinite reverse;
+}
+
+@keyframes droplet-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(10px, -15px) scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+/* Vertical Tree Gradient Overlay */
+.forest-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.1) 1%,
+      transparent 2%,
+      rgba(0, 0, 0, 0.15) 3%,
+      transparent 4%,
+      rgba(0, 0, 0, 0.08) 5%,
+      transparent 7%
+    );
+  opacity: 0.3;
+  animation: forest-sway 20s ease-in-out infinite;
+}
+
+@keyframes forest-sway {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(5px);
+    opacity: 0.35;
+  }
+}
+
+/* Warm Amber Glow Animation */
+.amber-glow {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  width: 140%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(218, 165, 32, 0.15) 0%,
+    rgba(184, 134, 11, 0.08) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 6;
+  animation: glow-pulse 8s ease-in-out infinite;
+  filter: blur(40px);
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Mist/Fog Layer */
+.mist-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to top,
+    rgba(20, 20, 15, 0.6) 0%,
+    rgba(15, 15, 12, 0.3) 30%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: mist-drift 15s ease-in-out infinite;
+}
+
+@keyframes mist-drift {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-10px);
+  }
+}
+
+/* Vignette Effect */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* Steam/Condensation Effect */
+.steam-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 18;
+  opacity: 0.15;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='steamFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.01' numOctaves='3' result='turbulence'/%3E%3CfeDisplacementMap in2='turbulence' in='SourceGraphic' scale='20' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23ffffff' filter='url(%23steamFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  animation: steam-move 20s linear infinite;
+}
+
+@keyframes steam-move {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-50px) scale(1.1);
+  }
+}
