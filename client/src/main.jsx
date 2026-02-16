@@ -17,6 +17,9 @@ const lenis = new Lenis({
   wheelMultiplier: 1,
 });
 
+// Expose Lenis to window for useScrollVelocity hook
+window.lenis = lenis;
+
 // Lenis animation loop
 function raf(time) {
   lenis.raf(time);
