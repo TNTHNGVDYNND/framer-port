@@ -89,6 +89,30 @@ const HeroContent = () => {
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
     >
+      {/* Midnight Sun Gradient Animation */}
+      <motion.div
+        className='absolute inset-0 z-[-1] pointer-events-none'
+        animate={{
+          background: [
+            `radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.6) 0%, rgba(184, 134, 11, 0.3) 15%, rgba(139, 69, 19, 0.1) 35%, transparent 60%)`,
+            `radial-gradient(ellipse at 50% 5%, rgba(255, 165, 0, 0.7) 0%, rgba(218, 165, 32, 0.35) 18%, rgba(160, 82, 45, 0.12) 38%, transparent 65%)`,
+            `radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.6) 0%, rgba(184, 134, 11, 0.3) 15%, rgba(139, 69, 19, 0.1) 35%, transparent 60%)`,
+          ],
+          scale: isHovered ? 1.05 : 1,
+        }}
+        transition={{
+          background: {
+            duration: 8,
+            ease: 'easeInOut',
+            repeat: Infinity,
+          },
+          scale: {
+            duration: 0.5,
+            ease: 'easeOut',
+          },
+        }}
+      />
+
       {/* 3D Tilt Container - Flex column to push content to bottom */}
       <motion.div
         className='hero__inner relative flex flex-col justify-end h-full min-h-screen px-8 pb-16'
