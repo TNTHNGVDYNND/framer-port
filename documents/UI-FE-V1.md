@@ -1360,6 +1360,113 @@ All components refactored to use Tailwind semantic classes:
 
 ---
 
+---
+
+## Implementation Session - February 16, 2026
+
+### Background Enhancement Attempt
+
+**Approach Tested:** WebGL Shader Background → CSS-Only Alternative
+
+#### Phase 4 Step 12 - WebGL Implementation Attempt
+
+**What Was Built:**
+
+1. **WebGL Dependencies Installed:**
+   - `@react-three/fiber` v9.5.0
+   - `@react-three/drei` v10.7.7  
+   - `maath` v0.10.8
+   - `three` v0.182.0
+
+2. **WebGL Components Created:**
+   - `client/src/components/WebGL/FluidShader.jsx` - GLSL fragment shader with:
+     - Simplex noise for organic flow
+     - Voronoi patterns for water droplets
+     - Mouse position tracking
+     - Scroll velocity reactivity
+   - `client/src/components/WebGL/BackgroundMaterial.jsx` - Material wrapper
+   - `client/src/components/WebGL/WebGLBackground.jsx` - Main component with:
+     - Orthographic camera
+     - Performance optimizations (60fps cap, visibility API)
+     - Context loss handling with CSS fallback
+   - `client/src/components/WebGL/index.js` - Barrel exports
+
+3. **Custom Hooks Created:**
+   - `client/src/hooks/useMousePosition.js` - Mouse tracking with RAF throttling
+   - `client/src/hooks/useScrollVelocity.js` - Scroll velocity detection
+   - `client/src/hooks/index.js` - Clean barrel exports
+
+4. **Files Modified:**
+   - `client/src/components/Layout.jsx` - Integrated WebGLBackground
+   - `client/src/components/Hero.jsx` - Made overlay transparent for WebGL visibility
+   - `client/package.json` - Added WebGL dependencies
+
+**Issues Encountered:**
+
+1. **WebGL Context Lost Error** - GPU couldn't handle complex shader
+2. **Performance Impact** - Bundle size increased to 1,380 kB
+3. **Visual Misalignment** - Generic noise patterns didn't match forest reference
+4. **Shader Complexity** - Simplex noise + voronoi too heavy, simplified version lost impact
+
+**Decision:** Pivot to CSS-only approach for better stability and visual control.
+
+---
+
+#### CSS-Only Background Enhancement
+
+**New Components Created:**
+
+1. **`client/src/styles/background-effects.css`** - Advanced CSS effects:
+   - Animated film grain overlay (SVG noise filter)
+   - Glass morphism with backdrop-filter
+   - Water droplets via CSS pseudo-elements
+   - Vertical forest texture (repeating gradients)
+   - Warm amber glow animation (radial gradient with blur)
+   - Mist/fog layer (linear gradient)
+   - Vignette effect
+   - Steam/condensation overlay (SVG turbulence filter)
+
+**Files Modified:**
+
+1. **`client/src/styles/index.css`**:
+   - Changed `body { background-color: var(--color-bg-body) }` to `background-color: transparent`
+   - This allows global background div to be visible
+
+2. **`client/src/components/Layout.jsx`**:
+   - Removed WebGLBackground import
+   - Added global CSS background layers (4 layers: base gradient, amber glow, grain, vignette)
+   - Imported `background-effects.css`
+   - Effects now appear on ALL routes, not just Hero
+
+3. **`client/src/components/Hero.jsx`**:
+   - Removed local `BackgroundEffects` component
+   - Removed `background-effects.css` import
+   - Cleaned up to focus on content only
+   - Background effects now handled globally by Layout
+
+**Result:**
+- Bundle size: 492 kB (65% smaller without WebGL)
+- Build time: 7s (3x faster)
+- Performance: Smooth 60fps CSS animations
+- Stability: No WebGL context issues
+
+---
+
+### Current Status
+
+**✅ Completed:**
+- Phase 1-4 (Steps 1-11) - Foundation, Navigation, Hero, Cursor
+- CSS-only global background with warm amber/moody forest aesthetic
+- Body transparency fix for proper layering
+- Performance optimized build
+
+**⏸️ Pending:**
+- Fine-tuning background colors/effects to match reference exactly
+- Adding glass/condensation effects if desired
+- Final visual polish
+
+---
+
 **Last Updated:** 2026-02-16  
-**Status:** ✅ READY FOR KIMI K2.5 HANDOVER | Build Phase Starting
-**Handover Notes:** Semantic color system cleanup COMPLETED. All Phase 1-4 implementations ready for production build with WebGL enhancements.
+**Status:** CSS-Only Background Implementation Complete | Ready for Review
+**Handover Notes:** WebGL approach tested and documented. CSS-only solution implemented for stability. User reviewing before final direction.
