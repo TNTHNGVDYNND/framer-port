@@ -21,7 +21,7 @@
 
 body {
   @apply leading-relaxed;
-  background-color: transparent; /* Let global background show through */
+  background-color: var(--color-bg-body);
   color: var(--color-neutral-900);
   font-family: var(--font-sans);
   margin: 0;
