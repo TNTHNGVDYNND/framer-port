@@ -2,7 +2,7 @@
 
 ## Current State Analysis
 
-### Original MyPortfolio:
+### Original MyPortfolio
 
 - ✅ Modern React 19 + Tailwind v4 + Framer Motion
 - ✅ Component-based architecture
@@ -14,7 +14,7 @@
 - ❌ Native browser scrollbar
 - ❌ No gesture controls or 3D elements
 
-### Shoya Kajita Site (Inspiration): https://shoya-kajita.com/
+### Shoya Kajita Site (Inspiration): <https://shoya-kajita.com/>
 
 - SVG-based animated typography for every letter
 - Terminal-style loading with system info display
@@ -123,8 +123,8 @@
 
 ```jsx
 // WebGLBackground.jsx
-import { Canvas } from '@react-three/fiber'
-import { ShaderMaterial, Plane } from './shaders/FluidShader'
+import { Canvas } from "@react-three/fiber";
+import { ShaderMaterial, Plane } from "./shaders/FluidShader";
 
 // Fluid particle system with scroll-reactive distortion
 // Uses custom fragment shader for organic, flowing gradients
@@ -133,14 +133,16 @@ import { ShaderMaterial, Plane } from './shaders/FluidShader'
 ```
 
 **Dependencies (Lightweight):**
+
 ```bash
 npm install @react-three/fiber @react-three/drei maath
 ```
 
 **Implementation Pattern:**
+
 ```jsx
 // FluidShader.jsx
-import { shaderMaterial } from '@react-three/drei'
+import { shaderMaterial } from "@react-three/drei";
 
 const fluidFragmentShader = `
   uniform float uTime;
@@ -150,10 +152,11 @@ const fluidFragmentShader = `
   // Noise functions for organic flow
   // Gradient blending for "midnight sun" aesthetic
   // Real-time distortion based on interaction
-`
+`;
 ```
 
 **Key Features:**
+
 - Real-time GLSL shader rendering (no video files)
 - Scroll-velocity reactive distortion
 - Mouse position influence on flow direction
@@ -162,6 +165,7 @@ const fluidFragmentShader = `
 - Bundle size: ~150kb total (vs 500kb+ for three.js)
 
 **NOT Implementing:**
+
 - ❌ MediaPipe hand gestures (too heavy, complex)
 - ❌ Multiple WebGL libraries
 - ❌ Pre-rendered video loops (not authentic to Shoya Kajita)
@@ -192,7 +196,7 @@ const fluidFragmentShader = `
 
 ## Key Components to Create
 
-### New Components:
+### New Components
 
 - `SvgText.jsx` - Animated SVG typography
 - `TerminalLoader.jsx` - Enhanced loading screen
@@ -203,7 +207,7 @@ const fluidFragmentShader = `
 - `Cursor.jsx` - Custom cursor with effects
 - `HandGestureController.jsx` - MediaPipe integration
 
-### Enhanced Components:
+### Enhanced Components
 
 - `Navbar.jsx` → Vertical sidebar redesign
 - `Hero.jsx` → SVG typography + 3D effects
@@ -447,7 +451,7 @@ export default Barcode;
 
 ---
 
-### Package Dependencies Required:
+### Package Dependencies Required
 
 ```json
 {
@@ -1164,7 +1168,7 @@ export default Layout;
 
 ## Implementation Checklist for Kimi K2.5
 
-### Phase 1 Tasks:
+### Phase 1 Tasks
 
 - [ ] Install new dependencies: `@envoy1084/react-terminal`, `react-barcodes`
 - [ ] Create `SvgText.jsx` component with character-by-character animation
@@ -1173,7 +1177,7 @@ export default Layout;
 - [ ] Update Tailwind config with monospace font stack
 - [ ] Add terminal colors to theme system
 
-### Phase 2 Tasks:
+### Phase 2 Tasks
 
 - [ ] Refactor `Navbar.jsx` to vertical sidebar with Framer Motion variants
 - [ ] Create `CustomScrollbar.jsx` with range input
@@ -1181,7 +1185,7 @@ export default Layout;
 - [ ] Add `AudioProvider` context for global audio state
 - [ ] Test sidebar active link indicator with layoutId
 
-### Phase 3 Tasks:
+### Phase 3 Tasks
 
 - [ ] Refactor `Hero.jsx` with 3D tilt effects and SVG text
 - [ ] Create `ProjectCard.jsx` with 3D hover effects and parallax
@@ -1190,7 +1194,7 @@ export default Layout;
 - [ ] Update `AppRoutes.jsx` to use AnimatePresence
 - [ ] Add barcode decorations to hero and project cards
 
-### General Tasks:
+### General Tasks
 
 - [ ] Wrap app with AudioProvider in main.jsx
 - [ ] Update Layout.jsx to include all new components
@@ -1353,6 +1357,7 @@ All components refactored to use Tailwind semantic classes:
 5. **Deploy to production** with all Phase 1-4 enhancements
 
 **Kimi K2.5 Focus Areas:**
+
 - WebGL shader implementation for fluid background effects
 - 3D scene integration with existing Framer Motion animations
 - Background image/video integration matching Shoya Kajita aesthetic
@@ -1374,7 +1379,7 @@ All components refactored to use Tailwind semantic classes:
 
 1. **WebGL Dependencies Installed:**
    - `@react-three/fiber` v9.5.0
-   - `@react-three/drei` v10.7.7  
+   - `@react-three/drei` v10.7.7
    - `maath` v0.10.8
    - `three` v0.182.0
 
@@ -1445,6 +1450,7 @@ All components refactored to use Tailwind semantic classes:
    - Background effects now handled globally by Layout
 
 **Result:**
+
 - Bundle size: 492 kB (65% smaller without WebGL)
 - Build time: 7s (3x faster)
 - Performance: Smooth 60fps CSS animations
@@ -1455,12 +1461,14 @@ All components refactored to use Tailwind semantic classes:
 ### Current Status
 
 **✅ Completed:**
+
 - Phase 1-4 (Steps 1-11) - Foundation, Navigation, Hero, Cursor
 - CSS-only global background with warm amber/moody forest aesthetic
 - Body transparency fix for proper layering
 - Performance optimized build
 
 **⏸️ Pending:**
+
 - Fine-tuning background colors/effects to match reference exactly
 - Adding glass/condensation effects if desired
 - Final visual polish
@@ -1477,12 +1485,14 @@ All components refactored to use Tailwind semantic classes:
 **Status:** All Phase 1-4 implementations preserved with clean CSS background
 
 **What Was Kept:**
+
 - ✅ Global CSS background layer in Layout.jsx (warm amber radial gradient)
 - ✅ background-effects.css file (available for future enhancements)
 - ✅ WebGL/ folder and hooks/ folder (code preserved, not imported)
 - ✅ All original component animations and functionality
 
 **What Was Reverted:**
+
 - ✅ Hero.jsx - Back to original (no midnight sun overlay added)
 - ✅ index.css - Body background restored to `var(--color-bg-body)`
 - ✅ AppRoutes.jsx - Removed AnimatePresence wrapper
@@ -1490,6 +1500,7 @@ All components refactored to use Tailwind semantic classes:
 - ✅ package-lock.json - Reverted to original state
 
 **Build Performance:**
+
 - Bundle: 492 kB JS + 57 kB CSS
 - Build time: 3.1s
 - Performance: Smooth like main branch, with added CSS background
@@ -1503,10 +1514,12 @@ Based on testing and the reference image analysis, here are improvement suggesti
 ### 1. **Color System Refinement** (Priority: HIGH)
 
 **Dark Theme:**
+
 - ✅ **Current:** Works well - warm amber (#2a2515 to #000000) creates moody forest aesthetic
 - 💡 **Suggestion:** Slightly increase amber intensity for more dramatic "midnight sun" effect
 
-**Light Theme:** 
+**Light Theme:**
+
 - ⚠️ **Current:** Needs significant improvement
 - 💡 **Suggestions:**
   - Current beige/tan (`--color-driftwood: #d2b690`) feels dated
@@ -1517,6 +1530,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
 ### 2. **Hero Section Enhancements** (Priority: MEDIUM)
 
 **Missing "Midnight Sun" Effect:**
+
 - 💡 **Suggestion:** Add back the animated orange/gold radial gradient at top of Hero
 - Implementation: CSS-only with Framer Motion `animate` prop
 - Should be **Hero-specific**, not global (to avoid affecting other pages)
@@ -1525,6 +1539,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
 ### 3. **Glass / Condensation Effects** (Priority: LOW)
 
 **For Future Polish:**
+
 - 💡 **Idea:** Add subtle SVG filter for "wet glass" look on background
 - Implementation: CSS `backdrop-filter: blur()` with noise texture
 - Should be **very subtle** (opacity: 0.03-0.05) to maintain performance
@@ -1533,6 +1548,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
 ### 4. **Typography & Contrast** (Priority: MEDIUM)
 
 **Light Theme Issues:**
+
 - ⚠️ Current light theme text might lack contrast
 - 💡 **Suggestion:** Test `--color-text-primary` and `--color-text-secondary` in light mode
 - Ensure WCAG AA compliance (4.5:1 contrast ratio minimum)
@@ -1540,6 +1556,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
 ### 5. **Animation Polish** (Priority: LOW)
 
 **Subtle Enhancements:**
+
 - 💡 **Idea:** Add very subtle parallax to global background on scroll
 - Implementation: CSS `transform: translateY()` linked to scroll position
 - Movement: 20-30px max to avoid motion sickness
@@ -1572,6 +1589,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
    - Should it be global or Hero-only?
 
 **When You're Ready for Next Session:**
+
 - Update the document with your color changes
 - Let me know which suggestions to implement
 - I'll help with fine-tuning the visual effects
