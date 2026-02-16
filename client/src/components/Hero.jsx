@@ -29,7 +29,7 @@ const Hero = () => {
   });
 
   return (
-    <section className='relative min-h-screen overflow-hidden'>
+    <section className='relative min-h-screen'>
       <AnimatePresence mode='sync'>
         {loadingState === 0 && !hasLoaded && (
           <TerminalLoader
@@ -80,7 +80,7 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      className='hero relative z-30'
+      className='hero'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeInOut' }}
@@ -89,25 +89,43 @@ const HeroContent = () => {
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
     >
-      {/* Midnight Sun Gradient Animation */}
+      {/* Gradient atmosphere with 3D depth */}
       <motion.div
-        className='absolute inset-0 z-[-1] pointer-events-none'
+        className='absolute inset-0 z-10'
         animate={{
-          background: [
-            `radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.6) 0%, rgba(184, 134, 11, 0.3) 15%, rgba(139, 69, 19, 0.1) 35%, transparent 60%)`,
-            `radial-gradient(ellipse at 50% 5%, rgba(255, 165, 0, 0.7) 0%, rgba(218, 165, 32, 0.35) 18%, rgba(160, 82, 45, 0.12) 38%, transparent 65%)`,
-            `radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.6) 0%, rgba(184, 134, 11, 0.3) 15%, rgba(139, 69, 19, 0.1) 35%, transparent 60%)`,
+          backgroundImage: [
+            `radial-gradient(
+              ellipse at 50% 0%,
+              var(--color-inner-glow) 1%,
+              var(--color-md-glow) 25%,
+              var(--color-outer-glow) 35%,
+              var(--color-border-glow) 75%
+            )`,
+            `radial-gradient(
+              ellipse at 50% 8%,
+              var(--color-inner-glow) 1%,
+              var(--color-md-glow) 26%,
+              var(--color-outer-glow) 36%,
+              var(--color-border-glow) 95%
+            )`,
+            `radial-gradient(
+              ellipse at 50% 0%,
+              var(--color-inner-glow) 1%,
+              var(--color-md-glow) 25%,
+              var(--color-outer-glow) 35%,
+              var(--color-border-glow) 75%
+            )`,
           ],
-          scale: isHovered ? 1.05 : 1,
+          scale: isHovered ? 1.02 : 1,
         }}
         transition={{
-          background: {
-            duration: 8,
+          backgroundImage: {
+            duration: 60,
             ease: 'easeInOut',
             repeat: Infinity,
           },
           scale: {
-            duration: 0.5,
+            duration: 0.3,
             ease: 'easeOut',
           },
         }}
@@ -115,7 +133,7 @@ const HeroContent = () => {
 
       {/* 3D Tilt Container - Flex column to push content to bottom */}
       <motion.div
-        className='hero__inner relative flex flex-col justify-end h-full min-h-screen px-8 pb-16'
+        className='hero__inner relative z-20 flex flex-col justify-end h-full min-h-screen px-8 pb-16'
         initial='hidden'
         animate='visible'
         variants={{
