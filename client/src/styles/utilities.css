@@ -1,0 +1,77 @@
+/* ========================================
+   UTILITIES
+   ======================================== */
+
+@layer utilities {
+  /* ========================================
+     TERMINAL EFFECTS
+     ======================================== */
+  .terminal-glow {
+    text-shadow:
+      0 0 10px var(--color-lagoon),
+      0 0 20px var(--color-lagoon),
+      0 0 30px var(--color-lagoon);
+  }
+
+  /* Blinking cursor animation */
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .cursor-blink {
+    animation: blink 0.8s step-end infinite;
+  }
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   CUSTOM CURSOR
+   ======================================== */
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  [role='button'],
+  input,
+  textarea,
+  select {
+    cursor: none;
+  }
+
+  .cursor-none {
+    cursor: none;
+  }
+
+  .magnetic {
+    cursor: none;
+  }
+}
+
+/* Fallback for touch devices */
+@media (pointer: coarse) {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
+}
