@@ -1,15 +1,15 @@
-import { useBarcode } from 'react-barcodes'
-import { motion } from 'framer-motion'
+import { useBarcode } from 'react-barcodes';
+import { motion } from 'framer-motion';
 
-const Barcode = ({ 
-  value, 
+const Barcode = ({
+  value,
   className = '',
   format = 'CODE128',
   lineColor = 'var(--color-dusk)',
   background = 'transparent',
   height = 40,
   width = 2,
-  animated = true 
+  animated = true,
 }) => {
   const { inputRef } = useBarcode({
     value: value || 'PORTFOLIO',
@@ -20,8 +20,8 @@ const Barcode = ({
       displayValue: false,
       background,
       lineColor,
-    }
-  })
+    },
+  });
 
   if (animated) {
     return (
@@ -30,15 +30,15 @@ const Barcode = ({
         className={className}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ 
+        transition={{
           duration: 0.5,
-          ease: "easeOut"
+          ease: 'easeOut',
         }}
       />
-    )
+    );
   }
 
-  return <svg ref={inputRef} className={className} />
-}
+  return <svg ref={inputRef} className={className} />;
+};
 
-export default Barcode
+export default Barcode;
