@@ -1467,6 +1467,117 @@ All components refactored to use Tailwind semantic classes:
 
 ---
 
+---
+
+## Final Status - February 16, 2026
+
+### ✅ Session Complete - Clean State Achieved
+
+**Branch:** `feature/refactor-fe-v1`
+**Status:** All Phase 1-4 implementations preserved with clean CSS background
+
+**What Was Kept:**
+- ✅ Global CSS background layer in Layout.jsx (warm amber radial gradient)
+- ✅ background-effects.css file (available for future enhancements)
+- ✅ WebGL/ folder and hooks/ folder (code preserved, not imported)
+- ✅ All original component animations and functionality
+
+**What Was Reverted:**
+- ✅ Hero.jsx - Back to original (no midnight sun overlay added)
+- ✅ index.css - Body background restored to `var(--color-bg-body)`
+- ✅ AppRoutes.jsx - Removed AnimatePresence wrapper
+- ✅ package.json - Removed WebGL dependencies (three.js, @react-three/fiber, etc.)
+- ✅ package-lock.json - Reverted to original state
+
+**Build Performance:**
+- Bundle: 492 kB JS + 57 kB CSS
+- Build time: 3.1s
+- Performance: Smooth like main branch, with added CSS background
+
+---
+
+## 🎨 Suggestions for Next Session
+
+Based on testing and the reference image analysis, here are improvement suggestions:
+
+### 1. **Color System Refinement** (Priority: HIGH)
+
+**Dark Theme:**
+- ✅ **Current:** Works well - warm amber (#2a2515 to #000000) creates moody forest aesthetic
+- 💡 **Suggestion:** Slightly increase amber intensity for more dramatic "midnight sun" effect
+
+**Light Theme:** 
+- ⚠️ **Current:** Needs significant improvement
+- 💡 **Suggestions:**
+  - Current beige/tan (`--color-driftwood: #d2b690`) feels dated
+  - Consider: warm white to cream gradient (`#faf8f5` to `#f5f0e8`)
+  - Add subtle warm amber accents for continuity with dark theme
+  - Use same color family but inverted lightness (dark forest → light sand)
+
+### 2. **Hero Section Enhancements** (Priority: MEDIUM)
+
+**Missing "Midnight Sun" Effect:**
+- 💡 **Suggestion:** Add back the animated orange/gold radial gradient at top of Hero
+- Implementation: CSS-only with Framer Motion `animate` prop
+- Should be **Hero-specific**, not global (to avoid affecting other pages)
+- Gradient: `radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.5) 0%, transparent 60%)`
+
+### 3. **Glass / Condensation Effects** (Priority: LOW)
+
+**For Future Polish:**
+- 💡 **Idea:** Add subtle SVG filter for "wet glass" look on background
+- Implementation: CSS `backdrop-filter: blur()` with noise texture
+- Should be **very subtle** (opacity: 0.03-0.05) to maintain performance
+- Only enable on desktop (disable on mobile for battery life)
+
+### 4. **Typography & Contrast** (Priority: MEDIUM)
+
+**Light Theme Issues:**
+- ⚠️ Current light theme text might lack contrast
+- 💡 **Suggestion:** Test `--color-text-primary` and `--color-text-secondary` in light mode
+- Ensure WCAG AA compliance (4.5:1 contrast ratio minimum)
+
+### 5. **Animation Polish** (Priority: LOW)
+
+**Subtle Enhancements:**
+- 💡 **Idea:** Add very subtle parallax to global background on scroll
+- Implementation: CSS `transform: translateY()` linked to scroll position
+- Movement: 20-30px max to avoid motion sickness
+- Disable if `prefers-reduced-motion: reduce`
+
+---
+
+## 🎯 Recommended Next Steps
+
+**User Task List (Before Next Session):**
+
+1. **Test Both Themes:**
+   - Toggle light/dark mode in browser
+   - Check all pages (Home, About, Work, Contact)
+   - Note any color issues or contrast problems
+
+2. **Color Palette Refinement:**
+   - Open `client/src/styles/theme.css`
+   - Adjust light theme colors (lines 23-60)
+   - Test warm white/cream base instead of current beige
+
+3. **Reference Image Analysis:**
+   - Study `references/Hero-sample-2.png` again
+   - Note: Dark forest with warm amber glow from top
+   - The "steamy glass" effect is subtle - maybe just grain + blur
+
+4. **Decide on Hero Animation:**
+   - Do you want the "midnight sun" glow back?
+   - Should it animate (pulse) or be static?
+   - Should it be global or Hero-only?
+
+**When You're Ready for Next Session:**
+- Update the document with your color changes
+- Let me know which suggestions to implement
+- I'll help with fine-tuning the visual effects
+
+---
+
 **Last Updated:** 2026-02-16  
-**Status:** CSS-Only Background Implementation Complete | Ready for Review
-**Handover Notes:** WebGL approach tested and documented. CSS-only solution implemented for stability. User reviewing before final direction.
+**Status:** ✅ CLEAN STATE | Global CSS Background Preserved | Ready for Color Refinement
+**Next Focus:** Light theme color system + optional Hero glow effect
