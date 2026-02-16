@@ -3,6 +3,7 @@
 ## Current State Analysis
 
 ### Original MyPortfolio:
+
 - ✅ Modern React 19 + Tailwind v4 + Framer Motion
 - ✅ Component-based architecture
 - ✅ Dark theme system with OKLCH colors
@@ -14,6 +15,7 @@
 - ❌ No gesture controls or 3D elements
 
 ### Shoya Kajita Site (Inspiration): https://shoya-kajita.com/
+
 - SVG-based animated typography for every letter
 - Terminal-style loading with system info display
 - Vertical left sidebar navigation
@@ -29,96 +31,159 @@
 ## Refactoring Plan - Phases
 
 ### Phase 1: Foundation & Visual Identity (3-4 days)
+
 **Goal:** Establish the technical/terminal aesthetic
 
 #### 1. Typography System Overhaul
+
 - Convert hero title to SVG letter animations
 - Create `SvgText.jsx` component for animated character-by-character reveals
 - Implement monospace/terminal font stack (Roboto Mono, JetBrains Mono)
 
 #### 2. Loading Screen Enhancement
+
 - Replace current preloader with terminal-style loader
 - Add "system info" display with loading steps
 - Show mock "environment variables" during load
 - Implement barcode graphic element in loader
 
 #### 3. Design System Updates
+
 - Add barcode SVG component for decorative elements
 - Create `Barcode.jsx` component
 - Update Tailwind theme with terminal colors
 - Add structured data/schema.org markup to pages
 
 ### Phase 2: Navigation & Controls (3-4 days)
+
 **Goal:** Implement custom navigation and interface elements
 
 #### 4. Navigation Redesign
+
 - Transform horizontal navbar to vertical left sidebar
 - Fix position with backdrop blur
 - Update active link indicator to vertical sliding bar
 - Add language toggle (JP/EN) component
 
 #### 5. Custom Scrollbar Implementation
+
 - Build `CustomScrollbar.jsx` component with range input
 - Replace native scrollbars site-wide
 - Style to match terminal aesthetic
 
 #### 6. Audio System
+
 - Add sound/audio toggle button
 - Create `AudioToggle.jsx` component
 - Hook up to future audio elements (video, hover sounds)
 
 ### Phase 3: Hero & Content Enhancement (4-5 days)
+
 **Goal:** Elevate the hero section with advanced animations
 
 #### 7. Hero Section Refactor
+
 - Enhance current staggered text with SVG letter paths
 - Add atmosphere/gradient background animation
 - Implement 3D tilt effects on hero elements
 - Add barcode decoration elements
 
 #### 8. Project Gallery Upgrade
+
 - Convert horizontal scroll to interactive 3D grid
 - Add tilt parallax effects on project cards
 - Implement video previews with custom controls
 
 #### 9. Page Transitions
+
 - Enhance AnimatePresence transitions with 3D effects
 - Add route-specific entry/exit animations
 
 ### Phase 4: Advanced Interactions (5-7 days)
-**Goal:** Implement cutting-edge interaction features
 
-#### 10. Hand Gesture Controls (Research & POC)
-- Integrate MediaPipe for hand tracking
-- Enable camera access UI flow
-- Implement basic pointer control
-- Research feasibility for full implementation
+**Goal:** Implement cutting-edge interaction features with WebGL background
+
+#### 10. Hand Gesture Controls (Research & POC) - SKIPPED
+
+- **Decision:** Not implementing MediaPipe for this version (too complex, heavy bundle)
+- Alternative: Focus on mouse/scroll interactions with Framer Motion
 
 #### 11. Enhanced Cursor & Hover Effects
+
 - Custom cursor with trail effects
 - Magnetic hover on interactive elements
 - Ripple click effects
 - 3D depth on cards
 
-#### 12. Video & 3D Elements
-- Add video backgrounds to sections
-- Implement WebGL shader effects
-- Create 3D project showcases using three.js
+#### 12. WebGL Background Implementation (Shoya Kajita Style)
+
+**Research Finding:** Shoya Kajita uses real-time WebGL/GLSL shaders, NOT video loops
+
+**Implementation Plan:**
+
+```jsx
+// WebGLBackground.jsx
+import { Canvas } from '@react-three/fiber'
+import { ShaderMaterial, Plane } from './shaders/FluidShader'
+
+// Fluid particle system with scroll-reactive distortion
+// Uses custom fragment shader for organic, flowing gradients
+// Responds to mouse position and scroll velocity
+// Lightweight alternative to three.js (React wrapper only)
+```
+
+**Dependencies (Lightweight):**
+```bash
+npm install @react-three/fiber @react-three/drei maath
+```
+
+**Implementation Pattern:**
+```jsx
+// FluidShader.jsx
+import { shaderMaterial } from '@react-three/drei'
+
+const fluidFragmentShader = `
+  uniform float uTime;
+  uniform vec2 uMouse;
+  uniform float uScrollVelocity;
+  
+  // Noise functions for organic flow
+  // Gradient blending for "midnight sun" aesthetic
+  // Real-time distortion based on interaction
+`
+```
+
+**Key Features:**
+- Real-time GLSL shader rendering (no video files)
+- Scroll-velocity reactive distortion
+- Mouse position influence on flow direction
+- Luminous gradient that flows organically
+- GPU-accelerated performance
+- Bundle size: ~150kb total (vs 500kb+ for three.js)
+
+**NOT Implementing:**
+- ❌ MediaPipe hand gestures (too heavy, complex)
+- ❌ Multiple WebGL libraries
+- ❌ Pre-rendered video loops (not authentic to Shoya Kajita)
 
 ### Phase 5: Polish & Deployment (3-4 days)
+
 **Goal:** Final polish and performance optimization
 
 #### 13. Modals & Documentation
+
 - Add "How to Use" modals
 - Create instructions for gesture controls
 - Implement loading states for all interactions
 
 #### 14. Performance Optimization
+
 - Lazy load heavy 3D libraries
 - Optimize animations with proper will-change
 - Implement intersection observers
 
 #### 15. Accessibility & Testing
+
 - Ensure keyboard navigation works
 - Add fallback for unsupported browsers
 - Test on multiple devices
@@ -128,6 +193,7 @@
 ## Key Components to Create
 
 ### New Components:
+
 - `SvgText.jsx` - Animated SVG typography
 - `TerminalLoader.jsx` - Enhanced loading screen
 - `Barcode.jsx` - Decorative barcode graphics
@@ -138,6 +204,7 @@
 - `HandGestureController.jsx` - MediaPipe integration
 
 ### Enhanced Components:
+
 - `Navbar.jsx` → Vertical sidebar redesign
 - `Hero.jsx` → SVG typography + 3D effects
 - `ProjectCard.jsx` → Tilt + video preview
@@ -166,6 +233,7 @@
 #### 1. Typography System Overhaul
 
 **Approach:**
+
 - Use Framer Motion's variants with staggerChildren pattern
 - Split text into individual characters via `text.split("")`
 - Wrap each character in `<motion.span>` with animation variants
@@ -175,15 +243,15 @@
 
 ```jsx
 // SvgText.jsx
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 const SvgText = ({ text, className }) => {
-  const letters = text.split("")
-  
+  const letters = text.split("");
+
   const letterVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20 
+    hidden: {
+      opacity: 0,
+      y: 20,
     },
     visible: (i) => ({
       opacity: 1,
@@ -191,9 +259,9 @@ const SvgText = ({ text, className }) => {
       transition: {
         delay: i * 0.05, // Stagger delay per character
         duration: 0.5,
-      }
-    })
-  }
+      },
+    }),
+  };
 
   return (
     <motion.span
@@ -203,9 +271,9 @@ const SvgText = ({ text, className }) => {
       variants={{
         visible: {
           transition: {
-            staggerChildren: 0.05
-          }
-        }
+            staggerChildren: 0.05,
+          },
+        },
       }}
     >
       {letters.map((char, i) => (
@@ -213,24 +281,25 @@ const SvgText = ({ text, className }) => {
           key={i}
           custom={i}
           variants={letterVariants}
-          style={{ display: 'inline-block' }}
+          style={{ display: "inline-block" }}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>
       ))}
     </motion.span>
-  )
-}
+  );
+};
 
-export default SvgText
+export default SvgText;
 ```
 
 **Font Stack:** Use monospace fonts - JetBrains Mono, Roboto Mono, or Fira Code for terminal aesthetic
 
 **Add to tailwind.config.js:**
+
 ```javascript
 fontFamily: {
-  mono: ['JetBrains Mono', 'Roboto Mono', 'monospace']
+  mono: ["JetBrains Mono", "Roboto Mono", "monospace"];
 }
 ```
 
@@ -241,6 +310,7 @@ fontFamily: {
 **Approach:** Use `@envoy1084/react-terminal` package for terminal-style loader
 
 **Installation:**
+
 ```bash
 npm install @envoy1084/react-terminal
 ```
@@ -249,39 +319,43 @@ npm install @envoy1084/react-terminal
 
 ```jsx
 // TerminalLoader.jsx
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Terminal, TypingAnimation, TerminalOutput } from '@envoy1084/react-terminal'
-import Barcode from './Barcode'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Terminal,
+  TypingAnimation,
+  TerminalOutput,
+} from "@envoy1084/react-terminal";
+import Barcode from "./Barcode";
 
 const TerminalLoader = ({ onComplete }) => {
-  const [loadingPhase, setLoadingPhase] = useState(0)
-  const [progress, setProgress] = useState(0)
-  
+  const [loadingPhase, setLoadingPhase] = useState(0);
+  const [progress, setProgress] = useState(0);
+
   const phases = [
-    'Loading environment...',
-    'Initializing WebGL...',
-    'Optimizing render pipeline...',
-    'Loading assets...',
-    'Ready to launch...'
-  ]
-  
+    "Loading environment...",
+    "Initializing WebGL...",
+    "Optimizing render pipeline...",
+    "Loading assets...",
+    "Ready to launch...",
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval)
-          setTimeout(onComplete, 500)
-          return 100
+          clearInterval(interval);
+          setTimeout(onComplete, 500);
+          return 100;
         }
-        return prev + 2
-      })
-      
-      setLoadingPhase(Math.floor((progress / 100) * phases.length))
-    }, 50)
-    
-    return () => clearInterval(interval)
-  }, [])
+        return prev + 2;
+      });
+
+      setLoadingPhase(Math.floor((progress / 100) * phases.length));
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
@@ -294,29 +368,33 @@ const TerminalLoader = ({ onComplete }) => {
         <Terminal>
           <TypingAnimation>WELCOME</TypingAnimation>
           <TerminalOutput>
-            NAME: Your Name{'\n'}
-            ROLE: Developer{'\n'}
+            NAME: Your Name{"\n"}
+            ROLE: Developer{"\n"}
             FIELD: Interactive / Website / CG
           </TerminalOutput>
-          
+
           {phases.slice(0, loadingPhase + 1).map((phase, i) => (
             <TerminalOutput key={i}>{phase}</TerminalOutput>
           ))}
-          
+
           <TerminalOutput>
-            Progress: [{Array(20).fill(progress > (i * 5) ? '█' : '░').join('')}]
+            Progress: [
+            {Array(20)
+              .fill(progress > i * 5 ? "█" : "░")
+              .join("")}
+            ]
           </TerminalOutput>
         </Terminal>
-        
+
         <div className="mt-8 flex justify-center">
           <Barcode value="LOADING" className="w-48" />
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default TerminalLoader
+export default TerminalLoader;
 ```
 
 ---
@@ -326,6 +404,7 @@ export default TerminalLoader
 **Approach:** Use `react-barcodes` npm package
 
 **Installation:**
+
 ```bash
 npm install react-barcodes
 ```
@@ -334,21 +413,21 @@ npm install react-barcodes
 
 ```jsx
 // Barcode.jsx
-import { useBarcode } from 'react-barcodes'
-import { motion } from 'framer-motion'
+import { useBarcode } from "react-barcodes";
+import { motion } from "framer-motion";
 
-const Barcode = ({ value, className = '' }) => {
+const Barcode = ({ value, className = "" }) => {
   const { inputRef } = useBarcode({
-    value: value || 'PORTFOLIO',
+    value: value || "PORTFOLIO",
     options: {
-      format: 'CODE128',
+      format: "CODE128",
       width: 2,
       height: 40,
       displayValue: false,
-      background: 'transparent',
-      lineColor: '#ffffff',
-    }
-  })
+      background: "transparent",
+      lineColor: "#ffffff",
+    },
+  });
 
   return (
     <motion.svg
@@ -358,10 +437,10 @@ const Barcode = ({ value, className = '' }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     />
-  )
-}
+  );
+};
 
-export default Barcode
+export default Barcode;
 ```
 
 **Barcode Types:** CODE128 recommended for alphanumeric codes used in portfolios
@@ -392,16 +471,16 @@ export default Barcode
 
 ```jsx
 // Sidebar.jsx
-import { motion } from 'framer-motion'
-import { NavLink } from 'react-router-dom'
+import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const menuItems = [
-    { path: '/', label: 'HOME' },
-    { path: '/about', label: 'ABOUT' },
-    { path: '/works', label: 'WORKS' },
-    { path: '/contact', label: 'CONTACT' }
-  ]
+    { path: "/", label: "HOME" },
+    { path: "/about", label: "ABOUT" },
+    { path: "/works", label: "WORKS" },
+    { path: "/contact", label: "CONTACT" },
+  ];
 
   const sidebarVariants = {
     hidden: { x: -100, opacity: 0 },
@@ -412,10 +491,10 @@ const Sidebar = () => {
         type: "spring",
         stiffness: 300,
         damping: 30,
-        staggerChildren: 0.1
-      }
-    }
-  }
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, x: -20 },
@@ -425,10 +504,10 @@ const Sidebar = () => {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 24
-      }
-    }
-  }
+        damping: 24,
+      },
+    },
+  };
 
   return (
     <motion.nav
@@ -440,7 +519,7 @@ const Sidebar = () => {
       <div className="mb-12">
         <img src="/logo.svg" alt="Logo" className="w-10 h-10" />
       </div>
-      
+
       <ul className="flex flex-col gap-8">
         {menuItems.map((item) => (
           <motion.li key={item.path} variants={itemVariants}>
@@ -449,7 +528,7 @@ const Sidebar = () => {
               className={({ isActive }) => `
                 relative px-4 py-2 text-sm font-mono tracking-wider
                 transition-colors duration-300
-                ${isActive ? 'text-white' : 'text-slate-400 hover:text-white'}
+                ${isActive ? "text-white" : "text-slate-400 hover:text-white"}
               `}
             >
               {({ isActive }) => (
@@ -462,11 +541,14 @@ const Sidebar = () => {
                       transition={{
                         type: "spring",
                         stiffness: 500,
-                        damping: 30
+                        damping: 30,
                       }}
                     />
                   )}
-                  <span className="vertical-text" style={{ writingMode: 'vertical-rl' }}>
+                  <span
+                    className="vertical-text"
+                    style={{ writingMode: "vertical-rl" }}
+                  >
                     {item.label}
                   </span>
                 </>
@@ -476,10 +558,10 @@ const Sidebar = () => {
         ))}
       </ul>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
 ```
 
 **Active Link Indicator:** Uses `motion.div` with `layoutId` for smooth sliding bar animation
@@ -494,26 +576,27 @@ export default Sidebar
 
 ```jsx
 // CustomScrollbar.jsx
-import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion'
-import { useEffect } from 'react'
+import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
 
 const CustomScrollbar = () => {
-  const { scrollYProgress } = useScroll()
-  const scaleY = useMotionValue(0)
-  
+  const { scrollYProgress } = useScroll();
+  const scaleY = useMotionValue(0);
+
   // Update scaleY based on scroll progress
   useEffect(() => {
-    return scrollYProgress.onChange(v => scaleY.set(v))
-  }, [scrollYProgress])
+    return scrollYProgress.onChange((v) => scaleY.set(v));
+  }, [scrollYProgress]);
 
   const handleSliderChange = (e) => {
-    const value = parseFloat(e.target.value) / 100
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    const value = parseFloat(e.target.value) / 100;
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
     window.scrollTo({
       top: value * maxScroll,
-      behavior: 'smooth'
-    })
-  }
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="fixed right-0 top-0 bottom-0 w-8 bg-slate-900/50 z-50 flex items-center justify-center">
@@ -522,12 +605,12 @@ const CustomScrollbar = () => {
         <motion.div
           className="w-full bg-blue-500 rounded-full origin-top"
           style={{
-            height: '100%',
+            height: "100%",
             scaleY: scrollYProgress,
           }}
         />
       </div>
-      
+
       {/* Range input for interaction */}
       <input
         type="range"
@@ -539,10 +622,10 @@ const CustomScrollbar = () => {
         value={scrollYProgress.get() * 100}
       />
     </div>
-  )
-}
+  );
+};
 
-export default CustomScrollbar
+export default CustomScrollbar;
 ```
 
 ---
@@ -555,63 +638,63 @@ export default CustomScrollbar
 
 ```jsx
 // AudioToggle.jsx
-import { useState, createContext, useContext } from 'react'
-import { motion } from 'framer-motion'
+import { useState, createContext, useContext } from "react";
+import { motion } from "framer-motion";
 
-const AudioContext = createContext()
+const AudioContext = createContext();
 
 export const AudioProvider = ({ children }) => {
-  const [isAudioOn, setIsAudioOn] = useState(false)
-  const [audioContext, setAudioContext] = useState(null)
-  
+  const [isAudioOn, setIsAudioOn] = useState(false);
+  const [audioContext, setAudioContext] = useState(null);
+
   const toggleAudio = () => {
     if (!isAudioOn && !audioContext) {
       // Initialize Web Audio API
-      const ctx = new (window.AudioContext || window.webkitAudioContext)()
-      setAudioContext(ctx)
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      setAudioContext(ctx);
     }
-    setIsAudioOn(!isAudioOn)
-  }
-  
+    setIsAudioOn(!isAudioOn);
+  };
+
   const playHoverSound = () => {
-    if (!isAudioOn || !audioContext) return
+    if (!isAudioOn || !audioContext) return;
     // Play subtle hover sound
-    const oscillator = audioContext.createOscillator()
-    const gainNode = audioContext.createGain()
-    
-    oscillator.connect(gainNode)
-    gainNode.connect(audioContext.destination)
-    
-    oscillator.frequency.value = 800
-    gainNode.gain.value = 0.1
-    
-    oscillator.start()
-    oscillator.stop(audioContext.currentTime + 0.05)
-  }
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.value = 800;
+    gainNode.gain.value = 0.1;
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.05);
+  };
 
   return (
     <AudioContext.Provider value={{ isAudioOn, toggleAudio, playHoverSound }}>
       {children}
     </AudioContext.Provider>
-  )
-}
+  );
+};
 
-export const useAudio = () => useContext(AudioContext)
+export const useAudio = () => useContext(AudioContext);
 
 // Audio Toggle Button Component
 const AudioToggle = () => {
-  const { isAudioOn, toggleAudio } = useAudio()
-  
+  const { isAudioOn, toggleAudio } = useAudio();
+
   const buttonVariants = {
-    on: { 
+    on: {
       backgroundColor: "#10b981",
-      scale: 1.05
+      scale: 1.05,
     },
-    off: { 
+    off: {
       backgroundColor: "#334155",
-      scale: 1
-    }
-  }
+      scale: 1,
+    },
+  };
 
   return (
     <motion.button
@@ -622,17 +705,14 @@ const AudioToggle = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <motion.span
-        initial={false}
-        animate={{ opacity: isAudioOn ? 1 : 0.5 }}
-      >
+      <motion.span initial={false} animate={{ opacity: isAudioOn ? 1 : 0.5 }}>
         Sound: {isAudioOn ? "On" : "Off"}
       </motion.span>
     </motion.button>
-  )
-}
+  );
+};
 
-export default AudioToggle
+export default AudioToggle;
 ```
 
 ---
@@ -645,41 +725,41 @@ export default AudioToggle
 
 ```jsx
 // Hero.jsx
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import SvgText from './SvgText'
-import Barcode from './Barcode'
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { useState, useEffect } from "react";
+import SvgText from "./SvgText";
+import Barcode from "./Barcode";
 
 const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
   const handleMouseMove = (e) => {
-    const { clientX, clientY } = e
-    const { innerWidth, innerHeight } = window
-    
-    mouseX.set((clientX - innerWidth / 2) / (innerWidth / 2))
-    mouseY.set((clientY - innerHeight / 2) / (innerHeight / 2))
-  }
-  
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    mouseX.set((clientX - innerWidth / 2) / (innerWidth / 2));
+    mouseY.set((clientY - innerHeight / 2) / (innerHeight / 2));
+  };
+
   // Smooth spring animations for 3D tilt
   const rotateX = useSpring(useTransform(mouseY, [-1, 1], [10, -10]), {
     stiffness: 150,
-    damping: 20
-  })
+    damping: 20,
+  });
   const rotateY = useSpring(useTransform(mouseX, [-1, 1], [-10, 10]), {
     stiffness: 150,
-    damping: 20
-  })
+    damping: 20,
+  });
 
   return (
     <motion.section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       onMouseMove={handleMouseMove}
       style={{
-        perspective: 1000
+        perspective: 1000,
       }}
     >
       {/* Animated gradient background */}
@@ -690,23 +770,23 @@ const Hero = () => {
             "radial-gradient(circle at 20% 50%, #1e3a8a 0%, #000000 100%)",
             "radial-gradient(circle at 80% 50%, #1e3a8a 0%, #000000 100%)",
             "radial-gradient(circle at 50% 20%, #1e3a8a 0%, #000000 100%)",
-            "radial-gradient(circle at 20% 50%, #1e3a8a 0%, #000000 100%)"
-          ]
+            "radial-gradient(circle at 20% 50%, #1e3a8a 0%, #000000 100%)",
+          ],
         }}
-        transition={{ 
-          duration: 15, 
-          repeat: Infinity, 
-          ease: "linear"
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "linear",
         }}
       />
-      
+
       {/* 3D tilt container */}
       <motion.div
         className="relative z-10 text-center"
         style={{
           rotateX,
           rotateY,
-          transformStyle: "preserve-3d"
+          transformStyle: "preserve-3d",
         }}
       >
         {/* Main title with SVG letter animation */}
@@ -716,12 +796,12 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <SvgText 
-            text="YOUR NAME" 
+          <SvgText
+            text="YOUR NAME"
             className="text-6xl md:text-8xl font-mono font-bold text-white tracking-tighter"
           />
         </motion.div>
-        
+
         {/* Subtitle */}
         <motion.p
           className="text-xl md:text-2xl text-slate-400 font-mono mb-12"
@@ -731,7 +811,7 @@ const Hero = () => {
         >
           Developer / Interactive / Creative
         </motion.p>
-        
+
         {/* Barcode decoration */}
         <motion.div
           className="flex justify-center"
@@ -742,25 +822,25 @@ const Hero = () => {
           <Barcode value="WELCOME-001" className="w-64" />
         </motion.div>
       </motion.div>
-      
+
       {/* Floating elements for depth */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full"
         animate={{
           y: [0, -20, 0],
-          opacity: [0.5, 1, 0.5]
+          opacity: [0.5, 1, 0.5],
         }}
         transition={{
           duration: 4,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       />
     </motion.section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
 ```
 
 ---
@@ -771,31 +851,31 @@ export default Hero
 
 ```jsx
 // ProjectCard.jsx
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import Barcode from './Barcode'
+import { motion } from "framer-motion";
+import { useState } from "react";
+import Barcode from "./Barcode";
 
 const ProjectCard = ({ project, index }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  
+  const [isHovered, setIsHovered] = useState(false);
+
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50, 
-      rotateX: -15 
+    hidden: {
+      opacity: 0,
+      y: 50,
+      rotateX: -15,
     },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       rotateX: 0,
       transition: {
         type: "spring",
         stiffness: 100,
         damping: 15,
-        delay: index * 0.1
-      }
-    }
-  }
+        delay: index * 0.1,
+      },
+    },
+  };
 
   return (
     <motion.div
@@ -806,7 +886,7 @@ const ProjectCard = ({ project, index }) => {
       onHoverEnd={() => setIsHovered(false)}
       style={{
         perspective: 1000,
-        transformStyle: "preserve-3d"
+        transformStyle: "preserve-3d",
       }}
     >
       {/* Card container with 3D tilt */}
@@ -816,16 +896,16 @@ const ProjectCard = ({ project, index }) => {
           className="relative h-64 overflow-hidden"
           animate={{
             y: isHovered ? -5 : 0,
-            scale: isHovered ? 1.05 : 1
+            scale: isHovered ? 1.05 : 1,
           }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          <img 
-            src={project.image} 
+          <img
+            src={project.image}
             alt={project.title}
             className="w-full h-full object-cover"
           />
-          
+
           {/* Gradient overlay on hover */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"
@@ -834,26 +914,24 @@ const ProjectCard = ({ project, index }) => {
             transition={{ duration: 0.3 }}
           />
         </motion.div>
-        
+
         {/* Content overlay */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 p-6"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ 
+          animate={{
             opacity: isHovered ? 1 : 0,
-            y: isHovered ? 0 : 20
+            y: isHovered ? 0 : 20,
           }}
           transition={{ duration: 0.3, delay: isHovered ? 0.1 : 0 }}
         >
           <h3 className="text-xl font-mono font-bold text-white mb-2">
             {project.title}
           </h3>
-          <p className="text-slate-400 text-sm mb-4">
-            {project.description}
-          </p>
+          <p className="text-slate-400 text-sm mb-4">{project.description}</p>
           <div className="flex gap-2">
-            {project.tags.map(tag => (
-              <span 
+            {project.tags.map((tag) => (
+              <span
                 key={tag}
                 className="px-2 py-1 bg-slate-700 rounded text-xs font-mono text-slate-300"
               >
@@ -862,25 +940,25 @@ const ProjectCard = ({ project, index }) => {
             ))}
           </div>
         </motion.div>
-        
+
         {/* Barcode decoration */}
         <div className="absolute bottom-2 right-2 opacity-50">
           <Barcode value={project.id} className="w-24" />
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default ProjectCard
+export default ProjectCard;
 ```
 
 **3D Grid Layout:**
 
 ```jsx
 // ProjectGrid.jsx
-import { motion } from 'framer-motion'
-import ProjectCard from './ProjectCard'
+import { motion } from "framer-motion";
+import ProjectCard from "./ProjectCard";
 
 const ProjectGrid = ({ projects }) => {
   const containerVariants = {
@@ -889,10 +967,10 @@ const ProjectGrid = ({ projects }) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  }
+        delayChildren: 0.2,
+      },
+    },
+  };
 
   return (
     <motion.div
@@ -901,21 +979,17 @@ const ProjectGrid = ({ projects }) => {
       initial="hidden"
       animate="visible"
       style={{
-        perspective: 1000
+        perspective: 1000,
       }}
     >
       {projects.map((project, index) => (
-        <ProjectCard 
-          key={project.id} 
-          project={project} 
-          index={index}
-        />
+        <ProjectCard key={project.id} project={project} index={index} />
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default ProjectGrid
+export default ProjectGrid;
 ```
 
 ---
@@ -926,15 +1000,15 @@ export default ProjectGrid
 
 ```jsx
 // PageTransition.jsx
-import { AnimatePresence, motion } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const pageVariants = {
   initial: {
     opacity: 0,
     rotateX: -15,
     scale: 0.95,
-    y: 50
+    y: 50,
   },
   in: {
     opacity: 1,
@@ -945,8 +1019,8 @@ const pageVariants = {
       type: "spring",
       stiffness: 100,
       damping: 20,
-      duration: 0.5
-    }
+      duration: 0.5,
+    },
   },
   out: {
     opacity: 0,
@@ -955,13 +1029,13 @@ const pageVariants = {
     y: -50,
     transition: {
       duration: 0.3,
-      ease: "easeIn"
-    }
-  }
-}
+      ease: "easeIn",
+    },
+  },
+};
 
 const PageTransition = ({ children }) => {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
@@ -973,65 +1047,65 @@ const PageTransition = ({ children }) => {
         exit="out"
         style={{
           perspective: 1000,
-          transformStyle: "preserve-3d"
+          transformStyle: "preserve-3d",
         }}
       >
         {children}
       </motion.div>
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default PageTransition
+export default PageTransition;
 ```
 
 **Usage in AppRoutes.jsx:**
 
 ```jsx
 // AppRoutes.jsx
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import PageTransition from './components/PageTransition'
-import Home from './pages/Home'
-import About from './pages/About'
-import Works from './pages/Works'
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import PageTransition from "./components/PageTransition";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Works from "./pages/Works";
 
 const AppRoutes = () => {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <PageTransition>
               <Home />
             </PageTransition>
-          } 
+          }
         />
-        <Route 
-          path="/about" 
+        <Route
+          path="/about"
           element={
             <PageTransition>
               <About />
             </PageTransition>
-          } 
+          }
         />
-        <Route 
-          path="/works" 
+        <Route
+          path="/works"
           element={
             <PageTransition>
               <Works />
             </PageTransition>
-          } 
+          }
         />
       </Routes>
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default AppRoutes
+export default AppRoutes;
 ```
 
 ---
@@ -1042,38 +1116,34 @@ export default AppRoutes
 
 ```jsx
 // Layout.jsx
-import { useState } from 'react'
-import Sidebar from './Sidebar'
-import CustomScrollbar from './CustomScrollbar'
-import AudioToggle from './AudioToggle'
-import TerminalLoader from './TerminalLoader'
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import CustomScrollbar from "./CustomScrollbar";
+import AudioToggle from "./AudioToggle";
+import TerminalLoader from "./TerminalLoader";
 
 const Layout = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <>
       <AnimatePresence>
-        {isLoading && (
-          <TerminalLoader onComplete={() => setIsLoading(false)} />
-        )}
+        {isLoading && <TerminalLoader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
-      
+
       {!isLoading && (
         <div className="flex min-h-screen bg-black">
           <Sidebar />
-          <main className="flex-1 ml-20">
-            {children}
-          </main>
+          <main className="flex-1 ml-20">{children}</main>
           <CustomScrollbar />
           <AudioToggle />
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
 ```
 
 ---
@@ -1095,6 +1165,7 @@ export default Layout
 ## Implementation Checklist for Kimi K2.5
 
 ### Phase 1 Tasks:
+
 - [ ] Install new dependencies: `@envoy1084/react-terminal`, `react-barcodes`
 - [ ] Create `SvgText.jsx` component with character-by-character animation
 - [ ] Create `TerminalLoader.jsx` with terminal-style loading screen
@@ -1103,6 +1174,7 @@ export default Layout
 - [ ] Add terminal colors to theme system
 
 ### Phase 2 Tasks:
+
 - [ ] Refactor `Navbar.jsx` to vertical sidebar with Framer Motion variants
 - [ ] Create `CustomScrollbar.jsx` with range input
 - [ ] Create `AudioToggle.jsx` with Web Audio API integration
@@ -1110,6 +1182,7 @@ export default Layout
 - [ ] Test sidebar active link indicator with layoutId
 
 ### Phase 3 Tasks:
+
 - [ ] Refactor `Hero.jsx` with 3D tilt effects and SVG text
 - [ ] Create `ProjectCard.jsx` with 3D hover effects and parallax
 - [ ] Create `ProjectGrid.jsx` with staggered animations
@@ -1118,6 +1191,7 @@ export default Layout
 - [ ] Add barcode decorations to hero and project cards
 
 ### General Tasks:
+
 - [ ] Wrap app with AudioProvider in main.jsx
 - [ ] Update Layout.jsx to include all new components
 - [ ] Test all animations and interactions
@@ -1144,14 +1218,15 @@ export default Layout
 
 ### Phase 1: Foundation & Visual Identity ✅ COMPLETED
 
-| Component | Status | Notes |
-|-----------|--------|-------|
+| Component            | Status  | Notes                                                                 |
+| -------------------- | ------- | --------------------------------------------------------------------- |
 | `TerminalLoader.jsx` | ✅ Done | Terminal-style loading with ASCII art, shows "HALLO" (German welcome) |
-| `SvgText.jsx` | ✅ Done | Letter-by-letter SVG text animations with stagger effects |
-| `Barcode.jsx` | ✅ Done | Decorative barcode elements using react-barcodes |
-| Theme System | ✅ Done | OKLCH color palette with Tailwind v4 @theme directive |
+| `SvgText.jsx`        | ✅ Done | Letter-by-letter SVG text animations with stagger effects             |
+| `Barcode.jsx`        | ✅ Done | Decorative barcode elements using react-barcodes                      |
+| Theme System         | ✅ Done | OKLCH color palette with Tailwind v4 @theme directive                 |
 
 **Key Decisions:**
+
 - Removed `@envoy1084/react-terminal` package - built custom terminal loader instead
 - Barcode positioned as decorative element in loader and throughout site
 - Monospace fonts (JetBrains Mono) integrated for terminal aesthetic
@@ -1160,14 +1235,15 @@ export default Layout
 
 ### Phase 2: Navigation & Controls ✅ COMPLETED
 
-| Component | Status | Notes |
-|-----------|--------|-------|
+| Component               | Status  | Notes                                                |
+| ----------------------- | ------- | ---------------------------------------------------- |
 | `Navbar.jsx` (Vertical) | ✅ Done | Fixed left sidebar with vertical text, backdrop blur |
-| `CustomScrollbar.jsx` | ✅ Done | Range input scrollbar matching terminal aesthetic |
-| `AudioToggle.jsx` | ✅ Done | Global audio state with Web Audio API integration |
-| Theme Toggle | ✅ Done | Integrated into sidebar with sun/moon icons |
+| `CustomScrollbar.jsx`   | ✅ Done | Range input scrollbar matching terminal aesthetic    |
+| `AudioToggle.jsx`       | ✅ Done | Global audio state with Web Audio API integration    |
+| Theme Toggle            | ✅ Done | Integrated into sidebar with sun/moon icons          |
 
 **Key Features:**
+
 - Active link indicator uses Framer Motion layoutId for smooth sliding animation
 - Sidebar links render with vertical writing mode (rotated 90°)
 - Scrollbar shows progress indicator with interactive range input
@@ -1176,14 +1252,15 @@ export default Layout
 
 ### Phase 3: Hero & Content Enhancement ✅ COMPLETED
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| `Hero.jsx` | ✅ Done | 3D mouse tilt effects, midnight sun composition |
-| `ProjectCard.jsx` | ✅ Done | 3D hover parallax, video preview support |
-| `ProjectGrid.jsx` | ✅ Done | Staggered animations, perspective grid layout |
-| `Curtain.jsx` | ✅ Done | Page transition overlay effect |
+| Component         | Status  | Notes                                           |
+| ----------------- | ------- | ----------------------------------------------- |
+| `Hero.jsx`        | ✅ Done | 3D mouse tilt effects, midnight sun composition |
+| `ProjectCard.jsx` | ✅ Done | 3D hover parallax, video preview support        |
+| `ProjectGrid.jsx` | ✅ Done | Staggered animations, perspective grid layout   |
+| `Curtain.jsx`     | ✅ Done | Page transition overlay effect                  |
 
 **Composition Update:**
+
 - Hero follows "Midnight Sun in the desert" layout - content at bottom (20%), luminous gradient dominates top (80%)
 - 3D tilt effect on hero title uses useSpring for smooth mouse tracking
 - Project cards have depth on hover with scale and z-index elevation
@@ -1192,13 +1269,14 @@ export default Layout
 
 ### Phase 4: Advanced Interactions 📝 PARTIAL
 
-| Step | Component | Status | Notes |
-|------|-----------|--------|-------|
-| 10 | Hand Gesture Controls | ❌ SKIPPED | Decision: Not implementing MediaPipe for this version |
-| 11 | Enhanced Cursor | ✅ Done | `CustomCursor.jsx` with 3 trail elements, magnetic hover, click ripple |
-| 12 | Video & 3D Elements | ⏭️ PENDING | Future enhancement |
+| Step | Component             | Status     | Notes                                                                  |
+| ---- | --------------------- | ---------- | ---------------------------------------------------------------------- |
+| 10   | Hand Gesture Controls | ❌ SKIPPED | Decision: Not implementing MediaPipe for this version                  |
+| 11   | Enhanced Cursor       | ✅ Done    | `CustomCursor.jsx` with 3 trail elements, magnetic hover, click ripple |
+| 12   | Video & 3D Elements   | ⏭️ PENDING | Future enhancement                                                     |
 
 **CustomCursor Features:**
+
 - Main cursor dot follows mouse position
 - 3 trailing elements with staggered delay (0.08s, 0.15s, 0.25s)
 - Magnetic effect on buttons using Framer Motion whileHover
@@ -1209,11 +1287,11 @@ export default Layout
 
 ### Phase 5: Polish & Deployment ⏭️ PENDING
 
-| Step | Component | Status | Notes |
-|------|-----------|--------|-------|
-| 13 | Modals & Documentation | ⏭️ Pending | Welcome modal, keyboard shortcuts modal, help button |
-| 14 | Performance Optimization | ⏭️ Pending | Lazy loading, will-change optimizations |
-| 15 | Accessibility & Testing | ⏭️ Pending | Keyboard nav, reduced motion support, device testing |
+| Step | Component                | Status     | Notes                                                |
+| ---- | ------------------------ | ---------- | ---------------------------------------------------- |
+| 13   | Modals & Documentation   | ⏭️ Pending | Welcome modal, keyboard shortcuts modal, help button |
+| 14   | Performance Optimization | ⏭️ Pending | Lazy loading, will-change optimizations              |
+| 15   | Accessibility & Testing  | ⏭️ Pending | Keyboard nav, reduced motion support, device testing |
 
 ---
 
@@ -1221,6 +1299,7 @@ export default Layout
 
 **Inline Styles Cleanup:** ✅ COMPLETED
 All components refactored to use Tailwind semantic classes:
+
 - `Hero.jsx` - uses `text-heading`, `text-dusk`, `text-text-secondary`
 - `About.jsx` - uses `text-heading`, `text-text-primary`
 - `Contact.jsx` - uses `text-heading`
@@ -1228,6 +1307,7 @@ All components refactored to use Tailwind semantic classes:
 - `ProjectGrid.jsx` - uses `text-heading`, `text-text-secondary`
 
 **Architecture Decision:**
+
 - **Option A (Tailwind semantic classes)** for simple components
 - **Option C (CSS classes in index.css)** for complex components when needed
 - **NO inline styles** - all styles via Tailwind or CSS
@@ -1237,11 +1317,13 @@ All components refactored to use Tailwind semantic classes:
 ### Current Work in Progress
 
 **Semantic Color System Cleanup:** 🔄 IN PROGRESS
+
 - User is refactoring OKLCH-based semantic colors in `theme.css`
 - Light/dark theme switching via `[data-theme='dark']` attribute
 - Using CSS custom properties (`--color-*`) for theme-aware colors
 
 **Pending Tasks:**
+
 1. Complete semantic color refactor (user task)
 2. Final build verification after color fixes
 3. Test theme switching across all components
@@ -1256,23 +1338,246 @@ All components refactored to use Tailwind semantic classes:
 ✅ **3D Effects** - Mouse tilt, card parallax, perspective grids  
 ✅ **Terminal Aesthetic** - Loading screen, custom scrollbar, monospace fonts  
 ✅ **Performance** - Intersection Observer for scroll animations  
-✅ **Accessibility** - Reduced motion support (`@media (prefers-reduced-motion)`)  
+✅ **Accessibility** - Reduced motion support (`@media (prefers-reduced-motion)`)
 
 ---
 
 ### Next Session Plan
 
-**User Tasks:**
-1. Clean up semantic color system in `theme.css`
-2. Ensure light/dark theme colors switch correctly
-3. Verify all Tailwind semantic classes work properly
+**Ready for Kimi K2.5 - BUILD PHASE:**
 
-**When User is Ready:**
-1. Test build after color system fixes
-2. Verify all pages display correctly in both themes
-3. Final polish and deployment preparation
+1. **Initialize Kimi K2.5** with this document as context
+2. **Implement WebGL Background** using @react-three/fiber and custom shaders
+3. **Fine-tune visual effects** based on inspirational references
+4. **Performance optimization** and production build verification
+5. **Deploy to production** with all Phase 1-4 enhancements
+
+**Kimi K2.5 Focus Areas:**
+- WebGL shader implementation for fluid background effects
+- 3D scene integration with existing Framer Motion animations
+- Background image/video integration matching Shoya Kajita aesthetic
+- Final polish and performance tuning
 
 ---
 
-**Last Updated:** 2026-02-13  
-**Status:** Phase 1-4 (Step 11) Complete | Waiting on semantic color cleanup
+---
+
+## Implementation Session - February 16, 2026
+
+### Background Enhancement Attempt
+
+**Approach Tested:** WebGL Shader Background → CSS-Only Alternative
+
+#### Phase 4 Step 12 - WebGL Implementation Attempt
+
+**What Was Built:**
+
+1. **WebGL Dependencies Installed:**
+   - `@react-three/fiber` v9.5.0
+   - `@react-three/drei` v10.7.7  
+   - `maath` v0.10.8
+   - `three` v0.182.0
+
+2. **WebGL Components Created:**
+   - `client/src/components/WebGL/FluidShader.jsx` - GLSL fragment shader with:
+     - Simplex noise for organic flow
+     - Voronoi patterns for water droplets
+     - Mouse position tracking
+     - Scroll velocity reactivity
+   - `client/src/components/WebGL/BackgroundMaterial.jsx` - Material wrapper
+   - `client/src/components/WebGL/WebGLBackground.jsx` - Main component with:
+     - Orthographic camera
+     - Performance optimizations (60fps cap, visibility API)
+     - Context loss handling with CSS fallback
+   - `client/src/components/WebGL/index.js` - Barrel exports
+
+3. **Custom Hooks Created:**
+   - `client/src/hooks/useMousePosition.js` - Mouse tracking with RAF throttling
+   - `client/src/hooks/useScrollVelocity.js` - Scroll velocity detection
+   - `client/src/hooks/index.js` - Clean barrel exports
+
+4. **Files Modified:**
+   - `client/src/components/Layout.jsx` - Integrated WebGLBackground
+   - `client/src/components/Hero.jsx` - Made overlay transparent for WebGL visibility
+   - `client/package.json` - Added WebGL dependencies
+
+**Issues Encountered:**
+
+1. **WebGL Context Lost Error** - GPU couldn't handle complex shader
+2. **Performance Impact** - Bundle size increased to 1,380 kB
+3. **Visual Misalignment** - Generic noise patterns didn't match forest reference
+4. **Shader Complexity** - Simplex noise + voronoi too heavy, simplified version lost impact
+
+**Decision:** Pivot to CSS-only approach for better stability and visual control.
+
+---
+
+#### CSS-Only Background Enhancement
+
+**New Components Created:**
+
+1. **`client/src/styles/background-effects.css`** - Advanced CSS effects:
+   - Animated film grain overlay (SVG noise filter)
+   - Glass morphism with backdrop-filter
+   - Water droplets via CSS pseudo-elements
+   - Vertical forest texture (repeating gradients)
+   - Warm amber glow animation (radial gradient with blur)
+   - Mist/fog layer (linear gradient)
+   - Vignette effect
+   - Steam/condensation overlay (SVG turbulence filter)
+
+**Files Modified:**
+
+1. **`client/src/styles/index.css`**:
+   - Changed `body { background-color: var(--color-bg-body) }` to `background-color: transparent`
+   - This allows global background div to be visible
+
+2. **`client/src/components/Layout.jsx`**:
+   - Removed WebGLBackground import
+   - Added global CSS background layers (4 layers: base gradient, amber glow, grain, vignette)
+   - Imported `background-effects.css`
+   - Effects now appear on ALL routes, not just Hero
+
+3. **`client/src/components/Hero.jsx`**:
+   - Removed local `BackgroundEffects` component
+   - Removed `background-effects.css` import
+   - Cleaned up to focus on content only
+   - Background effects now handled globally by Layout
+
+**Result:**
+- Bundle size: 492 kB (65% smaller without WebGL)
+- Build time: 7s (3x faster)
+- Performance: Smooth 60fps CSS animations
+- Stability: No WebGL context issues
+
+---
+
+### Current Status
+
+**✅ Completed:**
+- Phase 1-4 (Steps 1-11) - Foundation, Navigation, Hero, Cursor
+- CSS-only global background with warm amber/moody forest aesthetic
+- Body transparency fix for proper layering
+- Performance optimized build
+
+**⏸️ Pending:**
+- Fine-tuning background colors/effects to match reference exactly
+- Adding glass/condensation effects if desired
+- Final visual polish
+
+---
+
+---
+
+## Final Status - February 16, 2026
+
+### ✅ Session Complete - Clean State Achieved
+
+**Branch:** `feature/refactor-fe-v1`
+**Status:** All Phase 1-4 implementations preserved with clean CSS background
+
+**What Was Kept:**
+- ✅ Global CSS background layer in Layout.jsx (warm amber radial gradient)
+- ✅ background-effects.css file (available for future enhancements)
+- ✅ WebGL/ folder and hooks/ folder (code preserved, not imported)
+- ✅ All original component animations and functionality
+
+**What Was Reverted:**
+- ✅ Hero.jsx - Back to original (no midnight sun overlay added)
+- ✅ index.css - Body background restored to `var(--color-bg-body)`
+- ✅ AppRoutes.jsx - Removed AnimatePresence wrapper
+- ✅ package.json - Removed WebGL dependencies (three.js, @react-three/fiber, etc.)
+- ✅ package-lock.json - Reverted to original state
+
+**Build Performance:**
+- Bundle: 492 kB JS + 57 kB CSS
+- Build time: 3.1s
+- Performance: Smooth like main branch, with added CSS background
+
+---
+
+## 🎨 Suggestions for Next Session
+
+Based on testing and the reference image analysis, here are improvement suggestions:
+
+### 1. **Color System Refinement** (Priority: HIGH)
+
+**Dark Theme:**
+- ✅ **Current:** Works well - warm amber (#2a2515 to #000000) creates moody forest aesthetic
+- 💡 **Suggestion:** Slightly increase amber intensity for more dramatic "midnight sun" effect
+
+**Light Theme:** 
+- ⚠️ **Current:** Needs significant improvement
+- 💡 **Suggestions:**
+  - Current beige/tan (`--color-driftwood: #d2b690`) feels dated
+  - Consider: warm white to cream gradient (`#faf8f5` to `#f5f0e8`)
+  - Add subtle warm amber accents for continuity with dark theme
+  - Use same color family but inverted lightness (dark forest → light sand)
+
+### 2. **Hero Section Enhancements** (Priority: MEDIUM)
+
+**Missing "Midnight Sun" Effect:**
+- 💡 **Suggestion:** Add back the animated orange/gold radial gradient at top of Hero
+- Implementation: CSS-only with Framer Motion `animate` prop
+- Should be **Hero-specific**, not global (to avoid affecting other pages)
+- Gradient: `radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.5) 0%, transparent 60%)`
+
+### 3. **Glass / Condensation Effects** (Priority: LOW)
+
+**For Future Polish:**
+- 💡 **Idea:** Add subtle SVG filter for "wet glass" look on background
+- Implementation: CSS `backdrop-filter: blur()` with noise texture
+- Should be **very subtle** (opacity: 0.03-0.05) to maintain performance
+- Only enable on desktop (disable on mobile for battery life)
+
+### 4. **Typography & Contrast** (Priority: MEDIUM)
+
+**Light Theme Issues:**
+- ⚠️ Current light theme text might lack contrast
+- 💡 **Suggestion:** Test `--color-text-primary` and `--color-text-secondary` in light mode
+- Ensure WCAG AA compliance (4.5:1 contrast ratio minimum)
+
+### 5. **Animation Polish** (Priority: LOW)
+
+**Subtle Enhancements:**
+- 💡 **Idea:** Add very subtle parallax to global background on scroll
+- Implementation: CSS `transform: translateY()` linked to scroll position
+- Movement: 20-30px max to avoid motion sickness
+- Disable if `prefers-reduced-motion: reduce`
+
+---
+
+## 🎯 Recommended Next Steps
+
+**User Task List (Before Next Session):**
+
+1. **Test Both Themes:**
+   - Toggle light/dark mode in browser
+   - Check all pages (Home, About, Work, Contact)
+   - Note any color issues or contrast problems
+
+2. **Color Palette Refinement:**
+   - Open `client/src/styles/theme.css`
+   - Adjust light theme colors (lines 23-60)
+   - Test warm white/cream base instead of current beige
+
+3. **Reference Image Analysis:**
+   - Study `references/Hero-sample-2.png` again
+   - Note: Dark forest with warm amber glow from top
+   - The "steamy glass" effect is subtle - maybe just grain + blur
+
+4. **Decide on Hero Animation:**
+   - Do you want the "midnight sun" glow back?
+   - Should it animate (pulse) or be static?
+   - Should it be global or Hero-only?
+
+**When You're Ready for Next Session:**
+- Update the document with your color changes
+- Let me know which suggestions to implement
+- I'll help with fine-tuning the visual effects
+
+---
+
+**Last Updated:** 2026-02-16  
+**Status:** ✅ CLEAN STATE | Global CSS Background Preserved | Ready for Color Refinement
+**Next Focus:** Light theme color system + optional Hero glow effect
