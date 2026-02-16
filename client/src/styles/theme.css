@@ -1,56 +1,9 @@
 /* Modify index.css with Theme Color Definitions */
 /* Ref: (https://tailwindcss.com/docs/theme#customizing-your-theme) */
+/* Ref https://oklch.com/ */
 @theme {
   --color-*: initial;
   --color-scheme: light;
-
-  /* specify OKLCH color variables */
-  --color-lagoon: oklch(0.72 0.11 221.19);
-  --color-coral: oklch(0.74 0.17 40.24);
-  --color-driftwood: oklch(0.79 0.06 74.59);
-  --color-tide: oklch(0.49 0.08 205.88);
-  --color-dusk: oklch(0.82 0.15 72.09);
-
-  /* Additional Greens */
-  --color-avocado-100: oklch(0.99 0 0);
-  --color-avocado-200: oklch(0.98 0.04 113.22);
-  --color-avocado-300: oklch(0.94 0.11 115.03);
-  --color-avocado-400: oklch(0.92 0.19 114.08);
-  --color-avocado-500: oklch(0.84 0.18 117.33);
-  --color-avocado-600: oklch(0.53 0.12 118.34);
-
-  /* --- Light Theme Colors --- */
-  --light-bg-primary: oklch(27.9% 0.077 45.635);
-  --light-text-primary: #3b5360;
-  --light-text-secondary: #5c6a72;
-  --light-text-accent-alt: #f1f1f1;
-  --light-primary-accent: #a7c080;
-  --light-secondary-accent: #e69875;
-  --light-highlight: #7fbbb3;
-  --light-border-color: #e1ddc9;
-  --light-card-bg: #fff8dc;
-
-  --color-heading: var(--color-lagoon);
-  --color-sub-title: var(--light-text-accent-alt);
-  --color-text-primary: var(--light-text-primary);
-  --color-text-secondary: var(--light-text-secondary);
-  --color-text-accent-alt: var(--light-text-accent-alt);
-  --color-muted-text: var(--color-driftwood);
-  --color-primary-accent: var(--light-primary-accent);
-  --color-secondary-accent: var(--light-secondary-accent);
-  --color-highlight: var(--light-highlight);
-  --color-border-color: var(--light-border-color);
-  --color-card-bg: var(--light-card-bg);
-  /* Light theme landing bg colors */
-  --color-bg-body: var(--light-bg-primary);
-  --color-bg-t: oklch(27.9% 0.077 45.635);
-  --color-bg-md: oklch(82.8% 0.189 84.429);
-  --color-bg-b: oklch(14.7% 0.004 49.25);
-
-  --color-inner-glow: rgba(180, 220, 255, 0.8);
-  --color-md-glow: rgba(40, 120, 180, 0.8);
-  --color-outer-glow: rgba(10, 40, 80, 0.3);
-  --color-border-glow: rgba(0, 0, 0, 0.11);
 
   /* Primary, Ok, Warn, Fail color scales */
   --color-primary-50: oklch(0.95 0.05 260);
@@ -149,6 +102,56 @@
   --color-neutral-800: oklch(0.3 0.01 56.259);
   --color-neutral-900: oklch(0.2 0.01 56.259);
   --color-neutral-950: oklch(0.1 0.01 56.259);
+
+  /* specify OKLCH color variables */
+  --color-lagoon: oklch(0.72 0.11 221.19); /* #50c8ff */
+  --color-coral: oklch(0.7366 0.1672 40.7); /* #ff8050 */
+  --color-driftwood: oklch(0.79 0.06 74.59); /* #d2b690 */
+  --color-tide: oklch(0.49 0.08 205.88); /* #0f6d77 */
+  --color-dusk: oklch(0.82 0.15 72.09); /* #ffb345 */
+
+  /* Additional Greens */
+  --color-avocado-100: oklch(0.99 0 0); /* #fcfcfc */
+  --color-avocado-200: oklch(0.98 0.04 113.22); /* #f8fcdd */
+  --color-avocado-300: oklch(0.94 0.11 115.03); /* #e8f49e */
+  --color-avocado-400: oklch(0.92 0.19 114.08); /* #e4f23d */
+  --color-avocado-500: oklch(0.84 0.18 117.33); /* #c2d932 */
+  --color-avocado-600: oklch(0.53 0.12 118.34); /* #66740b */
+
+  /* --- Light Theme Colors --- */
+  --light-bg-body: var(--color-driftwood); /* #d2b690 */
+  --light-bg-primary: oklch(27.9% 0.077 45.635); /* #461901 */
+  --light-text-primary: oklch(0.428 0.0363 232.37); /* #3b5360 */
+  --light-text-secondary: oklch(0.5154 0.0212 232.87); /* #5c6a72 */
+  --light-text-accent-alt: oklch(0.9581 0 0); /* #f1f1f1 */
+  --light-primary-accent: oklch(0.7732 0.0906 125.78); /* #a7c080 */
+  --light-secondary-accent: oklch(0.7498 0.1059 44.86); /* #e69875 */
+  --light-highlight: oklch(0.7487 0.0631 185.5); /* #7fbbb3 */
+  --light-border-color: oklch(0.8953 0.0271 97.64); /* #e1ddc9 */
+  --light-card-bg: oklch(0.9773 0.0373 95.44); /* #fff8dc */
+
+  --color-heading: var(--color-lagoon);
+  --color-sub-title: var(--light-text-accent-alt);
+  --color-text-primary: var(--light-text-primary);
+  --color-text-secondary: var(--light-text-secondary);
+  --color-text-accent-alt: var(--light-text-accent-alt);
+  --color-muted-text: var(--color-driftwood);
+  --color-primary-accent: var(--light-primary-accent);
+  --color-secondary-accent: var(--light-secondary-accent);
+  --color-highlight: var(--light-highlight);
+  --color-border-color: var(--light-border-color);
+  --color-card-bg: var(--light-card-bg);
+
+  /* Light theme landing bg colors */
+  --color-bg-body: var(--light-bg-body);
+  --color-bg-t: var(--light-bg-primary);
+  --color-bg-md: var(--color-dusk);
+  --color-bg-b: oklch(14.7% 0.004 49.25); /* #0c0a09 */
+
+  --color-inner-glow: rgba(180, 220, 255, 0.8);
+  --color-md-glow: rgba(40, 120, 180, 0.8);
+  --color-outer-glow: rgba(10, 40, 80, 0.3);
+  --color-border-glow: rgba(0, 0, 0, 0.11);
 }
 
 @layer base {
@@ -167,40 +170,6 @@
     --color-neutral-800: oklch(0.844 0.011 73.639);
     --color-neutral-900: oklch(0.944 0.011 73.639);
     --color-neutral-950: oklch(0.985 0.001 106.423);
-
-    /* Dark theme color overrides */
-    --dark-bg-primary: oklch(12.2% 0.05 38.18);
-    --dark-text-primary: #e0e0e0;
-    --dark-text-secondary: #a0b0a0;
-    --dark-text-accent-alt: #303030;
-    --dark-primary-accent: #8fbc8f;
-    --dark-secondary-accent: #d2b48c;
-    --dark-highlight: #f0e68c;
-    --dark-border-color: #404d44;
-    --dark-card-bg: #2a3a2a;
-
-    --color-heading: var(--color-dusk);
-    --color-sub-title: var(--color-driftwood);
-    --color-text-primary: var(--dark-text-primary);
-    --color-text-secondary: var(--dark-text-secondary);
-    --color-text-accent-alt: var(--dark-text-accent-alt);
-    --color-muted-text: var(--color-driftwood);
-    --color-primary-accent: var(--dark-primary-accent);
-    --color-secondary-accent: var(--dark-secondary-accent);
-    --color-highlight: var(--dark-highlight);
-    --color-border-color: var(--dark-border-color);
-    --color-card-bg: var(--dark-card-bg);
-
-    /* Dark theme landing bg colors */
-    --color-bg-body: var(--dark-bg-primary);
-    --color-bg-t: oklch(0.1 0.01 56.259);
-    --color-bg-md: oklch(82.8% 0.189 84.429);
-    --color-bg-b: oklch(12.2% 0.05 38.18);
-
-    --color-inner-glow: rgb(255, 185, 0, 0.9);
-    --color-md-glow: rgb(98, 0, 0, 0.8);
-    --color-outer-glow: rgba(70, 25, 10, 0.1);
-    --color-border-glow: rgba(0, 0, 0, 1);
 
     /* Primary, Ok, Warn, Fail color scales for dark theme */
     --color-primary-50: oklch(0.45 0.3 260);
@@ -286,6 +255,40 @@
     --color-red-800: oklch(88.5% 0.062 18.334);
     --color-red-900: oklch(93.6% 0.032 17.717);
     --color-red-950: oklch(97.1% 0.013 17.38);
+
+    /* Dark theme color overrides */
+    --dark-bg-primary: oklch(12.2% 0.05 38.18);
+    --dark-text-primary: #e0e0e0;
+    --dark-text-secondary: #a0b0a0;
+    --dark-text-accent-alt: #303030;
+    --dark-primary-accent: #8fbc8f;
+    --dark-secondary-accent: #d2b48c;
+    --dark-highlight: #f0e68c;
+    --dark-border-color: #404d44;
+    --dark-card-bg: #2a3a2a;
+
+    --color-heading: var(--color-dusk);
+    --color-sub-title: var(--color-driftwood);
+    --color-text-primary: var(--dark-text-primary);
+    --color-text-secondary: var(--dark-text-secondary);
+    --color-text-accent-alt: var(--dark-text-accent-alt);
+    --color-muted-text: var(--color-driftwood);
+    --color-primary-accent: var(--dark-primary-accent);
+    --color-secondary-accent: var(--dark-secondary-accent);
+    --color-highlight: var(--dark-highlight);
+    --color-border-color: var(--dark-border-color);
+    --color-card-bg: var(--dark-card-bg);
+
+    /* Dark theme landing bg colors */
+    --color-bg-body: var(--dark-bg-primary);
+    --color-bg-t: oklch(0.1 0.01 56.259);
+    --color-bg-md: oklch(82.8% 0.189 84.429);
+    --color-bg-b: oklch(12.2% 0.05 38.18);
+
+    --color-inner-glow: rgb(255, 185, 0, 0.9);
+    --color-md-glow: rgb(98, 0, 0, 0.8);
+    --color-outer-glow: rgba(70, 25, 10, 0.1);
+    --color-border-glow: rgba(0, 0, 0, 1);
   }
 }
 
