@@ -1,0 +1,85 @@
+/* Modify index.css with Theme Color Definitions */
+/* Ref: (https://tailwindcss.com/docs/theme#customizing-your-theme) */
+/* Ref https://oklch.com/ */
+@theme {
+  /* Light theme landing bg colors */
+  /* @raw-theme.css */
+  --color-bg-body: var(--light-bg-body);
+  --color-bg-t: var(--light-bg-primary);
+  --color-bg-md: var(--color-dusk);
+  --color-bg-b: oklch(14.7% 0.004 49.25); /* #0c0a09 */
+
+  --color-inner-glow: rgba(180, 220, 255, 0.8);
+  --color-md-glow: rgba(40, 120, 180, 0.8);
+  --color-outer-glow: rgba(10, 40, 80, 0.3);
+  --color-border-glow: rgba(0, 0, 0, 0.11);
+}
+
+@layer base {
+  [data-theme='dark'] {
+    --color-scheme: dark;
+
+    /* Dark theme color overrides */
+    --dark-bg-primary: oklch(12.2% 0.05 38.18);
+    --dark-text-primary: #e0e0e0;
+    --dark-text-secondary: #a0b0a0;
+    --dark-text-accent-alt: #303030;
+    --dark-primary-accent: #8fbc8f;
+    --dark-secondary-accent: #d2b48c;
+    --dark-highlight: #f0e68c;
+    --dark-border-color: #404d44;
+    --dark-card-bg: #2a3a2a;
+
+    --color-heading: var(--color-dusk);
+    --color-sub-title: var(--color-driftwood);
+    --color-text-primary: var(--dark-text-primary);
+    --color-text-secondary: var(--dark-text-secondary);
+    --color-text-accent-alt: var(--dark-text-accent-alt);
+    --color-muted-text: var(--color-driftwood);
+    --color-primary-accent: var(--dark-primary-accent);
+    --color-secondary-accent: var(--dark-secondary-accent);
+    --color-highlight: var(--dark-highlight);
+    --color-border-color: var(--dark-border-color);
+    --color-card-bg: var(--dark-card-bg);
+
+    /* Dark theme landing bg colors */
+    --color-bg-body: var(--dark-bg-primary);
+    --color-bg-t: oklch(0.1 0.01 56.259);
+    --color-bg-md: oklch(82.8% 0.189 84.429);
+    --color-bg-b: oklch(12.2% 0.05 38.18);
+
+    --color-inner-glow: rgb(255, 185, 0, 0.9);
+    --color-md-glow: rgb(98, 0, 0, 0.8);
+    --color-outer-glow: rgba(70, 25, 10, 0.1);
+    --color-border-glow: rgba(0, 0, 0, 1);
+  }
+}
+
+/* ========================================
+   Terminal Aesthetic Utilities
+   ======================================== */
+
+@layer utilities {
+  /* Terminal text glow effect using existing colors */
+  .terminal-glow {
+    text-shadow:
+      0 0 10px var(--color-lagoon),
+      0 0 20px var(--color-lagoon),
+      0 0 30px var(--color-lagoon);
+  }
+
+  /* Blinking cursor using existing colors */
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .cursor-blink {
+    animation: blink 0.8s step-end infinite;
+  }
+}
