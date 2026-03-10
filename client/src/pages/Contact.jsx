@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import ContactForm from '../components/ContactForm';
+import ResumeDownload from '../components/ResumeDownload';
 
 const Contact = () => {
   return (
@@ -61,12 +62,40 @@ const Contact = () => {
         {/* Contact Form */}
         <ContactForm />
 
+        {/* Resume Download Section */}
+        <motion.div
+          className='mt-16'
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className='flex items-center gap-4 mb-8'>
+            <div
+              className='h-px flex-1'
+              style={{ backgroundColor: 'var(--color-neutral-200)' }}
+            />
+            <span
+              className='font-mono text-sm'
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              <span style={{ color: 'var(--color-lagoon)' }}>$</span> get
+              resume.pdf
+            </span>
+            <div
+              className='h-px flex-1'
+              style={{ backgroundColor: 'var(--color-neutral-200)' }}
+            />
+          </div>
+
+          <ResumeDownload />
+        </motion.div>
+
         {/* Additional contact info */}
         <motion.div
           className='mt-12 grid md:grid-cols-3 gap-6'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
         >
           {/* Email */}
           <div
@@ -147,7 +176,7 @@ const Contact = () => {
           className='mt-12 flex items-center justify-center gap-3 font-mono text-xs'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           style={{ color: 'var(--color-text-secondary)' }}
         >
           <div

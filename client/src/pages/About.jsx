@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import CareerTimeline from '../components/CareerTimeline';
 import TerminalSkills from '../components/TerminalSkills';
 import MiniTerminal from '../components/MiniTerminal';
+import BlogSection from '../components/BlogSection';
 
 const About = () => {
   return (
@@ -178,6 +179,9 @@ const About = () => {
 
       {/* Terminal Skills */}
       <TerminalSkills />
+
+      {/* Blog Section */}
+      <BlogSection />
 
       {/* Mini Terminal Easter Eggs */}
       <MiniTerminal />
