@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import CareerTimeline from '../components/CareerTimeline';
 import TerminalSkills from '../components/TerminalSkills';
+import MiniTerminal from '../components/MiniTerminal';
 
 const About = () => {
   return (
@@ -177,6 +178,9 @@ const About = () => {
 
       {/* Terminal Skills */}
       <TerminalSkills />
+
+      {/* Mini Terminal Easter Eggs */}
+      <MiniTerminal />
     </motion.div>
   );
 };
