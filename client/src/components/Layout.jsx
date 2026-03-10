@@ -18,21 +18,37 @@ const Layout = () => {
     <AudioProvider>
       <ReactLenis root>
         <div className='min-h-screen flex bg-bg-body relative'>
+          {/* Skip to content link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-20 z-50 px-4 py-2 bg-lagoon text-neutral-950 font-mono text-sm rounded"
+          >
+            Skip to main content
+          </a>
+
           {/* Global Background - CSS Only */}
           <div 
-            className='fixed inset-0 z-0 pointer-events-none'
+            className='fixed inset-0 z-0 pointer-events-none will-change-transform'
             style={{
               background: `
                 radial-gradient(ellipse at 50% 0%, #2a2515 0%, #1a1610 20%, #0f0d08 50%, #000000 100%)
               `,
             }}
+            aria-hidden="true"
           />
 
           {/* Navigation */}
-          <Navbar />
+          <header>
+            <Navbar />
+          </header>
 
           {/* Main Content */}
-          <main className='flex-1 ml-16 cursor-none relative z-10'>
+          <main 
+            id="main-content"
+            className='flex-1 ml-16 cursor-none relative z-10'
+            role="main"
+            aria-label="Main content"
+          >
             <Outlet />
             <Footer />
           </main>

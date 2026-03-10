@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ThemeToggleBtn from './ThemeToggleBtn';
 
-const NavItem = ({ to, children }) => {
+const NavItem = ({ to, children, label }) => {
   return (
     <motion.li
       variants={{
@@ -25,9 +25,11 @@ const NavItem = ({ to, children }) => {
         end={to === '/'}
         className={({ isActive }) => `
           relative block px-4 py-3 font-mono text-xs uppercase tracking-wider
-          transition-colors duration-300 pointer-events-auto
+          transition-colors duration-300 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-lagoon
           ${isActive ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}
         `}
+        aria-label={`Navigate to ${label} page`}
+        aria-current={({ isActive }) => (isActive ? 'page' : undefined)}
       >
         {({ isActive }) => (
           <>
@@ -42,6 +44,7 @@ const NavItem = ({ to, children }) => {
                   stiffness: 500,
                   damping: 30,
                 }}
+                aria-hidden="true"
               />
             )}
             {/* Vertical text */}
@@ -65,6 +68,7 @@ const NavItem = ({ to, children }) => {
 NavItem.propTypes = {
   to: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 const Sidebar = () => {
@@ -94,6 +98,8 @@ const Sidebar = () => {
       }}
       initial='hidden'
       animate='visible'
+      role="navigation"
+      aria-label="Main navigation"
     >
       {/* Logo/Brand */}
       <motion.div
@@ -103,13 +109,18 @@ const Sidebar = () => {
           visible: { opacity: 1, scale: 1 },
         }}
       >
-        <NavLink to='/' className='block'>
+        <NavLink 
+          to='/' 
+          className='block focus:outline-none focus:ring-2 focus:ring-lagoon rounded-full'
+          aria-label="Go to homepage"
+        >
           <div
             className='w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold'
             style={{
               backgroundColor: 'var(--color-dusk)',
               color: 'var(--color-neutral-50)',
             }}
+            aria-hidden="true"
           >
             VN
           </div>
@@ -117,9 +128,13 @@ const Sidebar = () => {
       </motion.div>
 
       {/* Navigation Items */}
-      <ul className='flex-1 flex flex-col gap-2'>
+      <ul 
+        className='flex-1 flex flex-col gap-2'
+        role="menubar"
+        aria-label="Navigation menu"
+      >
         {menuItems.map((item) => (
-          <NavItem key={item.to} to={item.to}>
+          <NavItem key={item.to} to={item.to} label={item.label}>
             {item.label}
           </NavItem>
         ))}

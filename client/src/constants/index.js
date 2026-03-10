@@ -8,6 +8,8 @@ export const projects = [
       'https://via.placeholder.com/400x250/FF5733/FFFFFF?text=Project+1',
     projectUrl: 'https://github.com/TVATDCI/Food-Delivery-Service-App',
     tags: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
+    category: 'MERN',
+    featured: true,
   },
   {
     _id: '2',
@@ -18,6 +20,8 @@ export const projects = [
       'https://via.placeholder.com/400x250/33FF57/FFFFFF?text=Project+2',
     projectUrl: 'https://github.com/TVATDCI/Algorithm-challenge',
     tags: ['MERN Stack', 'Redux', 'Stripe API'],
+    category: 'Experiments',
+    featured: false,
   },
   {
     _id: '3',
@@ -28,6 +32,8 @@ export const projects = [
       'https://via.placeholder.com/400x250/3357FF/FFFFFF?text=Project+3',
     projectUrl: 'https://signup-login-render.onrender.com/',
     tags: ['Node.js', 'Express', 'MongoDB', 'React'],
+    category: 'MERN',
+    featured: true,
   },
   {
     _id: '4',
@@ -37,6 +43,8 @@ export const projects = [
     imageUrl: 'https://natours-2025.onrender.com/',
     projectUrl: 'https://github.com/TVATDCI/natours-2025',
     tags: ['Express', 'React', 'Node.js', 'MongoDB', 'Mongoose', 'Pug'],
+    category: 'APIs',
+    featured: true,
   },
   {
     _id: '5',
@@ -46,5 +54,7 @@ export const projects = [
     imageUrl: 'https://github.com/TVATDCI/weather-CLI',
     projectUrl: 'https://github.com/TVATDCI/weather-CLI',
     tags: ['React', 'API Integration', 'Axios'],
+    category: 'Frontend',
+    featured: false,
   },
 ];

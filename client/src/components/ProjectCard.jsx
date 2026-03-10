@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Barcode from './Barcode';
 import { useInView, usePrefersReducedMotion } from '../hooks/useInView';
 
@@ -188,18 +189,49 @@ const ProjectCard = ({ project, index }) => {
         </div>
 
         {/* ID badge */}
-        <div 
-          className="absolute top-4 left-4 px-2 py-1 rounded text-xs font-mono"
-          style={{ 
+        <div
+          className="absolute top-4 left-4 px-2 py-1 rounded text-xs font-mono z-10"
+          style={{
             backgroundColor: 'var(--color-neutral-100)',
-            color: 'var(--color-text-secondary)'
+            color: 'var(--color-text-secondary)',
           }}
         >
           PRJ-{String(project._id).padStart(3, '0')}
         </div>
+
+        {/* Featured badge */}
+        {project.featured && (
+          <motion.div
+            className="absolute top-4 right-4 px-2 py-1 rounded text-xs font-mono z-10 flex items-center gap-1"
+            style={{
+              backgroundColor: 'var(--color-lagoon)',
+              color: 'var(--color-neutral-950)',
+            }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <span>★</span>
+            <span>FEATURED</span>
+          </motion.div>
+        )}
       </motion.div>
     </motion.div>
   );
+};
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    projectUrl: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    category: PropTypes.string,
+    featured: PropTypes.bool,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ProjectCard;
