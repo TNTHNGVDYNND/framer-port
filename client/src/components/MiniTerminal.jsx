@@ -3,9 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Konami code sequence - defined outside component to avoid dependency issues
 const konamiCode = [
-  'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-  'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-  'b', 'a'
+  'ArrowUp',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'b',
+  'a',
 ];
 
 const MiniTerminal = () => {
@@ -66,7 +73,7 @@ const MiniTerminal = () => {
         '',
         'From Thai spices to Bavarian cuisine,',
         'mastered the art of bringing flavors together.',
-        'Just like coding - it\'s all about the right ingredients!',
+        "Just like coding - it's all about the right ingredients!",
       ],
     }),
 
@@ -134,7 +141,7 @@ const MiniTerminal = () => {
       lines: [
         '[ERROR] Permission denied',
         '',
-        'Nice try, but you don\'t have root access here!',
+        "Nice try, but you don't have root access here!",
         'This is a portfolio, not a server 😉',
       ],
     }),
@@ -159,7 +166,10 @@ const MiniTerminal = () => {
     if (!trimmedCmd) return;
 
     // Add command to output
-    setOutput((prev) => [...prev, { type: 'command', text: `$ ${trimmedCmd}` }]);
+    setOutput((prev) => [
+      ...prev,
+      { type: 'command', text: `$ ${trimmedCmd}` },
+    ]);
 
     // Execute command
     if (commands[trimmedCmd]) {
@@ -212,8 +222,14 @@ const MiniTerminal = () => {
             { type: 'easter', text: 'You found the secret!' },
             { type: 'easter', text: 'Developer mode: ENABLED' },
             { type: 'easter', text: '' },
-            { type: 'easter', text: 'Fun fact: You just gained 30 extra lives! 🎲' },
-            { type: 'easter', text: '(In the game of life, keep pushing forward)' },
+            {
+              type: 'easter',
+              text: 'Fun fact: You just gained 30 extra lives! 🎲',
+            },
+            {
+              type: 'easter',
+              text: '(In the game of life, keep pushing forward)',
+            },
           ]);
           setKonamiIndex(0);
         }
@@ -289,8 +305,8 @@ const MiniTerminal = () => {
         <motion.div
           className='rounded-lg overflow-hidden border'
           style={{
-            backgroundColor: 'var(--color-neutral-950)',
-            borderColor: 'var(--color-neutral-700)',
+            backgroundColor: 'var(--color-border-glow)',
+            borderColor: 'var(--color-neutral-500)',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
           }}
           initial={{ opacity: 0, y: 30 }}
@@ -302,7 +318,7 @@ const MiniTerminal = () => {
           <div
             className='px-4 py-2 flex items-center gap-2 border-b'
             style={{
-              backgroundColor: 'var(--color-neutral-900)',
+              backgroundColor: 'var(--color-ok-400)',
               borderColor: 'var(--color-neutral-800)',
             }}
           >
@@ -333,7 +349,7 @@ const MiniTerminal = () => {
               ref={terminalRef}
               className='h-64 overflow-y-auto mb-4 p-4 rounded font-mono text-sm border'
               style={{
-                backgroundColor: 'var(--color-neutral-900)',
+                backgroundColor: 'var(--color-outer-glow)',
                 borderColor: 'var(--color-neutral-800)',
               }}
             >
@@ -349,9 +365,7 @@ const MiniTerminal = () => {
                     </div>
                     <div className='mb-2'>
                       Try typing:{' '}
-                      <span style={{ color: 'var(--color-lagoon)' }}>
-                        help
-                      </span>
+                      <span style={{ color: 'var(--color-lagoon)' }}>help</span>
                     </div>
                     <div style={{ color: 'var(--color-neutral-500)' }}>
                       (Hint: Use ⬆⬆⬇⬇⬅➡⬅➡BA for a surprise)
@@ -400,7 +414,7 @@ const MiniTerminal = () => {
                 type='text'
                 value={command}
                 onChange={(e) => setCommand(e.target.value)}
-                className='flex-1 bg-transparent border-none outline-none font-mono text-sm'
+                className='flex-1 bg-outer-glow border-none outline-none font-mono text-sm'
                 style={{ color: 'var(--color-text-primary)' }}
                 placeholder='Type command...'
                 autoFocus
@@ -420,8 +434,7 @@ const MiniTerminal = () => {
           className='mt-4 text-center font-mono text-xs'
           style={{ color: 'var(--color-text-secondary)' }}
         >
-          Available:{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>help</span>,{' '}
+          Available: <span style={{ color: 'var(--color-dusk)' }}>help</span>,{' '}
           <span style={{ color: 'var(--color-dusk)' }}>whoami</span>,{' '}
           <span style={{ color: 'var(--color-dusk)' }}>chef</span>,{' '}
           <span style={{ color: 'var(--color-dusk)' }}>journalist</span>,{' '}
