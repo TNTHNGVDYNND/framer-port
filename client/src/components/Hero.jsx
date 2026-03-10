@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   motion,
   useMotionValue,
@@ -22,11 +22,12 @@ const Hero = () => {
   };
 
   // Skip loader if already loaded once (for route navigation)
-  useState(() => {
+  useEffect(() => {
     if (hasLoaded && loadingState === 0) {
+      /* eslint-disable-next-line */
       setLoadingState(1);
     }
-  });
+  }, [hasLoaded, loadingState]);
 
   return (
     <section className='relative min-h-screen'>
@@ -50,10 +51,15 @@ const HeroContent = () => {
   // 3D Tilt effect state
   const [isHovered, setIsHovered] = useState(false);
 
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const handleMouseMove = (e) => {
+    if (prefersReducedMotion) return;
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
 
@@ -63,6 +69,7 @@ const HeroContent = () => {
   };
 
   const handleMouseLeave = () => {
+    if (prefersReducedMotion) return;
     mouseX.set(0);
     mouseY.set(0);
     setIsHovered(false);
@@ -145,9 +152,9 @@ const HeroContent = () => {
           },
         }}
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d',
+          rotateX: prefersReducedMotion ? 0 : rotateX,
+          rotateY: prefersReducedMotion ? 0 : rotateY,
+          transformStyle: prefersReducedMotion ? 'flat' : 'preserve-3d',
         }}
       >
         {/* Floating decorative elements */}
