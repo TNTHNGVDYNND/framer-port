@@ -70,6 +70,91 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 - Performance: Intersection Observer for scroll animations
 - Accessibility: Reduced motion support, aria-labels
 
+## New Phases A-G Implementation
+
+### Phase A-C: About Page Overhaul ✅
+
+**Phase A - Career Timeline Component**
+- `CareerTimeline.jsx` - Vertical 3-phase career path with SVG path animation
+- Scroll-triggered animations using `useScroll` and `useTransform`
+- Career phases: Field Journalist (2005-2015) → Chef/Restaurateur (2015-2023) → Full-Stack Developer (2024-Present)
+- Terminal aesthetic with color-coded phases (lagoon/dusk/coral)
+- Responsive connecting lines and skills tags
+
+**Phase B - Terminal Skills Component**
+- `TerminalSkills.jsx` - Animated progress bars with terminal block characters
+- Three skill categories: Frontend (React 85%, JS 90%, Tailwind 80%, Framer Motion 75%), Backend (Node 75%, Express 75%, MongoDB 60%), Tools (Git 85%, Docker 50%, Figma 65%)
+- Color-coded proficiency levels (lagoon=80%+, dusk=60-79%, neutral=<60%)
+- Blinking cursor animation and terminal window header
+
+**Phase C - Contact Form Refactor**
+- Complete terminal aesthetic transformation of `ContactForm.jsx`
+- `TerminalInput` sub-component with command labels and glow effects
+- Real-time terminal output with typewriter effect
+- Progress bar animation during submission
+- Terminal states: idle, submitting, success, error
+
+### Phase D: Mini Terminal Easter Eggs ✅
+
+**`MiniTerminal.jsx`** - Interactive terminal with hidden commands
+- Available commands: whoami, chef, journalist, skills, clear, help
+- **Hidden Easter Eggs:**
+  - `matrix` - Matrix reference ("Wake up, Neo...")
+  - `sudo` - Permission denied with humor
+  - `coffee` - Coffee status bar (80% fuel)
+- **Konami Code Detection** (⬆⬆⬇⬇⬅➡⬅➡BA): Secret mode activation
+- Auto-scrolling output with color-coded message types
+- Command history and keyboard navigation
+- Integrated into About.jsx page
+
+### Phase E: Work Page Hero Enhancement ✅
+
+**`WorkHero.jsx`** - Terminal-styled hero with stats
+- `./showcase_work` terminal header
+- **Animated Stat Counters:** 20+ Projects, 5+ Technologies, 365 Days of Code
+- `useCountUp` custom hook with easeOutExpo easing
+- **Project Filter System:** All, MERN, APIs, Frontend, Experiments
+- Enhanced `ProjectCard.jsx` with category, featured badge, 3 featured projects
+- `ProjectGrid.jsx` with filtering and empty state handling
+
+### Phase F: Performance and Accessibility Optimizations ✅
+
+**Performance Improvements:**
+- **React.lazy code splitting** - Bundle reduced from 530KB to 408KB
+- Lazy loaded pages: Home, Work, About, Contact, ThemeCard, NotFound
+- `PageLoader` component with animated dots
+- **GPU Acceleration:** `will-change` CSS properties, `translateZ(0)`
+- Intersection Observer for scroll-triggered animations
+
+**Accessibility Enhancements:**
+- Skip-to-content link for keyboard navigation
+- ARIA labels in Navbar
+- `prefers-reduced-motion` support (0.01ms animations)
+- High contrast mode support (`prefers-contrast: high`)
+- Screen reader support with `.sr-only` class
+- Focus-visible styles with outline rings
+
+### Phase G: Additional Features ✅
+
+**`BlogSection.jsx`** - dev.to integration
+- Fetches 5 latest posts from `dev.to/api/articles?username=tvatdci`
+- Cover images with lazy loading and hover scale effects
+- Tags, reading time, and terminal-styled cards
+- Loading and error states
+
+**`ResumeDownload.jsx`** - Resume download component
+- Animated download progress bar with block characters
+- QR code ASCII art for mobile viewing
+- Simulated download progress (10% increments)
+- Downloads `/resume-update.pdf`
+
+**`NotFound.jsx`** - Terminal-themed 404 page
+- Glitch effect animation on "404" text
+- ASCII art "ERROR" banner
+- Easter egg: type "home" to navigate
+- Konami code hint animation
+- Terminal output showing failed `find` command
+
 ## Implementation Rules
 
 ### Critical Patterns
@@ -226,7 +311,7 @@ npm run dev        # Development with nodemon
 
 ---
 
-**Document Version:** 1.0  
+**Document Version:** 2.0  
 **Last Updated:** 2026-03-10  
 **Branch:** feature/refactor-fe-v1  
-**Status:** Phase 1-4 Complete, Phase 5 Partial
+**Status:** Phase 1-4 Complete, Phase 5 Partial, Phases A-G Complete
