@@ -62,17 +62,11 @@ const StatCounter = ({ value, label, suffix = '' }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <div
-        className='text-4xl md:text-5xl font-bold font-mono mb-2'
-        style={{ color: 'var(--color-lagoon)' }}
-      >
+      <div className='text-4xl md:text-5xl font-bold font-mono mb-2 text-lagoon'>
         {count}
         {suffix}
       </div>
-      <div
-        className='text-sm font-mono uppercase tracking-wider'
-        style={{ color: 'var(--color-text-secondary)' }}
-      >
+      <div className='text-sm font-mono uppercase tracking-wider text-text-secondary'>
         {label}
       </div>
     </motion.div>
@@ -112,31 +106,21 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
           />
 
           {/* Main heading */}
-          <h1
-            className='text-4xl md:text-6xl font-bold font-mono mb-4'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h1 className='text-4xl md:text-6xl font-bold font-mono mb-4 text-heading'>
             <span className='text-neutral-500 mr-2'>$</span>./showcase_work
           </h1>
 
           {/* Philosophy text */}
-          <p
-            className='text-lg max-w-2xl mb-8 font-mono'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Explore my
-            digital craftsmanship. Each project represents a unique challenge, a
+          <p className='text-lg max-w-2xl mb-8 font-mono text-text-secondary'>
+            <span className='text-ok-400'>➜</span> Explore my digital
+            craftsmanship. Each project represents a unique challenge, a
             learning opportunity, and a step forward in my development journey.
           </p>
         </motion.div>
 
         {/* Stats Section */}
         <motion.div
-          className='grid grid-cols-3 gap-8 mb-16 p-8 rounded-lg border'
-          style={{
-            backgroundColor: 'var(--color-neutral-50)',
-            borderColor: 'var(--color-neutral-200)',
-          }}
+          className='grid grid-cols-3 gap-8 mb-16 p-8 rounded-lg border bg-neutral-50 border-neutral-200'
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -158,12 +142,8 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <span
-            className='font-mono text-sm mr-4 self-center'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-lagoon)' }}>$</span> filter
-            --category:
+          <span className='font-mono text-sm mr-4 self-center text-text-secondary'>
+            <span className='text-lagoon'>$</span> filter --category:
           </span>
           {filters.map((filter) => (
             <motion.button
@@ -194,16 +174,13 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
 
         {/* Filter hint */}
         <motion.div
-          className='font-mono text-xs mb-8'
-          style={{ color: 'var(--color-text-secondary)' }}
+          className='font-mono text-xs mb-8 text-text-secondary'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Currently
-          viewing:{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>{activeFilter}</span>{' '}
-          projects
+          <span className='text-ok-400'>➜</span> Currently viewing:{' '}
+          <span className='text-dusk'>{activeFilter}</span> projects
         </motion.div>
       </div>
     </section>

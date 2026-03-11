@@ -249,26 +249,19 @@ const MiniTerminal = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2
-            className='text-2xl font-bold font-mono mb-2'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h2 className='text-2xl font-bold font-mono mb-2 text-heading'>
             <span className='text-neutral-500 mr-2'>$</span>interactive_terminal
           </h2>
-          <p
-            className='font-mono text-sm'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Type a
-            command to explore more...
+          <p className='font-mono text-sm text-text-secondary'>
+            <span className='text-ok-400'>➜</span> Type a command to explore
+            more...
           </p>
         </motion.div>
 
         {/* Terminal Window */}
         <motion.div
-          className='terminal-window'
+          className='terminal-window bg-border-glow'
           style={{
-            backgroundColor: 'var(--color-border-glow)',
             borderColor: 'var(--color-neutral-500)',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
           }}
@@ -279,9 +272,8 @@ const MiniTerminal = () => {
         >
           {/* Terminal Header */}
           <div
-            className='terminal-window__header py-2'
+            className='terminal-window__header py-2 bg-ok-400'
             style={{
-              backgroundColor: 'var(--color-ok-400)',
               borderColor: 'var(--color-neutral-800)',
             }}
           >
@@ -293,9 +285,8 @@ const MiniTerminal = () => {
             {/* Output Area */}
             <div
               ref={terminalRef}
-              className='h-64 overflow-y-auto mb-4 p-4 rounded font-mono text-sm border'
+              className='h-64 overflow-y-auto mb-4 p-4 rounded font-mono text-sm border bg-outer-glow'
               style={{
-                backgroundColor: 'var(--color-outer-glow)',
                 borderColor: 'var(--color-neutral-800)',
               }}
             >
@@ -304,16 +295,15 @@ const MiniTerminal = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    style={{ color: 'var(--color-text-secondary)' }}
+                    className='text-text-secondary'
                   >
                     <div className='mb-2'>
                       Welcome to the interactive terminal!
                     </div>
                     <div className='mb-2'>
-                      Try typing:{' '}
-                      <span style={{ color: 'var(--color-lagoon)' }}>help</span>
+                      Try typing: <span className='text-lagoon'>help</span>
                     </div>
-                    <div style={{ color: 'var(--color-neutral-500)' }}>
+                    <div className='text-neutral-500'>
                       (Hint: Use ⬆⬆⬇⬇⬅➡⬅➡BA for a surprise)
                     </div>
                   </motion.div>
@@ -334,50 +324,35 @@ const MiniTerminal = () => {
 
               {/* Blinking cursor at end */}
               {output.length > 0 && (
-                <BlinkingCursor
-                  className='w-2 h-4 mt-1'
-                  style={{ backgroundColor: 'var(--color-lagoon)' }}
-                />
+                <BlinkingCursor className='w-2 h-4 mt-1 bg-lagoon' />
               )}
             </div>
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className='flex items-center gap-2'>
-              <span
-                className='font-mono text-lg'
-                style={{ color: 'var(--color-lagoon)' }}
-              >
-                {'$'}
-              </span>
+              <span className='font-mono text-lg text-lagoon'>{'$'}</span>
               <input
                 ref={inputRef}
                 type='text'
                 value={command}
                 onChange={(e) => setCommand(e.target.value)}
-                className='flex-1 bg-outer-glow border-none outline-none font-mono text-sm'
-                style={{ color: 'var(--color-text-primary)' }}
+                className='flex-1 bg-outer-glow border-none outline-none font-mono text-sm text-text-primary'
                 placeholder='Type command...'
                 autoFocus
               />
-              <BlinkingCursor
-                className='w-2 h-5'
-                style={{ backgroundColor: 'var(--color-lagoon)' }}
-              />
+              <BlinkingCursor className='w-2 h-5 bg-lagoon' />
             </form>
           </div>
         </motion.div>
 
         {/* Command hint */}
-        <div
-          className='mt-4 text-center font-mono text-xs'
-          style={{ color: 'var(--color-text-secondary)' }}
-        >
-          Available: <span style={{ color: 'var(--color-dusk)' }}>help</span>,{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>whoami</span>,{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>chef</span>,{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>journalist</span>,{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>skills</span>,{' '}
-          <span style={{ color: 'var(--color-dusk)' }}>clear</span>
+        <div className='mt-4 text-center font-mono text-xs text-text-secondary'>
+          Available: <span className='text-dusk'>help</span>,{' '}
+          <span className='text-dusk'>whoami</span>,{' '}
+          <span className='text-dusk'>chef</span>,{' '}
+          <span className='text-dusk'>journalist</span>,{' '}
+          <span className='text-dusk'>skills</span>,{' '}
+          <span className='text-dusk'>clear</span>
         </div>
       </div>
     </section>

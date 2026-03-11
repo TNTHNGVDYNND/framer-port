@@ -24,18 +24,11 @@ const TerminalInput = ({
     <div className='mb-6'>
       {/* Label as terminal command */}
       <div className='flex items-center gap-2 mb-2 font-mono text-sm'>
-        <span style={{ color: 'var(--color-ok-500)' }}>➜</span>
-        <span
-          className='uppercase tracking-wider'
-          style={{ color: 'var(--color-text-primary)' }}
-        >
+        <span className='text-ok-500'>➜</span>
+        <span className='uppercase tracking-wider text-text-primary'>
           {label}:
         </span>
-        {required && (
-          <span className='text-xs' style={{ color: 'var(--color-coral)' }}>
-            [required]
-          </span>
-        )}
+        {required && <span className='text-xs text-coral'>[required]</span>}
       </div>
 
       {/* Input field container */}
@@ -50,10 +43,7 @@ const TerminalInput = ({
         }}
       >
         {/* Terminal prompt */}
-        <span
-          className='font-mono text-lg select-none mt-1'
-          style={{ color: 'var(--color-lagoon)' }}
-        >
+        <span className='font-mono text-lg select-none mt-1 text-lagoon'>
           {'>'}
         </span>
 
@@ -69,22 +59,14 @@ const TerminalInput = ({
           disabled={disabled}
           required={required}
           rows={multiline ? 5 : undefined}
-          className={`flex-1 bg-transparent border-none outline-none font-mono text-sm resize-none ${
+          className={`flex-1 bg-transparent border-none outline-none font-mono text-sm resize-none text-text-primary ${
             multiline ? 'min-h-25' : ''
           }`}
-          style={{
-            color: 'var(--color-text-primary)',
-          }}
           placeholder={`Enter ${label.toLowerCase()}...`}
         />
 
         {/* Blinking cursor */}
-        {isFocused && (
-          <BlinkingCursor
-            className='w-2 h-5 mt-1'
-            style={{ backgroundColor: 'var(--color-lagoon)' }}
-          />
-        )}
+        {isFocused && <BlinkingCursor className='w-2 h-5 mt-1 bg-lagoon' />}
       </div>
     </div>
   );
@@ -182,9 +164,8 @@ const TerminalContactForm = () => {
     <div className='w-full max-w-2xl mx-auto'>
       {/* Terminal Window Container */}
       <motion.div
-        className='terminal-window'
+        className='terminal-window bg-outer-glow'
         style={{
-          backgroundColor: 'var(--color-outer-glow)',
           borderColor: 'var(--color-neutral-700)',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         }}
@@ -195,9 +176,8 @@ const TerminalContactForm = () => {
       >
         {/* Terminal Header */}
         <div
-          className='terminal-window__header'
+          className='terminal-window__header bg-neutral-900'
           style={{
-            backgroundColor: 'var(--color-neutral-900)',
             borderColor: 'var(--color-neutral-800)',
           }}
         >
@@ -295,23 +275,12 @@ const TerminalContactForm = () => {
                 exit={{ opacity: 0, height: 0 }}
               >
                 <div className='flex justify-between text-xs font-mono mb-2'>
-                  <span style={{ color: 'var(--color-text-secondary)' }}>
-                    Progress
-                  </span>
-                  <span style={{ color: 'var(--color-lagoon)' }}>
-                    {progress}%
-                  </span>
+                  <span className='text-text-secondary'>Progress</span>
+                  <span className='text-lagoon'>{progress}%</span>
                 </div>
-                <div
-                  className='h-6 font-mono text-xs flex items-center rounded overflow-hidden'
-                  style={{ backgroundColor: 'var(--color-neutral-900)' }}
-                >
+                <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-neutral-900'>
                   <motion.div
-                    className='h-full flex items-center font-mono'
-                    style={{
-                      backgroundColor: 'var(--color-lagoon)',
-                      color: 'var(--color-neutral-950)',
-                    }}
+                    className='h-full flex items-center font-mono bg-lagoon text-neutral-950'
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3 }}
@@ -322,10 +291,7 @@ const TerminalContactForm = () => {
                         .join('')}
                     </span>
                   </motion.div>
-                  <span
-                    className='pl-2 font-mono'
-                    style={{ color: 'var(--color-neutral-600)' }}
-                  >
+                  <span className='pl-2 font-mono text-neutral-600'>
                     {Array(10 - Math.ceil(progress / 10))
                       .fill('░')
                       .join('')}
@@ -339,11 +305,7 @@ const TerminalContactForm = () => {
           <AnimatePresence>
             {terminalOutput.length > 0 && (
               <motion.div
-                className='mt-6 p-4 rounded font-mono text-xs border'
-                style={{
-                  backgroundColor: 'var(--color-neutral-900)',
-                  borderColor: 'var(--color-neutral-800)',
-                }}
+                className='mt-6 p-4 rounded font-mono text-xs border bg-neutral-900 border-neutral-800'
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -377,17 +339,10 @@ const TerminalContactForm = () => {
           </AnimatePresence>
 
           {/* Command hint */}
-          <div
-            className='mt-6 pt-4 border-t font-mono text-xs'
-            style={{
-              borderColor: 'var(--color-neutral-800)',
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            <span style={{ color: 'var(--color-lagoon)' }}>$</span> Type your
-            message above or try commands:{' '}
-            <span style={{ color: 'var(--color-dusk)' }}>help</span>,{' '}
-            <span style={{ color: 'var(--color-dusk)' }}>clear</span>
+          <div className='mt-6 pt-4 border-t font-mono text-xs border-neutral-800 text-text-secondary'>
+            <span className='text-lagoon'>$</span> Type your message above or
+            try commands: <span className='text-dusk'>help</span>,{' '}
+            <span className='text-dusk'>clear</span>
           </div>
         </div>
       </motion.div>
