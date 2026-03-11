@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { TerminalHeader } from './primitives';
 import { useAsyncOperation } from '../hooks';
@@ -67,6 +68,11 @@ const BlogCard = ({ post, index }) => {
       </div>
     </motion.a>
   );
+};
+
+BlogCard.propTypes = {
+  post: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const BlogSection = () => {
