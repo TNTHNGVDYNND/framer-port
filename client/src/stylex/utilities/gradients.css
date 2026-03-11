@@ -1,0 +1,143 @@
+/* ==============================================
+            Gradient Text Utilities
+   ============================================== */
+@utility text-brand-colors {
+  background-image: var(--color-text-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gradient-text-brand {
+  background-image: var(--color-text-grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gradient-text-accent {
+  background-image: var(--color-text-grad-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gradient-text-prime {
+  background-image: var(--color-prime-btn);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gradient-text-btn-x {
+  background-image: var(--color-btn-x);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==============================================
+            Colors methods for gradients:
+   ==============================================
+   1. Simple 2-color UI elements gradient: Directly use two color variables here in utility.
+   2. Standard Branded Gradients: Centralize only the stops in colors.css and apply here in utility.
+   3. Complex Surfaces (Glows/Glass): Centralize the entire gradient mix in colors.css and apply here in utility.
+    ==============================================
+*/
+/* 1. Directly using two color variables to create gradient here: Quickest to implement for small details.*/
+@utility bg-gradient-brand {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-gradient-accent-5-to),
+    var(--color-gradient-accent-3-from)
+  );
+}
+
+/* 2. The color is centralized in colors.css as stops only: Reuse the "Stops" in other properties (like text-shadows). */
+@utility bg-gradient-primary {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-grad-primary-stops)
+  );
+}
+
+/*3. The colors is centralized and mixed in the variable in colors.css. */
+/* Then Applied here in utility as background-image directly: Protects the complex math (percentages/shapes) from being broken. */
+@utility bg-gradient-primary-alt {
+  background-image: var(--color-grad-primary-alt);
+}
+
+/* ==============================================
+            Conic Gradient Background
+   ============================================== */
+@utility bg-conic-gradient {
+  background-image: var(--color-conic-grad);
+}
+
+/* ==============================================
+            Radial Glow Background
+            sample in - Auth - FormComponents
+   ============================================== */
+@utility bg-radial-glow {
+  background-image: var(--color-tr-radial-glow);
+}
+
+/* ===============================================
+            Gradient Accent Backgrounds sets
+   =============================================== */
+
+@utility bg-gradient-accent {
+  background-image: var(--color-grad-accent);
+}
+
+@utility bg-gradient-accent-1 {
+  background-image: var(--color-grad-accent-1);
+}
+@utility bg-gradient-accent-2 {
+  background-image: var(--color-grad-accent-2);
+}
+@utility bg-gradient-accent-3 {
+  background-image: var(--color-grad-accent-3);
+}
+@utility bg-gradient-accent-4 {
+  background-image: var(--color-grad-accent-4);
+}
+@utility bg-gradient-accent-5 {
+  background-image: var(--color-grad-accent-5);
+}
+@utility bg-gradient-accent-6 {
+  background-image: var(--color-grad-accent-6);
+}
+@utility bg-gradient-accent-7 {
+  background-image: var(--color-grad-accent-7);
+}
+@utility bg-gradient-accent-8 {
+  background-image: var(--color-grad-accent-8);
+}
+
+/* ======================================================================
+   3D-effect gradients for the planets - HeroBgCircles - MobileBgElements
+====================================================================== */
+@utility bg-planet-purple {
+  background-image: var(--color-purple-planet);
+}
+
+@utility bg-planet-prime {
+  background-image: var(--color-prime-planet);
+}
+
+@utility bg-planet-gold {
+  background-image: var(--color-gold-planet);
+}
+
+@utility bg-planet-green {
+  background-image: var(--color-green-planet);
+}
+
+@utility bg-planet-orange {
+  background-image: var(--color-orange-planet);
+}
+
+@utility bg-planet-white {
+  background-image: var(--color-white-planet);
+}

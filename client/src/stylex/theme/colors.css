@@ -1,0 +1,242 @@
+@theme {
+  /* ===============================================
+                Color Palette Definitions
+         =============================================== */
+  /* Brand Colors */
+  --color-brand-primary: var(--color-color-1, #ac6aff);
+  --color-brand-secondary: var(--color-color-5, #858dff);
+  --color-brand-tertiary: var(--color-color-35, #30be96);
+
+  /* Accent - Colors for Highlights and Emphasis */
+  --color-accent-1: var(--color-color-21, #f40076); /* Neon Cyber Pink*/
+  --color-accent-2: var(--color-color-33, #ff6b00); /* Vivid Orange */
+  --color-accent-3: var(--color-color-16, #ffd960); /* Bright Gold */
+  --color-accent-4: var(--color-color-41, #9acd32); /* Lime Green */
+  --color-accent-5: var(--color-color-28, #13e2da); /* Aqua Blue */
+  --color-accent-6: var(--color-color-32, #e233ff); /* Electric Purple */
+  --color-accent-7: var(--color-color-40, #dc2537); /* Crimson Red */
+  --color-accent-8: var(--color-color-45, #b53d7e); /* Dark Magenta */
+  /* Text Colors */
+  --color-primary: var(--color-color-17, #fffde1);
+  --color-secondary: var(--color-color-18, #d2fcdb);
+  --color-tertiary: var(--color-color-7, #d6ff7f);
+  --color-highlight: var(--color-color-8, #ffd6a5);
+  --color-highlight-glow: var(--color-md-glow, #2878b4cc);
+  /* Functional Feedback with States */
+  --color-error: var(--color-color-14, #ff0000);
+  --color-error-hover: oklch(
+    from var(--color-error) calc(l - 0.1) c h
+  ); /* Darken by 10% */
+
+  --color-success: var(--color-color-10, #06d001);
+  --color-success-hover: oklch(
+    from var(--color-success) calc(l + 0.05) c h
+  ); /* Lighten slightly */
+
+  --color-warning: var(--color-color-9, #ffff00);
+  --color-link: var(--color-color-28, #13e2da);
+
+  /* Text Roles */
+  --color-text-base: var(--color-n-1, #ffffff);
+  --color-text-muted: var(--color-n-3, #ada8c3);
+  --color-text-inverted: var(--color-n-9, #6c7275);
+
+  /* --- Component Tokens --- */
+  --color-input-bg: var(--color-bg-overlay-light, #fffde10d);
+  --color-input-bg-focus: var(--color-bg-overlay-medium, #08080826);
+  --color-input-bg-hover: var(--color-md-glow, #2878b4cc);
+  --color-input-text: var(--color-accent-3, #ffd960);
+
+  /* Interaction & Borders */
+  --color-border-subtle: var(--color-stroke-1, #26242c);
+  --color-border-default: var(--color-stroke-2, #18161e);
+  --color-border-glow: var(--color-stroke-3, #0000001c);
+  --color-border-nebula: var(--color-nebula-11, #ffc8761a);
+  --color-border-bright: var(--color-inner-glow, #b4dcffcc);
+  --color-ring-focus: var(--color-md-glow, #2878b4cc);
+
+  /* ===============================================
+            Gradient Background Definitions
+         =============================================== */
+  /* The variable holds just the color stops, to be used inside the gradient function in utilities */
+  /* bg-gradient-primary */
+  --color-grad-primary-stops:
+    var(--color-color-21, #f40076), var(--color-color-22, #df98fa);
+
+  /* The variable holds the entire instruction for background-image */
+  /* bg-gradient-primary-alt */
+  --color-grad-primary-alt: linear-gradient(
+    to bottom right,
+    var(--color-color-35, #30be96) 0%,
+    var(--color-color-31, #000ea1) 90%
+  );
+
+  /* bg-conic-gradient */
+  --color-conic-grad: conic-gradient(
+    from 225deg,
+    var(--color-color-19, #ffc876),
+    var(--color-color-20, #f40076),
+    var(--color-color-5, #858dff),
+    var(--color-color-6, #ff98e2),
+    var(--color-color-16, #ffd960)
+  );
+
+  /* bg-radial-glow */
+  --color-tr-radial-glow: radial-gradient(
+    circle at top right,
+    var(--color-inner-glow, #b4dcffcc) 1%,
+    var(--color-md-glow, #2878b4cc) 25%,
+    var(--color-outer-glow, #0a28504d) 55%,
+    var(--color-border-glow, #0000001c) 85%
+  );
+
+  /* ===============================================
+                Gradient Accent Backgrounds sets
+         =============================================== */
+  --color-grad-accent: linear-gradient(
+    55deg,
+    var(--color-color-35, #30be96) 10%,
+    var(--color-color-36, #a855f7) 80%
+  );
+
+  --color-grad-accent-1: linear-gradient(
+    to right,
+    var(--color-color-21, #f40076),
+    var(--color-color-22, #df98fa)
+  );
+
+  --color-grad-accent-2: linear-gradient(
+    to right,
+    var(--color-color-35, #30be96),
+    var(--color-color-32, #e233ff)
+  );
+
+  --color-grad-accent-3: linear-gradient(
+    to right,
+    var(--color-color-44, #00838d),
+    var(--color-color-43, #a69748)
+  );
+
+  --color-grad-accent-4: linear-gradient(
+    to right,
+    var(--color-color-6, #ff98e2) 0%,
+    var(--color-color-28, #13e2da) 50%,
+    var(--color-color-35, #30be96) 90%
+  );
+
+  --color-grad-accent-5: linear-gradient(
+    to right,
+    var(--color-color-29, #00b3cc),
+    var(--color-color-30, #0b63f6)
+  );
+
+  --color-grad-accent-6: linear-gradient(
+    to right,
+    var(--color-color-31, #000ea1) 15%,
+    var(--color-color-32, #e233ff) 90%
+  );
+
+  --color-grad-accent-7: linear-gradient(
+    to right,
+    var(--color-color-33, #ff6b00),
+    var(--color-color-34, #ed7b84)
+  );
+
+  --color-grad-accent-8: linear-gradient(
+    to right,
+    var(--color-color-47, #ffcac9),
+    var(--color-outer-glow, #0a28504d)
+  );
+
+  /* radial-gradient-light here */
+  --color-radial-gradient-light: radial-gradient(
+    circle at center,
+    var(--color-accent-3, #ffd960) 0%,
+    transparent 60%
+  );
+
+  /* ==============================================
+                    Button Gradient Backgrounds
+         ============================================== */
+  /* ButtonX Gradient */
+  --color-btn-x: linear-gradient(
+    to right,
+    var(--color-color-42, #870000) 0%,
+    var(--color-color-10, #06d001) 25%,
+    var(--color-color-9, #ffff00) 50%,
+    var(--color-color-36, #a855f7) 75%,
+    var(--color-color-14, #ff0000) 100%
+  );
+
+  /* PrimeBtn Gradient */
+  --color-prime-btn: linear-gradient(
+    15deg,
+    var(--color-color-16, #ffd960) 0%,
+    var(--color-color-43, #a69748) 25%,
+    var(--color-color-44, #00838d) 70%,
+    var(--color-color-28, #13e2da) 100%
+  );
+
+  /* ==============================================
+                Text Gradient Backgrounds
+     ============================================== */
+  /* text-brand-colors */
+  --color-text-brand: linear-gradient(
+    to right,
+    var(--color-color-30, #0b63f6),
+    var(--color-color-21, #f40076)
+  );
+
+  /* gradient-text-brand */
+  --color-text-grad-brand: linear-gradient(
+    to right,
+    var(--color-color-41, #9acd32) 0%,
+    var(--color-color-43, #a69748) 75%,
+    var(--color-color-16, #ffd960) 95%
+  );
+
+  /* gradient-text-accent */
+  --color-text-grad-accent: linear-gradient(
+    45deg,
+    var(--color-color-15, #a5f3fc) 15%,
+    var(--color-color-35, #30be96) 65%
+  );
+
+  /* ===========================================
+                Planet Color Definitions
+       =========================================== */
+  /* The "Dark Side" of the planet */
+  --color-planet-shadow: var(--color-n-deep, #1a1a32);
+
+  /* Planet color themes for HeroBgCircles & MobileBgElements */
+  --color-purple-planet: linear-gradient(
+    to bottom,
+    var(--color-color-5, #858dff),
+    var(--color-planet-shadow, #1a1a32)
+  );
+  --color-prime-planet: linear-gradient(
+    to bottom,
+    var(--color-color-17, #fffde1),
+    var(--color-planet-shadow, #1a1a32)
+  );
+  --color-gold-planet: linear-gradient(
+    to bottom,
+    var(--color-color-16, #ffd960),
+    var(--color-planet-shadow, #1a1a32)
+  );
+  --color-green-planet: linear-gradient(
+    to bottom,
+    var(--color-color-11, #859f3d),
+    var(--color-planet-shadow, #1a1a32)
+  );
+  --color-orange-planet: linear-gradient(
+    to bottom,
+    var(--color-color-23, #f06966),
+    var(--color-planet-shadow, #1a1a32)
+  );
+  --color-white-planet: linear-gradient(
+    to bottom,
+    var(--color-n-1, #ffffff),
+    var(--color-planet-shadow, #1a1a32)
+  );
+}

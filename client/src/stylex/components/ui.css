@@ -1,0 +1,273 @@
+@layer components {
+  .container {
+    @apply max-w-310 mx-auto px-5 md:px-10 lg:px-15 xl:max-w-350;
+  }
+
+  .music-player-card {
+    @apply flex items-center p-4 pr-6 bg-n-9/10 backdrop-blur-sm border border-n-8/10 rounded-2xl gap-5;
+  }
+
+  .planet {
+    @apply rounded-full transition-transform duration-500 ease-out;
+  }
+
+  /* .button {
+    @apply font-code text-xs tracking-wider;
+  } */
+
+  /* Staggered animation classes */
+  .stagger-item {
+    @apply opacity-0;
+  }
+  .stagger-item.is-visible {
+    animation: fadeScaleIn 0.5s ease-in-out forwards;
+    animation-delay: calc(var(--stagger-index, 0) * 150ms);
+  }
+
+  .char-reveal-item {
+    @apply opacity-0 inline-block;
+  }
+  .char-reveal-item.is-visible {
+    animation: fadeSlideUpIn 0.5s ease forwards;
+    animation-delay: calc(var(--stagger-index, 0) * 50ms);
+  }
+
+  /* Rotation utilities for ToolsBox circular layout */
+  .rotate-0 {
+    @apply rotate-0;
+  }
+  .rotate-45 {
+    @apply rotate-45;
+  }
+  .rotate-90 {
+    @apply rotate-90;
+  }
+  .rotate-135 {
+    @apply rotate-135;
+  }
+  .rotate-180 {
+    @apply rotate-180;
+  }
+  .rotate-225 {
+    @apply rotate-225;
+  }
+  .rotate-270 {
+    @apply rotate-270;
+  }
+  .rotate-315 {
+    @apply rotate-315;
+  }
+  .rotate-360 {
+    @apply rotate-360;
+  }
+  .-rotate-45 {
+    @apply -rotate-45;
+  }
+  .-rotate-90 {
+    @apply -rotate-90;
+  }
+  .-rotate-135 {
+    @apply -rotate-135;
+  }
+  .-rotate-180 {
+    @apply -rotate-180;
+  }
+  .-rotate-225 {
+    @apply -rotate-225;
+  }
+  .-rotate-270 {
+    @apply -rotate-270;
+  }
+  .-rotate-315 {
+    @apply -rotate-315;
+  }
+  .-rotate-360 {
+    @apply -rotate-360;
+  }
+
+  /* === Rotating Cube === */
+  .rotating-cube {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    animation: var(--animate-cube-rotate);
+    transition: box-shadow 1s ease-in-out;
+    z-index: 10;
+  }
+
+  .rotating-cube .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-shade-1); /* subtle border for each face */
+    box-shadow: 0 0 10px var(--color-inner-glow); /* subtle shadow for each face */
+    backface-visible: hidden; /*To prevent flickering or flipping issues */
+    transition:
+      transform 0.5s,
+      box-shadow 0.5s;
+    backdrop-filter: blur(10px);
+  }
+
+  .rotating-cube .front {
+    transform: translateZ(100px);
+    background-color: var(--color-shade-5);
+  }
+
+  .rotating-cube .back {
+    transform: translateZ(-100px) rotateY(180deg);
+    background-color: var(--color-shade-6);
+  }
+
+  .rotating-cube .left {
+    transform: translateX(-100px) rotateY(-90deg);
+    background-color: var(--color-shade-7);
+  }
+
+  .rotating-cube .right {
+    transform: translateX(100px) rotateY(-90deg);
+    background-color: var(--color-shade-8);
+  }
+
+  .rotating-cube .top {
+    transform: translateY(-100px) rotateX(-90deg);
+    background-color: var(--color-shade-9);
+  }
+
+  .rotating-cube .bottom {
+    transform: translateY(100px) rotateX(90deg);
+    background-color: var(--color-shade-10);
+  }
+}
+
+@utility tap-highlight-color {
+  -webkit-tap-highlight-color: var(--color-shade-1);
+}
+
+/* === Versatile Glass Morphism Utilities === */
+@utility glass {
+  @apply backdrop-blur-md;
+  background: color-mix(in srgb, var(--color-n-8) 10%, transparent);
+}
+
+@utility glass-heavy {
+  @apply backdrop-blur-[20px] backdrop-saturate-150;
+  background: color-mix(in srgb, var(--color-n-8) 90%, transparent);
+}
+
+@utility glass-light {
+  @apply backdrop-blur-md;
+  background: color-mix(in srgb, var(--color-n-1) 5%, transparent);
+}
+
+/* === PrimeBtn Utilities === */
+@layer utilities {
+  .prime-btn-solid {
+    /* background using existing CSS variable */
+    background-image: var(--color-prime-btn);
+    box-shadow: 0 10px 20px -5px var(--color-shade-2);
+  }
+
+  .prime-btn-solid:hover {
+    box-shadow: 0 15px 25px -5px var(--color-shade-5);
+  }
+
+  .prime-btn-grad-border {
+    position: relative;
+    background: transparent;
+    border: 2px solid transparent;
+  }
+
+  /* Use pseudo-element for the gradient border to avoid masking the text */
+  .prime-btn-grad-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px; /* Border width */
+    background: var(--color-grad-primary-alt);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none; /* Allows clicks to pass through */
+  }
+
+  .prime-btn-grad-border:hover::before {
+    opacity: 0.9;
+  }
+
+  .prime-btn-grad-border:hover {
+    background-color: var(--color-shade-2);
+  }
+
+  /* SVG-based gradient variant - uses SVG shapes with gradient strokes/fills */
+  .prime-btn-svg {
+    /* Transparent background - the SVG shapes provide the visual design */
+    position: relative;
+    background: transparent;
+    box-shadow: 0 10px 20px -5px var(--color-shade-2);
+    overflow: visible; /* Allow SVG edges to show */
+  }
+
+  .prime-btn-svg:hover {
+    box-shadow: 0 15px 25px -5px var(--color-shade-5);
+    transform: translateY(-1px);
+  }
+
+  /* Alternative SVG gradient variant with different gradient definition */
+  .prime-btn-svg-alt {
+    /* Transparent background - the SVG shapes provide the visual design */
+    position: relative;
+    background: transparent;
+    box-shadow: 0 10px 20px -5px var(--color-shade-2);
+    overflow: visible; /* Allow SVG edges to show */
+  }
+
+  .prime-btn-svg-alt:hover {
+    box-shadow: 0 15px 25px -5px var(--color-shade-5);
+    transform: translateY(-1px);
+  }
+
+  /* Decorative radial gradient used by components(GradientLight.jsx, color token lives in theme/colors.css) */
+  .gradient-light-glow {
+    background-image: var(--color-radial-gradient-light);
+    filter: blur(100px);
+    will-change: opacity;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    aspect-ratio: 1 / 1;
+    z-index: 10;
+  }
+}
+
+/* Hey future Me: This handles the core shape and animation of all decorative planets.
+     Combine this with a 'bg-planet-*' gradient utility. */
+
+@utility planet-base {
+  @apply rounded-full shadow-2xl transition-all duration-1000 ease-out;
+  /* Optional: adds a slight "glow" to the edge */
+  box-shadow: inset 0 1px 1px var(--color-shade-1);
+}
+
+/* Keyframes for cube rotation */
+@keyframes rotate {
+  0% {
+    transform: rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}

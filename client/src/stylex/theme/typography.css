@@ -1,0 +1,72 @@
+@theme {
+  /* Fonts */
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-code: 'Dune Rise', monospace, sans-serif;
+  --font-zodiak: 'Zodiak', sans-serif;
+  --font-grotesk: var(--font-grotesk), sans-serif;
+  --font-sora: 'Sora', sans-serif;
+
+  /* Spacing */
+  --spacing-0_25: 0.0625rem;
+  --spacing-7_5: 1.875rem;
+  --spacing-15: 3.75rem;
+  --spacing-rhythm-xs: 0.5rem;
+  --spacing-rhythm-sm: 1rem;
+  --spacing-rhythm-d: 1.5rem;
+  --spacing-rhythm-lg: 2rem;
+  --spacing-rhythm-xl: 3rem;
+
+  /* Opacity */
+  --opacity-15: 0.15;
+
+  /* Letter Spacing */
+  --tracking-tagline: 0.15em;
+
+  /* Z-Index */
+  --z-index-1: 1;
+  --z-index-2: 2;
+  --z-index-3: 3;
+  --z-index-4: 4;
+  --z-index-5: 5;
+  --z-index-6: 6;
+  --z-index-7: 7;
+  --z-index-8: 8;
+}
+
+@layer components {
+  .h1 {
+    @apply font-semibold text-[2.5rem] leading-13 md:text-[2.75rem] md:leading-15 lg:text-[3.25rem] lg:leading-16.25 xl:text-[3.75rem] xl:leading-18;
+  }
+  .h2 {
+    @apply text-[1.75rem] leading-10 md:text-[2rem] md:leading-10 lg:text-[2.5rem] lg:leading-14 xl:text-[3rem] xl:leading-tight;
+  }
+  .h3 {
+    @apply text-[2rem] leading-normal md:text-[2.5rem];
+  }
+  .h4 {
+    @apply text-[2rem] leading-normal;
+  }
+  .h5 {
+    @apply text-2xl leading-normal;
+  }
+  .h6 {
+    @apply font-semibold text-lg leading-8;
+  }
+  .body-1 {
+    @apply text-[0.875rem] leading-[1.5rem] md:text-[1rem] md:leading-7 lg:text-[1.25rem] lg:leading-8;
+  }
+  .body-2 {
+    @apply font-light text-[0.875rem] leading-6 md:text-base;
+  }
+  .caption {
+    @apply text-sm;
+  }
+  .tagline {
+    @apply font-grotesk font-light text-xs tracking-tagline uppercase;
+  }
+  .quote {
+    @apply font-code text-lg leading-normal;
+  }
+}
