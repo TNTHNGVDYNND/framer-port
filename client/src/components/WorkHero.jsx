@@ -149,7 +149,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
             <motion.button
               key={filter}
               onClick={() => onFilterChange(filter)}
-              className='px-4 py-2 rounded font-mono text-sm transition-all duration-300 border'
+              className='px-4 py-2 rounded font-mono text-sm transition-all duration-300 border focus-ring'
               style={{
                 backgroundColor:
                   activeFilter === filter

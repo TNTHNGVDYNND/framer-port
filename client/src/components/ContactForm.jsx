@@ -230,7 +230,7 @@ const TerminalContactForm = () => {
               <motion.button
                 type='submit'
                 disabled={status === 'submitting' || status === 'success'}
-                className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3'
+                className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 focus-ring'
                 style={{
                   backgroundColor:
                     status === 'success'

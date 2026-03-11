@@ -37,6 +37,9 @@ const Layout = () => {
             aria-hidden='true'
           />
 
+          {/* Film grain overlay */}
+          <div className='grain-overlay' aria-hidden='true' />
+
           {/* Navigation */}
           <header>
             <Navbar />

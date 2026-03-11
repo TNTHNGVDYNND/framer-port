@@ -336,7 +336,7 @@ const MiniTerminal = () => {
                 type='text'
                 value={command}
                 onChange={(e) => setCommand(e.target.value)}
-                className='flex-1 bg-outer-glow border-none outline-none font-mono text-sm text-text-primary'
+                className='flex-1 bg-outer-glow border-none outline-none font-mono text-sm text-text-primary focus-ring'
                 placeholder='Type command...'
                 autoFocus
               />

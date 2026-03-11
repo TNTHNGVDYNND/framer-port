@@ -223,6 +223,13 @@
   z-index: 25;
 }
 
+/* Accessibility: disable grain animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay {
+    display: none;
+  }
+}
+
 /* scanline overlay – subtle CRT effect */
 .scanlines {
   background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 50%);

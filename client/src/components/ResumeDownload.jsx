@@ -59,7 +59,7 @@ const ResumeDownload = () => {
           <motion.button
             onClick={handleDownload}
             disabled={isDownloading}
-            className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 mb-4'
+            className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 mb-4 focus-ring'
             style={{
               backgroundColor: isDownloading
                 ? 'var(--color-neutral-300)'
@@ -123,7 +123,7 @@ const ResumeDownload = () => {
           {/* QR Code Toggle */}
           <button
             onClick={toggleQR}
-            className='w-full py-3 px-6 rounded font-mono text-sm border transition-all duration-300 flex items-center justify-center gap-2 bg-transparent border-neutral-300 text-text-primary'
+            className='w-full py-3 px-6 rounded font-mono text-sm border transition-all duration-300 flex items-center justify-center gap-2 bg-transparent border-neutral-300 text-text-primary hover:bg-neutral-100 focus-ring'
           >
             <span>{showQR ? 'Hide QR Code' : 'Show QR Code'}</span>
             <span>{showQR ? '▲' : '▼'}</span>

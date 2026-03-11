@@ -73,6 +73,11 @@
   --color-md-glow: rgba(40, 120, 180, 0.8);
   --color-outer-glow: rgba(10, 40, 80, 0.3);
   --color-border-glow: rgba(0, 0, 0, 0.11);
+
+  /* Duration tokens */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
 }
 
 /* ========================================
