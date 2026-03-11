@@ -60,7 +60,7 @@ const About = () => {
               <span style={{ color: 'var(--color-text-secondary)' }}>
                 Languages:
               </span>
-              {['EN', 'DE', 'ภาษาไทย'].map((lang, i) => (
+              {['EN', 'DE', 'ภาษาไทย'].map((lang) => (
                 <span
                   key={lang}
                   className='px-2 py-1 rounded text-xs border'
@@ -87,11 +87,11 @@ const About = () => {
             <p>
               I grew up in Bangkok, Thailand, in a vibrant urban environment
               that shaped my curiosity for how technology can improve lives.
-              After completing an intensive program in full-stack web development
-              (MERN), my idea is drawn by analytical mindset, an obsession with
-              problem-solving, creating innovative solutions to complex problems,
-              and a background that spans a mix of creativity and hands-on
-              engineering.
+              After completing an intensive program in full-stack web
+              development (MERN), my idea is drawn by analytical mindset, an
+              obsession with problem-solving, creating innovative solutions to
+              complex problems, and a background that spans a mix of creativity
+              and hands-on engineering.
             </p>
             <p
               className='font-mono text-sm'
@@ -99,9 +99,9 @@ const About = () => {
             >
               <span style={{ color: 'var(--color-ok-400)' }}>➜</span> I am
               actively seeking an apprenticeship or full-time role where I can
-              contribute to a forward-thinking team. An opportunity to collaborate
-              among a team of motivated developers to build a meaningful product
-              is what I am looking for!
+              contribute to a forward-thinking team. An opportunity to
+              collaborate among a team of motivated developers to build a
+              meaningful product is what I am looking for!
             </p>
           </motion.div>
         </div>
@@ -153,7 +153,7 @@ const About = () => {
                 magnificent structures, developers use their building blocks—as
                 tools, and beyond—to design seamless user experiences and
                 powerful backends. Explore this space to see how these essential
-                pieces fit together to shape the web's future.
+                pieces fit together to shape the web&apos; future.
               </p>
             </div>
 
