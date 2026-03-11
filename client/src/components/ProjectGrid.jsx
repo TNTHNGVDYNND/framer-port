@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ProjectCard from './ProjectCard';
 import { projects } from '../constants';
 import Barcode from './Barcode';
-import { useInView, usePrefersReducedMotion } from '../hooks/useInView';
+import { useInView, usePrefersReducedMotion } from '../hooks';
 
 const ProjectGrid = ({ filter }) => {
   const [ref, isInView] = useInView({ threshold: 0.05, once: true });
@@ -91,11 +91,7 @@ const ProjectGrid = ({ filter }) => {
         >
           <AnimatePresence mode='wait'>
             {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project._id}
-                project={project}
-                index={index}
-              />
+              <ProjectCard key={project._id} project={project} index={index} />
             ))}
           </AnimatePresence>
         </motion.div>

@@ -50,10 +50,7 @@ const SkillBar = ({ skill, index }) => {
       transition={{ delay: index * 0.1 }}
     >
       <div className='flex justify-between items-center mb-1'>
-        <span
-          className='font-mono text-sm'
-          style={{ color: 'var(--color-text-primary)' }}
-        >
+        <span className='font-mono text-sm text-text-primary'>
           {skill.name}
         </span>
         <motion.span
@@ -69,10 +66,7 @@ const SkillBar = ({ skill, index }) => {
       </div>
 
       {/* Terminal-style bar container */}
-      <div
-        className='relative h-6 font-mono text-xs flex items-center'
-        style={{ backgroundColor: 'var(--color-neutral-100)' }}
-      >
+      <div className='relative h-6 font-mono text-xs flex items-center bg-neutral-100'>
         {/* Progress bar fill */}
         <motion.div
           className='absolute left-0 top-0 bottom-0 flex items-center'
@@ -101,8 +95,7 @@ const SkillBar = ({ skill, index }) => {
 
         {/* Empty space indicator */}
         <motion.span
-          className='absolute font-mono pl-2'
-          style={{ color: 'var(--color-neutral-300)' }}
+          className='absolute font-mono pl-2 text-neutral-300'
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -150,20 +143,13 @@ const SkillCategory = ({ category, index }) => {
         >
           {category.title}
         </h3>
-        <div
-          className='flex-1 h-px'
-          style={{ backgroundColor: 'var(--color-neutral-200)' }}
-        />
+        <div className='flex-1 h-px bg-neutral-200' />
       </div>
 
       {/* Skills list */}
       <div className='space-y-1'>
         {category.skills.map((skill, skillIndex) => (
-          <SkillBar
-            key={skill.name}
-            skill={skill}
-            index={skillIndex}
-          />
+          <SkillBar key={skill.name} skill={skill} index={skillIndex} />
         ))}
       </div>
     </motion.div>
@@ -196,45 +182,26 @@ const TerminalSkills = () => {
       <div className='max-w-5xl mx-auto'>
         {/* Terminal window header */}
         <motion.div
-          className='mb-8 border-b pb-4'
-          style={{ borderColor: 'var(--color-neutral-200)' }}
+          className='mb-8 border-b pb-4 border-neutral-200'
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <div className='flex items-center gap-2 mb-2'>
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
+            <div className='w-3 h-3 rounded-full bg-coral' />
+            <div className='w-3 h-3 rounded-full bg-dusk' />
+            <div className='w-3 h-3 rounded-full bg-lagoon' />
+            <span className='ml-4 text-sm font-mono text-text-secondary'>
               skills.txt
             </span>
           </div>
 
-          <h2
-            className='text-3xl md:text-4xl font-bold font-mono'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h2 className='text-3xl md:text-4xl font-bold font-mono text-heading'>
             <span className='text-neutral-500 mr-2'>$</span>./display_skills.sh
           </h2>
-          <p
-            className='mt-2 font-mono text-sm'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Loading
-            technical proficiencies...
+          <p className='mt-2 font-mono text-sm text-text-secondary'>
+            <span className='text-ok-400'>➜</span> Loading technical
+            proficiencies...
           </p>
         </motion.div>
 
@@ -251,33 +218,23 @@ const TerminalSkills = () => {
 
         {/* Overall proficiency */}
         <motion.div
-          className='mt-12 pt-8 border-t'
-          style={{ borderColor: 'var(--color-neutral-200)' }}
+          className='mt-12 pt-8 border-t border-neutral-200'
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
           <div className='flex items-center justify-between mb-2'>
-            <span
-              className='font-mono text-sm'
-              style={{ color: 'var(--color-text-primary)' }}
-            >
+            <span className='font-mono text-sm text-text-primary'>
               Overall Proficiency
             </span>
-            <span
-              className='font-mono text-sm font-bold'
-              style={{ color: 'var(--color-lagoon)' }}
-            >
+            <span className='font-mono text-sm font-bold text-lagoon'>
               {overallLevel}%
             </span>
           </div>
 
           {/* Overall progress bar */}
-          <div
-            className='relative h-8 font-mono text-xs flex items-center rounded'
-            style={{ backgroundColor: 'var(--color-neutral-100)' }}
-          >
+          <div className='relative h-8 font-mono text-xs flex items-center rounded bg-neutral-100'>
             <motion.div
               className='absolute left-0 top-0 bottom-0 flex items-center rounded'
               initial={{ width: 0 }}
@@ -296,14 +253,15 @@ const TerminalSkills = () => {
                 className='pl-3 text-white font-mono font-bold'
                 style={{ textShadow: '0 0 2px rgba(0,0,0,0.5)' }}
               >
-                {Array(Math.ceil(overallLevel / 10)).fill('█').join('')}
+                {Array(Math.ceil(overallLevel / 10))
+                  .fill('█')
+                  .join('')}
               </span>
             </motion.div>
-            <span
-              className='absolute font-mono pl-3'
-              style={{ color: 'var(--color-neutral-300)' }}
-            >
-              {Array(10 - Math.ceil(overallLevel / 10)).fill('░').join('')}
+            <span className='absolute font-mono pl-3 text-neutral-300'>
+              {Array(10 - Math.ceil(overallLevel / 10))
+                .fill('░')
+                .join('')}
             </span>
           </div>
 
@@ -315,10 +273,9 @@ const TerminalSkills = () => {
             viewport={{ once: true }}
             transition={{ delay: 1 }}
           >
-            <span style={{ color: 'var(--color-lagoon)' }}>$</span>
+            <span className='text-lagoon'>$</span>
             <motion.span
-              className='w-2 h-4'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
+              className='w-2 h-4 bg-lagoon'
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.8, repeat: Infinity }}
             />

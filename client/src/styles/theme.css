@@ -6,6 +6,18 @@
   --color-scheme: light;
 
   /* ========================================
+     WARM CREAM BASE SCALE (Light Theme)
+     ======================================== */
+  --color-base-100: oklch(98% 0.01 90); /* Warm white — lightest surface */
+  --color-base-200: oklch(96% 0.015 85); /* Warm cream — secondary surface */
+  --color-base-300: oklch(93% 0.02 80); /* Warm sand — card/panel bg */
+
+  /* Midnight Sun glow accent */
+  --color-accent-glow: oklch(
+    70% 0.15 40
+  ); /* Warm amber-orange for hero radial glow */
+
+  /* ========================================
      FONT DEFINITIONS
      ======================================== */
   --font-display: 'Playfair Display', serif;
@@ -20,7 +32,9 @@
   /* ========================================
      LIGHT THEME VARIABLES
      ======================================== */
-  --light-bg-body: var(--color-driftwood); /* #d2b690 */
+  --light-bg-body: var(
+    --color-base-100
+  ); /* warm white (was --color-driftwood #d2b690) */
   --light-bg-primary: oklch(27.9% 0.077 45.635); /* #461901 */
   --light-text-primary: oklch(0.428 0.0363 232.37); /* #3b5360 */
   --light-text-secondary: oklch(0.5154 0.0212 232.87); /* #5c6a72 */
@@ -44,7 +58,9 @@
   --color-secondary-accent: var(--light-secondary-accent);
   --color-highlight: var(--light-highlight);
   --color-border-color: var(--light-border-color);
-  --color-card-bg: var(--light-card-bg);
+  --color-card-bg: var(
+    --color-base-200
+  ); /* warm cream card bg (was --light-card-bg oklch 97.73% 0.0373) */
 
   /* Light theme background colors */
   --color-bg-body: var(--light-bg-body);
@@ -57,6 +73,11 @@
   --color-md-glow: rgba(40, 120, 180, 0.8);
   --color-outer-glow: rgba(10, 40, 80, 0.3);
   --color-border-glow: rgba(0, 0, 0, 0.11);
+
+  /* Duration tokens */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
 }
 
 /* ========================================

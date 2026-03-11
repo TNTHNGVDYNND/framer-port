@@ -104,4 +104,65 @@
   .prime-btn--svg {
     background: url(#prime-gradient);
   }
+
+  /* ========================================
+     TERMINAL WINDOW
+     ======================================== */
+
+  /* Outer container — rounded border shell */
+  .terminal-window {
+    @apply rounded-lg overflow-hidden border;
+    border-color: var(--color-border-color);
+  }
+
+  /* Header bar — traffic-light dots + filename label */
+  .terminal-window__header {
+    @apply px-4 py-3 flex items-center gap-2 border-b font-mono text-xs;
+    border-color: var(--color-border-color);
+  }
+
+  /* Body area */
+  .terminal-window__body {
+    @apply p-4 font-mono text-sm;
+  }
+
+  /* ========================================
+     TERMINAL STATUS ROW (traffic-light dots)
+     ======================================== */
+
+  .terminal-status {
+    @apply flex items-center gap-2;
+  }
+
+  .terminal-status__dot {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  /* ========================================
+     TERMINAL OUTPUT LINES
+     ======================================== */
+
+  .terminal-output-line {
+    @apply mb-1 whitespace-pre-wrap;
+    color: var(--color-text-secondary);
+  }
+
+  .terminal-output-line--command {
+    color: var(--color-lagoon);
+  }
+  .terminal-output-line--system {
+    color: var(--color-ok-400);
+  }
+  .terminal-output-line--success {
+    color: var(--color-ok-400);
+  }
+  .terminal-output-line--error {
+    color: var(--color-coral);
+  }
+  .terminal-output-line--info {
+    color: var(--color-dusk);
+  }
+  .terminal-output-line--easter {
+    color: var(--color-fuchsia-400);
+  }
 }

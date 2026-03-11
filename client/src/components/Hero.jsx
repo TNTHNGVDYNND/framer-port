@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  useSpring,
-  AnimatePresence,
-} from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import TerminalLoader from './TerminalLoader';
 import SvgText from './SvgText';
 import PrimeBtn from './buttons/PrimeBtn';
 import { MagneticButton } from './CustomCursor';
+import { use3DTilt } from '../hooks';
+import { TRANSITION_SLOW } from '../utils/motionPresets';
 
 const Hero = () => {
   const [loadingState, setLoadingState] = useState(0);
@@ -48,51 +44,27 @@ const Hero = () => {
 };
 
 const HeroContent = () => {
-  // 3D Tilt effect state
-  const [isHovered, setIsHovered] = useState(false);
-
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = (e) => {
-    if (prefersReducedMotion) return;
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-
-    // Calculate mouse position relative to center (-1 to 1)
-    mouseX.set((clientX - innerWidth / 2) / (innerWidth / 2));
-    mouseY.set((clientY - innerHeight / 2) / (innerHeight / 2));
-  };
-
-  const handleMouseLeave = () => {
-    if (prefersReducedMotion) return;
-    mouseX.set(0);
-    mouseY.set(0);
-    setIsHovered(false);
-  };
-
-  // Smooth spring animations for 3D tilt
-  const rotateX = useSpring(useTransform(mouseY, [-1, 1], [8, -8]), {
-    stiffness: 150,
-    damping: 20,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-1, 1], [-8, 8]), {
-    stiffness: 150,
-    damping: 20,
-  });
+  // 3D Tilt effect (window-relative coords, soft spring)
+  const { rotateX, rotateY, handleMouseMove, handleMouseLeave, isHovered } =
+    use3DTilt({
+      elementRelative: false,
+      mouseRange: [-1, 1],
+      stiffness: 150,
+      damping: 20,
+      disabled: prefersReducedMotion,
+    });
 
   return (
     <motion.div
       className='hero'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      transition={TRANSITION_SLOW}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
     >

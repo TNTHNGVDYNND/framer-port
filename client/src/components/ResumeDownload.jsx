@@ -1,33 +1,25 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import TerminalHeader from './primitives/TerminalHeader';
+import { useProgressSimulation } from '../hooks';
 
 const ResumeDownload = () => {
   const [isDownloading, setIsDownloading] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [showQR, setShowQR] = useState(false);
+
+  const { progress, start: startProgress } = useProgressSimulation(() => {
+    setIsDownloading(false);
+    const link = document.createElement('a');
+    link.href = '/resume-update.pdf';
+    link.download = 'Tuanthong_Vaidyanond_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
 
   const handleDownload = () => {
     setIsDownloading(true);
-    setProgress(0);
-
-    // Simulate download progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsDownloading(false);
-          // Trigger actual download
-          const link = document.createElement('a');
-          link.href = '/resume-update.pdf';
-          link.download = 'Tuanthong_Vaidyanond_Resume.pdf';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
+    startProgress();
   };
 
   const toggleQR = () => {
@@ -37,10 +29,8 @@ const ResumeDownload = () => {
   return (
     <div className='w-full max-w-2xl mx-auto'>
       <motion.div
-        className='rounded-lg overflow-hidden border'
+        className='terminal-window bg-card-bg'
         style={{
-          backgroundColor: 'var(--color-card-bg)',
-          borderColor: 'var(--color-border-color)',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         }}
         initial={{ opacity: 0, y: 30 }}
@@ -49,56 +39,27 @@ const ResumeDownload = () => {
         transition={{ duration: 0.6 }}
       >
         {/* Header */}
-        <div
-          className='px-4 py-3 flex items-center gap-2 border-b'
-          style={{
-            backgroundColor: 'var(--color-neutral-100)',
-            borderColor: 'var(--color-border-color)',
-          }}
-        >
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-coral)' }}
-          />
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-dusk)' }}
-          />
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-lagoon)' }}
-          />
-          <span
-            className='ml-4 text-xs font-mono'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            resume_download.exe
-          </span>
+        <div className='terminal-window__header bg-neutral-100'>
+          <TerminalHeader filename='resume_download.exe' />
         </div>
 
         {/* Body */}
         <div className='p-6 md:p-8'>
           {/* Title */}
-          <h3
-            className='text-2xl font-bold font-mono mb-4'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h3 className='text-2xl font-bold font-mono mb-4 text-heading'>
             <span className='text-neutral-500 mr-2'>$</span>get_resume.pdf
           </h3>
 
-          <p
-            className='font-mono text-sm mb-6'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Download my
-            latest resume or scan the QR code for mobile viewing.
+          <p className='font-mono text-sm mb-6 text-text-secondary'>
+            <span className='text-ok-400'>➜</span> Download my latest resume or
+            scan the QR code for mobile viewing.
           </p>
 
           {/* Download Button */}
           <motion.button
             onClick={handleDownload}
             disabled={isDownloading}
-            className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 mb-4'
+            className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 mb-4 focus-ring'
             style={{
               backgroundColor: isDownloading
                 ? 'var(--color-neutral-300)'
@@ -119,7 +80,7 @@ const ResumeDownload = () => {
                 </motion.span>
               </>
             ) : (
-              <>> DOWNLOAD RESUME</>
+              <span>{'> DOWNLOAD RESUME'}</span>
             )}
           </motion.button>
 
@@ -133,23 +94,12 @@ const ResumeDownload = () => {
                 exit={{ opacity: 0, height: 0 }}
               >
                 <div className='flex justify-between text-xs font-mono mb-2'>
-                  <span style={{ color: 'var(--color-text-secondary)' }}>
-                    Progress
-                  </span>
-                  <span style={{ color: 'var(--color-lagoon)' }}>
-                    {progress}%
-                  </span>
+                  <span className='text-text-secondary'>Progress</span>
+                  <span className='text-lagoon'>{progress}%</span>
                 </div>
-                <div
-                  className='h-6 font-mono text-xs flex items-center rounded overflow-hidden'
-                  style={{ backgroundColor: 'var(--color-neutral-100)' }}
-                >
+                <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-neutral-100'>
                   <motion.div
-                    className='h-full flex items-center font-mono'
-                    style={{
-                      backgroundColor: 'var(--color-lagoon)',
-                      color: 'var(--color-neutral-950)',
-                    }}
+                    className='h-full flex items-center font-mono bg-lagoon text-neutral-950'
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3 }}
@@ -160,10 +110,7 @@ const ResumeDownload = () => {
                         .join('')}
                     </span>
                   </motion.div>
-                  <span
-                    className='pl-2 font-mono'
-                    style={{ color: 'var(--color-neutral-400)' }}
-                  >
+                  <span className='pl-2 font-mono text-neutral-400'>
                     {Array(10 - Math.ceil(progress / 10))
                       .fill('░')
                       .join('')}
@@ -176,12 +123,7 @@ const ResumeDownload = () => {
           {/* QR Code Toggle */}
           <button
             onClick={toggleQR}
-            className='w-full py-3 px-6 rounded font-mono text-sm border transition-all duration-300 flex items-center justify-center gap-2'
-            style={{
-              backgroundColor: 'transparent',
-              borderColor: 'var(--color-neutral-300)',
-              color: 'var(--color-text-primary)',
-            }}
+            className='w-full py-3 px-6 rounded font-mono text-sm border transition-all duration-300 flex items-center justify-center gap-2 bg-transparent border-neutral-300 text-text-primary hover:bg-neutral-100 focus-ring'
           >
             <span>{showQR ? 'Hide QR Code' : 'Show QR Code'}</span>
             <span>{showQR ? '▲' : '▼'}</span>
@@ -191,20 +133,13 @@ const ResumeDownload = () => {
           <AnimatePresence>
             {showQR && (
               <motion.div
-                className='mt-6 p-6 rounded border text-center'
-                style={{
-                  backgroundColor: 'var(--color-neutral-50)',
-                  borderColor: 'var(--color-border-color)',
-                }}
+                className='mt-6 p-6 rounded border text-center bg-neutral-50 border-border-color'
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
               >
                 {/* ASCII QR Code Representation */}
-                <div
-                  className='font-mono text-xs leading-none mb-4 inline-block'
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
+                <div className='font-mono text-xs leading-none mb-4 inline-block text-text-primary'>
                   <pre className='text-center'>
                     {`█▀▀▀▀▀█ ▀▄▄▄▀ █▀▀▀▀▀█
 █ ███ █ ▀▄▄▄▀ █ ███ █
@@ -219,16 +154,10 @@ const ResumeDownload = () => {
 ▀▄▄▄▄▄▀ ▀▄▄▄▄▀ ▀▄▄▄▄▄▀`}
                   </pre>
                 </div>
-                <p
-                  className='font-mono text-xs'
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
+                <p className='font-mono text-xs text-text-secondary'>
                   Scan with your phone camera
                 </p>
-                <p
-                  className='font-mono text-xs mt-2'
-                  style={{ color: 'var(--color-neutral-400)' }}
-                >
+                <p className='font-mono text-xs mt-2 text-neutral-400'>
                   (Or click the download button above)
                 </p>
               </motion.div>
@@ -236,13 +165,7 @@ const ResumeDownload = () => {
           </AnimatePresence>
 
           {/* File info */}
-          <div
-            className='mt-6 pt-4 border-t font-mono text-xs flex justify-between'
-            style={{
-              borderColor: 'var(--color-border-color)',
-              color: 'var(--color-text-secondary)',
-            }}
-          >
+          <div className='mt-6 pt-4 border-t font-mono text-xs flex justify-between border-border-color text-text-secondary'>
             <span>File: resume-update.pdf</span>
             <span>Format: PDF</span>
           </div>

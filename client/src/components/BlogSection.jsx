@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import TerminalHeader from './primitives/TerminalHeader';
+import { useAsyncOperation } from '../hooks';
+import { FADE_UP, FADE_IN, TRANSITION_NORMAL } from '../utils/motionPresets';
+import { api } from '../services';
+
+const fetchBlogPosts = () => api.blog.getPosts('tvatdci', 5);
 
 const BlogCard = ({ post, index }) => {
   return (
     <motion.a
       href={post.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className='block rounded-lg overflow-hidden border transition-all duration-300 hover:scale-[1.02] group'
-      style={{
-        backgroundColor: 'var(--color-card-bg)',
-        borderColor: 'var(--color-border-color)',
-      }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      target='_blank'
+      rel='noopener noreferrer'
+      className='terminal-window bg-card-bg block transition-all duration-300 hover:scale-[1.02] group'
+      variants={FADE_UP}
+      initial='hidden'
+      whileInView='visible'
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
@@ -24,7 +26,7 @@ const BlogCard = ({ post, index }) => {
             src={post.cover_image}
             alt={post.title}
             className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
-            loading="lazy"
+            loading='lazy'
           />
         </div>
       )}
@@ -32,27 +34,21 @@ const BlogCard = ({ post, index }) => {
       {/* Content */}
       <div className='p-4'>
         {/* Title */}
-        <h3
-          className='font-mono font-bold text-lg mb-2 line-clamp-2'
-          style={{ color: 'var(--color-heading)' }}
-        >
+        <h3 className='font-mono font-bold text-lg mb-2 line-clamp-2 text-heading'>
           {post.title}
         </h3>
 
         {/* Description */}
-        <p
-          className='text-sm mb-3 line-clamp-2'
-          style={{ color: 'var(--color-text-secondary)' }}
-        >
+        <p className='text-sm mb-3 line-clamp-2 text-text-secondary'>
           {post.description}
         </p>
 
         {/* Meta info */}
         <div className='flex items-center justify-between text-xs font-mono'>
-          <span style={{ color: 'var(--color-text-secondary)' }}>
+          <span className='text-text-secondary'>
             {post.readable_publish_date}
           </span>
-          <span style={{ color: 'var(--color-lagoon)' }}>
+          <span className='text-lagoon'>
             {post.reading_time_minutes} min read
           </span>
         </div>
@@ -62,11 +58,7 @@ const BlogCard = ({ post, index }) => {
           {post.tag_list.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className='px-2 py-0.5 rounded text-xs font-mono'
-              style={{
-                backgroundColor: 'var(--color-neutral-100)',
-                color: 'var(--color-text-primary)',
-              }}
+              className='px-2 py-0.5 rounded text-xs font-mono bg-neutral-100 text-text-primary'
             >
               #{tag}
             </span>
@@ -78,28 +70,8 @@ const BlogCard = ({ post, index }) => {
 };
 
 const BlogSection = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(
-          'https://dev.to/api/articles?username=tvatdci&per_page=5'
-        );
-        if (!response.ok) throw new Error('Failed to fetch posts');
-        const data = await response.json();
-        setPosts(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+  const { loading, error, data } = useAsyncOperation(fetchBlogPosts, []);
+  const posts = data || [];
 
   if (loading) {
     return (
@@ -107,15 +79,15 @@ const BlogSection = () => {
         <div className='max-w-5xl mx-auto'>
           <motion.div
             className='text-center'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            variants={FADE_IN}
+            initial='hidden'
+            animate='visible'
           >
             <div className='flex justify-center gap-2 mb-4'>
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
-                  className='w-3 h-3 rounded-full'
-                  style={{ backgroundColor: 'var(--color-lagoon)' }}
+                  className='w-3 h-3 rounded-full bg-lagoon'
                   animate={{ y: [0, -10, 0] }}
                   transition={{
                     duration: 0.6,
@@ -125,10 +97,7 @@ const BlogSection = () => {
                 />
               ))}
             </div>
-            <span
-              className='font-mono text-sm'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
+            <span className='font-mono text-sm text-text-secondary'>
               Loading blog posts...
             </span>
           </motion.div>
@@ -141,10 +110,7 @@ const BlogSection = () => {
     return (
       <section className='py-24 px-4 md:px-8'>
         <div className='max-w-5xl mx-auto text-center'>
-          <p
-            className='font-mono text-sm'
-            style={{ color: 'var(--color-coral)' }}
-          >
+          <p className='font-mono text-sm text-coral'>
             [ERROR] Failed to load blog posts
           </p>
         </div>
@@ -163,40 +129,19 @@ const BlogSection = () => {
           viewport={{ once: true }}
         >
           {/* Terminal controls */}
-          <div className='flex items-center gap-2 mb-6'>
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              dev.to_blog.sh
-            </span>
-          </div>
+          <TerminalHeader
+            filename='dev.to_blog.sh'
+            className='mb-6'
+            labelClassName='text-sm'
+          />
 
-          <h2
-            className='text-3xl md:text-4xl font-bold font-mono mb-4'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h2 className='text-3xl md:text-4xl font-bold font-mono mb-4 text-heading'>
             <span className='text-neutral-500 mr-2'>$</span>./fetch_blog_posts
           </h2>
 
-          <p
-            className='font-mono text-sm max-w-2xl'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Thoughts,
-            tutorials, and insights from my development journey.
+          <p className='font-mono text-sm max-w-2xl text-text-secondary'>
+            <span className='text-ok-400'>➜</span> Thoughts, tutorials, and
+            insights from my development journey.
           </p>
         </motion.div>
 
@@ -210,17 +155,17 @@ const BlogSection = () => {
         {/* View all link */}
         <motion.div
           className='mt-12 text-center'
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          variants={FADE_IN}
+          initial='hidden'
+          whileInView='visible'
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ ...TRANSITION_NORMAL, delay: 0.3 }}
         >
           <a
             href='https://dev.to/tvatdci'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 font-mono text-sm transition-colors duration-300 hover:underline'
-            style={{ color: 'var(--color-lagoon)' }}
+            className='inline-flex items-center gap-2 font-mono text-sm transition-colors duration-300 hover:underline text-lagoon'
           >
             View all posts on dev.to →
           </a>

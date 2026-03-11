@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
+import TerminalHeader from './primitives/TerminalHeader';
 
 const careerPhases = [
   {
@@ -78,9 +79,8 @@ const TimelineNode = ({ phase, index }) => {
       <div className='relative'>
         {/* Year badge */}
         <div
-          className='inline-block px-3 py-1 rounded-full text-xs font-mono mb-3 border'
+          className='inline-block px-3 py-1 rounded-full text-xs font-mono mb-3 border bg-neutral-100'
           style={{
-            backgroundColor: 'var(--color-neutral-100)',
             borderColor: phase.color,
             color: phase.color,
           }}
@@ -89,36 +89,24 @@ const TimelineNode = ({ phase, index }) => {
         </div>
 
         {/* Role title */}
-        <h3
-          className='text-2xl md:text-3xl font-bold mb-1 font-mono'
-          style={{ color: 'var(--color-heading)' }}
-        >
+        <h3 className='text-2xl md:text-3xl font-bold mb-1 font-mono text-heading'>
           <span className='text-neutral-500 mr-2'>$</span>
           {phase.role}
         </h3>
 
         {/* Company & Location */}
         <div className='flex flex-wrap items-center gap-3 mb-4 text-sm'>
-          <span
-            className='font-mono font-semibold'
-            style={{ color: 'var(--color-text-primary)' }}
-          >
+          <span className='font-mono font-semibold text-text-primary'>
             {phase.company}
           </span>
           <span className='text-neutral-400'>|</span>
-          <span
-            className='font-mono text-xs'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
+          <span className='font-mono text-xs text-text-secondary'>
             {phase.location}
           </span>
         </div>
 
         {/* Description */}
-        <p
-          className='text-base leading-relaxed mb-4 max-w-2xl'
-          style={{ color: 'var(--color-text-secondary)' }}
-        >
+        <p className='text-base leading-relaxed mb-4 max-w-2xl text-text-secondary'>
           {phase.description}
         </p>
 
@@ -127,12 +115,7 @@ const TimelineNode = ({ phase, index }) => {
           {phase.skills.map((skill, i) => (
             <span
               key={i}
-              className='px-2 py-1 rounded text-xs font-mono border'
-              style={{
-                backgroundColor: 'var(--color-neutral-100)',
-                borderColor: 'var(--color-neutral-200)',
-                color: 'var(--color-text-primary)',
-              }}
+              className='px-2 py-1 rounded text-xs font-mono border bg-neutral-100 border-neutral-200 text-text-primary'
             >
               {skill}
             </span>
@@ -177,45 +160,18 @@ const CareerTimeline = () => {
       <div className='max-w-5xl mx-auto relative'>
         {/* Terminal window header */}
         <motion.div
-          className='mb-12 border-b pb-4'
-          style={{ borderColor: 'var(--color-neutral-200)' }}
+          className='mb-12 border-b pb-4 border-neutral-200'
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className='flex items-center gap-2 mb-2'>
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              career_history.sh
-            </span>
-          </div>
+          <TerminalHeader filename='career_history.sh' className='mb-2' />
 
-          <h2
-            className='text-3xl md:text-4xl font-bold font-mono'
-            style={{ color: 'var(--color-heading)' }}
-          >
+          <h2 className='text-3xl md:text-4xl font-bold font-mono text-heading'>
             <span className='text-neutral-500 mr-2'>$</span>cat career.txt
           </h2>
-          <p
-            className='mt-2 font-mono text-sm'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Loading
-            career trajectory...
+          <p className='mt-2 font-mono text-sm text-text-secondary'>
+            <span className='text-ok-400'>➜</span> Loading career trajectory...
           </p>
         </motion.div>
 
@@ -223,8 +179,7 @@ const CareerTimeline = () => {
         <div className='relative'>
           {/* SVG Connecting line - desktop */}
           <svg
-            className='absolute left-4 md:left-8 top-0 bottom-0 w-4 hidden md:block pointer-events-none'
-            style={{ height: '100%' }}
+            className='absolute left-4 md:left-8 top-0 bottom-0 w-4 hidden md:block pointer-events-none h-full'
             preserveAspectRatio='none'
           >
             <motion.line
@@ -243,10 +198,7 @@ const CareerTimeline = () => {
           </svg>
 
           {/* Mobile connecting line */}
-          <div
-            className='absolute left-4 top-8 bottom-8 w-0.5 md:hidden pointer-events-none'
-            style={{ backgroundColor: 'var(--color-neutral-200)' }}
-          />
+          <div className='absolute left-4 top-8 bottom-8 w-0.5 md:hidden pointer-events-none bg-neutral-200' />
 
           {/* Timeline nodes */}
           <div className='space-y-16 md:space-y-24 relative z-10'>
@@ -263,16 +215,9 @@ const CareerTimeline = () => {
             viewport={{ once: true }}
             transition={{ delay: 1.5 }}
           >
-            <div
-              className='w-3 h-3 rounded-full animate-pulse'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <span
-              className='font-mono text-sm'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Continue
-              to next chapter...
+            <div className='w-3 h-3 rounded-full animate-pulse bg-coral' />
+            <span className='font-mono text-sm text-text-secondary'>
+              <span className='text-ok-400'>➜</span> Continue to next chapter...
             </span>
           </motion.div>
         </div>
