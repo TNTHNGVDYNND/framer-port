@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import TerminalHeader from './primitives/TerminalHeader';
+import { TerminalHeader } from './primitives';
 import { useProgressSimulation } from '../hooks';
 
 const ResumeDownload = () => {

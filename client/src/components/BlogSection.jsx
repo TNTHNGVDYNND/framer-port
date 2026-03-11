@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import TerminalHeader from './primitives/TerminalHeader';
+import { TerminalHeader } from './primitives';
 import { useAsyncOperation } from '../hooks';
 import { FADE_UP, FADE_IN, TRANSITION_NORMAL } from '../utils/motionPresets';
 import { api } from '../services';

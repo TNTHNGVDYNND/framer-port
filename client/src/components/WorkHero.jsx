@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import TerminalHeader from './primitives/TerminalHeader';
-import { TRANSITION_NORMAL, TRANSITION_SLOW } from '../utils/motionPresets';
+import { TerminalHeader } from './primitives';
+import {
+  TRANSITION_NORMAL,
+  TRANSITION_SLOW,
+  SECTION_ENTRY,
+  FADE_DOWN,
+  FADE_IN,
+} from '../utils/motionPresets';
 
 // Animated counter hook
 const useCountUp = (end, duration = 2000, start = 0) => {
@@ -94,8 +100,8 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         {/* Terminal Header */}
         <motion.div
           className='mb-12'
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={FADE_DOWN} initial="hidden"
+          animate="visible"
           transition={{ duration: 0.6 }}
         >
           {/* Terminal controls */}
@@ -118,11 +124,11 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
           </p>
         </motion.div>
 
-        {/* Stats Section */}
         <motion.div
           className='grid grid-cols-3 gap-8 mb-16 p-8 rounded-lg border bg-neutral-50 border-neutral-200'
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={SECTION_ENTRY} initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {stats.map((stat) => (
@@ -138,8 +144,8 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         {/* Filter Tabs */}
         <motion.div
           className='flex flex-wrap gap-2 mb-12'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          variants={FADE_IN} initial="hidden"
+          animate="visible"
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <span className='font-mono text-sm mr-4 self-center text-text-secondary'>
@@ -175,8 +181,8 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         {/* Filter hint */}
         <motion.div
           className='font-mono text-xs mb-8 text-text-secondary'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          variants={FADE_IN} initial="hidden"
+          animate="visible"
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <span className='text-ok-400'>➜</span> Currently viewing:{' '}

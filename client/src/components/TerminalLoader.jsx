@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Barcode from './Barcode';
-import TerminalHeader from './primitives/TerminalHeader';
-import BlinkingCursor from './primitives/BlinkingCursor';
+
+import { TerminalHeader, BlinkingCursor } from './primitives';
 import { useTerminalOutput } from '../hooks';
 
 const bootStrings = [
