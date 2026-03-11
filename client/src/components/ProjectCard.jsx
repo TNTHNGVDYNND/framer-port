@@ -7,6 +7,7 @@ import {
   SPRING_SNAPPY,
   TRANSITION_NORMAL,
   TRANSITION_FAST,
+  PROJECT_CARD_ENTRY,
 } from '../utils/motionPresets';
 
 const ProjectCard = ({ project, index }) => {
@@ -30,32 +31,12 @@ const ProjectCard = ({ project, index }) => {
   // Parallax translation for the card image (separate from card rotation)
   const imageParallaxY = useTransform(mouseY, [-0.5, 0.5], [-8, 8]);
 
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      rotateX: prefersReducedMotion ? 0 : -15,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-        delay: index * 0.1,
-      },
-    },
-  };
-
   return (
     <motion.div
       ref={ref}
       className='relative group cursor-pointer'
-      variants={cardVariants}
+      variants={PROJECT_CARD_ENTRY}
+      custom={index}
       initial='hidden'
       animate={isInView ? 'visible' : 'hidden'}
       onMouseMove={handleMouseMove}
