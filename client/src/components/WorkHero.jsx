@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import TerminalHeader from './TerminalHeader';
+import { TRANSITION_NORMAL, TRANSITION_SLOW } from '../utils/motionPresets';
 
 // Animated counter hook
 const useCountUp = (end, duration = 2000, start = 0) => {
@@ -32,7 +34,7 @@ const useCountUp = (end, duration = 2000, start = 0) => {
     const animate = (currentTime) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
-      
+
       // Easing function (easeOutExpo)
       const easeOutExpo = 1 - Math.pow(2, -10 * progress);
       setCount(Math.floor(easeOutExpo * (end - start) + start));
@@ -103,26 +105,11 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
           transition={{ duration: 0.6 }}
         >
           {/* Terminal controls */}
-          <div className='flex items-center gap-2 mb-6'>
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              portfolio_work.exe
-            </span>
-          </div>
+          <TerminalHeader
+            filename='portfolio_work.exe'
+            className='mb-6'
+            labelClassName='text-sm'
+          />
 
           {/* Main heading */}
           <h1

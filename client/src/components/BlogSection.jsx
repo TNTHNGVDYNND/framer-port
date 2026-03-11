@@ -1,19 +1,27 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import TerminalHeader from './TerminalHeader';
+import { useAsyncOperation } from '../hooks/useAsyncOperation';
+import { FADE_UP, FADE_IN, TRANSITION_NORMAL } from '../utils/motionPresets';
+
+const fetchBlogPosts = () =>
+  fetch('https://dev.to/api/articles?username=tvatdci&per_page=5').then((r) => {
+    if (!r.ok) throw new Error('Failed to fetch posts');
+    return r.json();
+  });
 
 const BlogCard = ({ post, index }) => {
   return (
     <motion.a
       href={post.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className='block rounded-lg overflow-hidden border transition-all duration-300 hover:scale-[1.02] group'
+      target='_blank'
+      rel='noopener noreferrer'
+      className='terminal-window block transition-all duration-300 hover:scale-[1.02] group'
       style={{
         backgroundColor: 'var(--color-card-bg)',
-        borderColor: 'var(--color-border-color)',
       }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={FADE_UP}
+      initial='hidden'
+      whileInView='visible'
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
@@ -24,7 +32,7 @@ const BlogCard = ({ post, index }) => {
             src={post.cover_image}
             alt={post.title}
             className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
-            loading="lazy"
+            loading='lazy'
           />
         </div>
       )}
@@ -78,28 +86,8 @@ const BlogCard = ({ post, index }) => {
 };
 
 const BlogSection = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(
-          'https://dev.to/api/articles?username=tvatdci&per_page=5'
-        );
-        if (!response.ok) throw new Error('Failed to fetch posts');
-        const data = await response.json();
-        setPosts(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+  const { loading, error, data } = useAsyncOperation(fetchBlogPosts, []);
+  const posts = data || [];
 
   if (loading) {
     return (
@@ -107,8 +95,9 @@ const BlogSection = () => {
         <div className='max-w-5xl mx-auto'>
           <motion.div
             className='text-center'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            variants={FADE_IN}
+            initial='hidden'
+            animate='visible'
           >
             <div className='flex justify-center gap-2 mb-4'>
               {[0, 1, 2].map((i) => (
@@ -163,26 +152,11 @@ const BlogSection = () => {
           viewport={{ once: true }}
         >
           {/* Terminal controls */}
-          <div className='flex items-center gap-2 mb-6'>
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              dev.to_blog.sh
-            </span>
-          </div>
+          <TerminalHeader
+            filename='dev.to_blog.sh'
+            className='mb-6'
+            labelClassName='text-sm'
+          />
 
           <h2
             className='text-3xl md:text-4xl font-bold font-mono mb-4'
@@ -210,10 +184,11 @@ const BlogSection = () => {
         {/* View all link */}
         <motion.div
           className='mt-12 text-center'
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          variants={FADE_IN}
+          initial='hidden'
+          whileInView='visible'
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ ...TRANSITION_NORMAL, delay: 0.3 }}
         >
           <a
             href='https://dev.to/tvatdci'

@@ -1,33 +1,25 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import TerminalHeader from './TerminalHeader';
+import { useProgressSimulation } from '../hooks/useProgressSimulation';
 
 const ResumeDownload = () => {
   const [isDownloading, setIsDownloading] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [showQR, setShowQR] = useState(false);
+
+  const { progress, start: startProgress } = useProgressSimulation(() => {
+    setIsDownloading(false);
+    const link = document.createElement('a');
+    link.href = '/resume-update.pdf';
+    link.download = 'Tuanthong_Vaidyanond_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
 
   const handleDownload = () => {
     setIsDownloading(true);
-    setProgress(0);
-
-    // Simulate download progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsDownloading(false);
-          // Trigger actual download
-          const link = document.createElement('a');
-          link.href = '/resume-update.pdf';
-          link.download = 'Tuanthong_Vaidyanond_Resume.pdf';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
+    startProgress();
   };
 
   const toggleQR = () => {
@@ -37,7 +29,7 @@ const ResumeDownload = () => {
   return (
     <div className='w-full max-w-2xl mx-auto'>
       <motion.div
-        className='rounded-lg overflow-hidden border'
+        className='terminal-window'
         style={{
           backgroundColor: 'var(--color-card-bg)',
           borderColor: 'var(--color-border-color)',
@@ -50,30 +42,13 @@ const ResumeDownload = () => {
       >
         {/* Header */}
         <div
-          className='px-4 py-3 flex items-center gap-2 border-b'
+          className='terminal-window__header'
           style={{
             backgroundColor: 'var(--color-neutral-100)',
             borderColor: 'var(--color-border-color)',
           }}
         >
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-coral)' }}
-          />
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-dusk)' }}
-          />
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-lagoon)' }}
-          />
-          <span
-            className='ml-4 text-xs font-mono'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            resume_download.exe
-          </span>
+          <TerminalHeader filename='resume_download.exe' />
         </div>
 
         {/* Body */}
@@ -119,7 +94,7 @@ const ResumeDownload = () => {
                 </motion.span>
               </>
             ) : (
-              <>> DOWNLOAD RESUME</>
+              <span>{'> DOWNLOAD RESUME'}</span>
             )}
           </motion.button>
 

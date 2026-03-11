@@ -2,52 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Barcode from './Barcode';
-
-/**
- * custom hook to manage terminal commands
- */
-function useTerminalCommands(initialOutput = []) {
-  const [command, setCommand] = useState('');
-  const [output, setOutput] = useState(initialOutput);
-
-  const handleCommand = (e) => {
-    if (e.key !== 'Enter') return;
-    const cmd = command.trim().toLowerCase();
-    if (!cmd) return;
-
-    setOutput((prev) => [...prev, `$ ${cmd}`]);
-
-    switch (cmd) {
-      case 'status':
-        setOutput((prev) => [
-          ...prev,
-          `Browser: ${navigator.userAgent.split(' ')[0]}`,
-          `Resolution: ${window.innerWidth}x${window.innerHeight}`,
-          `Time: ${new Date().toLocaleTimeString()}`,
-        ]);
-        break;
-      case 'help':
-        setOutput((prev) => [
-          ...prev,
-          'Available commands: status, help, clear',
-        ]);
-        break;
-      case 'clear':
-        setOutput([]);
-        break;
-      default:
-        setOutput((prev) => [
-          ...prev,
-          'Command not recognized. Type "help" for options.',
-        ]);
-    }
-    setCommand('');
-  };
-
-  const clear = () => setOutput([]);
-
-  return { command, setCommand, output, handleCommand, clear };
-}
+import TerminalHeader from './TerminalHeader';
+import BlinkingCursor from './BlinkingCursor';
+import { useTerminalOutput } from '../hooks/useTerminalOutput';
 
 const bootStrings = [
   'System initialization started...',
@@ -78,9 +35,38 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
   const [progress, setProgress] = useState(0);
   const [phaseIndex, setPhaseIndex] = useState(0);
 
-  const { command, setCommand, output, handleCommand } = useTerminalCommands(
-    []
-  );
+  const [command, setCommand] = useState('');
+  const { output, addLine, addLines, clear: clearOutput } = useTerminalOutput();
+
+  const handleCommand = (e) => {
+    if (e.key !== 'Enter') return;
+    const cmd = command.trim().toLowerCase();
+    if (!cmd) return;
+
+    addLine(`$ ${cmd}`, 'command');
+
+    switch (cmd) {
+      case 'status':
+        addLines(
+          [
+            `Browser: ${navigator.userAgent.split(' ')[0]}`,
+            `Resolution: ${window.innerWidth}x${window.innerHeight}`,
+            `Time: ${new Date().toLocaleTimeString()}`,
+          ],
+          'info'
+        );
+        break;
+      case 'help':
+        addLine('Available commands: status, help, clear', 'info');
+        break;
+      case 'clear':
+        clearOutput();
+        break;
+      default:
+        addLine('Command not recognized. Type "help" for options.', 'error');
+    }
+    setCommand('');
+  };
 
   // simulate loading progress
   useEffect(() => {
@@ -131,15 +117,8 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
           <div className='scanlines pointer-events-none absolute inset-0'></div>
 
           {/* terminal header */}
-          <div className='px-4 py-2 flex items-center gap-2 bg-neutral-100 border-b border-dusk'>
-            <div className='flex gap-1.5'>
-              <div className='w-3 h-3 rounded-full bg-coral'></div>
-              <div className='w-3 h-3 rounded-full bg-dusk'></div>
-              <div className='w-3 h-3 rounded-full bg-lagoon'></div>
-            </div>
-            <span className='ml-4 text-xs text-text-secondary'>
-              system_boot.exe
-            </span>
+          <div className='px-4 py-2 bg-neutral-100 border-b border-dusk'>
+            <TerminalHeader filename='system_boot.exe' />
           </div>
 
           {/* terminal body */}
@@ -161,8 +140,8 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
             {/* command output log */}
             {output.length > 0 && (
               <div className='space-y-1 text-xs text-neutral-500 font-mono'>
-                {output.map((ln, idx) => (
-                  <div key={idx}>{ln}</div>
+                {output.map((ln) => (
+                  <div key={ln.id}>{ln.text}</div>
                 ))}
               </div>
             )}
@@ -179,11 +158,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
                 placeholder='try "status" or "help"'
                 autoFocus
               />
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.6, repeat: Infinity }}
-                className='w-2 h-4 bg-lagoon'
-              />
+              <BlinkingCursor duration={0.6} />
             </div>
 
             {/* loading phases */}

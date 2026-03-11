@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import TerminalHeader from './TerminalHeader';
+import BlinkingCursor from './BlinkingCursor';
+import { useTerminalOutput } from '../hooks/useTerminalOutput';
 
 // Konami code sequence - defined outside component to avoid dependency issues
 const konamiCode = [
@@ -17,7 +20,7 @@ const konamiCode = [
 
 const MiniTerminal = () => {
   const [command, setCommand] = useState('');
-  const [output, setOutput] = useState([]);
+  const { output, addLine, addLines, clear: clearOutput } = useTerminalOutput();
   const [konamiIndex, setKonamiIndex] = useState(0);
   const inputRef = useRef(null);
   const terminalRef = useRef(null);
@@ -117,7 +120,7 @@ const MiniTerminal = () => {
     }),
 
     clear: () => {
-      setOutput([]);
+      clearOutput();
       return null;
     },
 
@@ -166,32 +169,20 @@ const MiniTerminal = () => {
     if (!trimmedCmd) return;
 
     // Add command to output
-    setOutput((prev) => [
-      ...prev,
-      { type: 'command', text: `$ ${trimmedCmd}` },
-    ]);
+    addLine(`$ ${trimmedCmd}`, 'command');
 
     // Execute command
     if (commands[trimmedCmd]) {
       const result = commands[trimmedCmd]();
       if (result) {
         setTimeout(() => {
-          setOutput((prev) => [
-            ...prev,
-            ...result.lines.map((line) => ({ type: result.type, text: line })),
-          ]);
+          addLines(result.lines, result.type);
         }, 300);
       }
     } else {
       setTimeout(() => {
-        setOutput((prev) => [
-          ...prev,
-          {
-            type: 'error',
-            text: `Command not found: ${trimmedCmd}`,
-          },
-          { type: 'system', text: 'Type "help" for available commands' },
-        ]);
+        addLine(`Command not found: ${trimmedCmd}`, 'error');
+        addLine('Type "help" for available commands', 'system');
       }, 300);
     }
   };
@@ -215,22 +206,13 @@ const MiniTerminal = () => {
 
         // If completed Konami code
         if (newIndex === konamiCode.length) {
-          setOutput((prev) => [
-            ...prev,
-            { type: 'command', text: '$ ⬆⬆⬇⬇⬅➡⬅➡BA' },
-            { type: 'easter', text: '🎮 KONAMI CODE ACTIVATED! 🎮' },
-            { type: 'easter', text: 'You found the secret!' },
-            { type: 'easter', text: 'Developer mode: ENABLED' },
-            { type: 'easter', text: '' },
-            {
-              type: 'easter',
-              text: 'Fun fact: You just gained 30 extra lives! 🎲',
-            },
-            {
-              type: 'easter',
-              text: '(In the game of life, keep pushing forward)',
-            },
-          ]);
+          addLine('$ ⬆⬆⬇⬇⬅➡⬅➡BA', 'command');
+          addLine('🎮 KONAMI CODE ACTIVATED! 🎮', 'easter');
+          addLine('You found the secret!', 'easter');
+          addLine('Developer mode: ENABLED', 'easter');
+          addLine('', 'easter');
+          addLine('Fun fact: You just gained 30 extra lives! 🎲', 'easter');
+          addLine('(In the game of life, keep pushing forward)', 'easter');
           setKonamiIndex(0);
         }
       } else {
@@ -241,7 +223,7 @@ const MiniTerminal = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [konamiIndex]);
+  }, [konamiIndex, addLine]);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -256,25 +238,6 @@ const MiniTerminal = () => {
       inputRef.current.focus();
     }
   }, []);
-
-  const getLineColor = (type) => {
-    switch (type) {
-      case 'command':
-        return 'var(--color-lagoon)';
-      case 'system':
-        return 'var(--color-ok-400)';
-      case 'success':
-        return 'var(--color-ok-400)';
-      case 'error':
-        return 'var(--color-coral)';
-      case 'info':
-        return 'var(--color-dusk)';
-      case 'easter':
-        return 'var(--color-fuchsia-400)';
-      default:
-        return 'var(--color-text-secondary)';
-    }
-  };
 
   return (
     <section className='py-24 px-4 md:px-8'>
@@ -303,7 +266,7 @@ const MiniTerminal = () => {
 
         {/* Terminal Window */}
         <motion.div
-          className='rounded-lg overflow-hidden border'
+          className='terminal-window'
           style={{
             backgroundColor: 'var(--color-border-glow)',
             borderColor: 'var(--color-neutral-500)',
@@ -316,30 +279,13 @@ const MiniTerminal = () => {
         >
           {/* Terminal Header */}
           <div
-            className='px-4 py-2 flex items-center gap-2 border-b'
+            className='terminal-window__header py-2'
             style={{
               backgroundColor: 'var(--color-ok-400)',
               borderColor: 'var(--color-neutral-800)',
             }}
           >
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-xs font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              easter_eggs.sh
-            </span>
+            <TerminalHeader filename='easter_eggs.sh' />
           </div>
 
           {/* Terminal Body */}
@@ -374,15 +320,11 @@ const MiniTerminal = () => {
                 ) : (
                   output.map((line, index) => (
                     <motion.div
-                      key={index}
+                      key={line.id}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      style={{
-                        color: getLineColor(line.type),
-                        marginBottom: '2px',
-                        whiteSpace: 'pre-wrap',
-                      }}
+                      className={`terminal-output-line terminal-output-line--${line.type}`}
                     >
                       {line.text}
                     </motion.div>
@@ -392,11 +334,9 @@ const MiniTerminal = () => {
 
               {/* Blinking cursor at end */}
               {output.length > 0 && (
-                <motion.span
-                  className='inline-block w-2 h-4 mt-1'
+                <BlinkingCursor
+                  className='w-2 h-4 mt-1'
                   style={{ backgroundColor: 'var(--color-lagoon)' }}
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
                 />
               )}
             </div>
@@ -419,11 +359,9 @@ const MiniTerminal = () => {
                 placeholder='Type command...'
                 autoFocus
               />
-              <motion.span
+              <BlinkingCursor
                 className='w-2 h-5'
                 style={{ backgroundColor: 'var(--color-lagoon)' }}
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
               />
             </form>
           </div>

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
+import TerminalHeader from './TerminalHeader';
+import BlinkingCursor from './BlinkingCursor';
+import { useTerminalOutput } from '../hooks/useTerminalOutput';
+import { useProgressSimulation } from '../hooks/useProgressSimulation';
 
 const TerminalInput = ({
   label,
@@ -76,11 +80,9 @@ const TerminalInput = ({
 
         {/* Blinking cursor */}
         {isFocused && (
-          <motion.span
+          <BlinkingCursor
             className='w-2 h-5 mt-1'
             style={{ backgroundColor: 'var(--color-lagoon)' }}
-            animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.8, repeat: Infinity }}
           />
         )}
       </div>
@@ -106,51 +108,43 @@ const TerminalContactForm = () => {
     message: '',
   });
   const [status, setStatus] = useState('idle'); // 'idle', 'submitting', 'success', 'error'
-  const [progress, setProgress] = useState(0);
-  const [terminalOutput, setTerminalOutput] = useState([]);
+
+  const {
+    output: terminalOutput,
+    addLine,
+    clear: clearTerminal,
+  } = useTerminalOutput();
+  const {
+    progress,
+    start: startProgress,
+    stop: stopProgress,
+    complete: completeProgress,
+    reset: resetProgress,
+  } = useProgressSimulation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const addOutput = (line, type = 'info') => {
-    setTerminalOutput((prev) => [
-      ...prev,
-      { text: line, type, id: Date.now() },
-    ]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    setProgress(0);
-    setTerminalOutput([]);
+    clearTerminal();
+    startProgress();
 
     // Simulate terminal output
-    addOutput('$ ./send_message.sh', 'command');
-    addOutput('[SYSTEM] Initializing transmission protocol...', 'system');
-
-    // Simulate progress
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
+    addLine('$ ./send_message.sh', 'command');
+    addLine('[SYSTEM] Initializing transmission protocol...', 'system');
 
     try {
       // For now, simulate API call since backend isn't ready
       await new Promise((resolve) => setTimeout(resolve, 2500));
 
-      clearInterval(progressInterval);
-      setProgress(100);
+      completeProgress();
 
-      addOutput('[PROCESSING] Validating data integrity...', 'system');
-      addOutput('[SUCCESS] Message transmitted successfully!', 'success');
-      addOutput(
+      addLine('[PROCESSING] Validating data integrity...', 'system');
+      addLine('[SUCCESS] Message transmitted successfully!', 'success');
+      addLine(
         `
       [INFO] Transmission Details:
       - Sender: ${formData.name}
@@ -167,35 +161,20 @@ const TerminalContactForm = () => {
       // Clear success message after 8 seconds
       setTimeout(() => {
         setStatus('idle');
-        setTerminalOutput([]);
-        setProgress(0);
+        clearTerminal();
+        resetProgress();
       }, 8000);
     } catch (error) {
-      clearInterval(progressInterval);
-      addOutput('[ERROR] Transmission failed!', 'error');
-      addOutput(`[DETAILS] ${error.message}`, 'error');
+      stopProgress();
+      addLine('[ERROR] Transmission failed!', 'error');
+      addLine(`[DETAILS] ${error.message}`, 'error');
       setStatus('error');
 
       setTimeout(() => {
         setStatus('idle');
-        setTerminalOutput([]);
-        setProgress(0);
+        clearTerminal();
+        resetProgress();
       }, 5000);
-    }
-  };
-
-  const getOutputColor = (type) => {
-    switch (type) {
-      case 'command':
-        return 'var(--color-lagoon)';
-      case 'system':
-        return 'var(--color-ok-400)';
-      case 'success':
-        return 'var(--color-ok-400)';
-      case 'error':
-        return 'var(--color-coral)';
-      default:
-        return 'var(--color-text-secondary)';
     }
   };
 
@@ -203,7 +182,7 @@ const TerminalContactForm = () => {
     <div className='w-full max-w-2xl mx-auto'>
       {/* Terminal Window Container */}
       <motion.div
-        className='rounded-lg overflow-hidden border'
+        className='terminal-window'
         style={{
           backgroundColor: 'var(--color-outer-glow)',
           borderColor: 'var(--color-neutral-700)',
@@ -216,35 +195,21 @@ const TerminalContactForm = () => {
       >
         {/* Terminal Header */}
         <div
-          className='px-4 py-3 flex items-center gap-2 border-b'
+          className='terminal-window__header'
           style={{
             backgroundColor: 'var(--color-neutral-900)',
             borderColor: 'var(--color-neutral-800)',
           }}
         >
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-coral)' }}
+          <TerminalHeader
+            filename={`contact_protocol.exe — ${formData.name || 'guest'}@${
+              status === 'submitting'
+                ? 'transmitting'
+                : status === 'success'
+                  ? 'delivered'
+                  : 'localhost'
+            }`}
           />
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-dusk)' }}
-          />
-          <div
-            className='w-3 h-3 rounded-full'
-            style={{ backgroundColor: 'var(--color-lagoon)' }}
-          />
-          <span
-            className='ml-4 text-xs font-mono'
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            contact_protocol.exe — {formData.name || 'guest'}@
-            {status === 'submitting'
-              ? 'transmitting'
-              : status === 'success'
-                ? 'delivered'
-                : 'localhost'}
-          </span>
         </div>
 
         {/* Terminal Body */}
@@ -389,16 +354,15 @@ const TerminalContactForm = () => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    style={{ color: getOutputColor(line.type) }}
-                    className='mb-1 whitespace-pre-wrap'
+                    className={`terminal-output-line terminal-output-line--${line.type}`}
                   >
                     {line.text}
                   </motion.div>
                 ))}
 
                 {/* Blinking cursor after last line */}
-                <motion.span
-                  className='inline-block w-2 h-4 mt-1'
+                <BlinkingCursor
+                  className='w-2 h-4 mt-1'
                   style={{
                     backgroundColor:
                       status === 'success'
@@ -407,8 +371,6 @@ const TerminalContactForm = () => {
                           ? 'var(--color-coral)'
                           : 'var(--color-lagoon)',
                   }}
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
                 />
               </motion.div>
             )}

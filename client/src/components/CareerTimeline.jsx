@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
+import TerminalHeader from './TerminalHeader';
 
 const careerPhases = [
   {
@@ -183,26 +184,7 @@ const CareerTimeline = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className='flex items-center gap-2 mb-2'>
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
-            />
-            <div
-              className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
-            />
-            <span
-              className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              career_history.sh
-            </span>
-          </div>
+          <TerminalHeader filename='career_history.sh' className='mb-2' />
 
           <h2
             className='text-3xl md:text-4xl font-bold font-mono'
