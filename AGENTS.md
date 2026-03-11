@@ -7,6 +7,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ## Architecture
 
 **Monorepo Structure:**
+
 - **Frontend:** React 19 SPA with Vite build system (Port 5173) → `/client`
 - **Backend:** Express.js REST API with MongoDB (Port 3001) → `/server`
 - **Documentation:** Comprehensive planning docs in `/documents`
@@ -15,6 +16,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ## Tech Stack
 
 ### Core Technologies
+
 - **Framework:** React 19.2.0 with modern hooks and patterns
 - **Build Tool:** Vite 7.2.4 (ESM only)
 - **Styling:** Tailwind CSS v4.1.17 with `@theme` directive
@@ -24,6 +26,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 - **Backend:** Express.js 5.1.0 + Mongoose 9.0.0
 
 ### Additional Libraries
+
 - `clsx` - Conditional class names
 - `react-barcodes` - Decorative barcode elements (deprecated v1.2.0)
 - `react-parallax-tilt` - 3D tilt effects
@@ -32,6 +35,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ## Design Language & Aesthetic
 
 **Theme:** Terminal-inspired, "Midnight Sun" aesthetic
+
 - **Color System:** OKLCH colors with Tailwind v4 `@theme` directive
 - **Typography:** Character-by-character SVG animations, monospace fonts (JetBrains Mono, Zodiak, Dune Rise)
 - **Elements:** Barcodes, terminal outputs, 3D tilt effects, custom cursors
@@ -40,18 +44,21 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ## Key Features Implemented
 
 ### Phase 1: Foundation ✅
+
 - `TerminalLoader.jsx` - Terminal-style loading with ASCII art and "HALLO" welcome
 - `SvgText.jsx` - Letter-by-letter SVG text animations with stagger effects
 - `Barcode.jsx` - Decorative barcode elements using react-barcodes
 - Theme system with OKLCH color palette via Tailwind v4 @theme directive
 
 ### Phase 2: Navigation ✅
+
 - `Navbar.jsx` - Vertical left sidebar with backdrop blur, vertical text writing mode
 - `CustomScrollbar.jsx` - Range input scrollbar with useTransform (not .get())
 - `AudioToggle.jsx` - Global audio state with Web Audio API integration
 - Active link indicator uses Framer Motion layoutId for smooth sliding animation
 
 ### Phase 3: Hero & Content ✅
+
 - `Hero.jsx` - 3D mouse tilt effects using useSpring, "Midnight Sun" composition
 - `ProjectCard.jsx` - 3D hover parallax with react-parallax-tilt
 - `ProjectGrid.jsx` - Staggered animations with Intersection Observer
@@ -59,12 +66,14 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 - `Curtain.jsx` - Page transition overlay effect
 
 ### Phase 4: Advanced Interactions ✅
+
 - `CustomCursor.jsx` - 3 trail elements, magnetic hover, click ripple
 - `ProjectCard.jsx` - Video preview support (future enhancement)
 - ❌ WebGL background - DEPRECATED (CSS-only approach chosen for performance)
 - ❌ Hand gestures - SKIPPED (MediaPipe too heavy)
 
 ### Phase 5: Polish 📝 PARTIAL
+
 - `HelpButton.jsx` - Help modal for user instructions
 - Theme toggle with sun/moon icons
 - Performance: Intersection Observer for scroll animations
@@ -75,6 +84,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ### Phase A-C: About Page Overhaul ✅
 
 **Phase A - Career Timeline Component**
+
 - `CareerTimeline.jsx` - Vertical 3-phase career path with SVG path animation
 - Scroll-triggered animations using `useScroll` and `useTransform`
 - Career phases: Field Journalist (2005-2015) → Chef/Restaurateur (2015-2023) → Full-Stack Developer (2024-Present)
@@ -82,12 +92,14 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 - Responsive connecting lines and skills tags
 
 **Phase B - Terminal Skills Component**
+
 - `TerminalSkills.jsx` - Animated progress bars with terminal block characters
 - Three skill categories: Frontend (React 85%, JS 90%, Tailwind 80%, Framer Motion 75%), Backend (Node 75%, Express 75%, MongoDB 60%), Tools (Git 85%, Docker 50%, Figma 65%)
 - Color-coded proficiency levels (lagoon=80%+, dusk=60-79%, neutral=<60%)
 - Blinking cursor animation and terminal window header
 
 **Phase C - Contact Form Refactor**
+
 - Complete terminal aesthetic transformation of `ContactForm.jsx`
 - `TerminalInput` sub-component with command labels and glow effects
 - Real-time terminal output with typewriter effect
@@ -97,6 +109,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ### Phase D: Mini Terminal Easter Eggs ✅
 
 **`MiniTerminal.jsx`** - Interactive terminal with hidden commands
+
 - Available commands: whoami, chef, journalist, skills, clear, help
 - **Hidden Easter Eggs:**
   - `matrix` - Matrix reference ("Wake up, Neo...")
@@ -110,6 +123,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ### Phase E: Work Page Hero Enhancement ✅
 
 **`WorkHero.jsx`** - Terminal-styled hero with stats
+
 - `./showcase_work` terminal header
 - **Animated Stat Counters:** 20+ Projects, 5+ Technologies, 365 Days of Code
 - `useCountUp` custom hook with easeOutExpo easing
@@ -120,6 +134,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ### Phase F: Performance and Accessibility Optimizations ✅
 
 **Performance Improvements:**
+
 - **React.lazy code splitting** - Bundle reduced from 530KB to 408KB
 - Lazy loaded pages: Home, Work, About, Contact, ThemeCard, NotFound
 - `PageLoader` component with animated dots
@@ -127,6 +142,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 - Intersection Observer for scroll-triggered animations
 
 **Accessibility Enhancements:**
+
 - Skip-to-content link for keyboard navigation
 - ARIA labels in Navbar
 - `prefers-reduced-motion` support (0.01ms animations)
@@ -137,18 +153,21 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ### Phase G: Additional Features ✅
 
 **`BlogSection.jsx`** - dev.to integration
+
 - Fetches 5 latest posts from `dev.to/api/articles?username=tvatdci`
 - Cover images with lazy loading and hover scale effects
 - Tags, reading time, and terminal-styled cards
 - Loading and error states
 
 **`ResumeDownload.jsx`** - Resume download component
+
 - Animated download progress bar with block characters
 - QR code ASCII art for mobile viewing
 - Simulated download progress (10% increments)
 - Downloads `/resume-update.pdf`
 
 **`NotFound.jsx`** - Terminal-themed 404 page
+
 - Glitch effect animation on "404" text
 - ASCII art "ERROR" banner
 - Easter egg: type "home" to navigate
@@ -158,9 +177,10 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ## Implementation Rules
 
 ### Critical Patterns
+
 1. **No Inline Styles:** Use Tailwind classes or CSS variables in `theme.css`
 2. **Accessibility:** Always include `aria-labels`, respect `prefers-reduced-motion`
-3. **Performance:** 
+3. **Performance:**
    - Throttling for mouse-tracking hooks
    - Use `Intersection Observer` for scroll animations
    - Use `useTransform` not `.get()` for MotionValues
@@ -169,6 +189,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 ### Style Architecture (Hybrid Approach)
 
 **File Structure:**
+
 ```
 client/src/styles/
 ├── index.css        # Entry point + imports + base styles
@@ -179,6 +200,7 @@ client/src/styles/
 ```
 
 **Design Tokens Pattern:**
+
 - **colors.css:** Primitive tokens - raw color values that NEVER change
 - **theme.css:** Semantic tokens - contextual meanings that CAN change per theme
 - **Light theme:** CSS custom properties for semantic colors
@@ -187,6 +209,7 @@ client/src/styles/
 ### Animation Patterns
 
 **Framer Motion Best Practices:**
+
 - Use `variants` with `staggerChildren` for coordinated animations
 - Use `useSpring` for physics-based motion (mouse tracking)
 - Use `useTransform` for reactive MotionValue mapping
@@ -194,6 +217,7 @@ client/src/styles/
 - Avoid `.get()` during render - causes React warnings
 
 **3D Effects:**
+
 - `perspective: 1000` on containers
 - `transformStyle: preserve-3d` for depth
 - `useSpring` + `useTransform` for smooth mouse tilt
@@ -202,11 +226,13 @@ client/src/styles/
 ## Important Technical Details
 
 ### Lenis Smooth Scroll
+
 - Lenis exposed to `window.lenis` in `main.jsx` for global access
 - Used by `useScrollVelocity` hook for scroll-based effects
 - RAF loop in main.jsx drives the animation frame
 
 ### Custom Scrollbar Implementation
+
 ```jsx
 // WRONG - causes React warnings
 value={scrollYProgress.get() * 100}
@@ -216,12 +242,14 @@ const thumbY = useTransform(scrollYProgress, [0, 1], ['0%', 'calc(100vh - 48px)'
 ```
 
 ### Background Effects
+
 - CSS-only approach (grain, blur, radial gradients) over WebGL
 - Global background layer in Layout.jsx (warm amber radial gradient)
 - Body background set to `transparent` in index.css for proper layering
 - WebGL components preserved in `/WebGL` folder but not imported
 
 ### Barcode Component
+
 - Uses deprecated `react-barcodes` v1.2.0 (still functional)
 - Alternative: `next-barcode` for future migration
 - Decorative element only (no functional purpose)
@@ -229,6 +257,7 @@ const thumbY = useTransform(scrollYProgress, [0, 1], ['0%', 'calc(100vh - 48px)'
 ## Scripts
 
 ### Client
+
 ```bash
 cd client
 npm run dev        # Vite dev server (localhost:5173)
@@ -240,6 +269,7 @@ npm run tailwind:build  # Manual Tailwind build
 ```
 
 ### Server
+
 ```bash
 cd server
 npm start          # Production server
@@ -249,11 +279,13 @@ npm run dev        # Development with nodemon
 ## Development Workflow
 
 ### Before Making Changes
+
 1. Read relevant documentation in `/documents`
 2. Check current branch and status
 3. Understand the component structure and existing patterns
 
 ### When Implementing Features
+
 1. Follow existing component patterns in `/client/src/components`
 2. Use semantic Tailwind classes, no inline styles
 3. Add accessibility attributes (aria-labels, focus states)
@@ -261,6 +293,7 @@ npm run dev        # Development with nodemon
 5. Test on multiple screen sizes
 
 ### Testing Checklist
+
 - [ ] Verify smooth scroll with Lenis
 - [ ] Check CustomScrollbar thumb syncs with scroll position
 - [ ] Test both light and dark themes
@@ -271,16 +304,19 @@ npm run dev        # Development with nodemon
 ## Known Issues & Decisions
 
 ### WebGL Deprecation
+
 - **Decision:** CSS-only background instead of WebGL
 - **Reason:** WebGL context lost errors, performance impact, bundle size (1,380kB vs 492kB)
 - **Result:** Better stability and performance
 
 ### react-barcodes Deprecation
+
 - **Status:** Package deprecated, moved to `next-barcode`
 - **Current:** Still using v1.2.0 (functional)
 - **Future:** Consider migration to `next-barcode`
 
 ### Language Support
+
 - **Decision:** English only
 - **Removed:** LanguageContext.jsx and LangToggle.jsx
 - **Reason:** User preference for simplicity
@@ -288,6 +324,7 @@ npm run dev        # Development with nodemon
 ## Project Context Files
 
 **Key Documentation:**
+
 - `UI-FE-V1.md` - Complete UI/UX refactoring blueprint with all implementation details
 - `project-instructions.md` - Technical persona and implementation rules
 - `styles-refactor-hybrid.md` - CSS architecture and design tokens pattern
@@ -297,6 +334,7 @@ npm run dev        # Development with nodemon
 ## Next Steps (From UI-FE-V1.md)
 
 ### Ready for Implementation
+
 1. **Color System Refinement** - Light theme improvements, warm white/cream base
 2. **Hero "Midnight Sun" Glow** - Add back animated orange/gold radial gradient
 3. **Glass/Condensation Effects** - Subtle SVG filter for wet glass look (optional)
@@ -304,6 +342,7 @@ npm run dev        # Development with nodemon
 5. **Animation Polish** - Subtle parallax on global background (20-30px max)
 
 ### Future Enhancements
+
 - Video previews in project cards
 - Performance optimization (lazy loading, will-change)
 - Additional accessibility testing

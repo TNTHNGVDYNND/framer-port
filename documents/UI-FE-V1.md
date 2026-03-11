@@ -723,7 +723,7 @@ export default AudioToggle;
 
 ### Phase 3: Hero & Content Enhancement
 
-#### 7. Hero Section Refactor
+#### 7. Hero Section Refactor - SVG Animation
 
 **SVG Letter Paths Animation:**
 
@@ -1621,6 +1621,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
 **Component:** `/client/src/components/CareerTimeline.jsx` (299 lines)
 
 **Key Features:**
+
 - Vertical 3-phase career path visualization
 - Scroll-triggered SVG path animation using `useScroll` and `useTransform`
 - Staggered animations for timeline nodes (0.4s delay between phases)
@@ -1640,7 +1641,7 @@ Based on testing and the reference image analysis, here are improvement suggesti
 // CareerTimeline.jsx - Scroll-triggered SVG path
 const { scrollYProgress } = useScroll({
   target: containerRef,
-  offset: ["start end", "end start"]
+  offset: ["start end", "end start"],
 });
 
 const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -1651,7 +1652,7 @@ const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
   strokeWidth="2"
   fill="none"
   style={{ pathLength }}
-/>
+/>;
 ```
 
 ---
@@ -1661,6 +1662,7 @@ const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 **Component:** `/client/src/components/TerminalSkills.jsx` (332 lines)
 
 **Key Features:**
+
 - Animated progress bars with terminal-style block characters (█ and ░)
 - Three skill categories:
   - **Frontend** (lagoon color): React 85%, JavaScript 90%, Tailwind CSS 80%, Framer Motion 75%
@@ -1681,7 +1683,7 @@ const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 // TerminalSkills.jsx - Block character progress bars
 const renderProgressBar = (percentage) => {
   const filled = Math.round((percentage / 100) * 20);
-  return '█'.repeat(filled) + '░'.repeat(20 - filled);
+  return "█".repeat(filled) + "░".repeat(20 - filled);
 };
 
 <motion.div
@@ -1690,7 +1692,7 @@ const renderProgressBar = (percentage) => {
   transition={{ delay: index * 0.1 }}
 >
   <span className="text-lagoon">{renderProgressBar(85)}</span>
-</motion.div>
+</motion.div>;
 ```
 
 ---
@@ -1700,6 +1702,7 @@ const renderProgressBar = (percentage) => {
 **Modified Component:** `/client/src/components/ContactForm.jsx` (436 lines)
 
 **Key Features:**
+
 - Complete terminal aesthetic refactor
 - `TerminalInput` sub-component with:
   - Terminal-style command labels (➜ NAME:)
@@ -1726,6 +1729,7 @@ const renderProgressBar = (percentage) => {
 **Component:** `/client/src/components/MiniTerminal.jsx` (449 lines)
 
 **Key Features:**
+
 - Interactive terminal with command system
 - Available commands:
   - `whoami` - User profile display with ASCII art table
@@ -1736,16 +1740,19 @@ const renderProgressBar = (percentage) => {
   - `help` - Command list
 
 **Hidden Easter Egg Commands:**
+
 - `matrix` - Matrix reference ("Wake up, Neo...")
 - `sudo` - Permission denied error with humor
 - `coffee` - Coffee status bar (80% fuel level)
 
 **Konami Code Detection:**
+
 - Sequence: ⬆⬆⬇⬇⬅➡⬅➡BA
 - Global keydown listener
 - Secret mode activation message with 30 extra lives reference
 
 **Additional Features:**
+
 - Auto-scrolling terminal output
 - Command history with color-coded output types (command, system, success, error, info, easter)
 - Blinking cursor animations
@@ -1761,6 +1768,7 @@ const renderProgressBar = (percentage) => {
 **New Component:** `/client/src/components/WorkHero.jsx` (231 lines)
 
 **Modified Files:**
+
 - `/client/src/components/ProjectCard.jsx`
 - `/client/src/components/ProjectGrid.jsx`
 - `/client/src/pages/Work.jsx`
@@ -1769,10 +1777,12 @@ const renderProgressBar = (percentage) => {
 **Key Features:**
 
 **Terminal-Styled Hero Header:**
+
 - `./showcase_work` terminal header
 - Terminal window aesthetic with traffic lights
 
 **Animated Stat Counters:**
+
 - 20+ Projects Built
 - 5+ Technologies
 - 365 Days of Code
@@ -1786,46 +1796,50 @@ const renderProgressBar = (percentage) => {
 const useCountUp = (end, duration = 2000) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         let start = 0;
         const startTime = Date.now();
-        
+
         const animate = () => {
           const elapsed = Date.now() - startTime;
           const progress = Math.min(elapsed / duration, 1);
           // easeOutExpo: 1 - 2^(-10 * progress)
-          const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          const easeProgress =
+            progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
           setCount(Math.floor(easeProgress * end));
-          
+
           if (progress < 1) requestAnimationFrame(animate);
         };
-        
+
         requestAnimationFrame(animate);
       }
     });
-    
+
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [end, duration]);
-  
+
   return { count, ref };
 };
 ```
 
 **Project Filter System:**
+
 - 5 categories: All, MERN, APIs, Frontend, Experiments
 - Active filter highlighting
 - Smooth scroll to projects on filter change
 
 **ProjectCard Enhancements:**
+
 - `category` and `featured` fields
 - Featured badge with star icon
 - 3 featured projects: Four Flavors Express, Signup-Login-Render, Natours 2025
 
 **ProjectGrid Enhancements:**
+
 - Filtering functionality
 - Empty state with 📁 emoji
 - Filter status display ("Showing X of Y projects")
@@ -1837,6 +1851,7 @@ const useCountUp = (end, duration = 2000) => {
 **Commit:** `abfe74e` - feat: Implement Phase F
 
 **Modified Files:**
+
 - `/client/src/AppRoutes.jsx`
 - `/client/src/components/Layout.jsx`
 - `/client/src/components/Navbar.jsx`
@@ -1845,6 +1860,7 @@ const useCountUp = (end, duration = 2000) => {
 #### Performance Improvements
 
 **React.lazy Code Splitting:**
+
 - Bundle size reduced: 530KB → 408KB (23% reduction)
 - Lazy loaded pages:
   - Home
@@ -1858,27 +1874,29 @@ const useCountUp = (end, duration = 2000) => {
 
 ```jsx
 // AppRoutes.jsx with React.lazy
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from "react";
 
-const Home = lazy(() => import('./pages/Home'));
-const Work = lazy(() => import('./pages/Work'));
-const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+const Home = lazy(() => import("./pages/Home"));
+const Work = lazy(() => import("./pages/Work"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 <Suspense fallback={<PageLoader />}>
   <Routes>
     <Route path="/" element={<Home />} />
     {/* ... */}
   </Routes>
-</Suspense>
+</Suspense>;
 ```
 
 **PageLoader Component:**
+
 - Animated bouncing dots
 - Displayed during lazy load
 
 **GPU Acceleration CSS:**
+
 ```css
 /* utilities.css */
 .will-change-transform {
@@ -1896,6 +1914,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 ```
 
 **Intersection Observer Usage:**
+
 - Scroll-triggered animations
 - Lazy image loading
 - Count-up animations
@@ -1903,16 +1922,19 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 #### Accessibility Enhancements
 
 **Skip-to-Content Link:**
+
 - First focusable element
 - Visible on focus, hidden otherwise
 - Smooth scrolls to main content
 
 **ARIA Labels:**
+
 - All interactive elements in Navbar
 - Form inputs with proper labeling
 - Button purpose descriptions
 
 **prefers-reduced-motion Support:**
+
 ```css
 /* utilities.css */
 @media (prefers-reduced-motion: reduce) {
@@ -1927,13 +1949,14 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 ```
 
 **High Contrast Mode:**
+
 ```css
 @media (prefers-contrast: high) {
   .high-contrast-border {
     border-width: 2px;
     border-color: currentColor;
   }
-  
+
   .focus-ring {
     outline: 3px solid currentColor;
     outline-offset: 2px;
@@ -1942,6 +1965,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 ```
 
 **Screen Reader Support:**
+
 ```css
 .sr-only {
   position: absolute;
@@ -1957,6 +1981,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 ```
 
 **Focus-Visible Styles:**
+
 - Clear focus rings on all interactive elements
 - Keyboard navigation support
 - No focus rings on mouse clicks
@@ -1972,6 +1997,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 **File:** `/client/src/components/BlogSection.jsx` (233 lines)
 
 **Features:**
+
 - dev.to API integration: `https://dev.to/api/articles?username=tvatdci`
 - Fetches 5 latest blog posts
 - Cover images with lazy loading
@@ -1983,6 +2009,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 - "View all posts on dev.to" link
 
 **Integration:**
+
 - Added to About.jsx page
 - Responsive grid layout
 
@@ -1993,6 +2020,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 **File:** `/client/src/components/ResumeDownload.jsx` (255 lines)
 
 **Features:**
+
 - Animated download progress bar with block characters
 - Simulated download progress (10% increments, 1.5s duration)
 - QR code ASCII art for mobile viewing
@@ -2007,22 +2035,23 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const simulateDownload = () => {
   setIsDownloading(true);
   let progress = 0;
-  
+
   const interval = setInterval(() => {
     progress += 10;
     setDownloadProgress(progress);
-    
+
     if (progress >= 100) {
       clearInterval(interval);
       setIsDownloading(false);
       // Trigger actual download
-      window.open('/resume-update.pdf', '_blank');
+      window.open("/resume-update.pdf", "_blank");
     }
   }, 150);
 };
 ```
 
 **Integration:**
+
 - Added to Contact.jsx page
 - Grid layout with ContactForm
 
@@ -2033,6 +2062,7 @@ const simulateDownload = () => {
 **File:** `/client/src/pages/NotFound.jsx` (249 lines)
 
 **Features:**
+
 - Terminal-themed 404 error page
 - Glitch effect animation on "404" text (random character substitution)
 - ASCII art decoration ("ERROR" banner)
@@ -2045,35 +2075,36 @@ const simulateDownload = () => {
 **Glitch Effect Implementation:**
 
 ```jsx
-const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+const glitchChars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
 const GlitchText = ({ text }) => {
   const [displayText, setDisplayText] = useState(text);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (Math.random() > 0.7) {
         const newText = text
-          .split('')
-          .map((char, i) => 
-            Math.random() > 0.8 
+          .split("")
+          .map((char, i) =>
+            Math.random() > 0.8
               ? glitchChars[Math.floor(Math.random() * glitchChars.length)]
-              : char
+              : char,
           )
-          .join('');
+          .join("");
         setDisplayText(newText);
         setTimeout(() => setDisplayText(text), 100);
       }
     }, 2000);
-    
+
     return () => clearInterval(interval);
   }, [text]);
-  
+
   return <span>{displayText}</span>;
 };
 ```
 
 **Integration:**
+
 - Added to AppRoutes as catch-all route (`*`)
 - Code splitting maintained
 
@@ -2081,25 +2112,26 @@ const GlitchText = ({ text }) => {
 
 ### Summary: Phases A-G Implementation
 
-| Phase | Component | Lines | Key Features |
-|-------|-----------|-------|--------------|
-| **A** | CareerTimeline | 299 | Scroll-triggered SVG path, 3-phase career |
-| **B** | TerminalSkills | 332 | Block character progress bars, 75% proficiency |
-| **C** | ContactForm | 436 | Terminal refactor, typewriter output |
-| **D** | MiniTerminal | 449 | Easter eggs, Konami code, hidden commands |
-| **E** | WorkHero | 231 | Animated counters, project filters, featured badges |
-| **F** | AppRoutes/Layout | - | Code splitting, accessibility, GPU acceleration |
-| **G** | BlogSection | 233 | dev.to API, lazy images, terminal cards |
-| **G** | ResumeDownload | 255 | QR code, progress animation, PDF download |
-| **G** | NotFound | 249 | Glitch effect, terminal 404, easter eggs |
+| Phase | Component        | Lines | Key Features                                        |
+| ----- | ---------------- | ----- | --------------------------------------------------- |
+| **A** | CareerTimeline   | 299   | Scroll-triggered SVG path, 3-phase career           |
+| **B** | TerminalSkills   | 332   | Block character progress bars, 75% proficiency      |
+| **C** | ContactForm      | 436   | Terminal refactor, typewriter output                |
+| **D** | MiniTerminal     | 449   | Easter eggs, Konami code, hidden commands           |
+| **E** | WorkHero         | 231   | Animated counters, project filters, featured badges |
+| **F** | AppRoutes/Layout | -     | Code splitting, accessibility, GPU acceleration     |
+| **G** | BlogSection      | 233   | dev.to API, lazy images, terminal cards             |
+| **G** | ResumeDownload   | 255   | QR code, progress animation, PDF download           |
+| **G** | NotFound         | 249   | Glitch effect, terminal 404, easter eggs            |
 
 **Total New Components:** 8  
 **Total Modified Files:** 4 (AppRoutes, ProjectCard, ProjectGrid, Contact, About, Work, Layout, Navbar)  
 **Total Lines of Code:** ~2,500+ lines  
-**Bundle Impact:** +80KB (optimized with code splitting)  
+**Bundle Impact:** +80KB (optimized with code splitting)
 
 **Consistency Pattern:**
 All components follow the terminal aesthetic:
+
 - Traffic light window controls (coral/dusk/lagoon)
 - Monospace fonts for terminal feel
 - `$` command prompts
