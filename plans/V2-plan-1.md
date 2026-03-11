@@ -268,7 +268,7 @@ Updated all 7 consumer components (`ContactForm`, `TerminalLoader`, `MiniTermina
 
 ### New files
 
-```
+```text
 client/src/components/TerminalHeader.jsx        (Phase 1-A → moved to primitives/ in Phase 4)
 client/src/components/BlinkingCursor.jsx        (Phase 1-B → moved to primitives/ in Phase 4)
 client/src/components/primitives/               (Phase 4-A)
@@ -285,7 +285,7 @@ client/src/services/index.js                    (Phase 4-C)
 
 ### Modified files
 
-```
+```text
 client/tailwind.config.js                       (NO CHANGE — content/darkMode only; never extend here)
 client/src/styles/theme.css                     (Phase 2-A — audit @theme tokens; Phase 2-A2 — warm cream light theme; add duration tokens)
 client/src/styles/components.css                (Phase 2-B — terminal window classes)
