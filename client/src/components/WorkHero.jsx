@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import TerminalHeader from './TerminalHeader';
+import TerminalHeader from './primitives/TerminalHeader';
 import { TRANSITION_NORMAL, TRANSITION_SLOW } from '../utils/motionPresets';
 
 // Animated counter hook

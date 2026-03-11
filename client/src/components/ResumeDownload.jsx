@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import TerminalHeader from './TerminalHeader';
-import { useProgressSimulation } from '../hooks/useProgressSimulation';
+import TerminalHeader from './primitives/TerminalHeader';
+import { useProgressSimulation } from '../hooks';
 
 const ResumeDownload = () => {
   const [isDownloading, setIsDownloading] = useState(false);

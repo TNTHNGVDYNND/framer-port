@@ -1,8 +1,8 @@
 import { motion, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Barcode from './Barcode';
-import { useInView, usePrefersReducedMotion } from '../hooks/useInView';
-import { use3DTilt } from '../hooks/use3DTilt';
+import { useInView, usePrefersReducedMotion } from '../hooks';
+import { use3DTilt } from '../hooks';
 import {
   SPRING_SNAPPY,
   TRANSITION_NORMAL,

@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion';
-import TerminalHeader from './TerminalHeader';
-import { useAsyncOperation } from '../hooks/useAsyncOperation';
+import TerminalHeader from './primitives/TerminalHeader';
+import { useAsyncOperation } from '../hooks';
 import { FADE_UP, FADE_IN, TRANSITION_NORMAL } from '../utils/motionPresets';
+import { api } from '../services';
 
-const fetchBlogPosts = () =>
-  fetch('https://dev.to/api/articles?username=tvatdci&per_page=5').then((r) => {
-    if (!r.ok) throw new Error('Failed to fetch posts');
-    return r.json();
-  });
+const fetchBlogPosts = () => api.blog.getPosts('tvatdci', 5);
 
 const BlogCard = ({ post, index }) => {
   return (

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import TerminalHeader from './TerminalHeader';
+import TerminalHeader from './primitives/TerminalHeader';
 
 const careerPhases = [
   {

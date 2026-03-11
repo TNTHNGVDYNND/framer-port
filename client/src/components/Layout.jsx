@@ -7,7 +7,7 @@ import { AudioProvider } from './AudioToggle';
 import CustomCursor from './CustomCursor';
 import HelpButton from './HelpButton';
 import { ReactLenis } from 'lenis/react';
-import { usePerformanceMetrics } from '../hooks/useInView';
+import { usePerformanceMetrics } from '../hooks';
 import '../styles/background-effects.css';
 
 const Layout = () => {

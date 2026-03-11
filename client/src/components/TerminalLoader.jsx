@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Barcode from './Barcode';
-import TerminalHeader from './TerminalHeader';
-import BlinkingCursor from './BlinkingCursor';
-import { useTerminalOutput } from '../hooks/useTerminalOutput';
+import TerminalHeader from './primitives/TerminalHeader';
+import BlinkingCursor from './primitives/BlinkingCursor';
+import { useTerminalOutput } from '../hooks';
 
 const bootStrings = [
   'System initialization started...',

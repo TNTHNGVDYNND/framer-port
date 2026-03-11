@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ThemeContext from './themeContext';
-import useDarkMode from '../hooks/useDarkMode';
+import { useDarkMode } from '../hooks';
 
 export default function ThemeProvider({ children }) {
   const { isDarkMode, setDarkMode, toggleDarkMode } = useDarkMode();

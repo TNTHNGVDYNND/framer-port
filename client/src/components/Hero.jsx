@@ -5,7 +5,7 @@ import TerminalLoader from './TerminalLoader';
 import SvgText from './SvgText';
 import PrimeBtn from './buttons/PrimeBtn';
 import { MagneticButton } from './CustomCursor';
-import { use3DTilt } from '../hooks/use3DTilt';
+import { use3DTilt } from '../hooks';
 import { TRANSITION_SLOW } from '../utils/motionPresets';
 
 const Hero = () => {

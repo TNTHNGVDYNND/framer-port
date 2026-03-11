@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import TerminalHeader from './TerminalHeader';
-import BlinkingCursor from './BlinkingCursor';
-import { useTerminalOutput } from '../hooks/useTerminalOutput';
-import { useProgressSimulation } from '../hooks/useProgressSimulation';
+import TerminalHeader from './primitives/TerminalHeader';
+import BlinkingCursor from './primitives/BlinkingCursor';
+import { useTerminalOutput } from '../hooks';
+import { useProgressSimulation } from '../hooks';
 
 const TerminalInput = ({
   label,
