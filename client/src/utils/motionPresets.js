@@ -25,9 +25,48 @@ export const FADE_UP = {
   visible: { opacity: 1, y: 0 },
 };
 
+export const FADE_DOWN = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export const FADE_IN = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
+};
+
+// ── Specialized Component Variants ───────────────────────────────────────────
+
+/** Standard entry for project cards */
+export const PROJECT_CARD_ENTRY = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+    rotateX: -15,
+    scale: 0.9,
+  },
+  visible: (index = 0) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 15,
+      delay: index * 0.1,
+    },
+  }),
+};
+
+/** Standard entry for terminal windows and major sections */
+export const SECTION_ENTRY = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
 };
 
 // ── Stagger container variants ───────────────────────────────────────────────

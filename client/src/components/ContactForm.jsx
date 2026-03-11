@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import TerminalHeader from './primitives/TerminalHeader';
-import BlinkingCursor from './primitives/BlinkingCursor';
+
+import { TerminalHeader, BlinkingCursor } from './primitives';
 import { useTerminalOutput } from '../hooks';
 import { useProgressSimulation } from '../hooks';
 

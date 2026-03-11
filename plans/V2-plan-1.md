@@ -4,7 +4,7 @@
 > Policy: behavior-preserving unless noted. Each phase is independently verifiable with `npm run lint && npm run build`.
 > Delivery: one PR per phase, small reviewable diffs.
 
-**STATUS: ✅ ALL PHASES COMPLETE** — `feature/refactor-fe-v2`, commits `f171b7a` → `fa6c0e6`
+**STATUS: ✅ ALL PHASES COMPLETE** — `feature/refactor-fe-v2`, commits `f171b7a` → `81a8258`
 Lint baseline: 58 errors / 8 warnings (pre-existing). Build: ✓ 502 modules, ~399 kB JS.
 
 ---
@@ -237,6 +237,33 @@ npm run lint && npm run build
 
 ---
 
+## Phase 5 — Scalability: Standardized Variants & Barrel Exports ✅ COMPLETE
+
+**Goal:** Centralize core primitives and animation variants to prevent "variant drift" and simplify the development experience for new features.
+
+### 5-A Primitives Barrel Export ✅
+
+**Implemented:** `client/src/components/primitives/index.js`.
+Exports `TerminalHeader` and `BlinkingCursor`.
+Updated all 7 consumer components (`ContactForm`, `TerminalLoader`, `MiniTerminal`, `ResumeDownload`, `BlogSection`, `CareerTimeline`, `WorkHero`) to use the unified import path.
+
+---
+
+### 5-B Specialized Motion Variant Presets ✅
+
+**Implemented:** Added `PROJECT_CARD_ENTRY` and `SECTION_ENTRY` to `client/src/utils/motionPresets.js`.
+`PROJECT_CARD_ENTRY` includes 3D rotation, spring physics, and a factory function for staggered delays using the `custom` prop.
+`SECTION_ENTRY` provides a standard 30px fade-up for terminal windows and major sections.
+`FADE_DOWN` added for top-level header entries.
+
+---
+
+### 5-C Refactor Consumers ✅
+
+**Implemented:** Refactored `ProjectCard.jsx` and `WorkHero.jsx` to remove hardcoded animation objects in favor of the new presets. Standardized the use of `whileInView` for section entries.
+
+---
+
 ## Summary: What Gets Created / Modified
 
 ### New files
@@ -245,12 +272,13 @@ npm run lint && npm run build
 client/src/components/TerminalHeader.jsx        (Phase 1-A → moved to primitives/ in Phase 4)
 client/src/components/BlinkingCursor.jsx        (Phase 1-B → moved to primitives/ in Phase 4)
 client/src/components/primitives/               (Phase 4-A)
+client/src/components/primitives/index.js       (Phase 5-A)
 client/src/components/ErrorBoundary.jsx         (Phase 3-C)
 client/src/hooks/useTerminalOutput.js           (Phase 1-C)
 client/src/hooks/useProgressSimulation.js       (Phase 1-D)
 client/src/hooks/use3DTilt.js                   (Phase 1-E)
 client/src/hooks/useAsyncOperation.js           (Phase 1-F)
-client/src/utils/motionPresets.js               (Phase 1-G)
+client/src/utils/motionPresets.js               (Phase 1-G / Phase 5-B)
 client/src/services/api.js                      (Phase 3-A)
 client/src/services/index.js                    (Phase 4-C)
 ```
@@ -265,15 +293,15 @@ client/src/styles/utilities.css                 (Phase 2-E — focus normalizati
 client/src/styles/background-effects.css        (Phase 2-D — wire grain overlay or remove)
 client/src/App.jsx                              (Phase 3-C — wrap with ErrorBoundary)
 client/src/hooks/index.js                       (Phase 1-C–F — new hook exports)
-client/src/components/ContactForm.jsx           (Phase 1-A,B,C,D / Phase 2-C)
-client/src/components/TerminalLoader.jsx        (Phase 1-A,B,C / Phase 2-C)
-client/src/components/MiniTerminal.jsx          (Phase 1-A,B,C / Phase 2-B,C)
-client/src/components/ResumeDownload.jsx        (Phase 1-A,D / Phase 2-B,C)
-client/src/components/BlogSection.jsx           (Phase 1-F / Phase 2-C / Phase 3-B)
-client/src/components/WorkHero.jsx              (Phase 1-A,G / Phase 2-B,C)
-client/src/components/CareerTimeline.jsx        (Phase 1-A / Phase 2-C)
+client/src/components/ContactForm.jsx           (Phase 1-A,B,C,D / Phase 2-C / Phase 5-A)
+client/src/components/TerminalLoader.jsx        (Phase 1-A,B,C / Phase 2-C / Phase 5-A)
+client/src/components/MiniTerminal.jsx          (Phase 1-A,B,C / Phase 2-B,C / Phase 5-A)
+client/src/components/ResumeDownload.jsx        (Phase 1-A,D / Phase 2-B,C / Phase 5-A)
+client/src/components/BlogSection.jsx           (Phase 1-F / Phase 2-C / Phase 3-B / Phase 5-A)
+client/src/components/WorkHero.jsx              (Phase 1-A,G / Phase 2-B,C / Phase 5-A,C)
+client/src/components/CareerTimeline.jsx        (Phase 1-A / Phase 2-C / Phase 5-A)
 client/src/components/Hero.jsx                  (Phase 1-E,G / Phase 2-C)
-client/src/components/ProjectCard.jsx           (Phase 1-E,G / Phase 2-C)
+client/src/components/ProjectCard.jsx           (Phase 1-E,G / Phase 2-C / Phase 5-C)
 client/src/components/TerminalSkills.jsx        (Phase 2-C)
 ```
 

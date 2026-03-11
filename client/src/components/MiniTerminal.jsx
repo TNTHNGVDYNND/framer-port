@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import TerminalHeader from './primitives/TerminalHeader';
-import BlinkingCursor from './primitives/BlinkingCursor';
+
+import { TerminalHeader, BlinkingCursor } from './primitives';
 import { useTerminalOutput } from '../hooks';
 
 // Konami code sequence - defined outside component to avoid dependency issues
