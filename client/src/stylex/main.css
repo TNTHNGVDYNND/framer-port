@@ -1,0 +1,18 @@
+@import url('https://api.fontshare.com/v2/css?f%5B%5D=zodiak@400,800,900,1&display=swap');
+@import url('https://fonts.cdnfonts.com/css/dune-rise');
+
+/* https://tailwindcss.com/docs/installation/using-vite */
+@import 'tailwindcss';
+@import './theme/theme.css';
+/* Design System Layers */
+@import './theme/colors.css';
+@import './theme/typography.css';
+@import './theme/motion.css';
+
+/* Base & Resets */
+@import './base/globals.css';
+
+/* Components & Utilities */
+@import './components/ui.css';
+@import './utilities/forms.css';
+@import './utilities/gradients.css';

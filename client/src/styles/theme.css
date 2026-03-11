@@ -32,9 +32,7 @@
   /* ========================================
      LIGHT THEME VARIABLES
      ======================================== */
-  --light-bg-body: var(
-    --color-base-100
-  ); /* warm white (was --color-driftwood #d2b690) */
+  --light-bg-body: var(--color-base-100);
   --light-bg-primary: oklch(27.9% 0.077 45.635); /* #461901 */
   --light-text-primary: oklch(0.428 0.0363 232.37); /* #3b5360 */
   --light-text-secondary: oklch(0.5154 0.0212 232.87); /* #5c6a72 */

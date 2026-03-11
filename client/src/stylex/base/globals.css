@@ -1,0 +1,50 @@
+/* ---------------------------------------
+   Global Styles & Overrides - AKA index.css
+---------------------------------------- */
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------------------
+   Browser-Specific Fixes
+---------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stroke-1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ---------------------------------------
+   Base Layer
+   Global resets
+---------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-(--color-text-base) antialiased;
+  }
+
+  /* Prevent image dragging weirdness */
+  img {
+    @apply select-none;
+  }
+}

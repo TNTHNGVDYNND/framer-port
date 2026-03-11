@@ -1,0 +1,75 @@
+@theme {
+  /* --- 1. Raw Design Tokens ("The Hardware") --- */
+
+  /* Neutrals */
+  --color-n-1: #ffffff;
+  --color-n-2: #d4d0e6;
+  --color-n-3: #ada8c3;
+  --color-n-4: #757185;
+  --color-n-5: #3f3a52;
+  --color-n-6: #252134;
+  --color-n-7: #15131d;
+  --color-n-8: #0e0c15;
+  --color-n-9: #474060;
+  --color-n-10: #43435c;
+  --color-n-11: #1b1b2e;
+  --color-n-12: #2e2a41;
+  --color-n-13: #6c7275;
+  --color-n-deep: #1a1a32;
+  --color-stroke-1: #26242c;
+
+  /* Palette */
+  --color-color-1: #ac6aff;
+  --color-color-2: #ffc876;
+  --color-color-3: #ff776f;
+  --color-color-4: #7adb78;
+  --color-color-5: #858dff;
+  --color-color-6: #ff98e2;
+  --color-color-7: #d6ff7f;
+  --color-color-8: #ffd6a5;
+  --color-color-9: #ffff00;
+  --color-color-10: #06d001;
+  --color-color-11: #859f3d;
+  --color-color-12: #31511e;
+  --color-color-13: #f7f7f3;
+  --color-color-14: #ff0000;
+  --color-color-15: #a5f3fc;
+  --color-color-16: #ffd960;
+  --color-color-17: #fffde1;
+  --color-color-18: #d2fcdb;
+
+  /* Gradients (Direct Variables) */
+  --color-gradient-accent-1-from: #f40076;
+  --color-gradient-accent-1-to: #df98fa;
+  --color-gradient-accent-4-to: #13e2da;
+  --color-gradient-accent-6-to: #00b3cc;
+  /* ... (Keep all your other gradient variables here) ... */
+
+  /* --- 2. Semantic Role Tokens ("The Software") --- */
+
+  /* Surfaces & Backgrounds */
+  --color-surface: var(--color-n-8);
+  --color-surface-overlay: var(--color-n-9);
+  --color-surface-deep: var(--color-n-deep);
+
+  /* Brand & Actions */
+  --color-brand-primary: var(--color-color-1);
+  --color-brand-secondary: var(--color-color-5);
+  --color-brand-accent: var(--color-gradient-accent-6-to);
+
+  /* Feedback */
+  --color-error: var(--color-color-14);
+  --color-success: var(--color-color-10);
+  --color-warning: var(--color-color-16);
+  --color-link: var(--color-gradient-accent-4-to);
+
+  /* Text Roles */
+  --color-text-base: var(--color-n-1);
+  --color-text-muted: var(--color-n-3);
+  --color-text-inverted: var(--color-n-8);
+
+  /* Component Specific */
+  --color-input-bg: rgba(255, 253, 225, 0.05);
+  --color-input-bg-focus: rgba(8, 8, 8, 0.15);
+  --color-input-text: var(--color-color-9);
+}

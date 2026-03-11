@@ -67,7 +67,7 @@ const ProjectList = () => {
           {projects.map((project) => (
             <motion.div
               key={project._id}
-              className='flex-shrink-0 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 scroll-snap-align-center'
+              className='shrink-0 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 scroll-snap-align-center'
               // Removed variants={cardVariants} from here
               // Removed viewport={{ once: true, amount: 0.5 }} from here as ProjectCard handles its own
             >

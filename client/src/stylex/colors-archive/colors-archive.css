@@ -1,0 +1,392 @@
+/* oklch Color palette Definitions : converted by (https://oklch.com/) */
+/* ===============================================
+                Neutral Color Palette Definitions
+         =============================================== */
+--color-n-1: oklch(1 0 0); /* #ffffff */
+--color-n-2: oklch(0.8675 0.0304 294.1); /* #d4d0e6 */
+--color-n-3: oklch(0.7445 0.0388 293.93); /* #ada8c3 */
+--color-n-4: oklch(0.5592 0.0309 294.55); /* #757185 */
+--color-n-5: oklch(0.3638 0.0413 293.8); /* #3f3a52 */
+--color-n-6: oklch(0.2613 0.0354 293.45); /* #252134 */
+--color-n-7: oklch(0.194 0.0201 293.61); /* #15131d */
+--color-n-8: oklch(0.1616 0.019 294.37); /* #0e0c15 */
+--color-n-9: oklch(0.3924 0.0539 293.8); /* #474060 */
+--color-n-10: oklch(0.3934 0.0421 284.3); /* #43435c */
+--color-n-11: oklch(0.232 0.0364 283.2); /* #1b1b2e */
+--color-n-12: oklch(0.3 0.0413 291.68); /* #2e2a41 */
+--color-n-13: oklch(0.5479 0.0087 228.96); /* #6c7275 */
+
+--color-n-deep: oklch(0.2311 0.0458 282.21); /* #1a1a32 */
+--color-stroke-1: oklch(0.2659 0.015 296.82); /* #26242c */
+--color-stroke-2: oklch(0.1814 0.0136 294.37); /* #18161e */
+--color-stroke-3: oklch(0 0 0 / 11%); /* #0000001c */
+--color-stroke-4: oklch(0.9883 0.0365 103.7 / 20%); /* #fffde133 */
+/* ===============================================
+            Background & Overlay Color Definitions
+         =============================================== */
+--color-bg-overlay-light: oklch(0.9883 0.0365 103.7 / 5%); /* #fffde10d */
+--color-bg-overlay-medium: oklch(0.1344 0 0 / 15%); /* #08080826 */
+
+/* ===============================================
+                Glow Effect Color Definitions
+         =============================================== */
+--color-inner-glow: oklch(0.8776 0.0643 245.03 / 80%); /* #b4dcffcc */
+--color-md-glow: oklch(0.5538 0.1202 245.47 / 80%); /* #2878b4cc */
+--color-outer-glow: oklch(0.2803 0.0814 257.05 / 30%); /* #0a28504d */
+
+/* ===============================================
+                Shade Color Definitions
+         =============================================== */
+--color-shade-1: oklch(1 0 0 / 20%); /* #ffffff33 */
+--color-shade-2: oklch(0.7484 0.1551 233.2517 / 20%); /* #00bcff33 */
+--color-shade-3: oklch(0.5314 0.25 300.66 / 20%); /* #8a2be233 */
+--color-shade-4: oklch(0.7283 0.1971 351.99 / 20%); /* #ff69b433 */
+--color-shade-5: oklch(0.6048 0.216559 257.2136 / 50%); /* #007bff80 */
+--color-shade-6: oklch(0.6602 0.229356 35.4025 / 50.2%); /* #ff450080 */
+--color-shade-7: oklch(0.868 0.1558 144.09 / 50%); /* #90ee9080 */
+--color-shade-8: oklch(0.7505 0.1791 58.28 / 50%); /* #ff8c0080 */
+--color-shade-9: rgba(255, 215, 0, 0.5); /* #ffd70080 */
+--color-shade-10: oklch(0.8668 0.206745 156.905 / 50%); /* #00fa9a80 */
+
+/* ===============================================
+                Nebula Color Definitions
+         =============================================== */
+--color-nebula-1: oklch(0.5598 0.1882 266.4 / 10%); /* #4169e11a */
+--color-nebula-2: oklch(0.5338 0.2503 301.37 / 10%); /* #8a2be21a */
+--color-nebula-3: oklch(0.6549 0.2613 356.94 / 10%); /* #ff14931a */
+--color-nebula-4: oklch(0.339 0.1793 301.68 / 10%); /* #4b00821a */
+--color-nebula-5: oklch(0.6269 0.158 296.67 / 10%); /* #9370db1a */
+--color-nebula-6: oklch(0.7021 0.1813 328.71 / 10%); /* #da70d61a */
+--color-nebula-7: oklch(0.4932 0.1744 29.99 / 10%); /* #ff45001a */
+--color-nebula-8: oklch(0.4823 0.1751 29.86 / 10%); /* #ff45001a */
+--color-nebula-9: oklch(0.4812 0.1753 29.63 / 10%); /* #ff45001a */
+--color-nebula-10: oklch(0.7283 0.1675 25.46 / 10%); /* #ff776f1a */
+--color-nebula-11: oklch(0.8651 0.1179 76.13 / 10%); /* #ffc8761a */
+
+/* ===============================================
+                    Color Palette Definitions
+         =============================================== */
+--color-color-1: oklch(0.6641 0.2142 301.18); /* #ac6aff */
+--color-color-2: oklch(0.8651 0.1179 76.13); /* #ffc876 */
+--color-color-3: oklch(0.7283 0.1675 25.46); /* #ff776f */
+--color-color-4: oklch(0.8085 0.1635 143.48); /* #7adb78 */
+--color-color-5: oklch(0.6888 0.1657 278.07); /* #858dff */
+--color-color-6: oklch(0.8088 0.1518 338.26); /* #ff98e2 */
+--color-color-7: oklch(0.9447 0.1616 124.13); /* #d6ff7f */
+--color-color-8: oklch(0.8995 0.0782 71.55); /* #ffd6a5 */
+--color-color-9: oklch(0.968 0.211 109.77); /* #ffff00 */
+--color-color-10: oklch(0.7434 0.2523 142.43); /* #06d001 */
+--color-color-11: oklch(0.6621 0.1281 122.51); /* #859f3d */
+--color-color-12: oklch(0.3972 0.0866 135.4); /* #31511e */
+--color-color-13: oklch(0.975 0.0053 106.5); /* #f7f7f3 */
+--color-color-14: oklch(0.628 0.2577 29.23); /* #ff0000 */
+--color-color-15: oklch(0.9167 0.0772 205.04); /* #a5f3fc */
+--color-color-16: oklch(0.8953 0.144056 91.764); /* #ffd960 */
+--color-color-17: oklch(0.9883 0.0365 103.7); /* #fffde1 */
+--color-color-18: oklch(0.9527 0.0617 151.47); /* #d2fcdb */
+--color-color-19: oklch(0.8651 0.1179 76.13); /* #ffc876 */
+--color-color-20: oklch(0.9228 0.1187 190.04); /* #b3f2ff */
+--color-color-21: oklch(0.623 0.2507 3.84); /* #f40076 */
+--color-color-22: oklch(0.784 0.1534 316.3); /* #df98fa */
+--color-color-23: oklch(0.6863 0.1676 23.78); /* #f06966 */
+--color-color-24: oklch(0.8951 0.0741 74.59); /* #fad6a6 */
+--color-color-25: oklch(0.6352 0.0208 256.24); /* #838c98 */
+--color-color-26: oklch(0.4183 0.2229 292.91); /* #590fb7 */
+--color-color-27: oklch(0.6076 0.238 294.09); /* #9055ff */
+--color-color-28: oklch(0.8246 0.1405 190.2); /* #13e2da */
+--color-color-29: oklch(0.7039 0.1227 212.19); /* #00b3cc */
+--color-color-30: oklch(0.551 0.2325 261.19); /* #0b63f6 */
+--color-color-31: oklch(0.3282 0.2178 262.99); /* #000ea1 */
+--color-color-32: oklch(0.6751 0.292 321.29); /* #e233ff */
+--color-color-33: oklch(0.7022 0.2004 45.1); /* #ff6b00 */
+--color-color-34: oklch(0.714 0.1404 16.33); /* #ed7b84 */
+--color-color-35: oklch(0.7183 0.1315 169.14); /* #30be96 */
+--color-color-36: oklch(0.6268 0.2325 303.9); /* #a855f7 */
+--color-color-37: oklch(0.3589 0.2138 282.18); /* #3900a6 */
+--color-color-38: oklch(0.6451 0.2063 19.5); /* #f14658 */
+--color-color-39: oklch(0.6381 0.0114 23.09); /* #928988 */
+--color-color-40: oklch(0.5783 0.2142 23.09); /* #dc2537 */
+--color-color-41: oklch(0.7849 0.1837 126.64); /* #9acd32 */
+--color-color-42: oklch(0.379 0.1837 26.47); /* #870000 */
+--color-color-43: oklch(0.6729 0.1011 98.47); /* #a69748 */
+--color-color-44: oklch(0.5471 0.1241 202.19); /* #00838d */
+--color-color-45: oklch(0.5496 0.1679 350.65); /* #b53d7e */
+--color-color-46: oklch(0.6463 0.1888 276.41); /* #737dfe */
+--color-color-47: oklch(0.8852 0.0605 19.62); /* #ffcac9 */
+--color-color-48: oklch(0.6093 0.1819 257.29); /* #2f80ed */
+
+/* ============================
+      Preset Gradient Stops
+     =========================== */
+--color-gradient-accent-1-from: var(--color-color-21); /* #f40076 */
+--color-gradient-accent-1-to: var(--color-color-22); /* #df98fa */
+--color-gradient-accent-2-from: var(--color-color-23); /* #f06966 */
+--color-gradient-accent-2-to: var(--color-color-24); /* #fad6a6 */
+--color-gradient-accent-3-from: var(--color-color-25); /* #838c98 */
+--color-gradient-accent-3-to: var(--color-color-26); /* #590fb7 */
+--color-gradient-accent-4-from: var(--color-color-27); /* #9055ff */
+--color-gradient-accent-4-to: var(--color-color-28); /* #13e2da */
+--color-gradient-accent-5-from: var(--color-color-29); /* #00b3cc */
+--color-gradient-accent-5-to: var(--color-color-30); /* #0b63f6 */
+--color-gradient-accent-6-from: var(--color-color-31); /* #000ea1 */
+--color-gradient-accent-6-to: var(--color-color-32); /* #e233ff */
+--color-gradient-accent-7-from: var(--color-color-33); /* #ff6b00 */
+--color-gradient-accent-7-to: var(--color-color-34); /* #ed7b84 */
+--color-gradient-accent-8-from: var(--color-color-35); /* #a855f7 */
+--color-gradient-accent-8-to: var(--color-color-36); /* #30be96 */
+--color-gradient-accent-9-from: var(--color-color-37); /* #3900a6 */
+--color-gradient-accent-9-to: var(--color-color-38); /* #f14658 */
+--color-gradient-accent-10-from: var(--color-color-39); /* #928988 */
+--color-gradient-accent-10-to: var(--color-color-40); /* #dc2537 */
+--color-gradient-accent-11-from: var(--color-color-41); /* #9acd32 */
+--color-gradient-accent-11-to: var(--color-color-42); /* #870000 */
+--color-gradient-accent-12-from: var(--color-color-43); /* #a69748 */
+--color-gradient-accent-12-to: var(--color-color-44); /* #00838d */
+--color-gradient-accent-13-from: var(--color-color-45); /* #b53d7e */
+--color-gradient-accent-13-to: var(--color-color-46); /* #737dfe */
+--color-gradient-accent-14-from: var(--color-color-47); /* #ffcac9 */
+--color-gradient-accent-14-to: var(--color-color-48); /* #2f80ed */
+
+/* ===============================================
+                Color Palette Definitions
+         =============================================== */
+/* Brand Colors */
+--color-brand-primary: var(--color-color-1); /* #ac6aff */
+--color-brand-secondary: var(--color-color-5); /* #858dff */
+--color-brand-tertiary: var(--color-color-35); /* #30be96 */
+
+/* Accent - Colors for Highlights and Emphasis */
+--color-accent-1: var(--color-color-21); /* Neon Cyber Pink #f40076 */
+--color-accent-2: var(--color-color-33); /* #ff6b00 */
+--color-accent-3: var(--color-color-16); /* #ffd960 */
+--color-accent-4: var(--color-color-41); /* #9acd32 */
+--color-accent-5: var(--color-color-28); /* #13e2da */
+--color-accent-6: var(--color-color-32); /* #e233ff */
+--color-accent-7: var(--color-color-33); /* #ff6b00 */
+--color-accent-8: var(--color-color-28); /* #13e2da */
+/* Text Colors */
+--color-primary: var(--color-color-17); /* #fffde1 */
+--color-secondary: var(--color-color-18); /* #d2fcdb */
+--color-tertiary: var(--color-color-7); /* #d6ff7f */
+--color-highlight: var(--color-color-8); /* #ffd6a5 */
+--color-highlight-glow: var(--color-md-glow); /* #2878b4cc */
+
+/* Functional Feedback with States */
+--color-error: var(--color-color-14); /* #ff0000 */
+--color-error-hover: oklch(
+  from var(--color-error) calc(l - 0.1) c h
+); /* Darken by 10% */
+
+--color-success: var(--color-color-10); /* #06d001 */
+--color-success-hover: oklch(
+  from var(--color-success) calc(l + 0.05) c h
+); /* Lighten slightly */
+
+--color-warning: var(--color-color-9); /* #ffff00 */
+--color-link: var(--color-color-28); /* #13e2da */
+
+/* Text Roles */
+--color-text-base: var(--color-n-1); /* #ffffff */
+--color-text-muted: var(--color-n-3); /* #ada8c3 */
+--color-text-inverted: var(--color-n-9); /* #ffff00 */
+
+/* --- Component Tokens --- */
+--color-input-bg: var(--color-bg-overlay-light); /* #fffde10d */
+--color-input-bg-focus: var(--color-bg-overlay-medium); /* #08080826 */
+--color-input-bg-hover: var(--color-md-glow); /* #2878b4cc */
+--color-input-text: var(--color-color-16);
+
+/* Interaction & Borders */
+--color-border-subtle: var(--color-stroke-1); /* #26242c */
+--color-border-default: var(--color-stroke-2); /* #18161e */
+--color-border-glow: var(--color-stroke-3); /* #0000001c */
+--color-border-nebula: var(--color-nebula-11); /* #ffc8761a */
+--color-border-bright: var(--color-inner-glow); /* #b4dcffcc */
+--color-ring-focus: var(--color-md-glow); /* #2878b4cc */
+
+/* ===============================================
+            Gradient Background Definitions
+         =============================================== */
+
+/* The variable holds just the color stops, to be used inside the gradient function in utilities */
+/* bg-gradient-primary */
+--color-grad-primary-stops:
+  var(--color-color-21), var(--color-color-22); /* #f40076 to #df98fa */
+
+/* The variable holds the entire instruction for background-image */
+/* bg-gradient-primary-alt */
+--color-grad-primary-alt: linear-gradient(
+  to bottom right,
+  var(--color-color-35) 0%,
+  var(--color-color-31) 90%
+); /* #30be96 to #000ea1 */
+
+/* bg-conic-gradient */
+--color-conic-grad: conic-gradient(
+  from 225deg,
+  var(--color-color-19),
+  var(--color-color-20),
+  var(--color-color-5),
+  var(--color-color-6),
+  var(--color-color-16)
+);
+
+/* bg-radial-glow */
+--color-tr-radial-glow: radial-gradient(
+  circle at top right,
+  var(--color-inner-glow) 1%,
+  var(--color-md-glow) 25%,
+  var(--color-outer-glow) 55%,
+  var(--color-border-glow) 85%
+); /* #b4dcffcc, #2878b4cc, #0a28504d, #0000001c */
+
+/* ===============================================
+                Gradient Accent Backgrounds sets
+         =============================================== */
+
+--color-grad-accent: linear-gradient(
+  55deg,
+  var(--color-color-35) 10%,
+  var(--color-color-36) 80%
+); /* #30be96 to #a855f7 */
+
+--color-grad-accent-1: linear-gradient(
+  to right,
+  var(--color-color-21),
+  var(--color-color-22)
+); /* #f40076 to #df98fa */
+
+--color-grad-accent-2: linear-gradient(
+  to right,
+  var(--color-color-35),
+  var(--color-color-32)
+); /* #30be96 to #e233ff */
+
+--color-grad-accent-3: linear-gradient(
+  to right,
+  var(--color-color-44),
+  var(--color-color-43)
+); /* #00838d to #a69748 */
+
+--color-grad-accent-4: linear-gradient(
+  to right,
+  var(--color-color-6) 0%,
+  var(--color-color-28) 50%,
+  var(--color-color-35) 90%
+); /* #ff98e2 , #13e2da , #30be96 */
+
+--color-grad-accent-5: linear-gradient(
+  to right,
+  var(--color-color-29),
+  var(--color-color-30)
+); /* #00b3cc to #0b63f6 */
+
+--color-grad-accent-6: linear-gradient(
+  to right,
+  var(--color-color-31) 15%,
+  var(--color-color-32) 90%
+); /* #000ea1 to #e233ff */
+
+--color-grad-accent-7: linear-gradient(
+  to right,
+  var(--color-color-33),
+  var(--color-color-34)
+); /* #ff6b00 to #ed7b84 */
+
+--color-grad-accent-8: linear-gradient(
+  to right,
+  var(--color-color-47),
+  var(--color-outer-glow)
+); /* #ffcac9 to #0a28504d */
+
+/* radial-gradient-light here */
+--color-radial-gradient-light: radial-gradient(
+  circle at center,
+  var(--color-accent-3) 0%,
+  transparent 60%
+);
+
+/* ==============================================
+                    Button Gradient Backgrounds
+         ============================================== */
+
+/* ButtonX Gradient */
+--color-btn-x: linear-gradient(
+  to right,
+  var(--color-color-42) 0%,
+  var(--color-color-10) 25%,
+  var(--color-color-9) 50%,
+  var(--color-color-36) 75%,
+  var(--color-color-14) 100%
+); /* #870000, #06d001, #ffff00, #a855f7, #ff0000 */
+
+/* PrimeBtn Gradient */
+--color-prime-btn: linear-gradient(
+  15deg,
+  var(--color-color-16) 0%,
+  var(--color-color-43) 25%,
+  var(--color-color-44) 70%,
+  var(--color-color-28) 100%
+); /* #ffd960, #a69748, #00838d, #13e2da */
+/* ==============================================
+                Text Gradient Backgrounds
+     ============================================== */
+/* text-brand-colors */
+--color-text-brand: linear-gradient(
+  to right,
+  var(--color-color-30),
+  var(--color-color-21)
+); /* #0b63f6 to #f40076 */
+
+/* gradient-text-brand */
+--color-text-grad-brand: linear-gradient(
+  to right,
+  var(--color-color-41) 0%,
+  var(--color-color-43) 75%,
+  var(--color-color-16) 95%
+); /* #9acd32, #a69748, #ffd960 */
+
+/* gradient-text-accent */
+--color-text-grad-accent: linear-gradient(
+  45deg,
+  var(--color-color-15) 15%,
+  var(--color-color-35) 65%
+); /* #a5f3fc to #30be96 */
+
+/* ===========================================
+                Planet Color Definitions
+       =========================================== */
+/* The "Dark Side" of the planet */
+--color-planet-shadow: var(--color-n-deep); /* #1a1a32 */
+
+/* Planet color themes for HeroBgCircles & MobileBgElements */
+--color-purple-planet: linear-gradient(
+  to bottom,
+  var(--color-color-5),
+  var(--color-planet-shadow)
+); /* #858dff to #1a1a32 */
+--color-prime-planet: linear-gradient(
+  to bottom,
+  var(--color-color-17),
+  var(--color-planet-shadow)
+); /* #fffde1 to #1a1a32 */
+--color-gold-planet: linear-gradient(
+  to bottom,
+  var(--color-color-16),
+  var(--color-planet-shadow)
+); /* #ffd960 to #1a1a32 */
+--color-green-planet: linear-gradient(
+  to bottom,
+  var(--color-color-11),
+  var(--color-planet-shadow)
+); /* #859f3d to #1a1a32 */
+--color-orange-planet: linear-gradient(
+  to bottom,
+  var(--color-color-23),
+  var(--color-planet-shadow)
+); /* #f06966 to #1a1a32 */
+--color-white-planet: linear-gradient(
+  to bottom,
+  var(--color-n-1),
+  var(--color-planet-shadow)
+); /* #ffffff to #1a1a32 */

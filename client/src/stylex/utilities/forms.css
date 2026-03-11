@@ -1,0 +1,66 @@
+/* Custom utility for input fields */
+@utility input-field {
+  @apply w-full p-2 text-base text-input-text rounded-lg shadow-md outline-none 
+    bg-input-bg backdrop-blur-md placeholder:text-color-17/30 transition-[border-color,background-color,box-shadow] duration-200 ease-in-out;
+
+  /* Keep focus states inside the class for consistency */
+  &:focus {
+    @apply ring-1 ring-(--color-ring-focus) bg-input-bg-focus;
+    /* Slightly dim the placeholder on focus */
+    &::placeholder {
+      @apply opacity-10;
+    }
+  }
+  &:hover {
+    @apply bg-input-bg-hover;
+  }
+
+  /* Handle disabled state specifically */
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Nesting placeholder styles within input-field */
+  &::placeholder {
+    @apply text-color-4/40 transition-opacity duration-300;
+  }
+}
+
+/* input field error state using semantic tokens */
+@utility input-error {
+  /* Use the semantic variable --color-error */
+  @apply border;
+  border-color: var(--color-error);
+  background-color: color-mix(in srgb, var(--color-error) 5%, transparent);
+
+  &:focus {
+    @apply ring-1 ring-(--color-error);
+  }
+
+  &::placeholder {
+    /* Direct variable usage for the text color */
+    color: color-mix(in srgb, var(--color-error) 40%, transparent);
+  }
+}
+
+/* used for submit buttons and auth FormComponents */
+@utility submit-btn {
+  @apply w-full py-2 px-4 text-n-1 font-zodiak font-bold rounded 
+         backdrop-blur-md transition-all duration-300
+         bg-linear-to-r from-color-30 via-color-29 to-color-28;
+
+  /* Focus and Hover states */
+  &:hover {
+    @apply from-color-28 via-color-29 to-color-30 scale-[1.02] shadow-lg;
+  }
+
+  /* Active/Click effect */
+  &:active {
+    @apply scale-[0.98];
+  }
+
+  /* Handle loading/disabled state */
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed grayscale-[0.5];
+  }
+}

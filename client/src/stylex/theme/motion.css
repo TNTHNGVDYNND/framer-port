@@ -1,0 +1,238 @@
+/* ===============================================
+    Motion Theme Tokens and Keyframes
+         =============================================== */
+@theme {
+  /* Duration Tokens */
+  --duration-2000: 2000ms;
+  --duration-6000: 6000ms;
+  --duration-1000: 1000ms;
+  --duration-700: 700ms;
+  --duration-500: 500ms;
+  /* Easing Tokens */
+  --ease-smooth: cubic-bezier(0.42, 0, 0.58, 1);
+
+  /* Animation Tokens */
+  --animate-fade-and-zoom: fadeAndZoom 4s ease-in-out;
+  --animate-slow-float: slowFloat 30s infinite ease-in-out;
+  --animate-slide-in: slideIn 1s ease-in-out forwards;
+  --animate-slide-in-from-right: slideInFromRight 0.5s ease-in-out forwards;
+  --animate-slide-out-to-right: slideOutToRight 0.5s ease-in-out forwards;
+  --animate-fade-scale-in: fadeScaleIn 0.5s ease-in-out forwards;
+  --animate-fade-scale-out: fadeScaleOut 0.5s ease-in-out forwards;
+  --animate-pulse-opacity: pulseOpacity 8s infinite;
+  --animate-wave-motion: waveMotion 3s cubic-bezier(0.68, -0.55, 0.27, 1.55)
+    infinite;
+  --animate-float-elegant: elegant-float 6s infinite ease-in-out;
+  --animate-spin-slow: spin-slow 60s linear infinite;
+  --animate-solar-spin: solar-spin 20s linear infinite;
+  --animate-fade-slide-up-in: fadeSlideUpIn 0.5s ease forwards;
+  --animate-cube-rotate: rotate 10s linear infinite;
+}
+
+/* Keyframes Definitions */
+@keyframes fadeAndZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+}
+@keyframes fadeScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes fadeScaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+}
+@keyframes slowFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25px);
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideOutToRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+@keyframes pulseOpacity {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.3;
+  }
+}
+@keyframes waveMotion {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  75% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+}
+@keyframes elegant-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+  66% {
+    transform: translateY(4px) rotate(-0.5deg);
+  }
+}
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes solar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fadeSlideUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for cube rotation */
+@keyframes rotate {
+  0% {
+    transform: rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+/* ===============================================
+    Custom Transition Utilities for specific properties
+    trans-[property]-[easing]-[duration] classes
+         =============================================== */
+@layer utilities {
+  .trans-smooth-6s {
+    @apply transition-all; /* Or specify properties like 'opacity, transform' */
+    transition-duration: var(--duration-6000);
+    transition-timing-function: var(--ease-smooth);
+  }
+}
+
+@layer utilities {
+  .trans-smooth-2s {
+    @apply transition-all;
+    transition-duration: var(--duration-2000);
+    transition-timing-function: var(--ease-smooth);
+  }
+}
+
+/* Alternative syntax without @apply */
+/* var(--ease-smooth); = cubic-bezier(0.42, 0, 0.58, 1); */
+@layer utilities {
+  .ease-smooth {
+    transition-timing-function: var(--ease-smooth);
+  }
+}
+
+/* trans-[property]-[easing]-[duration] */
+@layer utilities {
+  .trans-op-tr-smooth-1s {
+    @apply transition-[opacity,transform];
+    transition-duration: var(--duration-1000);
+    transition-timing-function: var(--ease-smooth);
+  }
+
+  .trans-color-smooth-700 {
+    @apply transition-colors;
+    transition-duration: var(--duration-700);
+    transition-timing-function: var(--ease-smooth);
+  }
+
+  .trans-color-smooth-500 {
+    @apply transition-colors;
+    transition-duration: var(--duration-500);
+    transition-timing-function: var(--ease-smooth);
+  }
+
+  .trans-tr-smooth-700 {
+    @apply transition-transform;
+    transition-duration: var(--duration-700);
+    transition-timing-function: var(--ease-smooth);
+  }
+
+  .trans-tr-smooth-500 {
+    @apply transition-transform;
+    transition-duration: var(--duration-500);
+    transition-timing-function: var(--ease-smooth);
+  }
+}

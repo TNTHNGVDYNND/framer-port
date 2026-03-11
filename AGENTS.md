@@ -190,7 +190,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 
 **File Structure:**
 
-```
+```yaml
 client/src/styles/
 ├── index.css        # Entry point + imports + base styles
 ├── colors.css       # RAW color scales (primitive tokens)
