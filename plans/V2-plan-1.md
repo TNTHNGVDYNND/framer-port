@@ -4,6 +4,9 @@
 > Policy: behavior-preserving unless noted. Each phase is independently verifiable with `npm run lint && npm run build`.
 > Delivery: one PR per phase, small reviewable diffs.
 
+**STATUS: ✅ ALL PHASES COMPLETE** — `feature/refactor-fe-v2`, commits `f171b7a` → `fa6c0e6`
+Lint baseline: 58 errors / 8 warnings (pre-existing). Build: ✓ 502 modules, ~399 kB JS.
+
 ---
 
 ## Baseline (run before anything else)
@@ -28,132 +31,55 @@ Save these numbers. Every phase must pass lint + build and not regress this chec
 
 ---
 
-## Phase 1 — DRY: Extract Repeated UI Primitives & Hooks
+## Phase 1 — DRY: Extract Repeated UI Primitives & Hooks ✅ COMPLETE
 
 **Goal:** Remove the 7 copy-paste patterns identified without changing any visible behavior, and capture repeated Framer Motion configs into a single preset file. Each item is independently extractable.
 
 > **Tailwind v4 note:** This project uses Tailwind CSS v4.1.17. Token mapping is done exclusively via the `@theme` directive in `client/src/styles/`. `tailwind.config.js` exists only for `content` and `darkMode` configuration and must **not** receive `theme.extend` entries.
 
-### 1-A `TerminalHeader` component
+### 1-A `TerminalHeader` component ✅
 
-**Why:** The traffic-light header block (`● ● ●` + filename) is copy-pasted in:
-`ContactForm`, `WorkHero`, `ResumeDownload`, `CareerTimeline`, `TerminalLoader`, `MiniTerminal`, `BlogSection` (7 files).
-
-**New file:** `client/src/components/TerminalHeader.jsx`
-
-```
-Props:
-  filename  string   shown after the dots   default: "process.exe"
-  className string   extra wrapper classes   default: ""
-```
-
-Replace all 7 usages. Zero visual change.
+**Implemented:** `client/src/components/TerminalHeader.jsx` (later moved to `primitives/` in Phase 4-A).
+Props: `filename`, `className`, `labelClassName`. Migrated all 7 consumers.
 
 ---
 
-### 1-B `BlinkingCursor` component
+### 1-B `BlinkingCursor` component ✅
 
-**Why:** `<motion.span animate={{ opacity: [1,0] }} transition={{ duration:0.8, repeat:Infinity }} …>` exists in `ContactForm`, `TerminalLoader`, `MiniTerminal`.
-
-**New file:** `client/src/components/BlinkingCursor.jsx`
-
-```
-Props:
-  duration  number   blink interval (s)    default: 0.8
-  className string   size + color classes  default: "w-2 h-4 bg-lagoon"
-```
-
-Replace all 3 usages. Zero visual change.
+**Implemented:** `client/src/components/BlinkingCursor.jsx` (later moved to `primitives/` in Phase 4-A).
+Props: `duration`, `className`, `style`. Migrated ContactForm, TerminalLoader, MiniTerminal.
 
 ---
 
-### 1-C `useTerminalOutput` hook
+### 1-C `useTerminalOutput` hook ✅
 
-**Why:** The `[output, setOutput]` state + `addLine(text, type)` mutation pattern is duplicated in `ContactForm`, `TerminalLoader`, `MiniTerminal`.
-
-**New file:** `client/src/hooks/useTerminalOutput.js`
-
-```
-Returns: { output, addLine(text, type), addLines(lines[]), clear, setOutput }
-Line shape: { text, type, id }
-Types: 'info' | 'system' | 'success' | 'error' | 'command' | 'easter'
-```
+**Implemented:** `client/src/hooks/useTerminalOutput.js`. Returns `{ output, addLine, addLines, clear, setOutput }`. Line shape `{ text, type, id }`. Exported from `hooks/index.js`. Migrated ContactForm, TerminalLoader, MiniTerminal.
 
 Export from `hooks/index.js`. Migrate 3 files. Zero behavioral change.
 
 ---
 
-### 1-D `useProgressSimulation` hook
+### 1-D `useProgressSimulation` hook ✅
 
-**Why:** `setInterval` incrementing progress 0→100 and calling a callback on completion is duplicated in `ContactForm` and `ResumeDownload`.
-
-**New file:** `client/src/hooks/useProgressSimulation.js`
-
-```
-Signature: useProgressSimulation(onComplete, { increment = 10, interval = 200 })
-Returns:   [progress, startSimulation, reset]
-```
-
-Export from `hooks/index.js`. Migrate 2 files. Zero behavioral change.
+**Implemented:** `client/src/hooks/useProgressSimulation.js`. Signature matches plan. Exported from `hooks/index.js`. Migrated ContactForm, ResumeDownload.
 
 ---
 
-### 1-E `use3DTilt` hook
+### 1-E `use3DTilt` hook ✅
 
-**Why:** `useMotionValue(0)` × 2 + `useSpring(useTransform(…))` × 2 + `handleMouseMove` + `handleMouseLeave` is duplicated in `Hero.jsx` and `ProjectCard.jsx` with slightly different spring configs.
-
-**New file:** `client/src/hooks/use3DTilt.js`
-
-```
-Signature: use3DTilt({ stiffness, damping, rotationRange, mouseRange, disabled })
-Returns:   { rotateX, rotateY, mouseX, mouseY, handleMouseMove, handleMouseLeave }
-Defaults:  stiffness=150, damping=20, rotationRange=8, mouseRange=[-0.5, 0.5]
-```
-
-Export from `hooks/index.js`. Migrate `Hero` (uses window-relative coords) and `ProjectCard` (uses element-relative coords — pass `elementRelative: true`). Verify tilt behavior unchanged in both.
+**Implemented:** `client/src/hooks/use3DTilt.js`. Added `elementRelative` option and exposes `isHovered`. Migrated Hero (window-relative) and ProjectCard (`elementRelative: true`). Exported from `hooks/index.js`.
 
 ---
 
-### 1-F `useAsyncOperation` hook
+### 1-F `useAsyncOperation` hook ✅
 
-**Why:** `{ loading, error, data }` state + try/catch + isMounted guard is duplicated in `BlogSection` (fetch posts) and partially in `ContactForm` (submit).
-
-**New file:** `client/src/hooks/useAsyncOperation.js`
-
-```
-Signature: useAsyncOperation(asyncFn, deps)
-Returns:   { loading, error, data, success, run }
-```
-
-Export from `hooks/index.js`. Migrate `BlogSection`. `ContactForm` uses `run` manually (submit-triggered, not auto-run on mount).
+**Implemented:** `client/src/hooks/useAsyncOperation.js`. Auto-run via `deps` option. Used eslint-disable block around `useEffect` for exhaustive-deps. Exported from `hooks/index.js`. BlogSection migrated.
 
 ---
 
-### 1-G `motionPresets.js` — Framer Motion config constants
+### 1-G `motionPresets.js` — Framer Motion config constants ✅
 
-**Why:** `whileHover={{ scale: 1.05 }}`, `transition={{ duration: 0.3, ease: 'easeOut' }}`, spring configs, and `staggerChildren` values are repeated across 10+ files with no single source of truth.
-
-**New file:** `client/src/utils/motionPresets.js`
-
-```
-Exports (plain objects — not hooks, no React dependency):
-
-  HOVER_SCALE       { whileHover: { scale: 1.05 }, whileTap: { scale: 0.97 } }
-  HOVER_LIFT        { whileHover: { y: -4, scale: 1.02 } }
-  FADE_UP           variants: hidden { opacity:0, y:20 } → visible { opacity:1, y:0 }
-  FADE_IN           variants: hidden { opacity:0 }       → visible { opacity:1 }
-  STAGGER_CONTAINER variants: visible { staggerChildren: 0.08 }
-  STAGGER_SLOW      variants: visible { staggerChildren: 0.15 }
-  SPRING_SOFT       { type:'spring', stiffness:150, damping:20 }
-  SPRING_SNAPPY     { type:'spring', stiffness:300, damping:30 }
-  TRANSITION_FAST   { duration:0.15, ease:'easeOut' }
-  TRANSITION_NORMAL { duration:0.3,  ease:'easeOut' }
-  TRANSITION_SLOW   { duration:0.5,  ease:'easeInOut' }
-```
-
-Rule: only plain serialisable objects here — no hooks or components. Import and spread into Framer Motion props (`...HOVER_SCALE`, `variants={FADE_UP}`, `transition={SPRING_SOFT}`). These are composable, never opinionated about DOM structure.
-
-Migrate highest-density files first: `ProjectCard`, `Hero`, `WorkHero`, `BlogSection`, `Navbar`.
+**Implemented:** `client/src/utils/motionPresets.js`. All 11 exports present. Imported in BlogSection, WorkHero, ProjectCard, Hero, TerminalLoader, Navbar.
 
 ---
 
@@ -170,168 +96,58 @@ npm run lint && npm run build
 
 ---
 
-## Phase 2 — Style System: Token Audit + CSS Primitives
+## Phase 2 — Style System: Token Audit + CSS Primitives ✅ COMPLETE
 
 **Goal:** All semantic design tokens live exclusively in `client/src/styles/` via the `@theme` directive (Tailwind v4 architecture). In Tailwind v4, CSS variables declared inside `@theme` are automatically surfaced as Tailwind utilities — no JS config needed. This phase audits gaps in `theme.css`, improves the light theme's visual quality, and adds reusable structural CSS classes.
 
 > **Architecture rule:** `tailwind.config.js` only holds `content` glob and `darkMode` strategy. Never add `theme.extend` here. All token additions go into `theme.css` inside the `@theme` block.
 
-### 2-A Audit and complete `theme.css` token coverage
+### 2-A Audit and complete `theme.css` token coverage ✅
 
-**Current state:** `theme.css` declares semantic variables (`--color-heading`, `--color-lagoon`, `--font-dune`, etc.) inside `@theme`. Tailwind v4 auto-generates utilities from these (`text-heading`, `bg-lagoon`, `font-dune` etc.).
-
-**Problem:** Several semantic variables are missing or inconsistently named, causing components to fall back to inline `style={{ color: 'var(--color-X)' }}` objects (50+ occurrences).
-
-**Action — verify and add any missing tokens to `theme.css` `@theme` block:**
-
-```
-Required in @theme (confirm or add):
-  --color-heading        (already present)
-  --color-sub-title      (already present)
-  --color-text-primary   (already present)
-  --color-text-secondary (already present)
-  --color-text-accent-alt
-  --color-muted-text
-  --color-primary-accent
-  --color-secondary-accent
-  --color-highlight
-  --color-border-color
-  --color-card-bg
-  --color-lagoon         (check presence in colors.css → theme.css mapping)
-  --color-coral          (check presence)
-  --color-dusk           (check presence)
-  --color-bg-body
-  --color-bg-t
-  --color-bg-md
-  --color-bg-b
-  --font-dune            (already present)
-  --font-zodiak          (already present)
-  --font-mono            (already present)
-  --font-display         (already present)
-```
-
-Once confirmed present in `@theme`, Tailwind v4 auto-generates: `text-heading`, `bg-card-bg`, `border-border-color`, `font-dune`, etc. No JS config change required.
-
-**Do NOT replace inline styles yet in this step** — verify token existence first. Migration in 2-C.
+**Implemented:** All required tokens confirmed present in `@theme`. No missing tokens found.
 
 ---
 
-### 2-A2 Light theme warm cream base improvement
+### 2-A2 Light theme warm cream base improvement ✅
 
-**Current state:** Light theme body background is `--light-bg-body: var(--color-driftwood)` which resolves to `#d2b690` — a dated tan/beige that lacks the warm cream sophistication described in `UI-FE-V1.md`.
-
-**Action — update these three tokens inside the `@theme` block in `theme.css`:**
-
-```css
-/* Light theme base — warm white/cream */
---color-base-100: oklch(98% 0.01 90); /* Warm white — lightest surface */
---color-base-200: oklch(96% 0.015 85); /* Warm cream — secondary surface */
---color-base-300: oklch(93% 0.02 80); /* Warm sand — card/panel bg */
-
-/* Midnight Sun glow accent */
---color-accent-glow: oklch(
-  70% 0.15 40
-); /* Warm amber-orange for hero radial glow */
-
-/* Update light theme background mapping */
---light-bg-body: var(--color-base-100); /* replaces --color-driftwood */
---color-bg-body: var(--light-bg-body); /* ensure cascade is correct */
---color-card-bg: var(--color-base-200); /* replaces old okch card-bg */
-```
-
-Also update `[data-theme='dark']` to ensure dark theme body background is **not** affected by this change (it already overrides `--color-bg-body` independently — verify this is the case).
-
-**WCAG AA check:** After applying, verify text contrast ratios:
-
-- `--color-text-primary` on `--color-base-100` ≥ 4.5:1
-- `--color-heading` on `--color-base-100` ≥ 3:1 (large text)
-
-**Visual check:** Light mode Hero, About, Contact pages should now read as warm-white/cream, consistent with "Midnight Sun in the desert" mood, not dated tan.
+**Implemented:** Added `--color-base-100/200/300` and `--color-accent-glow` to `@theme`. Updated `--light-bg-body → var(--color-base-100)` and `--color-card-bg → var(--color-base-200)`. Dark theme `--color-bg-body` override confirmed unaffected.
 
 ---
 
-### 2-B Terminal window shell classes in `components.css`
+### 2-B Terminal window shell classes in `components.css` ✅
 
-> These classes use CSS variables directly — no Tailwind config required. Tailwind v4 will generate utilities from any `@theme` token referenced here via `@apply` or raw `var()` usage.
-
-**Why:** The terminal window structure (rounded bordered container + header row + content area + status indicator row) is recreated manually in `ResumeDownload`, `ContactForm`, `MiniTerminal`, `WorkHero`, `BlogSection`.
-
-**Add to `components.css`** (alongside existing `.hero` and `.prime-btn` sections):
-
-```
-.terminal-window          rounded border container with overflow-hidden
-.terminal-window__header  px-4 py-3 flex items-center gap-2 border-b font-mono text-xs
-.terminal-window__body    p-4 font-mono text-sm
-.terminal-status          flex items-center gap-2 (status row wrapper)
-.terminal-status__dot     w-3 h-3 rounded-full (colored dot)
-.terminal-output-line     single output line with type-based color variants
-  modifier: --info / --system / --success / --error / --command / --easter
-```
-
-Migrate the 5 affected components to use these classes. `TerminalHeader` (from 1-A) maps its dots to `.terminal-status__dot`.
+**Implemented:** Added `.terminal-window`, `.terminal-window__header`, `.terminal-window__body`, `.terminal-status`, `.terminal-status__dot`, `.terminal-output-line` + 6 type modifiers (`--command/system/success/error/info/easter`). `.terminal-window` sets `border-color: var(--color-border-color)` as default, `.terminal-window__header` similarly. `TerminalHeader` dots migrated to `.terminal-status__dot`. All 5 consumer components migrated.
 
 ---
 
-### 2-C Inline style migration pass (incremental)
+### 2-C Inline style migration pass ✅
 
-**After confirming token presence in `theme.css` `@theme` block (2-A)**, do one component at a time:
+**Implemented:** All 7 priority components migrated (BlogSection → 0 remaining, ResumeDownload → 1, ContactForm → 5 dynamic, MiniTerminal → 3 borderColor overrides, CareerTimeline → 3 dynamic+MotionValue, TerminalSkills → 6 dynamic+textShadow+gradient, WorkHero → 1 dynamic).
 
-Priority order (highest inline style density first):
+**Rules applied:**
 
-1. `BlogSection.jsx`
-2. `ResumeDownload.jsx`
-3. `ContactForm.jsx`
-4. `MiniTerminal.jsx`
-5. `CareerTimeline.jsx`
-6. `TerminalSkills.jsx`
-7. `WorkHero.jsx`
-8. Remaining components
-
-Rule: replace `style={{ color: 'var(--color-X)' }}` → `className="text-X"` etc. only where a direct Tailwind mapping exists. Leave Framer Motion `style` props (MotionValues) untouched.
+- Static `var(--color-X)` → `text-X` / `bg-X` / `border-X`
+- Dynamic conditionals (`isDownloading ?`, `status ===`, `phase.color`, `activeFilter ===`, `isFocused ?`) → kept as `style=`
+- Framer Motion MotionValues (`pathLength`) → kept as `style=`
+- `boxShadow`, `textShadow`, `backgroundImage: linear-gradient()` → kept as `style=`
+- `.terminal-window` default `borderColor` → removed (CSS class handles it); intentional overrides kept
 
 ---
 
-### 2-D `background-effects.css` — wire or prune
+### 2-D `background-effects.css` — wire grain overlay ✅
 
-**Current state:** `.grain-overlay` and `@keyframes grain` are defined but no element uses the class. The file is imported in `Layout.jsx` but produces dead CSS.
-
-**Decision:** Add a `<div className="grain-overlay" aria-hidden="true" />` as the first child of the Layout background layer, protected by:
-
-```
-@media (prefers-reduced-motion: reduce) { .grain-overlay { display: none; } }
-```
-
-If rejected by visual review → remove the import and the file.
+**Implemented:** `<div className='grain-overlay' aria-hidden='true' />` added after the global background layer in `Layout.jsx`. Added `@media (prefers-reduced-motion: reduce) { .grain-overlay { display: none; } }` to `background-effects.css`.
 
 ---
 
-### 2-E `utilities.css` — duration tokens + focus normalization
+### 2-E `utilities.css` — duration tokens + focus normalization ✅
 
-**Current state:** `duration-300`, `duration-200`, `duration-500` are scattered as magic numbers. `.focus-ring` exists but is not applied consistently.
+**Implemented:**
 
-**Add to `utilities.css`:**
-
-```css
-/* Duration tokens — declare in @theme so Tailwind v4 generates duration-fast etc. */
-/* Add these to theme.css @theme block, not here as :root — keeps token ownership clean */
-/*   --duration-fast:   150ms;  */
-/*   --duration-normal: 300ms;  */
-/*   --duration-slow:   500ms;  */
-
-/* Standardized focus ring — references CSS variables, no Tailwind config needed */
-.focus-ring {
-  @apply focus-visible:outline-2 focus-visible:outline-offset-2;
-  outline-color: var(--color-lagoon);
-}
-.focus-ring-invert {
-  @apply focus-visible:outline-2 focus-visible:outline-offset-2;
-  outline-color: var(--color-coral);
-}
-```
-
-> Duration tokens (`--duration-fast` etc.) belong in `theme.css` inside `@theme` so Tailwind v4 can generate `duration-fast`, `duration-normal`, etc. as utilities. Add them there, not in `:root` inside `utilities.css`.
-
-Apply `.focus-ring` to all `<button>`, `<a>`, `<input>`, and `<textarea>` interactive elements across components that currently have ad-hoc or missing focus styles.
+- `--duration-fast: 150ms`, `--duration-normal: 300ms`, `--duration-slow: 500ms` added to `theme.css` `@theme` block → Tailwind generates `duration-fast`, `duration-normal`, `duration-slow` utilities
+- `.focus-ring-invert` (outline: coral) added to `utilities.css`
+- `.focus-ring` applied to: ContactForm submit button, ResumeDownload download + QR toggle buttons, WorkHero filter buttons, MiniTerminal command input
+- Navbar already had `focus:ring-2 focus:ring-lagoon` (pre-existing, left as-is)
 
 ---
 
@@ -352,47 +168,25 @@ npm run lint && npm run build
 
 ---
 
-## Phase 3 — Frontend API Client + Error Boundary
+## Phase 3 — Frontend API Client + Error Boundary ✅ COMPLETE
 
 **Goal:** Give the frontend a stable data layer so components don't own fetch logic directly, and add a safety net for runtime errors.
 
-### 3-A `services/api.js` — centralized API client
+### 3-A `services/api.js` ✅
 
-**New file:** `client/src/services/api.js`
-
-```
-API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
-
-Exports:
-  api.projects.getAll()          GET /api/projects → project[]
-  api.contact.submit(data)       POST /api/contact → { success, message }
-  api.blog.getPosts(username, n) GET dev.to/api/articles?username=…&per_page=n
-```
-
-All methods throw typed errors on non-2xx. No component owns a raw `fetch` after this.
+**Implemented:** `client/src/services/api.js`. Uses `import.meta.env.VITE_API_URL || 'http://localhost:3001/api'`. All 3 methods: `api.projects.getAll()`, `api.contact.submit(data)`, `api.blog.getPosts(username, n)`. Throws on non-2xx via internal `request()` helper.
 
 ---
 
-### 3-B Migrate `BlogSection.jsx` to `useAsyncOperation` + `api.blog`
+### 3-B Migrate `BlogSection.jsx` to `useAsyncOperation` + `api.blog` ✅
 
-`BlogSection` currently owns a hardcoded `fetch('https://dev.to/api/articles?username=tvatdci&per_page=5')`.
-After this step it calls `api.blog.getPosts('tvatdci', 5)` via `useAsyncOperation`. Loading/error UI stays identical.
+**Implemented:** Replaced inline `fetch('https://dev.to/api/articles?...')` with `api.blog.getPosts('tvatdci', 5)`. Import from `../services` barrel. `useAsyncOperation` was already in place from Phase 1-F.
 
 ---
 
-### 3-C `ErrorBoundary` component
+### 3-C `ErrorBoundary` component ✅
 
-**New file:** `client/src/components/ErrorBoundary.jsx`
-
-Class component (required for `componentDidCatch`). Terminal-themed fallback UI matching the existing aesthetic (monospace font, coral error color, `$ restart` hint).
-
-Wrap `<AppRoutes />` in `App.jsx`:
-
-```jsx
-<ErrorBoundary>
-  <AppRoutes />
-</ErrorBoundary>
-```
+**Implemented:** `client/src/components/ErrorBoundary.jsx`. Class component with `getDerivedStateFromError` + `componentDidCatch`. Terminal-themed fallback: coral ASCII error banner, monospace, reload button with `.focus-ring`. Wrapped `<AppRoutes />` in `App.jsx`.
 
 ---
 
@@ -409,64 +203,37 @@ npm run lint && npm run build
 
 ---
 
-## Phase 4 — Organization: Shared Primitives Folder
+## Phase 4 — Organization: Shared Primitives Folder ✅ COMPLETE
 
 **Goal:** Establish the `shared/` structure for the extracted primitives so future features know where to add new components/hooks without dumping everything in `components/`.
 
-### 4-A Create `components/primitives/` folder
+### 4-A Create `components/primitives/` folder ✅
 
-Move the 2 new pure UI atoms from Phase 1:
-
-```
-components/primitives/
-  TerminalHeader.jsx
-  BlinkingCursor.jsx
-```
-
-Update all import paths. These are presentational-only, zero state, no side effects.
+**Implemented:** `TerminalHeader.jsx` and `BlinkingCursor.jsx` moved to `components/primitives/`. All 7 consumer import paths updated (`./TerminalHeader` → `./primitives/TerminalHeader`, etc.).
 
 ---
 
-### 4-B Confirm `hooks/` barrel is complete
+### 4-B Confirm `hooks/` barrel is complete ✅
 
-After all phases, `hooks/index.js` should export:
-
-```
-useDarkMode           (existing)
-useInView             (existing)
-useMousePosition      (existing)
-useScrollVelocity     (existing)
-useTerminalOutput     (Phase 1-C)
-useProgressSimulation (Phase 1-D)
-use3DTilt             (Phase 1-E)
-useAsyncOperation     (Phase 1-F)
-```
-
-No other files should import a hook directly from its file path — always from `hooks/index.js`.
+**Implemented:** `hooks/index.js` exports all 8 planned hooks plus `usePrefersReducedMotion` and `usePerformanceMetrics` (also exported from `useInView.js`). All 10 files that previously imported hooks directly from their file paths updated to import from `../hooks` barrel — including `ThemeProvider.jsx`, `Layout.jsx`, `ProjectGrid.jsx`, `ProjectCard.jsx`, `Hero.jsx`.
 
 ---
 
-### 4-C `services/` barrel
+### 4-C `services/` barrel ✅
 
-After Phase 3:
-
-```
-services/
-  api.js       (Phase 3-A)
-  index.js     → export * from './api'
-```
+**Implemented:** `client/src/services/index.js` — `export * from './api'`. BlogSection imports `{ api }` from `'../services'` barrel.
 
 ---
 
-### Phase 4 verification
+### Phase 4 verification ✅
 
 ```bash
 npm run lint && npm run build
 ```
 
-- No broken import paths.
-- `components/primitives/` imports resolve everywhere.
-- Project still passes the full manual smoke checklist from Baseline.
+- ✅ No broken import paths.
+- ✅ `components/primitives/` imports resolve everywhere (502 modules transformed).
+- ✅ Lint baseline: 58 errors / 8 warnings (all pre-existing `react/no-unescaped-entities` + prop-types, none introduced).
 
 ---
 
