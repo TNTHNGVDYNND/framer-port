@@ -78,7 +78,7 @@ const PrimeBtn = ({
       className={`${baseClasses} ${variantStyles} ${
         initialLoad && animateButton
           ? 'opacity-100 translate-y-0 scale-100'
-          : 'opacity-0 translate-y-[4rem] scale-75'
+          : 'opacity-0 translate-y-16 scale-75'
       }`}
       style={commonStyles}
       onClick={onClick}
@@ -90,10 +90,10 @@ const PrimeBtn = ({
     </a>
   ) : (
     <button
-      className={`${baseClasses} ${variantStyles} transition-all duration-[2000ms] ease-[cubic-bezier(0.42, 0, 0.58, 1)] ${
+      className={`${baseClasses} ${variantStyles} transition-all duration-2000 ease-[cubic-bezier(0.42, 0, 0.58, 1)] ${
         initialLoad && animateButton
           ? 'opacity-100 translate-y-0 scale-100'
-          : 'opacity-0 translate-y-[4rem] scale-75'
+          : 'opacity-0 translate-y-16 scale-75'
       }`}
       onClick={onClick}
       style={commonStyles}
