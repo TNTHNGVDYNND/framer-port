@@ -14,9 +14,9 @@ const TerminalHeader = ({
   labelClassName = '',
 }) => (
   <div className={`flex items-center gap-2 ${className}`}>
-    <div className='terminal-status__dot bg-coral' />
-    <div className='terminal-status__dot bg-dusk' />
-    <div className='terminal-status__dot bg-lagoon' />
+    <div className='terminal-status__dot bg-brand-secondary' />
+    <div className='terminal-status__dot bg-brand-accent' />
+    <div className='terminal-status__dot bg-brand-primary' />
     <span
       className={`ml-4 font-mono text-xs text-text-secondary ${labelClassName}`}
     >

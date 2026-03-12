@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
  */
 const BlinkingCursor = ({
   duration = 0.8,
-  className = 'w-2 h-4 bg-lagoon',
+  className = 'w-2 h-4 bg-brand-primary',
   style,
 }) => (
   <motion.span

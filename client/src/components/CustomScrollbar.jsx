@@ -25,7 +25,7 @@ const CustomScrollbar = () => {
       {/* Track background */}
       <div
         className='absolute right-3 top-6 bottom-6 w-0.5 rounded-full'
-        style={{ backgroundColor: 'var(--color-neutral-200)' }}
+        style={{ backgroundColor: 'var(--color-border-subtle)' }}
       >
         <motion.div
           className='w-full rounded-full origin-top'

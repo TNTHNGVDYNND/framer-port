@@ -80,9 +80,9 @@ const AudioToggle = () => {
       style={{
         backgroundColor: isAudioOn
           ? 'var(--color-status-success)'
-          : 'var(--color-neutral-200)',
+          : 'var(--color-border-subtle)',
         color: isAudioOn
-          ? 'var(--color-neutral-50)'
+          ? 'var(--color-surface-base)'
           : 'var(--color-text-secondary)',
       }}
       whileHover={{ scale: 1.05 }}
