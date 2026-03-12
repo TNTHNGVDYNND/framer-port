@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# style prototype folder
+src/stylex/*
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
