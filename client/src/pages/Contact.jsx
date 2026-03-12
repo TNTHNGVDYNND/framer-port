@@ -35,7 +35,7 @@ const Contact = () => {
             />
             <span
               className='ml-4 text-sm font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               contact_protocol.exe
             </span>
@@ -44,14 +44,14 @@ const Contact = () => {
           {/* Main heading */}
           <h1
             className='text-4xl md:text-6xl font-bold font-mono mb-4'
-            style={{ color: 'var(--color-heading)' }}
+            style={{ color: 'var(--color-text-heading)' }}
           >
-            <span className='text-neutral-500 mr-2'>$</span>./initiate_contact
+            <span className='text-text-muted mr-2'>$</span>./initiate_contact
           </h1>
 
           <p
             className='font-mono text-sm max-w-2xl'
-            style={{ color: 'var(--color-text-secondary)' }}
+            style={{ color: 'var(--color-text-muted)' }}
           >
             <span style={{ color: 'var(--color-status-success)' }}>➜</span> Ready to
             collaborate? Send a message through the secure terminal below.
@@ -72,18 +72,18 @@ const Contact = () => {
           <div className='flex items-center gap-4 mb-8'>
             <div
               className='h-px flex-1'
-              style={{ backgroundColor: 'var(--color-neutral-200)' }}
+              style={{ backgroundColor: 'var(--color-border-subtle)' }}
             />
             <span
               className='font-mono text-sm'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               <span style={{ color: 'var(--color-brand-primary)' }}>$</span> get
               resume.pdf
             </span>
             <div
               className='h-px flex-1'
-              style={{ backgroundColor: 'var(--color-neutral-200)' }}
+              style={{ backgroundColor: 'var(--color-border-subtle)' }}
             />
           </div>
 
@@ -102,12 +102,12 @@ const Contact = () => {
             className='p-6 rounded-lg border font-mono text-sm'
             style={{
               backgroundColor: 'var(--color-outer-glow)',
-              borderColor: 'var(--color-neutral-200)',
+              borderColor: 'var(--color-border-subtle)',
             }}
           >
             <div
               className='text-xs mb-2 uppercase tracking-wider'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               Email Protocol
             </div>
@@ -125,12 +125,12 @@ const Contact = () => {
             className='p-6 rounded-lg border font-mono text-sm'
             style={{
               backgroundColor: 'var(--color-outer-glow)',
-              borderColor: 'var(--color-neutral-200)',
+              borderColor: 'var(--color-border-subtle)',
             }}
           >
             <div
               className='text-xs mb-2 uppercase tracking-wider'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               GitHub Repository
             </div>
@@ -150,12 +150,12 @@ const Contact = () => {
             className='p-6 rounded-lg border font-mono text-sm'
             style={{
               backgroundColor: 'var(--color-outer-glow)',
-              borderColor: 'var(--color-neutral-200)',
+              borderColor: 'var(--color-border-subtle)',
             }}
           >
             <div
               className='text-xs mb-2 uppercase tracking-wider'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               LinkedIn Network
             </div>
@@ -177,7 +177,7 @@ const Contact = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          style={{ color: 'var(--color-text-secondary)' }}
+          style={{ color: 'var(--color-text-muted)' }}
         >
           <div
             className='w-2 h-2 rounded-full animate-pulse'

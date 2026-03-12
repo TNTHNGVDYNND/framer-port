@@ -82,8 +82,8 @@ const NotFound = () => {
         <div
           className='rounded-lg overflow-hidden border'
           style={{
-            backgroundColor: 'var(--color-neutral-950)',
-            borderColor: 'var(--color-neutral-700)',
+            backgroundColor: 'var(--color-surface-base)',
+            borderColor: 'var(--color-border-default)',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
           }}
         >
@@ -91,8 +91,8 @@ const NotFound = () => {
           <div
             className='px-4 py-3 flex items-center gap-2 border-b'
             style={{
-              backgroundColor: 'var(--color-neutral-900)',
-              borderColor: 'var(--color-neutral-800)',
+              backgroundColor: 'var(--color-surface-base)',
+              borderColor: 'var(--color-border-default)',
             }}
           >
             <div
@@ -109,7 +109,7 @@ const NotFound = () => {
             />
             <span
               className='ml-4 text-xs font-mono'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               error_404.sh
             </span>
@@ -140,7 +140,7 @@ const NotFound = () => {
             {/* ASCII Art */}
             <pre
               className='font-mono text-xs md:text-sm mb-8 hidden md:block'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               {asciiArt}
             </pre>
@@ -149,14 +149,14 @@ const NotFound = () => {
             <div className='mb-8'>
               <h1
                 className='text-2xl md:text-3xl font-bold font-mono mb-4'
-                style={{ color: 'var(--color-heading)' }}
+                style={{ color: 'var(--color-text-heading)' }}
               >
                 <span style={{ color: 'var(--color-brand-secondary)' }}>[ERROR]</span> Page
                 Not Found
               </h1>
               <p
                 className='font-mono text-sm max-w-md mx-auto'
-                style={{ color: 'var(--color-text-secondary)' }}
+                style={{ color: 'var(--color-text-muted)' }}
               >
                 The page you are looking for has been deleted, moved, or never
                 existed.
@@ -167,8 +167,8 @@ const NotFound = () => {
             <div
               className='p-4 rounded mb-8 font-mono text-sm text-left max-w-lg mx-auto'
               style={{
-                backgroundColor: 'var(--color-neutral-900)',
-                border: '1px solid var(--color-neutral-800)',
+                backgroundColor: 'var(--color-surface-base)',
+                border: '1px solid var(--color-border-default)',
               }}
             >
               <div style={{ color: 'var(--color-brand-primary)' }}>
@@ -181,7 +181,7 @@ const NotFound = () => {
               <div style={{ color: 'var(--color-status-success)' }}>
                 ➜ Try navigating back to safety
               </div>
-              <div style={{ color: 'var(--color-text-secondary)' }}>
+              <div style={{ color: 'var(--color-text-muted)' }}>
                 <motion.span
                   animate={{ opacity: [1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
@@ -197,7 +197,7 @@ const NotFound = () => {
                 className='px-8 py-4 rounded font-mono text-sm font-bold tracking-wider border-2 transition-all duration-300'
                 style={{
                   backgroundColor: 'var(--color-brand-primary)',
-                  color: 'var(--color-neutral-950)',
+                  color: 'var(--color-surface-base)',
                   borderColor: 'var(--color-brand-primary)',
                 }}
                 whileHover={{ scale: 1.05 }}
@@ -211,7 +211,7 @@ const NotFound = () => {
             {/* Easter Egg Hint */}
             <motion.div
               className='mt-8 font-mono text-xs'
-              style={{ color: 'var(--color-neutral-400)' }}
+              style={{ color: 'var(--color-text-muted)' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: showHint ? 1 : 0 }}
               transition={{ duration: 0.5 }}
@@ -228,7 +228,7 @@ const NotFound = () => {
               <motion.span
                 key={i}
                 className='font-mono text-lg'
-                style={{ color: 'var(--color-neutral-500)' }}
+                style={{ color: 'var(--color-text-muted)' }}
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{
                   duration: 2,
