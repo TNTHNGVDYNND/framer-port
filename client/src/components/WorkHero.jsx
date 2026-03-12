@@ -113,7 +113,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
 
           {/* Main heading */}
           <h1 className='text-4xl md:text-6xl font-bold font-mono mb-4 text-heading'>
-            <span className='text-neutral-500 mr-2'>$</span>./showcase_work
+            <span className='text-text-muted mr-2'>$</span>./showcase_work
           </h1>
 
           {/* Philosophy text */}
@@ -125,7 +125,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         </motion.div>
 
         <motion.div
-          className='grid grid-cols-3 gap-8 mb-16 p-8 rounded-lg border bg-neutral-50 border-neutral-200'
+          className='grid grid-cols-3 gap-8 mb-16 p-8 rounded-lg border bg-surface-base border-border-subtle'
           variants={SECTION_ENTRY} initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -160,15 +160,15 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
                 backgroundColor:
                   activeFilter === filter
                     ? 'var(--color-brand-primary)'
-                    : 'var(--color-neutral-100)',
-                color:
-                  activeFilter === filter
-                    ? 'var(--color-neutral-950)'
-                    : 'var(--color-text-primary)',
-                borderColor:
-                  activeFilter === filter
-                    ? 'var(--color-brand-primary)'
-                    : 'var(--color-neutral-200)',
+                    : 'var(--color-surface-base)',
+                  color:
+                    activeFilter === filter
+                      ? 'var(--color-text-base)'
+                      : 'var(--color-text-primary)',
+                  borderColor:
+                    activeFilter === filter
+                      ? 'var(--color-brand-primary)'
+                      : 'var(--color-border-subtle)',
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

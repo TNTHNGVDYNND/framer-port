@@ -106,7 +106,7 @@ const ProjectGrid = ({ filter }) => {
           >
             <div
               className='text-6xl mb-4'
-              style={{ color: 'var(--color-neutral-300)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               📁
             </div>
@@ -115,7 +115,7 @@ const ProjectGrid = ({ filter }) => {
             </p>
             <p
               className='text-sm mt-2'
-              style={{ color: 'var(--color-neutral-400)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               Try selecting a different filter.
             </p>
@@ -129,7 +129,7 @@ const ProjectGrid = ({ filter }) => {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <div className='text-center font-mono text-xs text-neutral-400'>
+          <div className='text-center font-mono text-xs text-text-muted'>
             <span className='text-brand-primary'>Total Projects:</span>{' '}
             {String(projects.length).padStart(3, '0')}
             {filter !== 'All' && (

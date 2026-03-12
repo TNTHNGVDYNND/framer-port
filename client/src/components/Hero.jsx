@@ -167,7 +167,7 @@ const HeroContent = () => {
 
         {/* Tagline - uses Tailwind semantic colors */}
         <motion.p
-          className='hero__subtitle text-xs sm:text-sm text-neutral-500'
+          className='hero__subtitle text-xs sm:text-sm text-text-muted'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.6 }}

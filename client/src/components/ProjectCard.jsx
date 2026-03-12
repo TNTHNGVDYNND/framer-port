@@ -122,7 +122,7 @@ const ProjectCard = ({ project, index }) => {
                 key={i}
                 className='px-2 py-1 rounded text-xs font-mono'
                 style={{
-                  backgroundColor: 'var(--color-neutral-100)',
+                  backgroundColor: 'var(--color-surface-base)',
                   color: 'var(--color-text-primary)',
                 }}
               >
@@ -164,7 +164,7 @@ const ProjectCard = ({ project, index }) => {
         <div
           className='absolute top-4 left-4 px-2 py-1 rounded text-xs font-mono z-10'
           style={{
-            backgroundColor: 'var(--color-neutral-100)',
+            backgroundColor: 'var(--color-surface-base)',
             color: 'var(--color-text-secondary)',
           }}
         >
@@ -177,7 +177,7 @@ const ProjectCard = ({ project, index }) => {
             className='absolute top-4 right-4 px-2 py-1 rounded text-xs font-mono z-10 flex items-center gap-1'
             style={{
               backgroundColor: 'var(--color-brand-primary)',
-              color: 'var(--color-neutral-950)',
+              color: 'var(--color-text-base)',
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
