@@ -47,13 +47,11 @@ const ProjectCard = ({ project, index }) => {
       }}
     >
       <motion.div
-        className='relative rounded-xl overflow-hidden border backdrop-blur-sm'
+        className='relative rounded-xl overflow-hidden glass-elevated'
         style={{
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
-          backgroundColor: 'var(--color-card-bg)',
-          borderColor: 'var(--color-border-color)',
           boxShadow: isHovered
             ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             : '0 10px 25px -5px rgba(0, 0, 0, 0.3)',
@@ -63,6 +61,7 @@ const ProjectCard = ({ project, index }) => {
           transition: TRANSITION_NORMAL,
         }}
       >
+
         {/* Image with parallax effect */}
         <motion.div
           className='relative h-56 overflow-hidden'

@@ -53,37 +53,44 @@ We are moving from a **Direct Mapping** system to a **Three-Tier Token** system.
 ## 4. Implementation Steps
 
 ### Step 1: Audit & Mapping ✅
-*   Generate a "Translation Table" mapping every current variable in `theme.css` to its new Semantic Role.
-*   Identify "Ghost Variables" that are no longer needed.
+*   Generated a "Translation Table" mapping every current variable in `theme.css` to its new Semantic Role.
+*   Identified "Ghost Variables" that are no longer needed.
 
-### Step 2: Rewrite `theme.css` Infrastructure
-*   Define the new `@theme` block.
-*   Implement the **Light Theme** mappings.
-*   Implement the **Dark Theme** (`[data-theme='dark']`) overrides.
-*   Add **Relative Color Logic** for hovers.
+### Step 2: Rewrite `theme.css` Infrastructure ✅
+*   Defined the new `@theme` block.
+*   Implemented the **Light Theme** mappings.
+*   Implemented the **Dark Theme** (`[data-theme='dark']`) overrides with full inverted scales.
+*   Added **Relative Color Logic** for hovers and interactions.
 
-### Step 3: Component Migration
-*   Update JSX components to use the new semantic Tailwind classes (e.g., `text-brand-primary` instead of `text-lagoon`).
-*   Update `components.css` and `utilities.css` to reference the new roles.
+### Step 3: Component Migration ✅
+*   Updated JSX components to use the new semantic Tailwind classes (e.g., `text-brand-primary` instead of `text-lagoon`).
+*   Updated `components.css` and `utilities.css` to reference the new roles.
 
-### Step 4: Validation
-*   Verify contrast ratios in both themes.
-*   Ensure the Terminal aesthetic (glows/scanlines) remains intact.
+### Step 4: Validation ✅
+*   Verified contrast ratios in both themes via manual check.
+*   Fixed build errors related to missing legacy tokens and unknown utility classes.
+*   Ensured the Terminal aesthetic (glows/scanlines) remains intact.
 
-## 5. Phase 5: Advanced UI Patterns (The stylex "Polish")
+## 5. Phase 5: Advanced UI Patterns (The stylex "Polish") ✅ COMPLETE
 
-Following the success of the Tier 2 refactor, we will now adopt the high-level UI logic from the `stylex` prototype to make the portfolio more interactive and visually rich.
+### A. Normalized Interaction Math ✅
+Implemented relative OKLCH math for `--color-action-hover`, `--color-border-hover`, etc.
 
-### A. Normalized Interaction Math
-Instead of mapping hover colors to static legacy tokens, we will use **Relative OKLCH Syntax** for all interactive elements.
-*   `--color-border-hover`: Derived from `--color-border-default` (+10% lightness).
-*   `--color-text-hover`: Derived from `--color-brand-primary` (+5% chroma).
+### B. Specialized "Software" Utilities ✅
+Added `@utility glass`, `glass-elevated`, and `terminal-input`. Refactored `ContactForm.jsx` and `ProjectCard.jsx`.
 
-### B. Specialized "Software" Utilities
-We will move complex CSS logic into Tailwind `@utility` directives to remove noise from JSX:
-*   **`glass`**: Adaptive glassmorphism that uses `--color-surface-base` with dynamic opacity.
-*   **`terminal-input`**: A functional utility combining border-glow, focus-rings, and background-mix logic.
-*   **`btn-prime`**: The signature gradient-border button logic from `stylex`.
+### C. Gradient Library Integration ✅
+Imported semantic gradient stops and preset gradients (`bg-grad-accent-1`, etc.).
 
-### C. Gradient Library Integration
-Import the 14+ gradient stop definitions from `stylex/theme/colors.css` into our semantic layer, allowing us to use `bg-gradient-accent-1` through `8` consistently across both themes.
+---
+
+## 6. Post-Mortem & Lessons Learned
+
+### Hardware Scales are Critical
+Initially, the hardware scales (50-950) were stripped during consolidation. This broke the **Diagnostic Grid** in `ThemeCard.jsx`. **Lesson:** Always preserve Tier 1 Primitives even when building Tier 2 Software roles.
+
+### Legacy Bridges Prevent Build Failures
+Removing variables like `--color-atmo-light-t` caused Vite/Tailwind build errors because they were still referenced in `@apply` rules within `components.css`. **Lesson:** Maintain a "Legacy Bridge" section in `theme.css` until all CSS files are fully refactored.
+
+### Relative Color Math Complexity
+Using `oklch(from var(...) ...)` is powerful but requires strict variable definitions. Ensure all base variables are initialized before being used in relative calculations.

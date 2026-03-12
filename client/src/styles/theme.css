@@ -100,15 +100,31 @@
   --color-border-default: var(--color-border-color);
   --color-border-subtle: var(--color-neutral-100);
 
-  /* Relative Color States */
+  /* ── 2. RELATIVE COLOR LOGIC (Interaction Math) ─────────────────────── */
+
   --color-action-hover: oklch(from var(--color-brand-primary) calc(l - 0.1) c h);
   --color-action-active: oklch(from var(--color-brand-primary) calc(l - 0.2) c h);
-  --color-surface-hover: oklch(from var(--color-surface-elevated) calc(l + 0.05) c h);
+  --color-surface-hover: oklch(from var(--color-surface-elevated) calc(l + 0.02) c h);
+  
+  --color-border-hover: oklch(from var(--color-border-default) calc(l - 0.1) c h);
+  --color-text-hover: oklch(from var(--color-brand-primary) calc(l + 0.05) c h);
 
-  /* Atmosphere & Terminal */
-  --color-terminal-glow: var(--color-brand-primary);
-  --color-terminal-cursor: var(--color-brand-primary);
-  --color-scanline: color-mix(in srgb, var(--color-surface-base), transparent 90%);
+  /* ── 3. GRADIENT LIBRARY (Tier 2 - Software) ────────────────────────── */
+
+  /* Semantic Gradient Stops */
+  --color-grad-primary-stops: var(--color-brand-primary), var(--color-brand-secondary);
+  
+  /* Preset Gradients */
+  --color-grad-accent-1: linear-gradient(to right, var(--color-fuchsia-400), var(--color-fuchsia-200));
+  --color-grad-accent-2: linear-gradient(to right, var(--color-teal-400), var(--color-teal-200));
+  --color-grad-accent-3: linear-gradient(to right, var(--color-red-400), var(--color-red-200));
+  --color-grad-accent-4: linear-gradient(to right, var(--color-ok-400), var(--color-ok-200));
+  
+  --color-grad-prime: linear-gradient(15deg, var(--color-primary-400) 0%, var(--color-teal-600) 25%, var(--color-teal-400) 70%, var(--color-teal-200) 100%);
+  
+  --color-radial-glow: radial-gradient(circle at center, var(--color-brand-primary) 0%, transparent 70%);
+
+  /* ── 4. ATMOSPHERE & TERMINAL (Tier 3 Component Tokens) ─────────────── */
 }
 
 /* ========================================

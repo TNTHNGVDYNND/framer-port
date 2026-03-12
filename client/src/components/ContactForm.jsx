@@ -32,20 +32,12 @@ const TerminalInput = ({
       </div>
 
       {/* Input field container */}
-      <div
-        className='relative flex items-start gap-2 p-3 rounded border transition-all duration-300'
-        style={{
-          backgroundColor: 'var(--color-outer-glow)',
-          borderColor: isFocused
-            ? 'var(--color-brand-primary)'
-            : 'var(--color-neutral-700)',
-          boxShadow: isFocused ? '0 0 10px rgba(59, 130, 246, 0.3)' : 'none',
-        }}
-      >
+      <div className='terminal-input relative flex items-start gap-2'>
         {/* Terminal prompt */}
         <span className='font-mono text-lg select-none mt-1 text-brand-primary'>
           {'>'}
         </span>
+
 
         {/* Input field */}
         <InputComponent

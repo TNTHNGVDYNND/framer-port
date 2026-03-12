@@ -94,6 +94,47 @@
   }
 }
 
+/* ── ADVANCED SOFTWARE UTILITIES (stylex adaptation) ──────────────────── */
+
+@utility glass {
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--color-surface-base) 10%, transparent);
+  border: 1px solid var(--color-border-subtle);
+}
+
+@utility glass-elevated {
+  backdrop-filter: blur(20px);
+  background: color-mix(in srgb, var(--color-surface-elevated) 80%, transparent);
+  border: 1px solid var(--color-border-default);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+@utility terminal-input {
+  @apply bg-surface-overlay border border-border-default rounded p-3 transition-all;
+  transition-duration: var(--duration-normal);
+  
+  &:focus-within {
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--color-brand-primary) 30%, transparent);
+  }
+}
+
+/* ── GRADIENT UTILITIES ─────────────────────────────────────────────── */
+
+@utility bg-grad-brand {
+  background-image: linear-gradient(to bottom right, var(--color-grad-primary-stops));
+}
+
+@utility bg-grad-accent-1 { background-image: var(--color-grad-accent-1); }
+@utility bg-grad-accent-2 { background-image: var(--color-grad-accent-2); }
+
+@utility text-grad-brand {
+  background-image: linear-gradient(to right, var(--color-grad-primary-stops));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ========================================
    SCROLLBAR
    ======================================== */
