@@ -76,13 +76,46 @@
   --duration-fast: 150ms;
   --duration-normal: 300ms;
   --duration-slow: 500ms;
+
+  /* ========================================
+     TIER 2 - SEMANTIC ROLES (NEW)
+     ======================================== */
+  --color-surface-base: var(--color-bg-body);
+  --color-surface-elevated: var(--color-card-bg);
+  --color-surface-overlay: var(--color-outer-glow);
+
+  --color-text-base: var(--color-text-primary);
+  --color-text-muted: var(--color-text-secondary);
+  --color-text-heading: var(--color-heading);
+  --color-text-inverted: var(--color-text-accent-alt);
+
+  --color-brand-primary: var(--color-lagoon);
+  --color-brand-secondary: var(--color-coral);
+  --color-brand-accent: var(--color-dusk);
+
+  --color-status-success: var(--color-ok-400);
+  --color-status-warning: var(--color-warn-400);
+  --color-status-error: var(--color-fail-400);
+
+  --color-border-default: var(--color-border-color);
+  --color-border-subtle: var(--color-neutral-100);
+
+  /* Relative Color States */
+  --color-action-hover: oklch(from var(--color-brand-primary) calc(l - 0.1) c h);
+  --color-action-active: oklch(from var(--color-brand-primary) calc(l - 0.2) c h);
+  --color-surface-hover: oklch(from var(--color-surface-elevated) calc(l + 0.05) c h);
+
+  /* Atmosphere & Terminal */
+  --color-terminal-glow: var(--color-brand-primary);
+  --color-terminal-cursor: var(--color-brand-primary);
+  --color-scanline: color-mix(in srgb, var(--color-surface-base), transparent 90%);
 }
 
 /* ========================================
    DARK THEME OVERRIDES
    ======================================== */
 
-@layer base {
+ @layer base {
   [data-theme='dark'] {
     --color-scheme: dark;
 
@@ -210,7 +243,7 @@
     /* ========================================
        SEMANTIC MAPPINGS (Dark Theme)
        ======================================== */
-    --color-heading: var(--color-dusk);
+    --color-heading: var(--color-brand-accent);
     --color-sub-title: var(--color-driftwood);
     --color-text-primary: var(--dark-text-primary);
     --color-text-secondary: var(--dark-text-secondary);

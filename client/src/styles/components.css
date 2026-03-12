@@ -85,7 +85,7 @@
   }
 
   .prime-btn--white {
-    @apply text-red-500;
+    @apply text-status-error;
   }
 
   /* ---------- Combined Styles ---------- */
@@ -148,21 +148,21 @@
   }
 
   .terminal-output-line--command {
-    color: var(--color-lagoon);
+    color: var(--color-brand-primary);
   }
   .terminal-output-line--system {
-    color: var(--color-ok-400);
+    color: var(--color-status-success);
   }
   .terminal-output-line--success {
-    color: var(--color-ok-400);
+    color: var(--color-status-success);
   }
   .terminal-output-line--error {
-    color: var(--color-coral);
+    color: var(--color-brand-secondary);
   }
   .terminal-output-line--info {
-    color: var(--color-dusk);
+    color: var(--color-brand-accent);
   }
   .terminal-output-line--easter {
-    color: var(--color-fuchsia-400);
+    color: var(--color-brand-accent);
   }
 }

@@ -129,19 +129,19 @@
   /* ========================================
      BRAND COLORS
      ======================================== */
-  --color-lagoon: oklch(0.72 0.11 221.19); /* #50c8ff */
-  --color-coral: oklch(0.7366 0.1672 40.7); /* #ff8050 */
-  --color-driftwood: oklch(0.79 0.06 74.59); /* #d2b690 */
-  --color-tide: oklch(0.49 0.08 205.88); /* #0f6d77 */
-  --color-dusk: oklch(0.82 0.15 72.09); /* #ffb345 */
+  --color-lagoon: oklch(0.72 0.11 221.19);
+  --color-coral: oklch(0.7366 0.1672 40.7);
+  --color-driftwood: oklch(0.79 0.06 74.59);
+  --color-tide: oklch(0.49 0.08 205.88);
+  --color-dusk: oklch(0.82 0.15 72.09);
 
   /* ========================================
      AVOCADO COLOR SCALE
      ======================================== */
-  --color-avocado-100: oklch(0.99 0 0); /* #fcfcfc */
-  --color-avocado-200: oklch(0.98 0.04 113.22); /* #f8fcdd */
-  --color-avocado-300: oklch(0.94 0.11 115.03); /* #e8f49e */
-  --color-avocado-400: oklch(0.92 0.19 114.08); /* #e4f23d */
-  --color-avocado-500: oklch(0.84 0.18 117.33); /* #c2d932 */
-  --color-avocado-600: oklch(0.53 0.12 118.34); /* #66740b */
+  --color-avocado-100: oklch(0.99 0 0);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+  --color-avocado-300: oklch(0.94 0.11 115.03);
+  --color-avocado-400: oklch(0.92 0.19 114.08);
+  --color-avocado-500: oklch(0.84 0.18 117.33);
+  --color-avocado-600: oklch(0.53 0.12 118.34);
 }
