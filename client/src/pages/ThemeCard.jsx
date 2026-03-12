@@ -140,32 +140,31 @@ const ThemeCard = () => {
       <div className='container mx-auto max-w-6xl'>
         {/* Header */}
         <div className='text-center mb-12'>
-          <h1 className='text-4xl md:text-5xl font-dune font-bold mb-4 text-heading'>
+          <h1 className='text-4xl md:text-5xl font-dune font-bold mb-4 text-text-heading'>
             {heading}
           </h1>
-          <p className='font-mono max-w-2xl mx-auto text-text-secondary'>
+          <p className='font-mono max-w-2xl mx-auto text-text-muted'>
             {text}
           </p>
-          <p className='font-mono text-sm mt-2 text-secondary-accent'>
+          <p className='font-mono text-sm mt-2 text-brand-secondary'>
             Toggle between light and dark modes to see color transitions
           </p>
         </div>
 
         {/* Color Grid */}
-        <div className='rounded-xl overflow-hidden border border-border-color bg-card-bg'>
+        <div className='rounded-xl overflow-hidden border border-border-default bg-surface-elevated'>
           {/* Grid Header */}
           <div
-            className='grid grid-cols-12 gap-1 p-4 border border-border-color'
+            className='grid grid-cols-12 gap-1 p-4 border border-border-default'
             // style={{ borderColor: 'var(--color-border-color)' }}
           >
-            <div className='font-mono text-xs font-bold text-primary '>
+            <div className='font-mono text-xs font-bold text-text-base '>
               Color
             </div>
             {toneNames.map((tone) => (
               <div
                 key={tone}
-                className='font-mono text-xs text-center'
-                style={{ color: 'var(--color-neutral-400)' }}
+                className='font-mono text-xs text-center text-text-muted'
               >
                 {tone}
               </div>
@@ -176,9 +175,9 @@ const ThemeCard = () => {
           {colorNames.map((colorName) => (
             <div
               key={colorName}
-              className='grid grid-cols-12 gap-1 p-4 items-center border-b last:border-b-0 border-border-color'
+              className='grid grid-cols-12 gap-1 p-4 items-center border-b last:border-b-0 border-border-default'
             >
-              <div className='font-mono text-xs font-bold uppercase text-text-secondary'>
+              <div className='font-mono text-xs font-bold uppercase text-text-muted'>
                 {colorName}
               </div>
               {toneNames.map((tone) => (
@@ -193,13 +192,13 @@ const ThemeCard = () => {
         </div>
 
         {/* Additional Info */}
-        <div className='mt-8 p-6 rounded-xl bg-card-bg border border-border-color'>
-          <h2 className='text-xl font-dune mb-4 text-heading'>
+        <div className='mt-8 p-6 rounded-xl bg-surface-elevated border border-border-default'>
+          <h2 className='text-xl font-dune mb-4 text-text-heading'>
             About the Color System
           </h2>
           <div className='font-mono text-sm space-y-2'>
             <p>
-              <span className='text-highlight'>OKLCH</span> color space is used
+              <span className='text-brand-accent'>OKLCH</span> color space is used
               throughout the portfolio for perceptually uniform colors.
             </p>
             <p>
@@ -214,8 +213,8 @@ const ThemeCard = () => {
         </div>
 
         {/* Current Theme Indicator */}
-        <div className='mt-8 text-center font-mono text-xs text-secondary-accent'>
-          <span className='text-highlight'>Tip:</span> Use the theme toggle
+        <div className='mt-8 text-center font-mono text-xs text-brand-secondary'>
+          <span className='text-brand-accent'>Tip:</span> Use the theme toggle
           button in the sidebar to switch between light and dark modes
         </div>
       </div>
