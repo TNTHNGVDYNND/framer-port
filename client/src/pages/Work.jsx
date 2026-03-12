@@ -44,7 +44,7 @@ const Work = () => {
               className='font-mono text-sm uppercase tracking-wider'
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              <span style={{ color: 'var(--color-lagoon)' }}>$</span> ls -la
+              <span style={{ color: 'var(--color-brand-primary)' }}>$</span> ls -la
               projects/
             </span>
             <div

@@ -97,15 +97,15 @@ const NotFound = () => {
           >
             <div
               className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
+              style={{ backgroundColor: 'var(--color-brand-secondary)' }}
             />
             <div
               className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
+              style={{ backgroundColor: 'var(--color-brand-accent)' }}
             />
             <div
               className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
+              style={{ backgroundColor: 'var(--color-brand-primary)' }}
             />
             <span
               className='ml-4 text-xs font-mono'
@@ -121,8 +121,8 @@ const NotFound = () => {
             <motion.div
               className='text-8xl md:text-9xl font-bold font-mono mb-6'
               style={{
-                color: 'var(--color-coral)',
-                textShadow: '2px 2px 0px var(--color-lagoon)',
+                color: 'var(--color-brand-secondary)',
+                textShadow: '2px 2px 0px var(--color-brand-primary)',
               }}
               animate={{
                 x: [0, -2, 2, -1, 1, 0],
@@ -151,7 +151,7 @@ const NotFound = () => {
                 className='text-2xl md:text-3xl font-bold font-mono mb-4'
                 style={{ color: 'var(--color-heading)' }}
               >
-                <span style={{ color: 'var(--color-coral)' }}>[ERROR]</span> Page
+                <span style={{ color: 'var(--color-brand-secondary)' }}>[ERROR]</span> Page
                 Not Found
               </h1>
               <p
@@ -171,14 +171,14 @@ const NotFound = () => {
                 border: '1px solid var(--color-neutral-800)',
               }}
             >
-              <div style={{ color: 'var(--color-lagoon)' }}>
+              <div style={{ color: 'var(--color-brand-primary)' }}>
                 $ find /pages/{window.location.pathname.slice(1)}
               </div>
-              <div style={{ color: 'var(--color-coral)' }}>
+              <div style={{ color: 'var(--color-brand-secondary)' }}>
                 find: '/pages/{window.location.pathname.slice(1)}': No such
                 file or directory
               </div>
-              <div style={{ color: 'var(--color-ok-400)' }}>
+              <div style={{ color: 'var(--color-status-success)' }}>
                 ➜ Try navigating back to safety
               </div>
               <div style={{ color: 'var(--color-text-secondary)' }}>
@@ -196,9 +196,9 @@ const NotFound = () => {
               <motion.button
                 className='px-8 py-4 rounded font-mono text-sm font-bold tracking-wider border-2 transition-all duration-300'
                 style={{
-                  backgroundColor: 'var(--color-lagoon)',
+                  backgroundColor: 'var(--color-brand-primary)',
                   color: 'var(--color-neutral-950)',
-                  borderColor: 'var(--color-lagoon)',
+                  borderColor: 'var(--color-brand-primary)',
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

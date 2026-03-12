@@ -23,15 +23,15 @@ const Contact = () => {
           <div className='flex items-center gap-2 mb-6'>
             <div
               className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-coral)' }}
+              style={{ backgroundColor: 'var(--color-brand-secondary)' }}
             />
             <div
               className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-dusk)' }}
+              style={{ backgroundColor: 'var(--color-brand-accent)' }}
             />
             <div
               className='w-3 h-3 rounded-full'
-              style={{ backgroundColor: 'var(--color-lagoon)' }}
+              style={{ backgroundColor: 'var(--color-brand-primary)' }}
             />
             <span
               className='ml-4 text-sm font-mono'
@@ -53,7 +53,7 @@ const Contact = () => {
             className='font-mono text-sm max-w-2xl'
             style={{ color: 'var(--color-text-secondary)' }}
           >
-            <span style={{ color: 'var(--color-ok-400)' }}>➜</span> Ready to
+            <span style={{ color: 'var(--color-status-success)' }}>➜</span> Ready to
             collaborate? Send a message through the secure terminal below.
             Response time: Usually within 24 hours.
           </p>
@@ -78,7 +78,7 @@ const Contact = () => {
               className='font-mono text-sm'
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              <span style={{ color: 'var(--color-lagoon)' }}>$</span> get
+              <span style={{ color: 'var(--color-brand-primary)' }}>$</span> get
               resume.pdf
             </span>
             <div
@@ -114,7 +114,7 @@ const Contact = () => {
             <a
               href='mailto:tuanthong.vaidyanond@gmail.com'
               className='transition-colors duration-300 hover:underline'
-              style={{ color: 'var(--color-lagoon)' }}
+              style={{ color: 'var(--color-brand-primary)' }}
             >
               tuanthong.vaidyanond@gmail.com
             </a>
@@ -139,7 +139,7 @@ const Contact = () => {
               target='_blank'
               rel='noopener noreferrer'
               className='transition-colors duration-300 hover:underline'
-              style={{ color: 'var(--color-lagoon)' }}
+              style={{ color: 'var(--color-brand-primary)' }}
             >
               github.com/TVATDCI
             </a>
@@ -164,7 +164,7 @@ const Contact = () => {
               target='_blank'
               rel='noopener noreferrer'
               className='transition-colors duration-300 hover:underline'
-              style={{ color: 'var(--color-lagoon)' }}
+              style={{ color: 'var(--color-brand-primary)' }}
             >
               linkedin.com/in/tuanthong-vaidyanond
             </a>
@@ -181,7 +181,7 @@ const Contact = () => {
         >
           <div
             className='w-2 h-2 rounded-full animate-pulse'
-            style={{ backgroundColor: 'var(--color-ok-400)' }}
+            style={{ backgroundColor: 'var(--color-status-success)' }}
           />
           <span>Status: Available for opportunities</span>
         </motion.div>

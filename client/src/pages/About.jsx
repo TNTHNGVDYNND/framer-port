@@ -25,16 +25,16 @@ const About = () => {
             {/* Terminal window header */}
             <div className='flex items-center gap-2 mb-6'>
               <div
-                className='w-3 h-3 rounded-full bg-coral'
-                style={{ backgroundColor: 'var(--color-coral)' }}
+                className='w-3 h-3 rounded-full bg-brand-secondary'
+                style={{ backgroundColor: 'var(--color-brand-secondary)' }}
               />
               <div
                 className='w-3 h-3 rounded-full'
-                style={{ backgroundColor: 'var(--color-dusk)' }}
+                style={{ backgroundColor: 'var(--color-brand-accent)' }}
               />
               <div
                 className='w-3 h-3 rounded-full'
-                style={{ backgroundColor: 'var(--color-lagoon)' }}
+                style={{ backgroundColor: 'var(--color-brand-primary)' }}
               />
               <span
                 className='ml-4 text-sm font-mono'
@@ -97,7 +97,7 @@ const About = () => {
               className='font-mono text-sm'
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              <span style={{ color: 'var(--color-ok-400)' }}>➜</span> I am
+              <span style={{ color: 'var(--color-status-success)' }}>➜</span> I am
               actively seeking an apprenticeship or full-time role where I can
               contribute to a forward-thinking team. An opportunity to
               collaborate among a team of motivated developers to build a
@@ -124,7 +124,7 @@ const About = () => {
             {/* Decorative ASCII art */}
             <div
               className='absolute top-4 right-4 font-mono text-xs opacity-20 hidden md:block'
-              style={{ color: 'var(--color-lagoon)' }}
+              style={{ color: 'var(--color-brand-primary)' }}
             >
               ┌─┐ ┌─┐ ┌─┐
               <br />
@@ -161,7 +161,7 @@ const About = () => {
             <div className='mt-8 flex items-center gap-3'>
               <div
                 className='w-2 h-2 rounded-full animate-pulse'
-                style={{ backgroundColor: 'var(--color-ok-400)' }}
+                style={{ backgroundColor: 'var(--color-status-success)' }}
               />
               <span
                 className='font-mono text-sm'
