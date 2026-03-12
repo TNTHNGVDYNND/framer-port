@@ -21,8 +21,8 @@ class ErrorBoundary extends Component {
         <div className='min-h-screen flex items-center justify-center p-8 bg-bg-body'>
           <div className='terminal-window bg-card-bg max-w-2xl w-full'>
             <div
-              className='terminal-window__header bg-neutral-900'
-              style={{ borderColor: 'var(--color-neutral-800)' }}
+              className='terminal-window__header bg-surface-base'
+              style={{ borderColor: 'var(--color-border-default)' }}
             >
               <div className='flex items-center gap-2'>
                 <div className='w-3 h-3 rounded-full bg-brand-secondary' />
@@ -46,7 +46,7 @@ class ErrorBoundary extends Component {
                 <span className='text-status-success'>➜</span> An unexpected error
                 occurred:
               </p>
-              <p className='text-brand-secondary text-xs mb-6 pl-4 border-l border-neutral-700'>
+              <p className='text-brand-secondary text-xs mb-6 pl-4 border-l border-border-default'>
                 {this.state.error?.message || 'Unknown error'}
               </p>
               <p className='text-text-secondary text-xs'>
