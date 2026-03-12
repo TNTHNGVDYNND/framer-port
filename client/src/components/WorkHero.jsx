@@ -68,7 +68,7 @@ const StatCounter = ({ value, label, suffix = '' }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <div className='text-4xl md:text-5xl font-bold font-mono mb-2 text-lagoon'>
+      <div className='text-4xl md:text-5xl font-bold font-mono mb-2 text-brand-primary'>
         {count}
         {suffix}
       </div>
@@ -118,7 +118,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
 
           {/* Philosophy text */}
           <p className='text-lg max-w-2xl mb-8 font-mono text-text-secondary'>
-            <span className='text-ok-400'>➜</span> Explore my digital
+            <span className='text-status-success'>➜</span> Explore my digital
             craftsmanship. Each project represents a unique challenge, a
             learning opportunity, and a step forward in my development journey.
           </p>
@@ -149,7 +149,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <span className='font-mono text-sm mr-4 self-center text-text-secondary'>
-            <span className='text-lagoon'>$</span> filter --category:
+            <span className='text-brand-primary'>$</span> filter --category:
           </span>
           {filters.map((filter) => (
             <motion.button
@@ -159,7 +159,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
               style={{
                 backgroundColor:
                   activeFilter === filter
-                    ? 'var(--color-lagoon)'
+                    ? 'var(--color-brand-primary)'
                     : 'var(--color-neutral-100)',
                 color:
                   activeFilter === filter
@@ -167,7 +167,7 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
                     : 'var(--color-text-primary)',
                 borderColor:
                   activeFilter === filter
-                    ? 'var(--color-lagoon)'
+                    ? 'var(--color-brand-primary)'
                     : 'var(--color-neutral-200)',
               }}
               whileHover={{ scale: 1.05 }}
@@ -185,8 +185,8 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
           animate="visible"
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <span className='text-ok-400'>➜</span> Currently viewing:{' '}
-          <span className='text-dusk'>{activeFilter}</span> projects
+          <span className='text-status-success'>➜</span> Currently viewing:{' '}
+          <span className='text-brand-accent'>{activeFilter}</span> projects
         </motion.div>
       </div>
     </section>

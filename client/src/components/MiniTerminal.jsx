@@ -253,7 +253,7 @@ const MiniTerminal = () => {
             <span className='text-neutral-500 mr-2'>$</span>interactive_terminal
           </h2>
           <p className='font-mono text-sm text-text-secondary'>
-            <span className='text-ok-400'>➜</span> Type a command to explore
+            <span className='text-status-success'>➜</span> Type a command to explore
             more...
           </p>
         </motion.div>
@@ -272,7 +272,7 @@ const MiniTerminal = () => {
         >
           {/* Terminal Header */}
           <div
-            className='terminal-window__header py-2 bg-ok-400'
+            className='terminal-window__header py-2 bg-status-success'
             style={{
               borderColor: 'var(--color-neutral-800)',
             }}
@@ -301,7 +301,7 @@ const MiniTerminal = () => {
                       Welcome to the interactive terminal!
                     </div>
                     <div className='mb-2'>
-                      Try typing: <span className='text-lagoon'>help</span>
+                      Try typing: <span className='text-brand-primary'>help</span>
                     </div>
                     <div className='text-neutral-500'>
                       (Hint: Use ⬆⬆⬇⬇⬅➡⬅➡BA for a surprise)
@@ -324,13 +324,13 @@ const MiniTerminal = () => {
 
               {/* Blinking cursor at end */}
               {output.length > 0 && (
-                <BlinkingCursor className='w-2 h-4 mt-1 bg-lagoon' />
+                <BlinkingCursor className='w-2 h-4 mt-1 bg-brand-primary' />
               )}
             </div>
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className='flex items-center gap-2'>
-              <span className='font-mono text-lg text-lagoon'>{'$'}</span>
+              <span className='font-mono text-lg text-brand-primary'>{'$'}</span>
               <input
                 ref={inputRef}
                 type='text'
@@ -340,19 +340,19 @@ const MiniTerminal = () => {
                 placeholder='Type command...'
                 autoFocus
               />
-              <BlinkingCursor className='w-2 h-5 bg-lagoon' />
+              <BlinkingCursor className='w-2 h-5 bg-brand-primary' />
             </form>
           </div>
         </motion.div>
 
         {/* Command hint */}
         <div className='mt-4 text-center font-mono text-xs text-text-secondary'>
-          Available: <span className='text-dusk'>help</span>,{' '}
-          <span className='text-dusk'>whoami</span>,{' '}
-          <span className='text-dusk'>chef</span>,{' '}
-          <span className='text-dusk'>journalist</span>,{' '}
-          <span className='text-dusk'>skills</span>,{' '}
-          <span className='text-dusk'>clear</span>
+          Available: <span className='text-brand-accent'>help</span>,{' '}
+          <span className='text-brand-accent'>whoami</span>,{' '}
+          <span className='text-brand-accent'>chef</span>,{' '}
+          <span className='text-brand-accent'>journalist</span>,{' '}
+          <span className='text-brand-accent'>skills</span>,{' '}
+          <span className='text-brand-accent'>clear</span>
         </div>
       </div>
     </section>

@@ -70,7 +70,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
               role='dialog'
               aria-modal='true'
               aria-labelledby={titleId}
-              className='pointer-events-auto max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-xl border border-dusk/20 bg-bg-body shadow-2xl'
+              className='pointer-events-auto max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-xl border border-brand-accent/20 bg-bg-body shadow-2xl'
               initial={panelInitial}
               animate={panelAnimate}
               exit={panelExit}
@@ -81,7 +81,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
               }
               onClick={(event) => event.stopPropagation()}
             >
-              <div className='flex items-center justify-between border-b border-dusk/20 p-6'>
+              <div className='flex items-center justify-between border-b border-brand-accent/20 p-6'>
                 <h2
                   id={titleId}
                   className='font-dune text-xl font-bold text-heading'

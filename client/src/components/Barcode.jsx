@@ -5,7 +5,7 @@ const Barcode = ({
   value,
   className = '',
   format = 'CODE128',
-  lineColor = 'var(--color-dusk)',
+  lineColor = 'var(--color-brand-accent)',
   background = 'transparent',
   height = 40,
   width = 2,

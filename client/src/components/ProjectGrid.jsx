@@ -47,7 +47,7 @@ const ProjectGrid = ({ filter }) => {
             <Barcode
               value='SELECTED-WORKS'
               className='w-48'
-              lineColor='var(--color-dusk)'
+              lineColor='var(--color-brand-accent)'
             />
           </motion.div>
 
@@ -68,12 +68,12 @@ const ProjectGrid = ({ filter }) => {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <span style={{ color: 'var(--color-lagoon)' }}>➜</span> Showing{' '}
+            <span style={{ color: 'var(--color-brand-primary)' }}>➜</span> Showing{' '}
             {filteredProjects.length} of {projects.length} projects
             {filter !== 'All' && (
               <span>
                 {' '}
-                in <span style={{ color: 'var(--color-dusk)' }}>{filter}</span>
+                in <span style={{ color: 'var(--color-brand-accent)' }}>{filter}</span>
               </span>
             )}
           </motion.div>
@@ -130,12 +130,12 @@ const ProjectGrid = ({ filter }) => {
           transition={{ delay: 0.5 }}
         >
           <div className='text-center font-mono text-xs text-neutral-400'>
-            <span className='text-lagoon'>Total Projects:</span>{' '}
+            <span className='text-brand-primary'>Total Projects:</span>{' '}
             {String(projects.length).padStart(3, '0')}
             {filter !== 'All' && (
               <>
                 {' '}
-                | <span className='text-dusk'>Filtered:</span>{' '}
+                | <span className='text-brand-accent'>Filtered:</span>{' '}
                 {String(filteredProjects.length).padStart(3, '0')}
               </>
             )}

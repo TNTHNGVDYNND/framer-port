@@ -138,7 +138,7 @@ const ProjectCard = ({ project, index }) => {
             target='_blank'
             rel='noopener noreferrer'
             className='inline-flex items-center gap-2 font-mono text-sm font-semibold transition-colors duration-300'
-            style={{ color: 'var(--color-lagoon)' }}
+            style={{ color: 'var(--color-brand-primary)' }}
             onClick={(e) => e.stopPropagation()}
           >
             View Project
@@ -156,7 +156,7 @@ const ProjectCard = ({ project, index }) => {
           <Barcode
             value={project._id}
             className='w-20'
-            lineColor='var(--color-dusk)'
+            lineColor='var(--color-brand-accent)'
             animated={false}
           />
         </div>
@@ -177,7 +177,7 @@ const ProjectCard = ({ project, index }) => {
           <motion.div
             className='absolute top-4 right-4 px-2 py-1 rounded text-xs font-mono z-10 flex items-center gap-1'
             style={{
-              backgroundColor: 'var(--color-lagoon)',
+              backgroundColor: 'var(--color-brand-primary)',
               color: 'var(--color-neutral-950)',
             }}
             initial={{ opacity: 0, scale: 0.8 }}

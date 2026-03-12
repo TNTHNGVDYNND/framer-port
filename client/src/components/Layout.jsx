@@ -21,7 +21,7 @@ const Layout = () => {
           {/* Skip to content link for accessibility */}
           <a
             href='#main-content'
-            className='sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-20 z-50 px-4 py-2 bg-lagoon text-neutral-950 font-mono text-sm rounded'
+            className='sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-20 z-50 px-4 py-2 bg-brand-primary text-neutral-950 font-mono text-sm rounded'
           >
             Skip to main content
           </a>

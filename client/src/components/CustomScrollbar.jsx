@@ -32,7 +32,7 @@ const CustomScrollbar = () => {
           style={{
             height: '100%',
             scaleY: scrollYProgress,
-            backgroundColor: 'var(--color-lagoon)',
+            backgroundColor: 'var(--color-brand-primary)',
           }}
         />
       </div>
@@ -53,7 +53,7 @@ const CustomScrollbar = () => {
       <motion.div
         className='absolute right-2 w-3 h-3 rounded-full pointer-events-none'
         style={{
-          backgroundColor: 'var(--color-lagoon)',
+          backgroundColor: 'var(--color-brand-primary)',
           y: thumbY,
         }}
       />
