@@ -25,7 +25,7 @@ const NavItem = ({ to, children, label }) => {
         end={to === '/'}
         className={({ isActive }) => `
           relative block px-4 py-3 font-mono text-xs uppercase tracking-wider
-          transition-colors duration-300 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-lagoon
+          transition-colors duration-300 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-brand-primary
           ${isActive ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}
         `}
         aria-label={`Navigate to ${label} page`}
@@ -37,7 +37,7 @@ const NavItem = ({ to, children, label }) => {
             {isActive && (
               <motion.div
                 layoutId='activeIndicator'
-                className='absolute left-0 top-0 bottom-0 w-1 bg-lagoon'
+                className='absolute left-0 top-0 bottom-0 w-1 bg-brand-primary'
                 initial={false}
                 transition={{
                   type: 'spring',
@@ -82,7 +82,7 @@ const Sidebar = () => {
 
   return (
     <motion.nav
-      className='fixed left-0 top-0 bottom-0 w-16 bg-neutral-50/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-dusk/20'
+      className='fixed left-0 top-0 bottom-0 w-16 bg-neutral-50/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-brand-accent/20'
       variants={{
         hidden: { x: -100, opacity: 0 },
         visible: {
@@ -111,13 +111,13 @@ const Sidebar = () => {
       >
         <NavLink 
           to='/' 
-          className='block focus:outline-none focus:ring-2 focus:ring-lagoon rounded-full'
+          className='block focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-full'
           aria-label="Go to homepage"
         >
           <div
             className='w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold'
             style={{
-              backgroundColor: 'var(--color-dusk)',
+              backgroundColor: 'var(--color-brand-accent)',
               color: 'var(--color-neutral-50)',
             }}
             aria-hidden="true"

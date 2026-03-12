@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const skillCategories = [
   {
     title: 'FRONTEND',
-    color: 'var(--color-lagoon)',
+    color: 'var(--color-brand-primary)',
     skills: [
       { name: 'React', level: 85 },
       { name: 'JavaScript', level: 90 },
@@ -14,7 +14,7 @@ const skillCategories = [
   },
   {
     title: 'BACKEND',
-    color: 'var(--color-dusk)',
+    color: 'var(--color-brand-accent)',
     skills: [
       { name: 'Node.js', level: 75 },
       { name: 'Express', level: 75 },
@@ -33,8 +33,8 @@ const skillCategories = [
 ];
 
 const getSkillColor = (level) => {
-  if (level >= 80) return 'var(--color-lagoon)';
-  if (level >= 60) return 'var(--color-dusk)';
+  if (level >= 80) return 'var(--color-brand-primary)';
+  if (level >= 60) return 'var(--color-brand-accent)';
   return 'var(--color-neutral-400)';
 };
 
@@ -188,9 +188,9 @@ const TerminalSkills = () => {
           viewport={{ once: true }}
         >
           <div className='flex items-center gap-2 mb-2'>
-            <div className='w-3 h-3 rounded-full bg-coral' />
-            <div className='w-3 h-3 rounded-full bg-dusk' />
-            <div className='w-3 h-3 rounded-full bg-lagoon' />
+            <div className='w-3 h-3 rounded-full bg-brand-secondary' />
+            <div className='w-3 h-3 rounded-full bg-brand-accent' />
+            <div className='w-3 h-3 rounded-full bg-brand-primary' />
             <span className='ml-4 text-sm font-mono text-text-secondary'>
               skills.txt
             </span>
@@ -200,7 +200,7 @@ const TerminalSkills = () => {
             <span className='text-neutral-500 mr-2'>$</span>./display_skills.sh
           </h2>
           <p className='mt-2 font-mono text-sm text-text-secondary'>
-            <span className='text-ok-400'>➜</span> Loading technical
+            <span className='text-status-success'>➜</span> Loading technical
             proficiencies...
           </p>
         </motion.div>
@@ -228,7 +228,7 @@ const TerminalSkills = () => {
             <span className='font-mono text-sm text-text-primary'>
               Overall Proficiency
             </span>
-            <span className='font-mono text-sm font-bold text-lagoon'>
+            <span className='font-mono text-sm font-bold text-brand-primary'>
               {overallLevel}%
             </span>
           </div>
@@ -246,7 +246,7 @@ const TerminalSkills = () => {
                 ease: 'easeOut',
               }}
               style={{
-                background: `linear-gradient(90deg, var(--color-lagoon), var(--color-dusk))`,
+                background: `linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-accent))`,
               }}
             >
               <span
@@ -273,9 +273,9 @@ const TerminalSkills = () => {
             viewport={{ once: true }}
             transition={{ delay: 1 }}
           >
-            <span className='text-lagoon'>$</span>
+            <span className='text-brand-primary'>$</span>
             <motion.span
-              className='w-2 h-4 bg-lagoon'
+              className='w-2 h-4 bg-brand-primary'
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.8, repeat: Infinity }}
             />

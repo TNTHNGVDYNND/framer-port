@@ -47,13 +47,11 @@ const ProjectCard = ({ project, index }) => {
       }}
     >
       <motion.div
-        className='relative rounded-xl overflow-hidden border backdrop-blur-sm'
+        className='relative rounded-xl overflow-hidden glass-elevated'
         style={{
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
-          backgroundColor: 'var(--color-card-bg)',
-          borderColor: 'var(--color-border-color)',
           boxShadow: isHovered
             ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             : '0 10px 25px -5px rgba(0, 0, 0, 0.3)',
@@ -63,6 +61,7 @@ const ProjectCard = ({ project, index }) => {
           transition: TRANSITION_NORMAL,
         }}
       >
+
         {/* Image with parallax effect */}
         <motion.div
           className='relative h-56 overflow-hidden'
@@ -138,7 +137,7 @@ const ProjectCard = ({ project, index }) => {
             target='_blank'
             rel='noopener noreferrer'
             className='inline-flex items-center gap-2 font-mono text-sm font-semibold transition-colors duration-300'
-            style={{ color: 'var(--color-lagoon)' }}
+            style={{ color: 'var(--color-brand-primary)' }}
             onClick={(e) => e.stopPropagation()}
           >
             View Project
@@ -156,7 +155,7 @@ const ProjectCard = ({ project, index }) => {
           <Barcode
             value={project._id}
             className='w-20'
-            lineColor='var(--color-dusk)'
+            lineColor='var(--color-brand-accent)'
             animated={false}
           />
         </div>
@@ -177,7 +176,7 @@ const ProjectCard = ({ project, index }) => {
           <motion.div
             className='absolute top-4 right-4 px-2 py-1 rounded text-xs font-mono z-10 flex items-center gap-1'
             style={{
-              backgroundColor: 'var(--color-lagoon)',
+              backgroundColor: 'var(--color-brand-primary)',
               color: 'var(--color-neutral-950)',
             }}
             initial={{ opacity: 0, scale: 0.8 }}

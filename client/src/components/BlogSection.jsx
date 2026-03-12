@@ -49,7 +49,7 @@ const BlogCard = ({ post, index }) => {
           <span className='text-text-secondary'>
             {post.readable_publish_date}
           </span>
-          <span className='text-lagoon'>
+          <span className='text-brand-primary'>
             {post.reading_time_minutes} min read
           </span>
         </div>
@@ -93,7 +93,7 @@ const BlogSection = () => {
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
-                  className='w-3 h-3 rounded-full bg-lagoon'
+                  className='w-3 h-3 rounded-full bg-brand-primary'
                   animate={{ y: [0, -10, 0] }}
                   transition={{
                     duration: 0.6,
@@ -116,7 +116,7 @@ const BlogSection = () => {
     return (
       <section className='py-24 px-4 md:px-8'>
         <div className='max-w-5xl mx-auto text-center'>
-          <p className='font-mono text-sm text-coral'>
+          <p className='font-mono text-sm text-brand-secondary'>
             [ERROR] Failed to load blog posts
           </p>
         </div>
@@ -146,7 +146,7 @@ const BlogSection = () => {
           </h2>
 
           <p className='font-mono text-sm max-w-2xl text-text-secondary'>
-            <span className='text-ok-400'>➜</span> Thoughts, tutorials, and
+            <span className='text-status-success'>➜</span> Thoughts, tutorials, and
             insights from my development journey.
           </p>
         </motion.div>
@@ -171,7 +171,7 @@ const BlogSection = () => {
             href='https://dev.to/tvatdci'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 font-mono text-sm transition-colors duration-300 hover:underline text-lagoon'
+            className='inline-flex items-center gap-2 font-mono text-sm transition-colors duration-300 hover:underline text-brand-primary'
           >
             View all posts on dev.to →
           </a>

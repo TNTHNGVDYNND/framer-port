@@ -218,7 +218,7 @@ const FloatingElements = () => {
   return (
     <>
       <motion.div
-        className='absolute top-[15%] left-[15%] w-2 h-2 rounded-full bg-lagoon'
+        className='absolute top-[15%] left-[15%] w-2 h-2 rounded-full bg-brand-primary'
         animate={{
           y: [0, -30, 0],
           opacity: [0.3, 0.8, 0.3],
@@ -231,7 +231,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className='absolute top-[25%] right-[20%] w-3 h-3 rounded-full bg-dusk'
+        className='absolute top-[25%] right-[20%] w-3 h-3 rounded-full bg-brand-accent'
         animate={{
           y: [0, -20, 0],
           opacity: [0.2, 0.6, 0.2],
@@ -245,7 +245,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className='absolute top-[40%] left-[25%] w-1.5 h-1.5 rounded-full bg-coral'
+        className='absolute top-[40%] left-[25%] w-1.5 h-1.5 rounded-full bg-brand-secondary'
         animate={{
           y: [0, -25, 0],
           opacity: [0.3, 0.7, 0.3],
@@ -258,7 +258,7 @@ const FloatingElements = () => {
         }}
       />
       <motion.div
-        className='absolute top-[10%] right-[40%] w-1 h-1 rounded-full bg-lagoon'
+        className='absolute top-[10%] right-[40%] w-1 h-1 rounded-full bg-brand-primary'
         animate={{
           y: [0, -15, 0],
           opacity: [0.2, 0.5, 0.2],

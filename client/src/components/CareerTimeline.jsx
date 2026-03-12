@@ -13,7 +13,7 @@ const careerPhases = [
     description:
       'Sports and cultural correspondent covering major events across Thailand and the UK. Developed keen analytical skills and storytelling abilities.',
     icon: '📰',
-    color: 'var(--color-lagoon)',
+    color: 'var(--color-brand-primary)',
     skills: ['Research', 'Writing', 'Analysis', 'Interviewing'],
   },
   {
@@ -25,7 +25,7 @@ const careerPhases = [
     description:
       "Founded and operated 'Wirtshauskatze' restaurant. Mastered project management, team leadership, and creative problem-solving under pressure.",
     icon: '👨‍🍳',
-    color: 'var(--color-dusk)',
+    color: 'var(--color-brand-accent)',
     skills: ['Leadership', 'Creativity', 'Operations', 'Customer Service'],
   },
   {
@@ -37,7 +37,7 @@ const careerPhases = [
     description:
       'Completed intensive full-stack program. Bringing analytical mindset, creativity, and hands-on engineering approach to web development.',
     icon: '💻',
-    color: 'var(--color-coral)',
+    color: 'var(--color-brand-secondary)',
     skills: ['React', 'Node.js', 'Problem Solving', 'System Design'],
   },
 ];
@@ -171,7 +171,7 @@ const CareerTimeline = () => {
             <span className='text-neutral-500 mr-2'>$</span>cat career.txt
           </h2>
           <p className='mt-2 font-mono text-sm text-text-secondary'>
-            <span className='text-ok-400'>➜</span> Loading career trajectory...
+            <span className='text-status-success'>➜</span> Loading career trajectory...
           </p>
         </motion.div>
 
@@ -187,7 +187,7 @@ const CareerTimeline = () => {
               y1='16'
               x2='8'
               y2='100%'
-              stroke='var(--color-lagoon)'
+              stroke='var(--color-brand-primary)'
               strokeWidth='2'
               strokeLinecap='round'
               style={{
@@ -215,9 +215,9 @@ const CareerTimeline = () => {
             viewport={{ once: true }}
             transition={{ delay: 1.5 }}
           >
-            <div className='w-3 h-3 rounded-full animate-pulse bg-coral' />
+            <div className='w-3 h-3 rounded-full animate-pulse bg-brand-secondary' />
             <span className='font-mono text-sm text-text-secondary'>
-              <span className='text-ok-400'>➜</span> Continue to next chapter...
+              <span className='text-status-success'>➜</span> Continue to next chapter...
             </span>
           </motion.div>
         </div>

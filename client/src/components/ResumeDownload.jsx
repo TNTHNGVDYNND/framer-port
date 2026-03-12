@@ -51,7 +51,7 @@ const ResumeDownload = () => {
           </h3>
 
           <p className='font-mono text-sm mb-6 text-text-secondary'>
-            <span className='text-ok-400'>➜</span> Download my latest resume or
+            <span className='text-status-success'>➜</span> Download my latest resume or
             scan the QR code for mobile viewing.
           </p>
 
@@ -63,7 +63,7 @@ const ResumeDownload = () => {
             style={{
               backgroundColor: isDownloading
                 ? 'var(--color-neutral-300)'
-                : 'var(--color-lagoon)',
+                : 'var(--color-brand-primary)',
               color: 'var(--color-neutral-950)',
             }}
             whileHover={{ scale: isDownloading ? 1 : 1.02 }}
@@ -95,11 +95,11 @@ const ResumeDownload = () => {
               >
                 <div className='flex justify-between text-xs font-mono mb-2'>
                   <span className='text-text-secondary'>Progress</span>
-                  <span className='text-lagoon'>{progress}%</span>
+                  <span className='text-brand-primary'>{progress}%</span>
                 </div>
                 <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-neutral-100'>
                   <motion.div
-                    className='h-full flex items-center font-mono bg-lagoon text-neutral-950'
+                    className='h-full flex items-center font-mono bg-brand-primary text-neutral-950'
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3 }}

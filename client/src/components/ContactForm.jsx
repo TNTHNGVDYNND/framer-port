@@ -28,24 +28,16 @@ const TerminalInput = ({
         <span className='uppercase tracking-wider text-text-primary'>
           {label}:
         </span>
-        {required && <span className='text-xs text-coral'>[required]</span>}
+        {required && <span className='text-xs text-brand-secondary'>[required]</span>}
       </div>
 
       {/* Input field container */}
-      <div
-        className='relative flex items-start gap-2 p-3 rounded border transition-all duration-300'
-        style={{
-          backgroundColor: 'var(--color-outer-glow)',
-          borderColor: isFocused
-            ? 'var(--color-lagoon)'
-            : 'var(--color-neutral-700)',
-          boxShadow: isFocused ? '0 0 10px rgba(59, 130, 246, 0.3)' : 'none',
-        }}
-      >
+      <div className='terminal-input relative flex items-start gap-2'>
         {/* Terminal prompt */}
-        <span className='font-mono text-lg select-none mt-1 text-lagoon'>
+        <span className='font-mono text-lg select-none mt-1 text-brand-primary'>
           {'>'}
         </span>
+
 
         {/* Input field */}
         <InputComponent
@@ -66,7 +58,7 @@ const TerminalInput = ({
         />
 
         {/* Blinking cursor */}
-        {isFocused && <BlinkingCursor className='w-2 h-5 mt-1 bg-lagoon' />}
+        {isFocused && <BlinkingCursor className='w-2 h-5 mt-1 bg-brand-primary' />}
       </div>
     </div>
   );
@@ -234,10 +226,10 @@ const TerminalContactForm = () => {
                 style={{
                   backgroundColor:
                     status === 'success'
-                      ? 'var(--color-ok-400)'
+                      ? 'var(--color-status-success)'
                       : status === 'error'
-                        ? 'var(--color-coral)'
-                        : 'var(--color-lagoon)',
+                        ? 'var(--color-brand-secondary)'
+                        : 'var(--color-brand-primary)',
                   color: 'var(--color-neutral-950)',
                   opacity: status === 'submitting' ? 0.7 : 1,
                 }}
@@ -276,11 +268,11 @@ const TerminalContactForm = () => {
               >
                 <div className='flex justify-between text-xs font-mono mb-2'>
                   <span className='text-text-secondary'>Progress</span>
-                  <span className='text-lagoon'>{progress}%</span>
+                  <span className='text-brand-primary'>{progress}%</span>
                 </div>
                 <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-neutral-900'>
                   <motion.div
-                    className='h-full flex items-center font-mono bg-lagoon text-neutral-950'
+                    className='h-full flex items-center font-mono bg-brand-primary text-neutral-950'
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3 }}
@@ -328,10 +320,10 @@ const TerminalContactForm = () => {
                   style={{
                     backgroundColor:
                       status === 'success'
-                        ? 'var(--color-ok-400)'
+                        ? 'var(--color-status-success)'
                         : status === 'error'
-                          ? 'var(--color-coral)'
-                          : 'var(--color-lagoon)',
+                          ? 'var(--color-brand-secondary)'
+                          : 'var(--color-brand-primary)',
                   }}
                 />
               </motion.div>
@@ -340,9 +332,9 @@ const TerminalContactForm = () => {
 
           {/* Command hint */}
           <div className='mt-6 pt-4 border-t font-mono text-xs border-neutral-800 text-text-secondary'>
-            <span className='text-lagoon'>$</span> Type your message above or
-            try commands: <span className='text-dusk'>help</span>,{' '}
-            <span className='text-dusk'>clear</span>
+            <span className='text-brand-primary'>$</span> Type your message above or
+            try commands: <span className='text-brand-accent'>help</span>,{' '}
+            <span className='text-brand-accent'>clear</span>
           </div>
         </div>
       </motion.div>

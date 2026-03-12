@@ -46,8 +46,8 @@ const HelpButton = () => {
         className="fixed bottom-4 right-4 z-50 w-10 h-10 rounded-full flex items-center justify-center font-mono font-bold text-lg"
         style={{
           backgroundColor: 'var(--color-neutral-100)',
-          color: 'var(--color-lagoon)',
-          border: '2px solid var(--color-lagoon)',
+          color: 'var(--color-brand-primary)',
+          border: '2px solid var(--color-brand-primary)',
         }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

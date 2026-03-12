@@ -79,7 +79,7 @@ const AudioToggle = () => {
       className="fixed bottom-4 left-20 z-50 px-4 py-2 rounded-full font-mono text-xs flex items-center gap-2"
       style={{
         backgroundColor: isAudioOn
-          ? 'var(--color-ok-400)'
+          ? 'var(--color-status-success)'
           : 'var(--color-neutral-200)',
         color: isAudioOn
           ? 'var(--color-neutral-50)'

@@ -119,7 +119,7 @@ const CustomCursor = () => {
           y: trail3Y,
           translateX: '-50%',
           translateY: '-50%',
-          backgroundColor: 'var(--color-lagoon)',
+          backgroundColor: 'var(--color-brand-primary)',
           opacity: 0.2,
         }}
       />
@@ -130,7 +130,7 @@ const CustomCursor = () => {
           y: trail2Y,
           translateX: '-50%',
           translateY: '-50%',
-          backgroundColor: 'var(--color-lagoon)',
+          backgroundColor: 'var(--color-brand-primary)',
           opacity: 0.4,
         }}
       />
@@ -141,7 +141,7 @@ const CustomCursor = () => {
           y: trail1Y,
           translateX: '-50%',
           translateY: '-50%',
-          backgroundColor: 'var(--color-lagoon)',
+          backgroundColor: 'var(--color-brand-primary)',
           opacity: 0.6,
         }}
       />
@@ -164,8 +164,8 @@ const CustomCursor = () => {
         <div 
           className="w-4 h-4 rounded-full border-2"
           style={{ 
-            borderColor: 'var(--color-lagoon)',
-            backgroundColor: isHovering ? 'var(--color-lagoon)' : 'transparent',
+            borderColor: 'var(--color-brand-primary)',
+            backgroundColor: isHovering ? 'var(--color-brand-primary)' : 'transparent',
             transition: 'background-color 0.2s ease'
           }}
         />
@@ -182,7 +182,7 @@ const CustomCursor = () => {
               y: ripple.y,
               translateX: '-50%',
               translateY: '-50%',
-              borderColor: 'var(--color-lagoon)',
+              borderColor: 'var(--color-brand-primary)',
             }}
             initial={{ width: 0, height: 0, opacity: 1 }}
             animate={{ width: 60, height: 60, opacity: 0 }}

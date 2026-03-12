@@ -112,12 +112,12 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
       }}
     >
       <div className='relative w-full max-w-2xl p-8'>
-        <div className='rounded-lg overflow-hidden backdrop-blur-sm border border-dusk bg-neutral-50 relative'>
+        <div className='rounded-lg overflow-hidden backdrop-blur-sm border border-brand-accent bg-neutral-50 relative'>
           {/* scanline overlay */}
           <div className='scanlines pointer-events-none absolute inset-0'></div>
 
           {/* terminal header */}
-          <div className='px-4 py-2 bg-neutral-100 border-b border-dusk'>
+          <div className='px-4 py-2 bg-neutral-100 border-b border-brand-accent'>
             <TerminalHeader filename='system_boot.exe' />
           </div>
 
@@ -132,7 +132,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
             >
               {bootStrings.slice(0, phaseIndex + 1).map((line, i) => (
                 <motion.div key={i} variants={itemVariants}>
-                  <span className='text-lagoon'>$</span> {line}
+                  <span className='text-brand-primary'>$</span> {line}
                 </motion.div>
               ))}
             </motion.div>
@@ -148,7 +148,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
 
             {/* input prompt */}
             <div className='flex items-center gap-2'>
-              <span className='text-lagoon'>$</span>
+              <span className='text-brand-primary'>$</span>
               <input
                 type='text'
                 value={command}
@@ -167,10 +167,10 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
                 <div
                   key={i}
                   className={`flex items-center gap-2 ${
-                    i === phaseIndex ? 'text-lagoon' : 'text-neutral-500'
+                    i === phaseIndex ? 'text-brand-primary' : 'text-neutral-500'
                   }`}
                 >
-                  <span className='text-ok-400'>✓</span>
+                  <span className='text-status-success'>✓</span>
                   <span>{p}</span>
                 </div>
               ))}
@@ -182,7 +182,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
                 <span>Progress</span>
                 <span>{Math.round(progress)}%</span>
               </div>
-              <div className='font-mono text-xs tracking-wider text-ok-400'>
+              <div className='font-mono text-xs tracking-wider text-status-success'>
                 [{progressBar}]
               </div>
             </div>
@@ -198,7 +198,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
             <Barcode
               value='SYSTEM-INIT'
               className='w-48'
-              lineColor='var(--color-dusk)'
+              lineColor='var(--color-brand-accent)'
             />
           </motion.div>
         </div>
