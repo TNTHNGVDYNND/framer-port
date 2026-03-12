@@ -6,16 +6,16 @@
   --color-scheme: light;
 
   /* ========================================
-     WARM CREAM BASE SCALE (Light Theme)
+     FOREST GREEN BASE SCALE (Light Theme)
      ======================================== */
-  --color-base-100: oklch(98% 0.01 90); /* Warm white — lightest surface */
-  --color-base-200: oklch(96% 0.015 85); /* Warm cream — secondary surface */
-  --color-base-300: oklch(93% 0.02 80); /* Warm sand — card/panel bg */
+  --color-base-100: oklch(98% 0.015 120);   /* creamy avocado-white — body bg */
+  --color-base-200: oklch(96% 0.02 115);    /* slightly greener cream — card bg */
+  --color-base-300: oklch(93% 0.025 118);   /* light sage — panel/section bg */
 
-  /* Midnight Sun glow accent */
+  /* Forest glow accent */
   --color-accent-glow: oklch(
-    70% 0.15 40
-  ); /* Warm amber-orange for hero radial glow */
+    0.70 0.12 160
+  ); /* Forest green glow for hero */
 
   /* ========================================
      FONT DEFINITIONS
@@ -34,19 +34,19 @@
      ======================================== */
   --light-bg-body: var(--color-base-100);
   --light-bg-primary: oklch(27.9% 0.077 45.635); /* #461901 */
-  --light-text-primary: oklch(0.428 0.0363 232.37); /* #3b5360 */
-  --light-text-secondary: oklch(0.5154 0.0212 232.87); /* #5c6a72 */
+  --light-text-primary: oklch(0.35 0.04 160);    /* dark forest green — primary body text */
+  --light-text-secondary: oklch(0.50 0.03 160);  /* medium forest green — secondary text */
   --light-text-accent-alt: oklch(0.9581 0 0); /* #f1f1f1 */
-  --light-primary-accent: oklch(0.7732 0.0906 125.78); /* #a7c080 */
-  --light-secondary-accent: oklch(0.7498 0.1059 44.86); /* #e69875 */
-  --light-highlight: oklch(0.7487 0.0631 185.5); /* #7fbbb3 */
-  --light-border-color: oklch(0.8953 0.0271 97.64); /* #e1ddc9 */
+  --light-primary-accent: var(--color-avocado-500);  /* vibrant green */
+  --light-secondary-accent: var(--color-coral);       /* warm bridge accent */
+  --light-highlight: var(--color-dusk);                /* golden highlight — nods to dark theme */
+  --light-border-color: oklch(0.88 0.025 130);         /* sage-tinted border */
   --light-card-bg: oklch(0.9773 0.0373 95.44); /* #fff8dc */
 
   /* ========================================
      SEMANTIC MAPPINGS (Light Theme Default)
      ======================================== */
-  --color-heading: var(--color-lagoon);
+  --color-heading: var(--color-tide);
   --color-sub-title: var(--light-text-accent-alt);
   --color-text-primary: var(--light-text-primary);
   --color-text-secondary: var(--light-text-secondary);
@@ -66,11 +66,11 @@
   --color-bg-md: var(--color-dusk);
   --color-bg-b: oklch(14.7% 0.004 49.25); /* #0c0a09 */
 
-  /* Light theme glow effects */
-  --color-inner-glow: rgba(180, 220, 255, 0.8);
-  --color-md-glow: rgba(40, 120, 180, 0.8);
-  --color-outer-glow: rgba(10, 40, 80, 0.3);
-  --color-border-glow: rgba(0, 0, 0, 0.11);
+  /* Light theme glow effects — green-tinted */
+  --color-inner-glow: oklch(0.85 0.08 160 / 80%);    /* light forest glow */
+  --color-md-glow: oklch(0.55 0.10 170 / 80%);        /* mid-depth forest */
+  --color-outer-glow: oklch(0.30 0.06 180 / 30%);     /* deep forest shadow */
+  --color-border-glow: oklch(0 0 0 / 11%);             /* keep — neutral shadow */
 
   /* Duration tokens */
   --duration-fast: 150ms;
@@ -78,16 +78,16 @@
   --duration-slow: 500ms;
 
   /* ========================================
-     TIER 2 - SEMANTIC ROLES (NEW)
+     TIER 2 - SEMANTIC ROLES (CANONICAL)
      ======================================== */
-  --color-surface-base: var(--color-bg-body);
-  --color-surface-elevated: var(--color-card-bg);
+  --color-surface-base: var(--light-bg-body);
+  --color-surface-elevated: var(--color-base-200);
   --color-surface-overlay: var(--color-outer-glow);
 
-  --color-text-base: var(--color-text-primary);
-  --color-text-muted: var(--color-text-secondary);
-  --color-text-heading: var(--color-heading);
-  --color-text-inverted: var(--color-text-accent-alt);
+  --color-text-base: var(--light-text-primary);
+  --color-text-muted: var(--light-text-secondary);
+  --color-text-heading: var(--color-tide);
+  --color-text-inverted: var(--light-text-accent-alt);
 
   --color-brand-primary: var(--color-lagoon);
   --color-brand-secondary: var(--color-coral);
@@ -97,7 +97,7 @@
   --color-status-warning: var(--color-warn-400);
   --color-status-error: var(--color-fail-400);
 
-  --color-border-default: var(--color-border-color);
+  --color-border-default: var(--light-border-color);
   --color-border-subtle: var(--color-neutral-100);
 
   /* ── 2. RELATIVE COLOR LOGIC (Interaction Math) ─────────────────────── */
@@ -125,6 +125,18 @@
   --color-radial-glow: radial-gradient(circle at center, var(--color-brand-primary) 0%, transparent 70%);
 
   /* ── 4. ATMOSPHERE & TERMINAL (Tier 3 Component Tokens) ─────────────── */
+
+  /* Component-specific tokens */
+  --color-terminal-glow: var(--color-brand-primary);
+  --color-terminal-cursor: var(--color-brand-primary);
+  --color-terminal-bg: var(--color-surface-elevated);
+  --color-scanline: color-mix(in srgb, var(--color-surface-base), transparent 90%);
+
+  /* Atmosphere tokens for Layout.jsx background */
+  --color-atmo-center: oklch(96% 0.02 130);        /* soft avocado-cream center */
+  --color-atmo-mid: oklch(92% 0.025 140);           /* sage-tinted mid-ring */
+  --color-atmo-edge: oklch(88% 0.03 150);           /* deeper sage edge */
+  --color-atmo-deep: oklch(95% 0.015 120);          /* very subtle green tint */
 }
 
 /* ========================================
@@ -244,17 +256,17 @@
     --color-red-950: oklch(97.1% 0.013 17.38);
 
     /* ========================================
-       DARK THEME VARIABLES
+       DARK THEME VARIABLES (OKLCH format)
        ======================================== */
     --dark-bg-primary: oklch(12.2% 0.05 38.18);
-    --dark-text-primary: #e0e0e0;
-    --dark-text-secondary: #a0b0a0;
-    --dark-text-accent-alt: #303030;
-    --dark-primary-accent: #8fbc8f;
-    --dark-secondary-accent: #d2b48c;
-    --dark-highlight: #f0e68c;
-    --dark-border-color: #404d44;
-    --dark-card-bg: #2a3a2a;
+    --dark-text-primary: oklch(0.90 0.005 90);        /* warm near-white */
+    --dark-text-secondary: oklch(0.73 0.025 150);     /* sage-tinted muted */
+    --dark-text-accent-alt: oklch(0.25 0.005 90);     /* very dark warm gray */
+    --dark-primary-accent: oklch(0.73 0.08 150);      /* dark sage green */
+    --dark-secondary-accent: oklch(0.76 0.06 75);     /* warm tan/driftwood */
+    --dark-highlight: oklch(0.87 0.14 95);             /* golden khaki */
+    --dark-border-color: oklch(0.38 0.02 150);         /* dark olive border */
+    --dark-card-bg: oklch(0.24 0.02 150);              /* deep forest card */
 
     /* ========================================
        SEMANTIC MAPPINGS (Dark Theme)
@@ -282,5 +294,34 @@
     --color-md-glow: rgb(98, 0, 0, 0.8);
     --color-outer-glow: rgba(70, 25, 10, 0.1);
     --color-border-glow: rgba(0, 0, 0, 1);
+
+    /* ========================================
+       TIER 2 - SEMANTIC ROLES (CANONICAL)
+       ======================================== */
+    --color-surface-base: var(--dark-bg-primary);
+    --color-surface-elevated: var(--dark-card-bg);
+    --color-surface-overlay: var(--color-outer-glow);
+
+    --color-text-base: var(--dark-text-primary);
+    --color-text-muted: var(--dark-text-secondary);
+    --color-text-heading: var(--color-brand-accent);
+    --color-text-inverted: var(--dark-text-accent-alt);
+
+    --color-brand-primary: var(--color-lagoon);
+    --color-brand-secondary: var(--color-coral);
+    --color-brand-accent: var(--color-dusk);
+
+    --color-status-success: var(--color-ok-400);
+    --color-status-warning: var(--color-warn-400);
+    --color-status-error: var(--color-fail-400);
+
+    --color-border-default: var(--dark-border-color);
+    --color-border-subtle: var(--color-neutral-700);
+
+    /* Dark theme atmosphere tokens */
+    --color-atmo-center: oklch(0.18 0.04 70);         /* dark amber center */
+    --color-atmo-mid: oklch(0.13 0.03 60);            /* dark warm mid */
+    --color-atmo-edge: oklch(0.08 0.02 50);           /* near-black warm edge */
+    --color-atmo-deep: oklch(0 0 0);                   /* pure black outer */
   }
 }
