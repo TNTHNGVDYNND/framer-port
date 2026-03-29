@@ -97,13 +97,19 @@ User decided to use English only for simplicity.
 
 ## 7. Server Port Alignment
 
-### Issue
-- Client defaults to port 3001
-- Server defaults to port 5000
+### Issue (DISCOVERED)
+- `server/server.js` line 12: `const PORT = process.env.PORT || 5000;`
+- `client/src/services/api.js`: `baseURL: 'http://localhost:3001'` (defaults to wrong port)
+- Frontend cannot connect to backend due to port mismatch
+
+### Source Files
+- `server/server.js:12` - Port configuration
+- `client/src/services/api.js` - API base URL
 
 ### Planned Fix
-- Synchronize via environment variables
-- Ensure VITE_API_URL points to correct server port
+- Update `client/src/services/api.js` to use port 5000
+- Or set `VITE_API_URL` environment variable
+- Uncomment MongoDB connection in `server/server.js:23-30`
 
 ### Status
-**PENDING** - Server-side work in progress
+**PENDING** - Needs immediate fix for backend integration

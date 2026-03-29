@@ -20,7 +20,7 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 │   │   ├── hooks/       # Custom hooks (useScrollVelocity, etc.)
 │   │   ├── styles/      # Tailwind v4 + Design Tokens
 │   │   └── services/   # API services
-├── server/              # Express API (Port 3001)
+├── server/              # Express API (Port 5000)
 │   ├── models/          # Mongoose schemas
 │   ├── controllers/     # Route handlers
 │   └── routes/         # API routes
@@ -54,6 +54,21 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 - **Mini Terminal:** Easter eggs with hidden commands (matrix, sudo, coffee)
 - **Konami Code:** Secret mode activation (⬆⬆⬇⬇⬅➡⬅➡BA)
 
+## Original Documents (Reference)
+
+The `documents/` folder contains the original planning and implementation documents. These are preserved for historical reference and contain detailed technical information:
+
+| Document | Purpose |
+|----------|---------|
+| `build.md` | Original MERN blueprint |
+| `context.md` | Original GEMINI.md planning context |
+| `project-instructions.md` | Technical persona and implementation rules |
+| `UI-FE-V1.md` | Comprehensive UI/UX refactoring blueprint |
+| `styles-refactor-hybrid.md` | CSS architecture and design tokens |
+| `bugfix-implementation-plan.md` | Recent bug fixes |
+
+See cross-references in each section for which original document informed each topic.
+
 ## Documentation Sections
 
 | File | Description |
@@ -67,6 +82,27 @@ A high-end interactive portfolio website with cinematic animations, terminal-ins
 | [06-bugfixes-technical.md](06-bugfixes-technical.md) | Bug fixes & technical decisions |
 | [07-code-quality.md](07-code-quality.md) | Code standards & cleanup |
 | [08-future-improvements.md](08-future-improvements.md) | What's next |
+
+## Key Files for Next Agent
+
+### Server-Side Priority
+```
+server/server.js           # Port 5000, MongoDB connection commented out (line 23-30)
+server/controllers/        # Placeholder controllers need implementation
+server/models/            # Need Contact model creation
+```
+
+### Frontend-to-Backend Bridge
+```
+client/src/services/api.js  # Defaults to localhost:3001 (needs 5000)
+client/src/pages/Contact.jsx  # Uses setTimeout simulation (not real API)
+```
+
+### Documentation Source
+```
+documents/UI-FE-V1.md       # Most comprehensive planning doc
+documents/06-bugfixes-technical.md  # Server port alignment issue
+```
 
 ## Running the Project
 

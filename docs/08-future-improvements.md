@@ -8,17 +8,28 @@
 
 ## Server-Side Priorities
 
-### 1. Contact Form Integration
-- [ ] Create Contact Mongoose model
-- [ ] Implement database persistence
-- [ ] Connect frontend to real API endpoint
-- [ ] Add server-side validation
+### 1. CRITICAL: Port Alignment
+- **File:** `client/src/services/api.js`
+- **Issue:** Defaults to `localhost:3001`, but server runs on `5000`
+- **Fix:** Change baseURL to `http://localhost:5000` or set `VITE_API_URL`
 
-### 2. Port Alignment
-- [ ] Synchronize client/server ports via environment variables
-- [ ] Ensure VITE_API_URL points to correct server port
+### 2. MongoDB Connection
+- **File:** `server/server.js:23-30`
+- **Issue:** `mongoose.connect()` is commented out
+- **Fix:** Uncomment and add MongoDB URI to `.env`
 
-### 3. API Refinement
+### 3. Contact Form Integration
+- **Files:**
+  - `server/models/` - Need to create `Contact.js` model
+  - `server/controllers/contactController.js` - Currently placeholder
+  - `client/src/pages/Contact.jsx` - Uses `setTimeout` simulation, not real API
+- **Fix:** 
+  1. Create Contact Mongoose model
+  2. Implement real database persistence
+  3. Connect frontend form to `/api/contact` endpoint
+  4. Add server-side validation
+
+### 4. API Refinement
 - [ ] Complete /api/contact endpoint
 - [ ] Test MongoDB connection
 - [ ] Error handling improvements

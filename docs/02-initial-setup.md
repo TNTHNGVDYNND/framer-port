@@ -20,8 +20,26 @@ npm install express mongoose cors dotenv nodemon
 
 ### Configuration
 - ES Modules enabled (`"type": "module"`)
-- Basic Express server in `server.js`
+- Basic Express server in `server.js` (runs on port **5000**, not 3001)
 - RESTful API structure with Controller-Service-Model pattern
+- **Note:** MongoDB connection in `server/server.js:23-30` is currently commented out
+
+### Server Structure
+```
+server/
+├── server.js              # Main entry, port 5000, MongoDB commented out
+├── config/
+│   └── db.js              # Database connection (unused when commented)
+├── models/                # Mongoose schemas (need Contact model)
+│   └── Project.js         # Existing project model
+├── controllers/           # Route handlers
+│   ├── projectController.js
+│   └── contactController.js  # Placeholder implementation
+├── routes/                # API routes
+│   ├── projectRoutes.js
+│   └── contactRoutes.js
+└── middleware/            # Error handling, etc.
+```
 
 ### Initial API Endpoints
 
