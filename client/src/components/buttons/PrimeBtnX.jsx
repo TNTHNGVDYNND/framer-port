@@ -1,10 +1,18 @@
+/*
+ * @deprecated - This file is not currently in use
+ * It was an early design system primitive button component
+ * Preserved for future refactoring reference
+ *
+ * PrimeBtnX has been superseded by PrimeBtn in ./PrimeBtn.jsx
+ */
+
 /* design system primitive button component */
 import React from 'react';
 import PropTypes from 'prop-types';
 import PrimeGradient from './PrimeGradient.jsx';
 import { useMemo, useState, useEffect } from 'react';
 
-const PrimeBtn = ({
+const PrimeBtnX = ({
   className = '',
   href = null,
   onClick = null,
@@ -118,4 +126,4 @@ PrimeBtn.propTypes = {
   rel: PropTypes.string, // Rel attribute for anchor element
 };
 
-export default PrimeBtn;
+export default PrimeBtnX;
