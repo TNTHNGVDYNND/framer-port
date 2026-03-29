@@ -1,3 +1,10 @@
+/*
+ * @deprecated - WebGL shader not currently in use
+ * Replaced with CSS-based background effects for better performance
+ * Simplified 2-octave FBM noise shader with forest colors
+ * Preserved for future WebGL background re-implementation
+ */
+
 import { shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 

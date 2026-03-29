@@ -1,3 +1,10 @@
+/*
+ * @deprecated - WebGL background component not currently in use
+ * Replaced with CSS-based background effects for better performance
+ * Full-screen fluid shader with mouse interaction and reduced motion support
+ * Preserved for future WebGL background re-implementation
+ */
+
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrthographicCamera } from '@react-three/drei';
