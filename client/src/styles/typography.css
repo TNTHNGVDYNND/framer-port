@@ -1,0 +1,39 @@
+/* ========================================
+   TYPOGRAPHY — Reusable type classes
+   Adapted from stylex reference for terminal portfolio aesthetic
+   ======================================== */
+
+@layer components {
+  .terminal-h1 {
+    @apply font-dune font-bold leading-tight;
+    @apply text-4xl sm:text-5xl md:text-7xl;
+  }
+
+  .terminal-h2 {
+    @apply font-dune font-bold leading-tight;
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  .terminal-h3 {
+    @apply font-mono font-semibold leading-normal;
+    @apply text-xl md:text-2xl;
+  }
+
+  .body-1 {
+    @apply font-mono;
+    @apply text-sm leading-relaxed md:text-base md:leading-7;
+  }
+
+  .body-2 {
+    @apply font-mono font-light;
+    @apply text-sm leading-6 md:text-base;
+  }
+
+  .caption {
+    @apply font-mono text-xs;
+  }
+
+  .tagline-mono {
+    @apply font-mono font-light text-xs tracking-widest uppercase;
+  }
+}

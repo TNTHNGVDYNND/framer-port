@@ -59,7 +59,7 @@ const BlogCard = ({ post, index }) => {
           {post.tag_list.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className='px-2 py-0.5 rounded text-xs font-mono bg-neutral-100 text-text-primary'
+              className='px-2 py-0.5 rounded text-xs font-mono bg-surface-base text-text-primary'
             >
               #{tag}
             </span>
@@ -142,7 +142,7 @@ const BlogSection = () => {
           />
 
           <h2 className='text-3xl md:text-4xl font-bold font-mono mb-4 text-heading'>
-            <span className='text-neutral-500 mr-2'>$</span>./fetch_blog_posts
+            <span className='text-text-muted mr-2'>$</span>./fetch_blog_posts
           </h2>
 
           <p className='font-mono text-sm max-w-2xl text-text-secondary'>

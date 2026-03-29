@@ -39,7 +39,7 @@ const ResumeDownload = () => {
         transition={{ duration: 0.6 }}
       >
         {/* Header */}
-        <div className='terminal-window__header bg-neutral-100'>
+        <div className='terminal-window__header bg-surface-base'>
           <TerminalHeader filename='resume_download.exe' />
         </div>
 
@@ -47,7 +47,7 @@ const ResumeDownload = () => {
         <div className='p-6 md:p-8'>
           {/* Title */}
           <h3 className='text-2xl font-bold font-mono mb-4 text-heading'>
-            <span className='text-neutral-500 mr-2'>$</span>get_resume.pdf
+            <span className='text-text-muted mr-2'>$</span>get_resume.pdf
           </h3>
 
           <p className='font-mono text-sm mb-6 text-text-secondary'>
@@ -62,9 +62,9 @@ const ResumeDownload = () => {
             className='w-full py-4 px-6 rounded font-mono text-sm font-bold tracking-wider transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 mb-4 focus-ring'
             style={{
               backgroundColor: isDownloading
-                ? 'var(--color-neutral-300)'
+                ? 'var(--color-border-subtle)'
                 : 'var(--color-brand-primary)',
-              color: 'var(--color-neutral-950)',
+              color: 'var(--color-text-base)',
             }}
             whileHover={{ scale: isDownloading ? 1 : 1.02 }}
             whileTap={{ scale: isDownloading ? 1 : 0.98 }}
@@ -97,9 +97,9 @@ const ResumeDownload = () => {
                   <span className='text-text-secondary'>Progress</span>
                   <span className='text-brand-primary'>{progress}%</span>
                 </div>
-                <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-neutral-100'>
+                <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-surface-base'>
                   <motion.div
-                    className='h-full flex items-center font-mono bg-brand-primary text-neutral-950'
+                    className='h-full flex items-center font-mono bg-brand-primary text-text-base'
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3 }}
@@ -110,7 +110,7 @@ const ResumeDownload = () => {
                         .join('')}
                     </span>
                   </motion.div>
-                  <span className='pl-2 font-mono text-neutral-400'>
+                  <span className='pl-2 font-mono text-text-muted'>
                     {Array(10 - Math.ceil(progress / 10))
                       .fill('░')
                       .join('')}
@@ -123,7 +123,7 @@ const ResumeDownload = () => {
           {/* QR Code Toggle */}
           <button
             onClick={toggleQR}
-            className='w-full py-3 px-6 rounded font-mono text-sm border transition-all duration-300 flex items-center justify-center gap-2 bg-transparent border-neutral-300 text-text-primary hover:bg-neutral-100 focus-ring'
+            className='w-full py-3 px-6 rounded font-mono text-sm border transition-all duration-300 flex items-center justify-center gap-2 bg-transparent border-border-default text-text-primary hover:bg-surface-base focus-ring'
           >
             <span>{showQR ? 'Hide QR Code' : 'Show QR Code'}</span>
             <span>{showQR ? '▲' : '▼'}</span>
@@ -133,7 +133,7 @@ const ResumeDownload = () => {
           <AnimatePresence>
             {showQR && (
               <motion.div
-                className='mt-6 p-6 rounded border text-center bg-neutral-50 border-border-color'
+                className='mt-6 p-6 rounded border text-center bg-surface-base border-border-default'
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -157,7 +157,7 @@ const ResumeDownload = () => {
                 <p className='font-mono text-xs text-text-secondary'>
                   Scan with your phone camera
                 </p>
-                <p className='font-mono text-xs mt-2 text-neutral-400'>
+                <p className='font-mono text-xs mt-2 text-text-muted'>
                   (Or click the download button above)
                 </p>
               </motion.div>

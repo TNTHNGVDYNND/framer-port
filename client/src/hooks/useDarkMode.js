@@ -4,8 +4,11 @@
  * keep React in sync
  * update storage when toggled
  * update DOM when toggled
+ *
+ * Uses the View Transitions API for smooth cross-fade between themes.
+ * Falls back to instant switch in browsers that don't support it.
  */
-import { useLayoutEffect, useState, useCallback } from 'react';
+import { useLayoutEffect, useState, useCallback, useRef } from 'react';
 
 const THEME_KEY = 'theme';
 
@@ -26,25 +29,51 @@ function pickInitial() {
   );
 }
 
+/**
+ * Apply the theme to the DOM — separated so it can be called
+ * inside a View Transition callback.
+ */
+function applyTheme(isDark) {
+  const html = document.documentElement;
+  const theme = isDark ? 'dark' : 'light';
+
+  html.classList.toggle('dark', isDark);
+  html.dataset.theme = theme;
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch {
+    // localStorage may not be available
+  }
+}
+
 export default function useDarkMode() {
   const [isDarkMode, setIsDarkMode] = useState(() => pickInitial());
+  const isTransitioning = useRef(false);
 
+  // Apply theme on mount and when isDarkMode changes (non-toggle path)
   useLayoutEffect(() => {
-    const html = document.documentElement;
-    const theme = isDarkMode ? 'dark' : 'light';
-
-    html.classList.toggle('dark', isDarkMode);
-    html.dataset.theme = theme;
-    try {
-      localStorage.setItem(THEME_KEY, theme);
-    } catch {
-      // localStorage may not be available
+    // Skip if a view transition is handling it
+    if (isTransitioning.current) {
+      isTransitioning.current = false;
+      return;
     }
+    applyTheme(isDarkMode);
   }, [isDarkMode]);
 
   const toggleDarkMode = useCallback(() => {
-    setIsDarkMode((v) => !v);
-  }, []);
+    const nextDark = !isDarkMode;
+
+    // Use View Transitions API for smooth cross-fade if available
+    if (document.startViewTransition) {
+      isTransitioning.current = true;
+      document.startViewTransition(() => {
+        applyTheme(nextDark);
+        setIsDarkMode(nextDark);
+      });
+    } else {
+      setIsDarkMode(nextDark);
+    }
+  }, [isDarkMode]);
 
   return {
     isDarkMode,

@@ -20,7 +20,7 @@ const ThemeToggleBtn = () => {
     ${
       isDarkMode
         ? 'bg-radial-[at_25%_25%] from-warn-700 via-warn-900 via-10% to-dusk to-75%'
-        : 'bg-radial-[at_25%_25%] from-neutral-950 via-neutral-700 via-60% to-neutral-200 to-45%'
+        : 'bg-radial-[at_25%_25%] from-surface-base via-surface-elevated via-60% to-surface-overlay to-45%'
     }
   `}
           initial={{ opacity: 0, rotate: -90, scale: 0 }}

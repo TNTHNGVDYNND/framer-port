@@ -104,7 +104,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
 
   return (
     <motion.div
-      className='fixed inset-0 z-100 flex items-center justify-center font-mono text-sm bg-neutral-50'
+      className='fixed inset-0 z-100 flex items-center justify-center font-mono text-sm bg-surface-base'
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
@@ -112,12 +112,12 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
       }}
     >
       <div className='relative w-full max-w-2xl p-8'>
-        <div className='rounded-lg overflow-hidden backdrop-blur-sm border border-brand-accent bg-neutral-50 relative'>
+        <div className='rounded-lg overflow-hidden backdrop-blur-sm border border-brand-accent bg-surface-base relative'>
           {/* scanline overlay */}
           <div className='scanlines pointer-events-none absolute inset-0'></div>
 
           {/* terminal header */}
-          <div className='px-4 py-2 bg-neutral-100 border-b border-brand-accent'>
+          <div className='px-4 py-2 bg-surface-elevated border-b border-brand-accent'>
             <TerminalHeader filename='system_boot.exe' />
           </div>
 
@@ -128,7 +128,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
               variants={containerVariants}
               initial='hidden'
               animate='visible'
-              className='space-y-1 text-xs text-neutral-500 font-mono'
+              className='space-y-1 text-xs text-text-muted font-mono'
             >
               {bootStrings.slice(0, phaseIndex + 1).map((line, i) => (
                 <motion.div key={i} variants={itemVariants}>
@@ -139,7 +139,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
 
             {/* command output log */}
             {output.length > 0 && (
-              <div className='space-y-1 text-xs text-neutral-500 font-mono'>
+              <div className='space-y-1 text-xs text-text-muted font-mono'>
                 {output.map((ln) => (
                   <div key={ln.id}>{ln.text}</div>
                 ))}
@@ -167,7 +167,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
                 <div
                   key={i}
                   className={`flex items-center gap-2 ${
-                    i === phaseIndex ? 'text-brand-primary' : 'text-neutral-500'
+                    i === phaseIndex ? 'text-brand-primary' : 'text-text-muted'
                   }`}
                 >
                   <span className='text-status-success'>✓</span>
@@ -178,7 +178,7 @@ const TerminalLoader = ({ onComplete = () => {} }) => {
 
             {/* progress bar */}
             <div className='space-y-2'>
-              <div className='flex justify-between text-xs text-neutral-500'>
+              <div className='flex justify-between text-xs text-text-muted'>
                 <span>Progress</span>
                 <span>{Math.round(progress)}%</span>
               </div>

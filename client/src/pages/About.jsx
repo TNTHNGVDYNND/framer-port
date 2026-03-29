@@ -38,7 +38,7 @@ const About = () => {
               />
               <span
                 className='ml-4 text-sm font-mono'
-                style={{ color: 'var(--color-text-secondary)' }}
+                style={{ color: 'var(--color-text-muted)' }}
               >
                 about.txt
               </span>
@@ -47,9 +47,9 @@ const About = () => {
             {/* Main heading */}
             <h1
               className='text-4xl md:text-6xl lg:text-7xl font-bold font-dune mb-6'
-              style={{ color: 'var(--color-heading)' }}
+              style={{ color: 'var(--color-text-heading)' }}
             >
-              <span className='text-neutral-500 font-mono text-2xl md:text-3xl block mb-2'>
+              <span className='text-text-muted font-mono text-2xl md:text-3xl block mb-2'>
                 $
               </span>
               Tuanthong Vaidyanond
@@ -57,7 +57,7 @@ const About = () => {
 
             {/* Multilingual indicator */}
             <div className='flex items-center gap-3 mb-8 font-mono text-sm'>
-              <span style={{ color: 'var(--color-text-secondary)' }}>
+              <span style={{ color: 'var(--color-text-muted)' }}>
                 Languages:
               </span>
               {['EN', 'DE', 'ภาษาไทย'].map((lang) => (
@@ -65,9 +65,9 @@ const About = () => {
                   key={lang}
                   className='px-2 py-1 rounded text-xs border'
                   style={{
-                    backgroundColor: 'var(--color-neutral-100)',
-                    borderColor: 'var(--color-neutral-200)',
-                    color: 'var(--color-text-primary)',
+                    backgroundColor: 'var(--color-surface-base)',
+                    borderColor: 'var(--color-border-subtle)',
+                    color: 'var(--color-text-base)',
                   }}
                 >
                   {lang}
@@ -82,7 +82,7 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ color: 'var(--color-text-primary)' }}
+            style={{ color: 'var(--color-text-base)' }}
           >
             <p>
               I grew up in Bangkok, Thailand, in a vibrant urban environment
@@ -95,7 +95,7 @@ const About = () => {
             </p>
             <p
               className='font-mono text-sm'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               <span style={{ color: 'var(--color-status-success)' }}>➜</span> I am
               actively seeking an apprenticeship or full-time role where I can
@@ -113,8 +113,8 @@ const About = () => {
           <motion.div
             className='border rounded-lg p-8 md:p-12 relative overflow-hidden'
             style={{
-              backgroundColor: 'var(--color-neutral-50)',
-              borderColor: 'var(--color-neutral-200)',
+              backgroundColor: 'var(--color-surface-base)',
+              borderColor: 'var(--color-border-subtle)',
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -133,15 +133,15 @@ const About = () => {
 
             <h2
               className='text-2xl md:text-3xl font-bold font-mono mb-6'
-              style={{ color: 'var(--color-heading)' }}
+              style={{ color: 'var(--color-text-heading)' }}
             >
-              <span className='text-neutral-500 mr-2'>$</span>The Building
+              <span className='text-text-muted mr-2'>$</span>The Building
               Blocks Philosophy
             </h2>
 
             <div
               className='prose prose-lg max-w-none'
-              style={{ color: 'var(--color-text-primary)' }}
+              style={{ color: 'var(--color-text-base)' }}
             >
               <p className='mb-4'>
                 The Building Blocks represents the foundation and framework of
@@ -165,7 +165,7 @@ const About = () => {
               />
               <span
                 className='font-mono text-sm'
-                style={{ color: 'var(--color-text-secondary)' }}
+                style={{ color: 'var(--color-text-muted)' }}
               >
                 Status: Seeking opportunities
               </span>

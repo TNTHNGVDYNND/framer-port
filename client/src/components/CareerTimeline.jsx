@@ -79,7 +79,7 @@ const TimelineNode = ({ phase, index }) => {
       <div className='relative'>
         {/* Year badge */}
         <div
-          className='inline-block px-3 py-1 rounded-full text-xs font-mono mb-3 border bg-neutral-100'
+          className='inline-block px-3 py-1 rounded-full text-xs font-mono mb-3 border bg-surface-base'
           style={{
             borderColor: phase.color,
             color: phase.color,
@@ -90,7 +90,7 @@ const TimelineNode = ({ phase, index }) => {
 
         {/* Role title */}
         <h3 className='text-2xl md:text-3xl font-bold mb-1 font-mono text-heading'>
-          <span className='text-neutral-500 mr-2'>$</span>
+          <span className='text-text-muted mr-2'>$</span>
           {phase.role}
         </h3>
 
@@ -99,7 +99,7 @@ const TimelineNode = ({ phase, index }) => {
           <span className='font-mono font-semibold text-text-primary'>
             {phase.company}
           </span>
-          <span className='text-neutral-400'>|</span>
+          <span className='text-text-muted'>|</span>
           <span className='font-mono text-xs text-text-secondary'>
             {phase.location}
           </span>
@@ -115,7 +115,7 @@ const TimelineNode = ({ phase, index }) => {
           {phase.skills.map((skill, i) => (
             <span
               key={i}
-              className='px-2 py-1 rounded text-xs font-mono border bg-neutral-100 border-neutral-200 text-text-primary'
+              className='px-2 py-1 rounded text-xs font-mono border bg-surface-base border-border-subtle text-text-primary'
             >
               {skill}
             </span>
@@ -151,8 +151,8 @@ const CareerTimeline = () => {
       <div
         className='absolute inset-0 opacity-[0.02]'
         style={{
-          backgroundImage: `linear-gradient(var(--color-neutral-300) 1px, transparent 1px),
-                           linear-gradient(90deg, var(--color-neutral-300) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
+                           linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px)`,
           backgroundSize: '50px 50px',
         }}
       />
@@ -160,7 +160,7 @@ const CareerTimeline = () => {
       <div className='max-w-5xl mx-auto relative'>
         {/* Terminal window header */}
         <motion.div
-          className='mb-12 border-b pb-4 border-neutral-200'
+          className='mb-12 border-b pb-4 border-border-subtle'
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -168,7 +168,7 @@ const CareerTimeline = () => {
           <TerminalHeader filename='career_history.sh' className='mb-2' />
 
           <h2 className='text-3xl md:text-4xl font-bold font-mono text-heading'>
-            <span className='text-neutral-500 mr-2'>$</span>cat career.txt
+            <span className='text-text-muted mr-2'>$</span>cat career.txt
           </h2>
           <p className='mt-2 font-mono text-sm text-text-secondary'>
             <span className='text-status-success'>➜</span> Loading career trajectory...
@@ -198,7 +198,7 @@ const CareerTimeline = () => {
           </svg>
 
           {/* Mobile connecting line */}
-          <div className='absolute left-4 top-8 bottom-8 w-0.5 md:hidden pointer-events-none bg-neutral-200' />
+          <div className='absolute left-4 top-8 bottom-8 w-0.5 md:hidden pointer-events-none bg-border-subtle' />
 
           {/* Timeline nodes */}
           <div className='space-y-16 md:space-y-24 relative z-10'>

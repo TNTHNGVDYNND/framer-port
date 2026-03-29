@@ -43,7 +43,7 @@ const PrimeBtn = ({
     () =>
       isOutline
         ? 'border-2 border-border-color text-accent-alt'
-        : 'shadow-lg text-neutral-50',
+        : 'shadow-lg text-text-inverted',
     [isOutline]
   );
 

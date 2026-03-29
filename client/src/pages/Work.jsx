@@ -38,18 +38,18 @@ const Work = () => {
           >
             <div
               className='h-px flex-1'
-              style={{ backgroundColor: 'var(--color-neutral-200)' }}
+              style={{ backgroundColor: 'var(--color-border-subtle)' }}
             />
             <span
               className='font-mono text-sm uppercase tracking-wider'
-              style={{ color: 'var(--color-text-secondary)' }}
+              style={{ color: 'var(--color-text-muted)' }}
             >
               <span style={{ color: 'var(--color-brand-primary)' }}>$</span> ls -la
               projects/
             </span>
             <div
               className='h-px flex-1'
-              style={{ backgroundColor: 'var(--color-neutral-200)' }}
+              style={{ backgroundColor: 'var(--color-border-subtle)' }}
             />
           </motion.div>
 

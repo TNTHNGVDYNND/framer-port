@@ -26,7 +26,7 @@ const NavItem = ({ to, children, label }) => {
         className={({ isActive }) => `
           relative block px-4 py-3 font-mono text-xs uppercase tracking-wider
           transition-colors duration-300 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-brand-primary
-          ${isActive ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}
+          ${isActive ? 'text-white' : 'text-text-muted hover:text-text-base'}
         `}
         aria-label={`Navigate to ${label} page`}
         aria-current={({ isActive }) => (isActive ? 'page' : undefined)}
@@ -82,7 +82,7 @@ const Sidebar = () => {
 
   return (
     <motion.nav
-      className='fixed left-0 top-0 bottom-0 w-16 bg-neutral-50/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-brand-accent/20'
+      className='fixed left-0 top-0 bottom-0 w-16 bg-surface-base/80 backdrop-blur-md z-50 flex flex-col py-6 border-r border-brand-accent/20'
       variants={{
         hidden: { x: -100, opacity: 0 },
         visible: {
@@ -118,7 +118,7 @@ const Sidebar = () => {
             className='w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold'
             style={{
               backgroundColor: 'var(--color-brand-accent)',
-              color: 'var(--color-neutral-50)',
+              color: 'var(--color-surface-base)',
             }}
             aria-hidden="true"
           >

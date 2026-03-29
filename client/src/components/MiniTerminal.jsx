@@ -250,7 +250,7 @@ const MiniTerminal = () => {
           viewport={{ once: true }}
         >
           <h2 className='text-2xl font-bold font-mono mb-2 text-heading'>
-            <span className='text-neutral-500 mr-2'>$</span>interactive_terminal
+            <span className='text-text-muted mr-2'>$</span>interactive_terminal
           </h2>
           <p className='font-mono text-sm text-text-secondary'>
             <span className='text-status-success'>➜</span> Type a command to explore
@@ -262,7 +262,7 @@ const MiniTerminal = () => {
         <motion.div
           className='terminal-window bg-border-glow'
           style={{
-            borderColor: 'var(--color-neutral-500)',
+            borderColor: 'var(--color-border-default)',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
           }}
           initial={{ opacity: 0, y: 30 }}
@@ -274,7 +274,7 @@ const MiniTerminal = () => {
           <div
             className='terminal-window__header py-2 bg-status-success'
             style={{
-              borderColor: 'var(--color-neutral-800)',
+                borderColor: 'var(--color-border-default)',
             }}
           >
             <TerminalHeader filename='easter_eggs.sh' />
@@ -287,7 +287,7 @@ const MiniTerminal = () => {
               ref={terminalRef}
               className='h-64 overflow-y-auto mb-4 p-4 rounded font-mono text-sm border bg-outer-glow'
               style={{
-                borderColor: 'var(--color-neutral-800)',
+            borderColor: 'var(--color-border-default)',
               }}
             >
               <AnimatePresence>
@@ -303,7 +303,7 @@ const MiniTerminal = () => {
                     <div className='mb-2'>
                       Try typing: <span className='text-brand-primary'>help</span>
                     </div>
-                    <div className='text-neutral-500'>
+                    <div className='text-text-muted'>
                       (Hint: Use ⬆⬆⬇⬇⬅➡⬅➡BA for a surprise)
                     </div>
                   </motion.div>

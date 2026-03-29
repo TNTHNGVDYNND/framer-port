@@ -158,7 +158,7 @@ const TerminalContactForm = () => {
       <motion.div
         className='terminal-window bg-outer-glow'
         style={{
-          borderColor: 'var(--color-neutral-700)',
+          borderColor: 'var(--color-border-default)',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         }}
         initial={{ opacity: 0, y: 30 }}
@@ -168,9 +168,9 @@ const TerminalContactForm = () => {
       >
         {/* Terminal Header */}
         <div
-          className='terminal-window__header bg-neutral-900'
+          className='terminal-window__header bg-surface-base'
           style={{
-            borderColor: 'var(--color-neutral-800)',
+            borderColor: 'var(--color-border-default)',
           }}
         >
           <TerminalHeader
@@ -230,7 +230,7 @@ const TerminalContactForm = () => {
                       : status === 'error'
                         ? 'var(--color-brand-secondary)'
                         : 'var(--color-brand-primary)',
-                  color: 'var(--color-neutral-950)',
+                  color: 'var(--color-text-base)',
                   opacity: status === 'submitting' ? 0.7 : 1,
                 }}
                 whileHover={{ scale: status === 'idle' ? 1.02 : 1 }}
@@ -270,9 +270,9 @@ const TerminalContactForm = () => {
                   <span className='text-text-secondary'>Progress</span>
                   <span className='text-brand-primary'>{progress}%</span>
                 </div>
-                <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-neutral-900'>
+                <div className='h-6 font-mono text-xs flex items-center rounded overflow-hidden bg-surface-base'>
                   <motion.div
-                    className='h-full flex items-center font-mono bg-brand-primary text-neutral-950'
+                    className='h-full flex items-center font-mono bg-brand-primary text-text-base'
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3 }}
@@ -283,7 +283,7 @@ const TerminalContactForm = () => {
                         .join('')}
                     </span>
                   </motion.div>
-                  <span className='pl-2 font-mono text-neutral-600'>
+                  <span className='pl-2 font-mono text-text-muted'>
                     {Array(10 - Math.ceil(progress / 10))
                       .fill('░')
                       .join('')}
@@ -297,7 +297,7 @@ const TerminalContactForm = () => {
           <AnimatePresence>
             {terminalOutput.length > 0 && (
               <motion.div
-                className='mt-6 p-4 rounded font-mono text-xs border bg-neutral-900 border-neutral-800'
+                className='mt-6 p-4 rounded font-mono text-xs border bg-surface-base border-border-default'
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -331,7 +331,7 @@ const TerminalContactForm = () => {
           </AnimatePresence>
 
           {/* Command hint */}
-          <div className='mt-6 pt-4 border-t font-mono text-xs border-neutral-800 text-text-secondary'>
+          <div className='mt-6 pt-4 border-t font-mono text-xs border-border-default text-text-secondary'>
             <span className='text-brand-primary'>$</span> Type your message above or
             try commands: <span className='text-brand-accent'>help</span>,{' '}
             <span className='text-brand-accent'>clear</span>

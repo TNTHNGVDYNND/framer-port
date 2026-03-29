@@ -23,7 +23,7 @@ const skillCategories = [
   },
   {
     title: 'TOOLS',
-    color: 'var(--color-neutral-400)',
+    color: 'var(--color-text-muted)',
     skills: [
       { name: 'Git', level: 85 },
       { name: 'Docker', level: 50 },
@@ -35,7 +35,7 @@ const skillCategories = [
 const getSkillColor = (level) => {
   if (level >= 80) return 'var(--color-brand-primary)';
   if (level >= 60) return 'var(--color-brand-accent)';
-  return 'var(--color-neutral-400)';
+  return 'var(--color-text-muted)';
 };
 
 const SkillBar = ({ skill, index }) => {
@@ -66,7 +66,7 @@ const SkillBar = ({ skill, index }) => {
       </div>
 
       {/* Terminal-style bar container */}
-      <div className='relative h-6 font-mono text-xs flex items-center bg-neutral-100'>
+      <div className='relative h-6 font-mono text-xs flex items-center bg-surface-base'>
         {/* Progress bar fill */}
         <motion.div
           className='absolute left-0 top-0 bottom-0 flex items-center'
@@ -95,7 +95,7 @@ const SkillBar = ({ skill, index }) => {
 
         {/* Empty space indicator */}
         <motion.span
-          className='absolute font-mono pl-2 text-neutral-300'
+          className='absolute font-mono pl-2 text-text-muted'
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -143,7 +143,7 @@ const SkillCategory = ({ category, index }) => {
         >
           {category.title}
         </h3>
-        <div className='flex-1 h-px bg-neutral-200' />
+        <div className='flex-1 h-px bg-border-subtle' />
       </div>
 
       {/* Skills list */}
@@ -182,7 +182,7 @@ const TerminalSkills = () => {
       <div className='max-w-5xl mx-auto'>
         {/* Terminal window header */}
         <motion.div
-          className='mb-8 border-b pb-4 border-neutral-200'
+          className='mb-8 border-b pb-4 border-border-subtle'
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -197,7 +197,7 @@ const TerminalSkills = () => {
           </div>
 
           <h2 className='text-3xl md:text-4xl font-bold font-mono text-heading'>
-            <span className='text-neutral-500 mr-2'>$</span>./display_skills.sh
+            <span className='text-text-muted mr-2'>$</span>./display_skills.sh
           </h2>
           <p className='mt-2 font-mono text-sm text-text-secondary'>
             <span className='text-status-success'>➜</span> Loading technical
@@ -218,7 +218,7 @@ const TerminalSkills = () => {
 
         {/* Overall proficiency */}
         <motion.div
-          className='mt-12 pt-8 border-t border-neutral-200'
+          className='mt-12 pt-8 border-t border-border-subtle'
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -234,7 +234,7 @@ const TerminalSkills = () => {
           </div>
 
           {/* Overall progress bar */}
-          <div className='relative h-8 font-mono text-xs flex items-center rounded bg-neutral-100'>
+          <div className='relative h-8 font-mono text-xs flex items-center rounded bg-surface-base'>
             <motion.div
               className='absolute left-0 top-0 bottom-0 flex items-center rounded'
               initial={{ width: 0 }}
@@ -258,7 +258,7 @@ const TerminalSkills = () => {
                   .join('')}
               </span>
             </motion.div>
-            <span className='absolute font-mono pl-3 text-neutral-300'>
+            <span className='absolute font-mono pl-3 text-text-muted'>
               {Array(10 - Math.ceil(overallLevel / 10))
                 .fill('░')
                 .join('')}
