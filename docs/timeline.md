@@ -62,6 +62,16 @@
 - Organization: primitives/ folder, barrel exports
 - Scalability: Standardized motion presets, consistent patterns
 
+## Phase 1-6 (V3 Semantic Theme)
+- **Phase 1:** Forest-green light palette (tide/teal + avocado-cream), dark theme hex→OKLCH
+- **Phase 2:** Canonical Tier 2 semantic tokens, ThemeCard.jsx migration
+- **Phase 3:** Atmosphere tokens (`--color-atmo-*`), Layout.jsx theme-aware backgrounds
+- **Phase 4:** typography.css and motion.css, Tier 3 component tokens, centralized keyframes
+- **Phase 5:** 69 neutral-* migrations, 68 inline var updates across 20+ components
+- **Phase 6:** Legacy bridge removal, final verification
+- **Critical Fix:** View Transitions API for theme transitions (CSS transitions don't work with @theme)
+- **Performance:** 80% build time improvement (16.5s → 3.2s)
+
 ## Ongoing: Server-Side
 - Contact form backend integration
 - MongoDB persistence

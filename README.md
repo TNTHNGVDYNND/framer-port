@@ -62,7 +62,8 @@ cd server && npm run dev
 │   ├── 06-bugfixes-technical.md
 │   ├── 07-code-quality.md
 │   ├── 08-future-improvements.md
-│   └── 09-refactoring-v2.md
+│   ├── 09-refactoring-v2.md
+│   └── 10-semantic-theme-v3.md
 ├── documents/           # Original planning docs (.gitignore - not pushed)
 ├── references/          # Design references
 └── README.md            # This file
@@ -84,6 +85,7 @@ Detailed documentation is organized in `/docs`:
 | `docs/07-code-quality.md` | Code standards, DRY patterns, component primitives |
 | `docs/08-future-improvements.md` | Next steps (server-side integration, color refinements) |
 | `docs/09-refactoring-v2.md` | V2 refactoring (TerminalHeader, BlinkingCursor, 4 custom hooks, API layer, primitives) |
+| `docs/10-semantic-theme-v3.md` | **V3 semantic theme reconstruction** (6 phases, View Transitions API, forest→midnight palettes) |
 
 ## Current Development Status
 
@@ -123,7 +125,7 @@ Detailed documentation is organized in `/docs`:
 
 The documentation was restructured from scattered planning files into a coherent narrative:
 
-1. **Chronological:** `timeline.md` shows evolution from initial setup → phases 1-5 → phases A-G → V2 refactoring
+1. **Chronological:** `timeline.md` shows evolution from initial setup → phases 1-5 → phases A-G → V2 refactoring → **V3 semantic theme**
 2. **Thematic:** Each numbered file focuses on a specific aspect (styling, UI, features, refactoring)
 3. **Preserved:** Original documents in `/documents/` kept locally for reference but not pushed to remote
 4. **Current State:** Future improvements prioritized by server-side work needed

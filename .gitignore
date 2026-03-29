@@ -31,3 +31,4 @@ yarn-error.log*
 documents/
 Organizing-Task.md
 docs/CHANGELOG.md
+.opencode/
