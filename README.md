@@ -1,48 +1,57 @@
 # MyPortfolio - A Modern Animated Portfolio
 
-This project is a modern, single-page portfolio website designed to showcase creative work with a strong emphasis on fluid animations and a polished user experience. It was built from the ground up using React, Vite, and Tailwind CSS, and features advanced animations powered by Framer Motion.
+This project is a modern, single-page portfolio website designed to showcase creative work with a strong emphasis on fluid animations and a polished user experience. Built as a full-stack MERN application with a terminal-inspired "Midnight Sun" aesthetic.
 
-The user interface and animation sequences are inspired by high-quality design portfolios, aiming for a cinematic and interactive feel.
+## Quick Start
+
+```bash
+# Frontend (Port 5173)
+cd client && npm run dev
+
+# Backend (Port 5000)
+cd server && npm run dev
+```
 
 ## Core Technologies
 
--   **Frontend:** [React](https://react.dev/) (with [Vite](https://vitejs.dev/))
--   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
--   **Animation:** [Framer Motion](https://www.framer.com/motion/)
--   **Smooth Scrolling:** [Lenis](https://lenis.studiofreight.com/)
--   **Routing:** [React Router](https://reactrouter.com/)
+-   **Frontend:** React 19 + Vite + Tailwind CSS v4 + Framer Motion
+-   **Backend:** Express.js + MongoDB (Mongoose)
+-   **Routing:** React Router v7
+-   **Smooth Scrolling:** Lenis v1.3
 
 ## Key Features
 
--   **Multi-Stage Entry Animation:** A sophisticated, self-contained loading sequence in the `Hero` component that includes:
-    -   A progress-bar style preloader.
-    -   A "curtain reveal" transition effect.
--   **Advanced Hover Effects:** Custom "double text" sliding hover animations on navigation links.
--   **Animated Active Link Indicator:** A sliding underline in the navbar that smoothly animates to the currently active page.
--   **Staggered Text Animation:** The main headline in the Hero section animates in word by word.
--   **Horizontal Project Gallery:** A horizontally scrolling showcase for projects with scroll-snapping for a clean browsing experience.
--   **Dark, Minimalist UI:** A modern, dark-themed UI configured with Tailwind CSS v4's `@theme` directive.
--   **Component-Based Architecture:** A clean and organized codebase with reusable components for the Navbar, Hero, Project List, and more.
+| Category | Features |
+|----------|----------|
+| **Visual** | Terminal loader, SVG text animations, custom cursor with trails, 3D tilt effects |
+| **Navigation** | Vertical sidebar, custom scrollbar, 3D page transitions |
+| **Interactive** | Mini terminal easter eggs, Konami code detection |
+| **Content** | Career timeline, filterable project grid, terminal-styled contact form |
 
-## Getting Started
+## Documentation
 
-To run this project locally, follow these steps:
+Detailed documentation is organized in `/docs`:
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    ```
-2.  **Navigate to the client directory:**
-    ```bash
-    cd client
-    ```
-3.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-4.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
+| File | Description |
+|------|-------------|
+| `docs/README.md` | High-level overview |
+| `docs/timeline.md` | Development phases by chronology |
+| `docs/01-project-overview.md` | Project description |
+| `docs/02-initial-setup.md` | MERN stack initialization |
+| `docs/03-ui-refactoring.md` | UI/UX enhancement phases 1-5 |
+| `docs/04-styling-evolution.md` | Color system & design tokens |
+| `docs/05-feature-enhancements.md` | Phases A-G (About, Work, Mini Terminal) |
+| `docs/06-bugfixes-technical.md` | Bug fixes & technical decisions |
+| `docs/07-code-quality.md` | Code standards |
+| `docs/08-future-improvements.md` | Next steps (server-side focus) |
 
-The application will be available at `http://localhost:5173` (or the next available port).
+## Organization Logic
+
+The documentation was restructured from scattered planning files into a coherent narrative:
+
+1. **Chronological:** `timeline.md` shows evolution from initial setup → phases 1-5 → phases A-G
+2. **Thematic:** Each numbered file focuses on a specific aspect (styling, UI, features)
+3. **Preserved:** Original documents in `/documents/` kept for reference (research, learning paths, prompts)
+4. **Current State:** Future improvements prioritized by server-side work needed
+
+See `docs/01-project-overview.md` for full project description.
