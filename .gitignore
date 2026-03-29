@@ -26,3 +26,8 @@ yarn-error.log*
 .vscode/
 *.swp
 *.swo
+
+# Documentation cleanup (not pushed to remote - docs/ is the organized version)
+documents/
+Organizing-Task.md
+docs/CHANGELOG.md
