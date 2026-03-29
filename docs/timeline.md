@@ -55,6 +55,13 @@
 - ResumeDownload component
 - Terminal-themed 404 page
 
+## Phase 1-5 (V2 Refactoring)
+- DRY: Extract TerminalHeader, BlinkingCursor, 4 custom hooks
+- Style system: Warm cream light theme, CSS primitives
+- API layer: services/api.js, ErrorBoundary
+- Organization: primitives/ folder, barrel exports
+- Scalability: Standardized motion presets, consistent patterns
+
 ## Ongoing: Server-Side
 - Contact form backend integration
 - MongoDB persistence

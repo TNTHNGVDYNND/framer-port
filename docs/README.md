@@ -65,7 +65,14 @@ The `documents/` folder contains the original planning and implementation docume
 | `project-instructions.md` | Technical persona and implementation rules |
 | `UI-FE-V1.md` | Comprehensive UI/UX refactoring blueprint |
 | `styles-refactor-hybrid.md` | CSS architecture and design tokens |
-| `bugfix-implementation-plan.md` | Recent bug fixes |
+| `styles-refactor-plan.md` | Alternative CSS folder structure plan |
+| `bugfix-implementation-plan.md` | Recent bug fixes (Lenis, CustomScrollbar, LangToggle removal) |
+| `BARCODE-ISSUE-EXPLANATION.md` | Deprecated package troubleshooting |
+| `cleaning-prompts.md` | Unused files audit methodology |
+| `refactor-server-v1.md` | Server-side refactoring plans |
+| `JS-DEV-LEARNING-PATH.md` | Personal AI/JS learning notes (kept) |
+| `plans/V2-plan-1.md` | Frontend V2 refactoring phases 1-5 |
+| `plans/debug-V2-plan-1.md` | Debug companion to V2 plan |
 
 See cross-references in each section for which original document informed each topic.
 
@@ -82,6 +89,7 @@ See cross-references in each section for which original document informed each t
 | [06-bugfixes-technical.md](06-bugfixes-technical.md) | Bug fixes & technical decisions |
 | [07-code-quality.md](07-code-quality.md) | Code standards & cleanup |
 | [08-future-improvements.md](08-future-improvements.md) | What's next |
+| [09-refactoring-v2.md](09-refactoring-v2.md) | V2 refactoring phases (DRY, primitives, hooks) |
 
 ## Key Files for Next Agent
 

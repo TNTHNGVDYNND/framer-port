@@ -47,6 +47,17 @@ This document tracks all changes made during the documentation organization proc
 | `docs/07-code-quality.md` | Standards & cleanup | cleaning-prompts.md, project-instructions.md |
 | `docs/08-future-improvements.md` | Next steps | UI-FE-V1.md suggestions, AGENTS.md |
 
+### Files CREATED (Additional - Fact Check Phase)
+| File | Description | Source Document |
+|------|-------------|-----------------|
+| `docs/09-refactoring-v2.md` | V2 frontend refactoring phases 1-5 | `documents/plans/V2-plan-1.md` |
+
+### Files MODIFIED (Fact Check Phase)
+| File | Changes |
+|------|---------|
+| `docs/README.md` | Added missing documents to references table, added 09-refactoring-v2 to doc list |
+| `docs/timeline.md` | Added Phase 1-5 (V2 Refactoring) section |
+
 ---
 
 ## Documents Status
@@ -66,6 +77,8 @@ This document tracks all changes made during the documentation organization proc
 | `refactor-server-v1.md` | Active | Backend contact form plan |
 | `cleaning-prompts.md` | Active | Unused files audit workflow |
 | `JS-DEV-LEARNING-PATH.md` | Active | Personal learning notes (not project-specific) |
+| `plans/V2-plan-1.md` | Active | Frontend V2 refactoring phases 1-5 |
+| `plans/debug-V2-plan-1.md` | Active | Debug companion to V2 plan |
 
 ---
 
@@ -76,9 +89,19 @@ This document tracks all changes made during the documentation organization proc
 | Files Deleted (from root) | 3 |
 | Files Moved to documents/ | 3 |
 | New Task File | 1 |
-| New Organized Docs | 10 |
-| Original docs/ Preserved | 12 |
+| New Organized Docs | 11 |
+| Original docs/ Preserved | 14 |
 
 ---
 
 *Generated during documentation organization phase.*
+
+## Fact Check Completion
+
+**Date:** Current session  
+**Issues Resolved:**
+1. ✅ Created `docs/09-refactoring-v2.md` from missing `documents/plans/V2-plan-1.md`
+2. ✅ Added missing documents to docs/README.md references (plans/, cleaning-prompts.md)
+3. ✅ Verified server port is correctly 5000 in docs/02-initial-setup.md
+4. ✅ Updated timeline.md with V2 phases
+5. ✅ Updated CHANGELOG.md with new file counts

@@ -39,7 +39,7 @@ README.md
 
 ## Input
 
-You will receive multiple markdown files from a `/docs` folder.
+You will receive multiple markdown files from a `/docs` and `documents` folders.
 
 ---
 
