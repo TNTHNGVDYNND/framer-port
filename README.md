@@ -1,6 +1,20 @@
-# MyPortfolio - Interactive MERN Stack Portfolio
+# Zenfolio - Interactive MERN Stack Portfolio
 
 A high-end interactive portfolio website with cinematic animations, terminal-inspired aesthetics, and sophisticated UI/UX. Built as a full-stack MERN application with a strong emphasis on visual storytelling and technical sophistication.
+
+## Why This Project Exists
+
+This project was built to explore:
+
+- Advanced UI/UX patterns beyond standard portfolios
+- AI-assisted development workflows using structured prompting
+- Scalable frontend architecture with reusable primitives
+- Real-time iteration and refactoring practices
+
+It serves as both:
+
+1. A portfolio
+2. A documented learning system
 
 ## Quick Start
 
@@ -12,27 +26,57 @@ cd client && npm run dev
 cd server && npm run dev
 ```
 
+## AI-Assisted Development
+
+- Prompt engineering stored in structured `.md` files
+- Iterative UI refinement using LLM feedback loops
+- Documentation generated and refactored using AI agents
+- Decision tracking through prompt history
+
+See `/docs` for full evolution.
+
 ## Core Technologies
 
-| Layer | Technology |
-|-------|------------|
-| Frontend Framework | React 19 |
-| Build Tool | Vite |
-| Styling | Tailwind CSS v4 |
-| Animation | Framer Motion v12 |
-| Routing | React Router v7 |
-| Smooth Scroll | Lenis v1.3 |
-| Backend | Express.js v5 + Mongoose |
-| Database | MongoDB |
+| Layer              | Technology               |
+| ------------------ | ------------------------ |
+| Frontend Framework | React 19                 |
+| Build Tool         | Vite                     |
+| Styling            | Tailwind CSS v4          |
+| Animation          | Framer Motion v12        |
+| Routing            | React Router v7          |
+| Smooth Scroll      | Lenis v1.3               |
+| Backend            | Express.js v5 + Mongoose |
+| Database           | MongoDB                  |
+
+## Preview
+
+![Hero Section](./references/hero.png)
+![Theme System UI](./references/theme-system.webp)
 
 ## Key Features
 
-| Category | Features |
-|----------|----------|
-| **Visual** | Terminal loader with ASCII art, SVG text animations, custom cursor with trails, 3D tilt effects, warm amber "Midnight Sun" background |
-| **Navigation** | Vertical sidebar with vertical text, custom scrollbar with range input, 3D page transitions |
-| **Interactive** | Mini terminal easter eggs (whoami, chef, journalist, skills), hidden commands (matrix, sudo, coffee), Konami code detection |
-| **Content** | Career timeline with scroll-triggered SVG path, filterable project grid with stat counters, terminal-styled contact form |
+### Visual System
+
+- Terminal loader with ASCII art
+- SVG text animations
+- Custom cursor with trails
+- 3D tilt effects
+- Warm amber "Midnight Sun" background
+
+### Navigation
+
+- Vertical sidebar with vertical text
+- Custom scrollbar with range input
+- 3D page transitions
+
+### Interactive Elements
+
+- Mini terminal easter eggs (whoami, chef, journalist, skills)
+- Hidden commands (matrix, sudo, coffee)
+- Konami code detection
+- Career timeline with scroll-triggered SVG path
+- Filterable project grid with stat counters
+- Terminal-styled contact form
 
 ## Project Structure
 
@@ -73,34 +117,55 @@ cd server && npm run dev
 
 Detailed documentation is organized in `/docs`:
 
-| File | Description |
-|------|-------------|
-| `docs/timeline.md` | Chronological evolution by phases |
-| `docs/01-project-overview.md` | Project description and core technologies |
-| `docs/02-initial-setup.md` | Original MERN stack initialization |
-| `docs/03-ui-refactoring.md` | UI/UX enhancement phases 1-5 (Terminal aesthetic, SVG text, 3D effects) |
-| `docs/04-styling-evolution.md` | Color system evolution, OKLCH tokens, light/dark themes |
-| `docs/05-feature-enhancements.md` | Phases A-G (About, Work, Mini Terminal, Konami code, Blog, Resume, 404) |
-| `docs/06-bugfixes-technical.md` | Bug fixes (Lenis exposure, CustomScrollbar .get() warning, WebGL deprecation) |
-| `docs/07-code-quality.md` | Code standards, DRY patterns, component primitives |
-| `docs/08-future-improvements.md` | Next steps (server-side integration, color refinements) |
-| `docs/09-refactoring-v2.md` | V2 refactoring (TerminalHeader, BlinkingCursor, 4 custom hooks, API layer, primitives) |
-| `docs/10-semantic-theme-v3.md` | **V3 semantic theme reconstruction** (6 phases, View Transitions API, forest→midnight palettes) |
+| File                              | Description                                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `docs/timeline.md`                | Chronological evolution by phases                                                               |
+| `docs/01-project-overview.md`     | Project description and core technologies                                                       |
+| `docs/02-initial-setup.md`        | Original MERN stack initialization                                                              |
+| `docs/03-ui-refactoring.md`       | UI/UX enhancement phases 1-5 (Terminal aesthetic, SVG text, 3D effects)                         |
+| `docs/04-styling-evolution.md`    | Color system evolution, OKLCH tokens, light/dark themes                                         |
+| `docs/05-feature-enhancements.md` | Phases A-G (About, Work, Mini Terminal, Konami code, Blog, Resume, 404)                         |
+| `docs/06-bugfixes-technical.md`   | Bug fixes (Lenis exposure, CustomScrollbar .get() warning, WebGL deprecation)                   |
+| `docs/07-code-quality.md`         | Code standards, DRY patterns, component primitives                                              |
+| `docs/08-future-improvements.md`  | Next steps (server-side integration, color refinements)                                         |
+| `docs/09-refactoring-v2.md`       | V2 refactoring (TerminalHeader, BlinkingCursor, 4 custom hooks, API layer, primitives)          |
+| `docs/10-semantic-theme-v3.md`    | **V3 semantic theme reconstruction** (6 phases, View Transitions API, forest→midnight palettes) |
 
 ## Current Development Status
 
-**Frontend:** Feature-complete with polished animations and UI
+### ✅ Completed
 
-**Backend:** In progress - contact form integration and database persistence pending completion
+- Full frontend UI/UX system
+- Animation system and design tokens
+- Component architecture and refactoring (V2, V3)
+
+### 📝 Todo
+
+- Finalize color tokens re-touches
+- Add more easter eggs to the mini-terminal
+
+### 🔄 In Progress
+
+- Backend API integration (Express + MongoDB)
+- Contact form persistence
+- Production deployment setup
+
+### 🎯 Next Milestones
+
+- Connect frontend to live API
+- Add authentication (optional)
+- Deploy full-stack version
 
 ### Key Files for Next Agent
 
 **Server-Side Priority:**
+
 - `server/server.js` - Port 5000, MongoDB connection commented out (line 23-30)
 - `server/controllers/` - Placeholder controllers need implementation
 - `server/models/` - Need Contact model creation
 
 **Frontend-to-Backend Bridge:**
+
 - `client/src/services/api.js` - Defaults to localhost:3001 (needs 5000)
 - `client/src/pages/Contact.jsx` - Uses setTimeout simulation (not real API)
 
@@ -120,6 +185,13 @@ Detailed documentation is organized in `/docs`:
 - **Colors:** OKLCH-based with "Midnight Sun" palette (lagoon, coral, dusk, driftwood)
 - **Typography:** JetBrains Mono, Zodiak, Dune Rise
 - **Effects:** CSS-only background (grain, blur, radial gradients) - WebGL deprecated for performance
+
+## Notable Engineering Decisions
+
+- Replaced WebGL with CSS-based effects for performance
+- Introduced OKLCH color system for better perceptual consistency
+- Built reusable animation primitives using Framer Motion
+- Structured documentation as a chronological system
 
 ## Organization Logic
 
