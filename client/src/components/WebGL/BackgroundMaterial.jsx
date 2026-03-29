@@ -1,3 +1,10 @@
+/*
+ * @deprecated - WebGL background material not currently in use
+ * Replaced with CSS-based background effects for better performance
+ * Manages FluidBackgroundMaterial uniforms and Three.js integration
+ * Preserved for future WebGL background re-implementation
+ */
+
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame, extend } from '@react-three/fiber';
 import PropTypes from 'prop-types';
