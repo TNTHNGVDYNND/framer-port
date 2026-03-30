@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ThemeToggleBtn from './ThemeToggleBtn';
-import { useAuth } from '../context/AuthProvider';
+import { useAuth } from '../hooks/useAuth';
 
 const NavItem = ({ to, children, label }) => {
   return (
@@ -74,7 +74,7 @@ NavItem.propTypes = {
 
 const Sidebar = () => {
   // Use AuthContext for reactive auth state
-  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { isAuthenticated, isAdmin, logout } = useAuth();
 
   const handleLogout = () => {
     logout();

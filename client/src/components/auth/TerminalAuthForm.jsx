@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { TerminalHeader, BlinkingCursor } from '../primitives';
-import { useAuth } from '../../context/AuthProvider';
+import { useAuth } from '../../hooks/useAuth';
 
 const TerminalInput = ({
   label,
@@ -72,7 +72,7 @@ TerminalInput.propTypes = {
   rightElement: PropTypes.node,
 };
 
-const TerminalAuthForm = ({ onSuccess, onClose }) => {
+const TerminalAuthForm = ({ onSuccess }) => {
   const [mode, setMode] = useState('login'); // 'login' or 'register'
   const [formData, setFormData] = useState({
     email: '',
@@ -364,7 +364,6 @@ const TerminalAuthForm = ({ onSuccess, onClose }) => {
 
 TerminalAuthForm.propTypes = {
   onSuccess: PropTypes.func,
-  onClose: PropTypes.func,
 };
 
 export default TerminalAuthForm;
