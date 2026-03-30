@@ -37,6 +37,16 @@ export default [
       'react-refresh/only-export-components': 'warn',
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
       'react/react-in-jsx-scope': 'off', // React 19+ uses new JSX transform
+      // Disable strict prop-types validation (adds noise with React 19)
+      'react/prop-types': 'off',
+      // Disable set-state-in-effect for media query initialization patterns
+      'react-hooks/set-state-in-effect': 'off',
+      // Allow Three.js/R3F custom properties like 'args' and shader uniforms
+      'react/no-unknown-property': 'off',
+      // Allow hook dependencies for refs in cleanup
+      'react-hooks/exhaustive-deps': 'warn',
+      // Allow apostrophes and quotes in JSX (ESLint false positives)
+      'react/no-unescaped-entities': 'off',
     },
   },
   {
