@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Layout from './components/Layout';
@@ -18,34 +18,34 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 // Loading fallback component
 const PageLoader = () => (
   <motion.div
-    className="min-h-screen flex items-center justify-center"
+    className='min-h-screen flex items-center justify-center'
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
   >
-    <div className="flex flex-col items-center gap-4">
-      <div className="flex gap-2">
+    <div className='flex flex-col items-center gap-4'>
+      <div className='flex gap-2'>
         <motion.div
-          className="w-3 h-3 rounded-full"
+          className='w-3 h-3 rounded-full'
           style={{ backgroundColor: 'var(--color-lagoon)' }}
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
         />
         <motion.div
-          className="w-3 h-3 rounded-full"
+          className='w-3 h-3 rounded-full'
           style={{ backgroundColor: 'var(--color-dusk)' }}
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
         />
         <motion.div
-          className="w-3 h-3 rounded-full"
+          className='w-3 h-3 rounded-full'
           style={{ backgroundColor: 'var(--color-coral)' }}
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
         />
       </div>
       <span
-        className="font-mono text-sm"
+        className='font-mono text-sm'
         style={{ color: 'var(--color-text-secondary)' }}
       >
         Loading...
@@ -67,13 +67,13 @@ const AppRoutes = () => {
           <Route path='about' element={<About />} />
           <Route path='contact' element={<Contact />} />
           <Route path='login' element={<Login />} />
-          <Route 
-            path='admin' 
+          <Route
+            path='admin'
             element={
               <ProtectedRoute requireAdmin={true}>
                 <AdminDashboard />
               </ProtectedRoute>
-            } 
+            }
           />
           <Route path='*' element={<NotFound />} />
         </Route>
