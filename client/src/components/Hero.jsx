@@ -20,7 +20,6 @@ const Hero = () => {
   // Skip loader if already loaded once (for route navigation)
   useEffect(() => {
     if (hasLoaded && loadingState === 0) {
-      /* eslint-disable-next-line */
       setLoadingState(1);
     }
   }, [hasLoaded, loadingState]);
