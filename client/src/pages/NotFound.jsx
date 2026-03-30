@@ -151,8 +151,10 @@ const NotFound = () => {
                 className='text-2xl md:text-3xl font-bold font-mono mb-4'
                 style={{ color: 'var(--color-text-heading)' }}
               >
-                <span style={{ color: 'var(--color-brand-secondary)' }}>[ERROR]</span> Page
-                Not Found
+                <span style={{ color: 'var(--color-brand-secondary)' }}>
+                  [ERROR]
+                </span>{' '}
+                Page Not Found
               </h1>
               <p
                 className='font-mono text-sm max-w-md mx-auto'
@@ -175,8 +177,8 @@ const NotFound = () => {
                 $ find /pages/{window.location.pathname.slice(1)}
               </div>
               <div style={{ color: 'var(--color-brand-secondary)' }}>
-                find: '/pages/{window.location.pathname.slice(1)}': No such
-                file or directory
+                find: '/pages/{window.location.pathname.slice(1)}': No such file
+                or directory
               </div>
               <div style={{ color: 'var(--color-status-success)' }}>
                 ➜ Try navigating back to safety
@@ -203,8 +205,7 @@ const NotFound = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                $ cd ~
-                <span className='ml-2'>[GO HOME]</span>
+                $ cd ~<span className='ml-2'>[GO HOME]</span>
               </motion.button>
             </Link>
 
@@ -216,30 +217,28 @@ const NotFound = () => {
               animate={{ opacity: showHint ? 1 : 0 }}
               transition={{ duration: 0.5 }}
             >
-              (Psst... try typing "home" on your keyboard 😉)
+              (Psst... try typing &quot;home&quot; on your keyboard 😉)
             </motion.div>
           </div>
         </div>
 
         {/* Decorative elements */}
         <div className='mt-8 flex justify-center gap-4'>
-          {['⬆', '⬆', '⬇', '⬇', '⬅', '➡', '⬅', '➡', 'B', 'A'].map(
-            (char, i) => (
-              <motion.span
-                key={i}
-                className='font-mono text-lg'
-                style={{ color: 'var(--color-text-muted)' }}
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                }}
-              >
-                {char}
-              </motion.span>
-            )
-          )}
+          {['⬆', '⬆', '⬇', '⬇', '⬅', '➡', '⬅', '➡', 'B', 'A'].map((char, i) => (
+            <motion.span
+              key={i}
+              className='font-mono text-lg'
+              style={{ color: 'var(--color-text-muted)' }}
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
         </div>
       </motion.div>
     </div>
