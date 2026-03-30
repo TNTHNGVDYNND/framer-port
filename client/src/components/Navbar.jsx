@@ -45,7 +45,7 @@ const NavItem = ({ to, children, label }) => {
                   stiffness: 500,
                   damping: 30,
                 }}
-                aria-hidden="true"
+                aria-hidden='true'
               />
             )}
             {/* Vertical text */}
@@ -107,8 +107,8 @@ const Sidebar = () => {
         }}
         initial='hidden'
         animate='visible'
-        role="navigation"
-        aria-label="Main navigation"
+        role='navigation'
+        aria-label='Main navigation'
       >
         {/* Logo/Brand */}
         <motion.div
@@ -118,10 +118,10 @@ const Sidebar = () => {
             visible: { opacity: 1, scale: 1 },
           }}
         >
-          <NavLink 
-            to='/' 
+          <NavLink
+            to='/'
             className='block focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-full'
-            aria-label="Go to homepage"
+            aria-label='Go to homepage'
           >
             <div
               className='w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold'
@@ -129,7 +129,7 @@ const Sidebar = () => {
                 backgroundColor: 'var(--color-brand-accent)',
                 color: 'var(--color-surface-base)',
               }}
-              aria-hidden="true"
+              aria-hidden='true'
             >
               VN
             </div>
@@ -137,17 +137,17 @@ const Sidebar = () => {
         </motion.div>
 
         {/* Navigation Items */}
-        <ul 
+        <ul
           className='flex-1 flex flex-col gap-2'
-          role="menubar"
-          aria-label="Navigation menu"
+          role='menubar'
+          aria-label='Navigation menu'
         >
           {menuItems.map((item) => (
             <NavItem key={item.to} to={item.to} label={item.label}>
               {item.label}
             </NavItem>
           ))}
-          
+
           {/* Admin Dashboard Link - Only visible to admin */}
           {isAdmin && (
             <NavItem to='/admin' label='Admin Dashboard'>
@@ -176,7 +176,7 @@ const Sidebar = () => {
                   title={isAdmin ? 'Admin User' : 'Authenticated User'}
                 />
               </div>
-              
+
               {/* Logout Button */}
               <button
                 onClick={handleLogout}
@@ -217,10 +217,10 @@ const Sidebar = () => {
               </span>
             </NavLink>
           )}
-          
+
           {/* Divider */}
           <div className='h-px bg-brand-accent/20 my-2' />
-          
+
           {/* Theme Toggle */}
           <ThemeToggleBtn />
         </motion.div>
