@@ -77,6 +77,17 @@ See `/docs` for full evolution.
 - Career timeline with scroll-triggered SVG path
 - Filterable project grid with stat counters
 - Terminal-styled contact form
+- **Authentication system** with terminal-styled login UI
+- **Admin dashboard** with CRUD interface for projects
+
+### Authentication System
+
+- JWT-based authentication with bcrypt password hashing
+- Terminal-styled login/register forms with animations
+- Protected admin routes with role-based access
+- Admin dashboard for managing projects and content
+- LocalStorage persistence with reactive state updates
+- API endpoints: /api/users/login, /api/users/register, /api/users/profile
 
 ## Project Structure
 
@@ -130,6 +141,7 @@ Detailed documentation is organized in `/docs`:
 | `docs/08-future-improvements.md`  | Next steps (server-side integration, color refinements)                                         |
 | `docs/09-refactoring-v2.md`       | V2 refactoring (TerminalHeader, BlinkingCursor, 4 custom hooks, API layer, primitives)          |
 | `docs/10-semantic-theme-v3.md`    | **V3 semantic theme reconstruction** (6 phases, View Transitions API, forest→midnight palettes) |
+| `docs/11-server-auth-implementation.md` | **Server authentication system** (JWT, bcrypt, MongoDB, terminal UI) |
 
 ## Current Development Status
 
@@ -138,36 +150,44 @@ Detailed documentation is organized in `/docs`:
 - Full frontend UI/UX system
 - Animation system and design tokens
 - Component architecture and refactoring (V2, V3)
+- **Authentication system** (JWT + bcrypt + MongoDB)
+- **Admin dashboard** with protected routes
+- Terminal-styled login/register UI
 
 ### 📝 Todo
 
 - Finalize color tokens re-touches
 - Add more easter eggs to the mini-terminal
+- Move projects from constants to MongoDB
+- Cloudinary image upload integration
 
 ### 🔄 In Progress
 
-- Backend API integration (Express + MongoDB)
-- Contact form persistence
+- Full CRUD operations for admin dashboard
+- Blog management system
 - Production deployment setup
 
 ### 🎯 Next Milestones
 
-- Connect frontend to live API
-- Add authentication (optional)
+- Complete full-stack CRUD for projects
+- Implement image upload functionality
 - Deploy full-stack version
 
 ### Key Files for Next Agent
 
-**Server-Side Priority:**
+**Authentication System:**
 
-- `server/server.js` - Port 5000, MongoDB connection commented out (line 23-30)
-- `server/controllers/` - Placeholder controllers need implementation
-- `server/models/` - Need Contact model creation
+- `server/src/controllers/userController.js` - Login, register, profile logic
+- `server/src/middleware/authMiddleware.js` - JWT verification
+- `client/src/context/AuthProvider.jsx` - Global auth state management
+- `client/src/components/auth/TerminalAuthForm.jsx` - Terminal UI
 
-**Frontend-to-Backend Bridge:**
+**Next Features:**
 
-- `client/src/services/api.js` - Defaults to localhost:3001 (needs 5000)
-- `client/src/pages/Contact.jsx` - Uses setTimeout simulation (not real API)
+- `server/src/controllers/projectController.js` - Need full CRUD (currently static)
+- `server/models/Project.js` - Ready for MongoDB integration
+- `client/src/pages/AdminDashboard.jsx` - CRUD interface ready for API integration
+- `client/src/pages/Contact.jsx` - Ready for real API integration
 
 ## Tech Stack
 
