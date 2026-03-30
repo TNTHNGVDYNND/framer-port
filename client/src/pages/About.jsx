@@ -97,9 +97,9 @@ const About = () => {
               className='font-mono text-sm'
               style={{ color: 'var(--color-text-muted)' }}
             >
-              <span style={{ color: 'var(--color-status-success)' }}>➜</span> I am
-              actively seeking an apprenticeship or full-time role where I can
-              contribute to a forward-thinking team. An opportunity to
+              <span style={{ color: 'var(--color-status-success)' }}>➜</span> I
+              am actively seeking an apprenticeship or full-time role where I
+              can contribute to a forward-thinking team. An opportunity to
               collaborate among a team of motivated developers to build a
               meaningful product is what I am looking for!
             </p>
@@ -135,8 +135,8 @@ const About = () => {
               className='text-2xl md:text-3xl font-bold font-mono mb-6'
               style={{ color: 'var(--color-text-heading)' }}
             >
-              <span className='text-text-muted mr-2'>$</span>The Building
-              Blocks Philosophy
+              <span className='text-text-muted mr-2'>$</span>The Building Blocks
+              Philosophy
             </h2>
 
             <div

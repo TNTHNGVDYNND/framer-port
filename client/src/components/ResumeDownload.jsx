@@ -51,8 +51,8 @@ const ResumeDownload = () => {
           </h3>
 
           <p className='font-mono text-sm mb-6 text-text-secondary'>
-            <span className='text-status-success'>➜</span> Download my latest resume or
-            scan the QR code for mobile viewing.
+            <span className='text-status-success'>➜</span> Download my latest
+            resume or scan the QR code for mobile viewing.
           </p>
 
           {/* Download Button */}

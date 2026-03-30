@@ -24,7 +24,9 @@ const TerminalInput = ({
         <span className='uppercase tracking-wider text-text-primary'>
           {label}:
         </span>
-        {required && <span className='text-xs text-brand-secondary'>[required]</span>}
+        {required && (
+          <span className='text-xs text-brand-secondary'>[required]</span>
+        )}
       </div>
 
       {/* Input field container */}
@@ -50,9 +52,7 @@ const TerminalInput = ({
         />
 
         {/* Right element (e.g., password toggle) */}
-        {rightElement && (
-          <span className="flex-shrink-0">{rightElement}</span>
-        )}
+        {rightElement && <span className='flex-shrink-0'>{rightElement}</span>}
 
         {/* Blinking cursor */}
         {isFocused && <BlinkingCursor className='w-2 h-5 bg-brand-primary' />}
@@ -87,7 +87,7 @@ const TerminalAuthForm = ({ onSuccess }) => {
   const { login, register } = useAuth();
 
   const addTerminalLine = (text, type = 'system') => {
-    setTerminalOutput(prev => [...prev, { id: Date.now(), text, type }]);
+    setTerminalOutput((prev) => [...prev, { id: Date.now(), text, type }]);
   };
 
   const clearTerminal = () => {
@@ -107,21 +107,24 @@ const TerminalAuthForm = ({ onSuccess }) => {
 
     // Simulate terminal output
     addTerminalLine(`$ ./auth_${mode}.sh`, 'command');
-    addTerminalLine('[SYSTEM] Initializing authentication protocol...', 'system');
+    addTerminalLine(
+      '[SYSTEM] Initializing authentication protocol...',
+      'system'
+    );
     addTerminalLine(`[PROCESSING] Validating ${mode} credentials...`, 'system');
 
     try {
       if (mode === 'login') {
         // Use AuthContext login function
         const data = await login(formData.email, formData.password);
-        
+
         addTerminalLine('[SUCCESS] Authentication successful!', 'success');
         addTerminalLine(`[INFO] Welcome back, ${data.email}`, 'info');
         addTerminalLine(`[INFO] Role: ${data.role.toUpperCase()}`, 'info');
         addTerminalLine('[SYSTEM] Redirecting to home...', 'system');
-        
+
         setStatus('success');
-        
+
         // Auto-close and redirect after 2 seconds
         setTimeout(() => {
           if (onSuccess) onSuccess(data);
@@ -129,11 +132,11 @@ const TerminalAuthForm = ({ onSuccess }) => {
       } else {
         // Use AuthContext register function
         await register(formData.email, formData.password);
-        
+
         addTerminalLine('[SUCCESS] Account created successfully!', 'success');
         addTerminalLine('[INFO] Please login with your credentials', 'info');
         setStatus('success');
-        
+
         // Switch to login mode after 2 seconds
         setTimeout(() => {
           setMode('login');
@@ -147,7 +150,7 @@ const TerminalAuthForm = ({ onSuccess }) => {
       addTerminalLine(`[DETAILS] ${err.message}`, 'error');
       setError(err.message);
       setStatus('error');
-      
+
       setTimeout(() => {
         setStatus('idle');
       }, 3000);
@@ -274,12 +277,18 @@ const TerminalAuthForm = ({ onSuccess }) => {
               >
                 <span>
                   {status === 'submitting'
-                    ? mode === 'login' ? '[AUTHENTICATING...]' : '[CREATING ACCOUNT...]'
+                    ? mode === 'login'
+                      ? '[AUTHENTICATING...]'
+                      : '[CREATING ACCOUNT...]'
                     : status === 'success'
-                      ? mode === 'login' ? '[ACCESS GRANTED]' : '[ACCOUNT CREATED]'
+                      ? mode === 'login'
+                        ? '[ACCESS GRANTED]'
+                        : '[ACCOUNT CREATED]'
                       : status === 'error'
                         ? '[FAILED]'
-                        : mode === 'login' ? '> LOGIN' : '> REGISTER'}
+                        : mode === 'login'
+                          ? '> LOGIN'
+                          : '> REGISTER'}
                 </span>
                 {status === 'submitting' && (
                   <motion.span
@@ -346,7 +355,8 @@ const TerminalAuthForm = ({ onSuccess }) => {
 
           {/* Command hint */}
           <div className='mt-6 pt-4 border-t font-mono text-xs border-border-default text-text-secondary'>
-            <span className='text-brand-primary'>$</span> {mode === 'login' ? 'New user?' : 'Have an account?'}{' '}
+            <span className='text-brand-primary'>$</span>{' '}
+            {mode === 'login' ? 'New user?' : 'Have an account?'}{' '}
             <button
               type='button'
               onClick={toggleMode}

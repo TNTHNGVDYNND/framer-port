@@ -28,7 +28,9 @@ const TerminalInput = ({
         <span className='uppercase tracking-wider text-text-primary'>
           {label}:
         </span>
-        {required && <span className='text-xs text-brand-secondary'>[required]</span>}
+        {required && (
+          <span className='text-xs text-brand-secondary'>[required]</span>
+        )}
       </div>
 
       {/* Input field container */}
@@ -37,7 +39,6 @@ const TerminalInput = ({
         <span className='font-mono text-lg select-none mt-1 text-brand-primary'>
           {'>'}
         </span>
-
 
         {/* Input field */}
         <InputComponent
@@ -58,7 +59,9 @@ const TerminalInput = ({
         />
 
         {/* Blinking cursor */}
-        {isFocused && <BlinkingCursor className='w-2 h-5 mt-1 bg-brand-primary' />}
+        {isFocused && (
+          <BlinkingCursor className='w-2 h-5 mt-1 bg-brand-primary' />
+        )}
       </div>
     </div>
   );
@@ -332,8 +335,9 @@ const TerminalContactForm = () => {
 
           {/* Command hint */}
           <div className='mt-6 pt-4 border-t font-mono text-xs border-border-default text-text-secondary'>
-            <span className='text-brand-primary'>$</span> Type your message above or
-            try commands: <span className='text-brand-accent'>help</span>,{' '}
+            <span className='text-brand-primary'>$</span> Type your message
+            above or try commands:{' '}
+            <span className='text-brand-accent'>help</span>,{' '}
             <span className='text-brand-accent'>clear</span>
           </div>
         </div>

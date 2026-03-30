@@ -18,17 +18,17 @@ import useScrollVelocity from '../../hooks/useScrollVelocity';
 const FluidPlane = () => {
   const meshRef = useRef();
   const { viewport } = useThree();
-  
+
   // Get mouse position for shader interaction
   const mousePosition = useMousePosition();
   const scrollVelocity = useScrollVelocity();
-  
+
   // Normalize mouse coordinates to 0-1 range for shader
   const normalizedMouse = useMemo(() => {
     if (!mousePosition) return { x: 0.5, y: 0.5 };
     return {
       x: mousePosition.x / window.innerWidth,
-      y: 1 - (mousePosition.y / window.innerHeight), // Flip Y for WebGL coords
+      y: 1 - mousePosition.y / window.innerHeight, // Flip Y for WebGL coords
     };
   }, [mousePosition]);
 
@@ -65,11 +65,11 @@ const WebGLBackground = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
-    
+
     const handleChange = (e) => {
       setPrefersReducedMotion(e.matches);
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
@@ -79,7 +79,7 @@ const WebGLBackground = () => {
     const handleVisibilityChange = () => {
       setIsVisible(!document.hidden);
     };
-    
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -114,8 +114,8 @@ const WebGLBackground = () => {
   // Don't render WebGL if user prefers reduced motion or context is lost
   if (prefersReducedMotion || contextLost) {
     return (
-      <div 
-        className="fixed inset-0 z-0 pointer-events-none"
+      <div
+        className='fixed inset-0 z-0 pointer-events-none'
         style={{
           background: `
             radial-gradient(ellipse at 50% 0%, #1a1a0a 0%, #0a0a08 50%, #000000 100%)
@@ -128,7 +128,7 @@ const WebGLBackground = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-0 pointer-events-none"
+      className='fixed inset-0 z-0 pointer-events-none'
       style={{
         width: '100vw',
         height: '100vh',

@@ -146,8 +146,8 @@ const BlogSection = () => {
           </h2>
 
           <p className='font-mono text-sm max-w-2xl text-text-secondary'>
-            <span className='text-status-success'>➜</span> Thoughts, tutorials, and
-            insights from my development journey.
+            <span className='text-status-success'>➜</span> Thoughts, tutorials,
+            and insights from my development journey.
           </p>
         </motion.div>
 

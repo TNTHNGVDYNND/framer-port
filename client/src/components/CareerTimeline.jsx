@@ -171,7 +171,8 @@ const CareerTimeline = () => {
             <span className='text-text-muted mr-2'>$</span>cat career.txt
           </h2>
           <p className='mt-2 font-mono text-sm text-text-secondary'>
-            <span className='text-status-success'>➜</span> Loading career trajectory...
+            <span className='text-status-success'>➜</span> Loading career
+            trajectory...
           </p>
         </motion.div>
 
@@ -217,7 +218,8 @@ const CareerTimeline = () => {
           >
             <div className='w-3 h-3 rounded-full animate-pulse bg-brand-secondary' />
             <span className='font-mono text-sm text-text-secondary'>
-              <span className='text-status-success'>➜</span> Continue to next chapter...
+              <span className='text-status-success'>➜</span> Continue to next
+              chapter...
             </span>
           </motion.div>
         </div>

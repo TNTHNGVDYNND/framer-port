@@ -100,8 +100,9 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         {/* Terminal Header */}
         <motion.div
           className='mb-12'
-          variants={FADE_DOWN} initial="hidden"
-          animate="visible"
+          variants={FADE_DOWN}
+          initial='hidden'
+          animate='visible'
           transition={{ duration: 0.6 }}
         >
           {/* Terminal controls */}
@@ -126,8 +127,9 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
 
         <motion.div
           className='grid grid-cols-3 gap-8 mb-16 p-8 rounded-lg border bg-surface-base border-border-subtle'
-          variants={SECTION_ENTRY} initial="hidden"
-          whileInView="visible"
+          variants={SECTION_ENTRY}
+          initial='hidden'
+          whileInView='visible'
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
@@ -144,8 +146,9 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         {/* Filter Tabs */}
         <motion.div
           className='flex flex-wrap gap-2 mb-12'
-          variants={FADE_IN} initial="hidden"
-          animate="visible"
+          variants={FADE_IN}
+          initial='hidden'
+          animate='visible'
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <span className='font-mono text-sm mr-4 self-center text-text-secondary'>
@@ -161,14 +164,14 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
                   activeFilter === filter
                     ? 'var(--color-brand-primary)'
                     : 'var(--color-surface-base)',
-                  color:
-                    activeFilter === filter
-                      ? 'var(--color-text-base)'
-                      : 'var(--color-text-primary)',
-                  borderColor:
-                    activeFilter === filter
-                      ? 'var(--color-brand-primary)'
-                      : 'var(--color-border-subtle)',
+                color:
+                  activeFilter === filter
+                    ? 'var(--color-text-base)'
+                    : 'var(--color-text-primary)',
+                borderColor:
+                  activeFilter === filter
+                    ? 'var(--color-brand-primary)'
+                    : 'var(--color-border-subtle)',
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -181,8 +184,9 @@ const WorkHero = ({ activeFilter, onFilterChange }) => {
         {/* Filter hint */}
         <motion.div
           className='font-mono text-xs mb-8 text-text-secondary'
-          variants={FADE_IN} initial="hidden"
-          animate="visible"
+          variants={FADE_IN}
+          initial='hidden'
+          animate='visible'
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <span className='text-status-success'>➜</span> Currently viewing:{' '}

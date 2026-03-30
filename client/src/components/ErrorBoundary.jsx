@@ -43,8 +43,8 @@ class ErrorBoundary extends Component {
 █    ████ ████ █  █ ████`}
               </pre>
               <p className='text-text-secondary text-sm mb-2'>
-                <span className='text-status-success'>➜</span> An unexpected error
-                occurred:
+                <span className='text-status-success'>➜</span> An unexpected
+                error occurred:
               </p>
               <p className='text-brand-secondary text-xs mb-6 pl-4 border-l border-border-default'>
                 {this.state.error?.message || 'Unknown error'}

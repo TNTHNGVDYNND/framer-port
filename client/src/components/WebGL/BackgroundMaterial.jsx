@@ -22,15 +22,15 @@ const BackgroundMaterial = ({ uMouse, uScrollVelocity, uResolution }) => {
   useFrame((state) => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
-      
+
       if (uMouse) {
         materialRef.current.uniforms.uMouse.value.set(uMouse.x, uMouse.y);
       }
-      
+
       if (uScrollVelocity !== undefined) {
         materialRef.current.uniforms.uScrollVelocity.value = uScrollVelocity;
       }
-      
+
       if (uResolution) {
         materialRef.current.uniforms.uResolution.value.set(
           uResolution.x,
@@ -54,9 +54,17 @@ const BackgroundMaterial = ({ uMouse, uScrollVelocity, uResolution }) => {
     <fluidBackgroundMaterial
       ref={materialRef}
       uTime={0}
-      uMouse={uMouse ? new THREE.Vector2(uMouse.x, uMouse.y) : new THREE.Vector2(0.5, 0.5)}
+      uMouse={
+        uMouse
+          ? new THREE.Vector2(uMouse.x, uMouse.y)
+          : new THREE.Vector2(0.5, 0.5)
+      }
       uScrollVelocity={uScrollVelocity || 0}
-      uResolution={uResolution ? new THREE.Vector2(uResolution.x, uResolution.y) : new THREE.Vector2(1, 1)}
+      uResolution={
+        uResolution
+          ? new THREE.Vector2(uResolution.x, uResolution.y)
+          : new THREE.Vector2(1, 1)
+      }
     />
   );
 };

@@ -24,7 +24,10 @@ const Work = () => {
       transition={{ duration: 0.5 }}
     >
       {/* Work Hero Section with Stats & Filters */}
-      <WorkHero activeFilter={activeFilter} onFilterChange={handleFilterChange} />
+      <WorkHero
+        activeFilter={activeFilter}
+        onFilterChange={handleFilterChange}
+      />
 
       {/* Projects Grid Section */}
       <section id='projects-grid' className='px-4 md:px-8 pb-24'>
@@ -44,8 +47,8 @@ const Work = () => {
               className='font-mono text-sm uppercase tracking-wider'
               style={{ color: 'var(--color-text-muted)' }}
             >
-              <span style={{ color: 'var(--color-brand-primary)' }}>$</span> ls -la
-              projects/
+              <span style={{ color: 'var(--color-brand-primary)' }}>$</span> ls
+              -la projects/
             </span>
             <div
               className='h-px flex-1'

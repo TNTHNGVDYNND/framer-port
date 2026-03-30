@@ -180,11 +180,11 @@ const WelcomeModal = ({ isOpen, onClose }) => {
           are disabled on mobile devices for the best touch experience.
         </div>
 
-          <button
-            type='button'
-            onClick={onClose}
-            className='mt-6 w-full rounded-lg bg-brand-primary py-3 font-mono font-bold text-text-base transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2'
-          >
+        <button
+          type='button'
+          onClick={onClose}
+          className='mt-6 w-full rounded-lg bg-brand-primary py-3 font-mono font-bold text-text-base transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2'
+        >
           Got it, let&apos;s explore!
         </button>
       </div>
@@ -216,24 +216,24 @@ const KeyboardShortcutsModal = ({ isOpen, onClose }) => {
           shortcuts:
         </p>
 
-          <div className='space-y-2'>
-            {shortcuts.map((shortcut) => (
-              <div
-                key={shortcut.key}
-                className='flex items-center justify-between rounded-lg bg-surface-base p-3'
-              >
-                <span className='rounded bg-brand-accent px-2 py-1 text-xs font-bold text-text-base'>
-                  {shortcut.key}
-                </span>
-                <span className='ml-4 flex-1'>{shortcut.description}</span>
-              </div>
-            ))}
-          </div>
+        <div className='space-y-2'>
+          {shortcuts.map((shortcut) => (
+            <div
+              key={shortcut.key}
+              className='flex items-center justify-between rounded-lg bg-surface-base p-3'
+            >
+              <span className='rounded bg-brand-accent px-2 py-1 text-xs font-bold text-text-base'>
+                {shortcut.key}
+              </span>
+              <span className='ml-4 flex-1'>{shortcut.description}</span>
+            </div>
+          ))}
+        </div>
 
-          <p className='mt-4 text-xs text-text-muted'>
-            All interactive elements have visible focus indicators for keyboard
-            navigation.
-          </p>
+        <p className='mt-4 text-xs text-text-muted'>
+          All interactive elements have visible focus indicators for keyboard
+          navigation.
+        </p>
       </div>
     </Modal>
   );

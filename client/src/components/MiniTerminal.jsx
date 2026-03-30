@@ -253,8 +253,8 @@ const MiniTerminal = () => {
             <span className='text-text-muted mr-2'>$</span>interactive_terminal
           </h2>
           <p className='font-mono text-sm text-text-secondary'>
-            <span className='text-status-success'>➜</span> Type a command to explore
-            more...
+            <span className='text-status-success'>➜</span> Type a command to
+            explore more...
           </p>
         </motion.div>
 
@@ -274,7 +274,7 @@ const MiniTerminal = () => {
           <div
             className='terminal-window__header py-2 bg-status-success'
             style={{
-                borderColor: 'var(--color-border-default)',
+              borderColor: 'var(--color-border-default)',
             }}
           >
             <TerminalHeader filename='easter_eggs.sh' />
@@ -287,7 +287,7 @@ const MiniTerminal = () => {
               ref={terminalRef}
               className='h-64 overflow-y-auto mb-4 p-4 rounded font-mono text-sm border bg-outer-glow'
               style={{
-            borderColor: 'var(--color-border-default)',
+                borderColor: 'var(--color-border-default)',
               }}
             >
               <AnimatePresence>
@@ -301,7 +301,8 @@ const MiniTerminal = () => {
                       Welcome to the interactive terminal!
                     </div>
                     <div className='mb-2'>
-                      Try typing: <span className='text-brand-primary'>help</span>
+                      Try typing:{' '}
+                      <span className='text-brand-primary'>help</span>
                     </div>
                     <div className='text-text-muted'>
                       (Hint: Use ⬆⬆⬇⬇⬅➡⬅➡BA for a surprise)
@@ -330,7 +331,9 @@ const MiniTerminal = () => {
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className='flex items-center gap-2'>
-              <span className='font-mono text-lg text-brand-primary'>{'$'}</span>
+              <span className='font-mono text-lg text-brand-primary'>
+                {'$'}
+              </span>
               <input
                 ref={inputRef}
                 type='text'

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
  * Custom hook to track mouse position
  * Returns normalized mouse coordinates (0-1 range) for WebGL shader interaction
  * Uses requestAnimationFrame for smooth updates
- * 
+ *
  * @returns {Object} Mouse position with x, y coordinates or null if not available
  */
 const useMousePosition = () => {
@@ -31,7 +31,7 @@ const useMousePosition = () => {
     // Throttled update using RAF
     const throttledUpdate = () => {
       const now = performance.now();
-      
+
       // Update at most every 16ms (approx 60fps)
       if (now - lastUpdateRef.current >= 16) {
         if (isActive) {
@@ -39,13 +39,15 @@ const useMousePosition = () => {
           lastUpdateRef.current = now;
         }
       }
-      
+
       rafIdRef.current = requestAnimationFrame(throttledUpdate);
     };
 
     // Add event listener
-    window.addEventListener('mousemove', updateMousePosition, { passive: true });
-    
+    window.addEventListener('mousemove', updateMousePosition, {
+      passive: true,
+    });
+
     // Start the RAF loop
     rafIdRef.current = requestAnimationFrame(throttledUpdate);
 

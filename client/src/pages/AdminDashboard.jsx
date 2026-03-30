@@ -4,7 +4,7 @@ import { TerminalHeader } from '../components/primitives';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('projects');
-  
+
   // Get user info
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
@@ -33,13 +33,16 @@ const AdminDashboard = () => {
                   <span className='text-2xl'>👨‍💻</span>
                 </div>
                 <div>
-                  <h1 className='font-dune text-2xl text-heading'>Admin Dashboard</h1>
+                  <h1 className='font-dune text-2xl text-heading'>
+                    Admin Dashboard
+                  </h1>
                   <p className='font-mono text-sm text-text-secondary'>
-                    Welcome back, {user.email} | Role: {user.role?.toUpperCase()}
+                    Welcome back, {user.email} | Role:{' '}
+                    {user.role?.toUpperCase()}
                   </p>
                 </div>
               </div>
-              
+
               <div className='flex gap-2 mt-4'>
                 <div className='px-3 py-1 rounded font-mono text-xs bg-green-500/20 text-green-500 border border-green-500/30'>
                   [ONLINE]
@@ -84,17 +87,21 @@ const AdminDashboard = () => {
             {activeTab === 'projects' && (
               <div>
                 <div className='flex items-center justify-between mb-6'>
-                  <h2 className='font-dune text-xl text-heading'>Manage Projects</h2>
+                  <h2 className='font-dune text-xl text-heading'>
+                    Manage Projects
+                  </h2>
                   <button className='px-4 py-2 rounded font-mono text-sm bg-brand-primary text-text-base hover:opacity-90 transition-opacity'>
                     [+ ADD PROJECT]
                   </button>
                 </div>
-                
+
                 <div className='space-y-4'>
                   <div className='p-4 rounded border border-border-default bg-surface-base/50'>
                     <div className='flex items-center justify-between'>
                       <div>
-                        <h3 className='font-mono text-sm text-text-primary'>fourflavoursexpress</h3>
+                        <h3 className='font-mono text-sm text-text-primary'>
+                          fourflavoursexpress
+                        </h3>
                         <p className='font-mono text-xs text-text-secondary mt-1'>
                           Food delivery application with React and Node.js
                         </p>
@@ -109,11 +116,13 @@ const AdminDashboard = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className='p-4 rounded border border-border-default bg-surface-base/50'>
                     <div className='flex items-center justify-between'>
                       <div>
-                        <h3 className='font-mono text-sm text-text-primary'>natours-2025 SSR</h3>
+                        <h3 className='font-mono text-sm text-text-primary'>
+                          natours-2025 SSR
+                        </h3>
                         <p className='font-mono text-xs text-text-secondary mt-1'>
                           Node.js backend application with Express and MongoDB
                         </p>
@@ -128,10 +137,11 @@ const AdminDashboard = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className='p-4 rounded border border-dashed border-border-default'>
                     <p className='font-mono text-xs text-text-muted text-center'>
-                      Future: Projects will be stored in MongoDB with Cloudinary image uploads
+                      Future: Projects will be stored in MongoDB with Cloudinary
+                      image uploads
                     </p>
                   </div>
                 </div>
@@ -141,16 +151,19 @@ const AdminDashboard = () => {
             {activeTab === 'blog' && (
               <div>
                 <div className='flex items-center justify-between mb-6'>
-                  <h2 className='font-dune text-xl text-heading'>Manage Blog Posts</h2>
+                  <h2 className='font-dune text-xl text-heading'>
+                    Manage Blog Posts
+                  </h2>
                   <button className='px-4 py-2 rounded font-mono text-sm bg-brand-primary text-text-base hover:opacity-90 transition-opacity'>
                     [+ NEW POST]
                   </button>
                 </div>
-                
+
                 <div className='space-y-4'>
                   <div className='p-4 rounded border border-dashed border-border-default'>
                     <p className='font-mono text-xs text-text-muted text-center'>
-                      Blog posts will be loaded from dev.to API or stored in MongoDB
+                      Blog posts will be loaded from dev.to API or stored in
+                      MongoDB
                     </p>
                   </div>
                 </div>
@@ -159,8 +172,10 @@ const AdminDashboard = () => {
 
             {activeTab === 'settings' && (
               <div>
-                <h2 className='font-dune text-xl text-heading mb-6'>System Settings</h2>
-                
+                <h2 className='font-dune text-xl text-heading mb-6'>
+                  System Settings
+                </h2>
+
                 <div className='space-y-4 font-mono text-sm'>
                   <div className='flex items-center justify-between p-4 rounded border border-border-default bg-surface-base/50'>
                     <div>
@@ -173,10 +188,12 @@ const AdminDashboard = () => {
                       [CONNECTED]
                     </div>
                   </div>
-                  
+
                   <div className='flex items-center justify-between p-4 rounded border border-border-default bg-surface-base/50'>
                     <div>
-                      <p className='text-text-primary'>Cloudinary Integration</p>
+                      <p className='text-text-primary'>
+                        Cloudinary Integration
+                      </p>
                       <p className='text-xs text-text-secondary mt-1'>
                         Image upload service
                       </p>
@@ -185,7 +202,7 @@ const AdminDashboard = () => {
                       [PENDING]
                     </div>
                   </div>
-                  
+
                   <div className='flex items-center justify-between p-4 rounded border border-border-default bg-surface-base/50'>
                     <div>
                       <p className='text-text-primary'>Admin Account</p>
@@ -206,7 +223,9 @@ const AdminDashboard = () => {
         {/* Footer Info */}
         <div className='mt-8 p-4 rounded border border-border-default bg-surface-base/30'>
           <p className='font-mono text-xs text-text-secondary'>
-            <span className='text-brand-primary'>$</span> Admin Dashboard v1.0 | Future enhancements: Cloudinary image uploads, full CRUD operations for projects and blog posts
+            <span className='text-brand-primary'>$</span> Admin Dashboard v1.0 |
+            Future enhancements: Cloudinary image uploads, full CRUD operations
+            for projects and blog posts
           </p>
         </div>
       </div>

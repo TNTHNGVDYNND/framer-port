@@ -53,9 +53,9 @@ const Contact = () => {
             className='font-mono text-sm max-w-2xl'
             style={{ color: 'var(--color-text-muted)' }}
           >
-            <span style={{ color: 'var(--color-status-success)' }}>➜</span> Ready to
-            collaborate? Send a message through the secure terminal below.
-            Response time: Usually within 24 hours.
+            <span style={{ color: 'var(--color-status-success)' }}>➜</span>{' '}
+            Ready to collaborate? Send a message through the secure terminal
+            below. Response time: Usually within 24 hours.
           </p>
         </motion.div>
 

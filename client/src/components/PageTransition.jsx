@@ -7,7 +7,7 @@ const pageVariants = {
     opacity: 0,
     rotateY: -15,
     scale: 0.95,
-    x: -50
+    x: -50,
   },
   in: {
     opacity: 1,
@@ -15,11 +15,11 @@ const pageVariants = {
     scale: 1,
     x: 0,
     transition: {
-      type: "spring",
+      type: 'spring',
       stiffness: 100,
       damping: 20,
-      duration: 0.5
-    }
+      duration: 0.5,
+    },
   },
   out: {
     opacity: 0,
@@ -28,9 +28,9 @@ const pageVariants = {
     x: 50,
     transition: {
       duration: 0.3,
-      ease: "easeIn"
-    }
-  }
+      ease: 'easeIn',
+    },
+  },
 };
 
 // Alternative variants for different routes
@@ -38,55 +38,55 @@ const slideUpVariants = {
   initial: {
     opacity: 0,
     y: 50,
-    scale: 0.95
+    scale: 0.95,
   },
   in: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      type: "spring",
+      type: 'spring',
       stiffness: 80,
-      damping: 15
-    }
+      damping: 15,
+    },
   },
   out: {
     opacity: 0,
     y: -50,
     scale: 0.95,
     transition: {
-      duration: 0.3
-    }
-  }
+      duration: 0.3,
+    },
+  },
 };
 
 const fadeScaleVariants = {
   initial: {
     opacity: 0,
-    scale: 0.9
+    scale: 0.9,
   },
   in: {
     opacity: 1,
     scale: 1,
     transition: {
       duration: 0.4,
-      ease: "easeOut"
-    }
+      ease: 'easeOut',
+    },
   },
   out: {
     opacity: 0,
     scale: 1.1,
     transition: {
-      duration: 0.3
-    }
-  }
+      duration: 0.3,
+    },
+  },
 };
 
 const PageTransition = ({ children, variant = 'default' }) => {
   const location = useLocation();
-  
+
   const getVariants = () => {
-    switch(variant) {
+    switch (variant) {
       case 'slideUp':
         return slideUpVariants;
       case 'fadeScale':
@@ -102,13 +102,13 @@ const PageTransition = ({ children, variant = 'default' }) => {
     <motion.div
       key={location.pathname}
       variants={variants}
-      initial="initial"
-      animate="in"
-      exit="out"
+      initial='initial'
+      animate='in'
+      exit='out'
       style={{
         perspective: 1000,
         transformStyle: 'preserve-3d',
-        minHeight: '100vh'
+        minHeight: '100vh',
       }}
     >
       {children}

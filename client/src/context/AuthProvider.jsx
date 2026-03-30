@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
-    
+
     if (storedToken && storedUser) {
       try {
         setToken(storedToken);
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(data));
       setToken(data.token);
       setUser(data);
-      
+
       showNotification('[ACCESS GRANTED] Login successful!');
       return data;
     } catch (error) {
@@ -97,9 +97,9 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await fetch(`${API_BASE}/api/users/profile`, {
-        headers: { 
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       });
 
@@ -136,11 +136,7 @@ export const AuthProvider = ({ children }) => {
     showNotification,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 AuthProvider.propTypes = {

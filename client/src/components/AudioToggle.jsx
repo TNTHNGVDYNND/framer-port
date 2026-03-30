@@ -28,7 +28,10 @@ export const AudioProvider = ({ children }) => {
 
     oscillator.frequency.value = 800;
     gainNode.gain.value = 0.05;
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.05
+    );
 
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 0.05);
@@ -46,7 +49,10 @@ export const AudioProvider = ({ children }) => {
     oscillator.frequency.value = 1200;
     oscillator.type = 'sine';
     gainNode.gain.value = 0.08;
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.08
+    );
 
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 0.08);
@@ -59,7 +65,9 @@ export const AudioProvider = ({ children }) => {
     playClickSound,
   };
 
-  return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;
+  return (
+    <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
+  );
 };
 
 export const useAudio = () => {
@@ -76,7 +84,7 @@ const AudioToggle = () => {
   return (
     <motion.button
       onClick={toggleAudio}
-      className="fixed bottom-4 left-20 z-50 px-4 py-2 rounded-full font-mono text-xs flex items-center gap-2"
+      className='fixed bottom-4 left-20 z-50 px-4 py-2 rounded-full font-mono text-xs flex items-center gap-2'
       style={{
         backgroundColor: isAudioOn
           ? 'var(--color-status-success)'
@@ -91,7 +99,7 @@ const AudioToggle = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1 }}
     >
-      <span className="text-sm">{isAudioOn ? '🔊' : '🔇'}</span>
+      <span className='text-sm'>{isAudioOn ? '🔊' : '🔇'}</span>
       <span>Sound: {isAudioOn ? 'On' : 'Off'}</span>
     </motion.button>
   );

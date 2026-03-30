@@ -61,7 +61,6 @@ const ProjectCard = ({ project, index }) => {
           transition: TRANSITION_NORMAL,
         }}
       >
-
         {/* Image with parallax effect */}
         <motion.div
           className='relative h-56 overflow-hidden'

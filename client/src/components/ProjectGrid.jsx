@@ -68,12 +68,15 @@ const ProjectGrid = ({ filter }) => {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <span style={{ color: 'var(--color-brand-primary)' }}>➜</span> Showing{' '}
-            {filteredProjects.length} of {projects.length} projects
+            <span style={{ color: 'var(--color-brand-primary)' }}>➜</span>{' '}
+            Showing {filteredProjects.length} of {projects.length} projects
             {filter !== 'All' && (
               <span>
                 {' '}
-                in <span style={{ color: 'var(--color-brand-accent)' }}>{filter}</span>
+                in{' '}
+                <span style={{ color: 'var(--color-brand-accent)' }}>
+                  {filter}
+                </span>
               </span>
             )}
           </motion.div>

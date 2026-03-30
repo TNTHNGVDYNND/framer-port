@@ -10,12 +10,12 @@
    CORE IMPORTS
    ======================================== */
 @import 'tailwindcss';
-@import './colors.css';       /* Tier 1 — Primitive tokens (MUST come first) */
-@import './theme.css';        /* Tier 2 + 3 — Semantic + component tokens */
-@import './typography.css';   /* Reusable type classes */
-@import './motion.css';       /* Keyframes, easing, animation tokens */
-@import './components.css';   /* Component styles */
-@import './utilities.css';    /* Utility classes */
+@import './colors.css'; /* Tier 1 — Primitive tokens (MUST come first) */
+@import './theme.css'; /* Tier 2 + 3 — Semantic + component tokens */
+@import './typography.css'; /* Reusable type classes */
+@import './motion.css'; /* Keyframes, easing, animation tokens */
+@import './components.css'; /* Component styles */
+@import './utilities.css'; /* Utility classes */
 
 /* ========================================
    BASE STYLES

@@ -1,5 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  AnimatePresence,
+} from 'framer-motion';
 
 // Custom cursor component with trail effects
 const CustomCursor = () => {
@@ -85,7 +90,7 @@ const CustomCursor = () => {
   const addRipple = useCallback((x, y) => {
     const id = Date.now();
     setRipples((prev) => [...prev, { id, x, y }]);
-    
+
     // Remove ripple after animation
     setTimeout(() => {
       setRipples((prev) => prev.filter((r) => r.id !== id));
@@ -113,7 +118,7 @@ const CustomCursor = () => {
     <>
       {/* Trail elements */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 rounded-full pointer-events-none z-[9998] mix-blend-difference"
+        className='fixed top-0 left-0 w-4 h-4 rounded-full pointer-events-none z-[9998] mix-blend-difference'
         style={{
           x: trail3X,
           y: trail3Y,
@@ -124,7 +129,7 @@ const CustomCursor = () => {
         }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 rounded-full pointer-events-none z-[9998] mix-blend-difference"
+        className='fixed top-0 left-0 w-3 h-3 rounded-full pointer-events-none z-[9998] mix-blend-difference'
         style={{
           x: trail2X,
           y: trail2Y,
@@ -135,7 +140,7 @@ const CustomCursor = () => {
         }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9998] mix-blend-difference"
+        className='fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9998] mix-blend-difference'
         style={{
           x: trail1X,
           y: trail1Y,
@@ -148,7 +153,7 @@ const CustomCursor = () => {
 
       {/* Main cursor */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        className='fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference'
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -161,12 +166,14 @@ const CustomCursor = () => {
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
       >
-        <div 
-          className="w-4 h-4 rounded-full border-2"
-          style={{ 
+        <div
+          className='w-4 h-4 rounded-full border-2'
+          style={{
             borderColor: 'var(--color-brand-primary)',
-            backgroundColor: isHovering ? 'var(--color-brand-primary)' : 'transparent',
-            transition: 'background-color 0.2s ease'
+            backgroundColor: isHovering
+              ? 'var(--color-brand-primary)'
+              : 'transparent',
+            transition: 'background-color 0.2s ease',
           }}
         />
       </motion.div>
@@ -176,7 +183,7 @@ const CustomCursor = () => {
         {ripples.map((ripple) => (
           <motion.div
             key={ripple.id}
-            className="fixed top-0 left-0 pointer-events-none z-[9997] rounded-full border-2"
+            className='fixed top-0 left-0 pointer-events-none z-[9997] rounded-full border-2'
             style={{
               x: ripple.x,
               y: ripple.y,
@@ -196,12 +203,16 @@ const CustomCursor = () => {
 };
 
 // Magnetic wrapper component for interactive elements
-export const MagneticButton = ({ children, className = '', strength = 0.3 }) => {
+export const MagneticButton = ({
+  children,
+  className = '',
+  strength = 0.3,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   const springConfig = { damping: 15, stiffness: 150 };
   const xSpring = useSpring(x, springConfig);
   const ySpring = useSpring(y, springConfig);
@@ -210,10 +221,10 @@ export const MagneticButton = ({ children, className = '', strength = 0.3 }) => 
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     const distanceX = (e.clientX - centerX) * strength;
     const distanceY = (e.clientY - centerY) * strength;
-    
+
     x.set(distanceX);
     y.set(distanceY);
   };

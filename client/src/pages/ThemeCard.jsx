@@ -143,9 +143,7 @@ const ThemeCard = () => {
           <h1 className='text-4xl md:text-5xl font-dune font-bold mb-4 text-text-heading'>
             {heading}
           </h1>
-          <p className='font-mono max-w-2xl mx-auto text-text-muted'>
-            {text}
-          </p>
+          <p className='font-mono max-w-2xl mx-auto text-text-muted'>{text}</p>
           <p className='font-mono text-sm mt-2 text-brand-secondary'>
             Toggle between light and dark modes to see color transitions
           </p>
@@ -198,8 +196,8 @@ const ThemeCard = () => {
           </h2>
           <div className='font-mono text-sm space-y-2'>
             <p>
-              <span className='text-brand-accent'>OKLCH</span> color space is used
-              throughout the portfolio for perceptually uniform colors.
+              <span className='text-brand-accent'>OKLCH</span> color space is
+              used throughout the portfolio for perceptually uniform colors.
             </p>
             <p>
               Colors automatically adapt between light and dark themes using CSS

@@ -8,10 +8,10 @@
 // NOTE: These exports are commented out - components not currently imported anywhere
 // export { default as WebGLBackground } from './WebGLBackground';
 // export { default as BackgroundMaterial } from './BackgroundMaterial';
-// export { 
-//   FluidBackgroundMaterial, 
-//   FluidFragmentShader, 
-//   FluidVertexShader 
+// export {
+//   FluidBackgroundMaterial,
+//   FluidFragmentShader,
+//   FluidVertexShader
 // } from './FluidShader';
 
 // Hooks (also exported from their own directory)

@@ -15,7 +15,7 @@ const HelpButton = () => {
         setShowWelcome(true);
         localStorage.setItem('hasSeenWelcome', 'true');
       }, 2500); // Show after terminal loader completes
-      
+
       return () => clearTimeout(timer);
     }
   }, []);
@@ -43,7 +43,7 @@ const HelpButton = () => {
     <>
       {/* Help button */}
       <motion.button
-        className="fixed bottom-4 right-4 z-50 w-10 h-10 rounded-full flex items-center justify-center font-mono font-bold text-lg"
+        className='fixed bottom-4 right-4 z-50 w-10 h-10 rounded-full flex items-center justify-center font-mono font-bold text-lg'
         style={{
           backgroundColor: 'var(--color-surface-base)',
           color: 'var(--color-brand-primary)',
@@ -52,19 +52,19 @@ const HelpButton = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setShowWelcome(true)}
-        title="Help (Press H)"
+        title='Help (Press H)'
       >
         ?
       </motion.button>
 
       {/* Modals */}
-      <WelcomeModal 
-        isOpen={showWelcome} 
-        onClose={() => setShowWelcome(false)} 
+      <WelcomeModal
+        isOpen={showWelcome}
+        onClose={() => setShowWelcome(false)}
       />
-      <KeyboardShortcutsModal 
-        isOpen={showShortcuts} 
-        onClose={() => setShowShortcuts(false)} 
+      <KeyboardShortcutsModal
+        isOpen={showShortcuts}
+        onClose={() => setShowShortcuts(false)}
       />
     </>
   );
