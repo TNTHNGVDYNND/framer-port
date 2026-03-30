@@ -217,10 +217,10 @@ Detailed documentation is organized in `/docs`:
 
 The documentation was restructured from scattered planning files into a coherent narrative:
 
-1. **Chronological:** `timeline.md` shows evolution from initial setup → phases 1-5 → phases A-G → V2 refactoring → **V3 semantic theme**
-2. **Thematic:** Each numbered file focuses on a specific aspect (styling, UI, features, refactoring)
+1. **Chronological:** `timeline.md` shows evolution from initial setup → phases 1-5 → phases A-G → V2 refactoring → **V3 semantic theme** → **Phase 11 auth system**
+2. **Thematic:** Each numbered file focuses on a specific aspect (styling, UI, features, refactoring, auth)
 3. **Preserved:** Original documents in `/documents/` kept locally for reference but not pushed to remote
-4. **Current State:** Future improvements prioritized by server-side work needed
+4. **Current State:** Full-stack integration phase (CRUD operations, Cloudinary, production deployment)
 
 ---
 
