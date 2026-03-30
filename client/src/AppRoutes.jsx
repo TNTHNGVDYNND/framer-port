@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { motion } from 'framer-motion';
 
 import Layout from './components/Layout';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Lazy load page components for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -11,6 +12,8 @@ const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const ThemeCard = lazy(() => import('./pages/ThemeCard'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Login = lazy(() => import('./pages/Login'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -60,9 +63,18 @@ const AppRoutes = () => {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='work' element={<Work />} />
+          <Route path='theme' element={<ThemeCard />} />
           <Route path='about' element={<About />} />
           <Route path='contact' element={<Contact />} />
-          <Route path='theme' element={<ThemeCard />} />
+          <Route path='login' element={<Login />} />
+          <Route 
+            path='admin' 
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

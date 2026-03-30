@@ -4,6 +4,7 @@ import './styles/index.css';
 import 'wicg-inert';
 import App from './App';
 import ThemeProvider from './context/ThemeProvider';
+import { AuthProvider } from './context/AuthProvider';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
@@ -30,7 +31,9 @@ requestAnimationFrame(raf);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </StrictMode>
 );
