@@ -1,13 +1,39 @@
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import ProjectCard from './ProjectCard';
-import { projects } from '../constants';
 import Barcode from './Barcode';
 import { useInView, usePrefersReducedMotion } from '../hooks';
+import { api } from '../services/api';
 
 const ProjectGrid = ({ filter }) => {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [ref, isInView] = useInView({ threshold: 0.05, once: true });
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await api.projects.getAll();
+        if (response.success) {
+          setProjects(response.data || []);
+        } else {
+          setError('Failed to load projects');
+        }
+      } catch (err) {
+        console.error('Failed to fetch projects:', err);
+        setError('Failed to load projects from server');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   // Filter projects based on category
   const filteredProjects =
@@ -25,6 +51,33 @@ const ProjectGrid = ({ filter }) => {
       },
     },
   };
+
+  if (loading) {
+    return (
+      <section ref={ref} className='py-12 px-4'>
+        <div className='container mx-auto max-w-7xl text-center'>
+          <div className='font-mono text-brand-primary animate-pulse'>
+            Loading projects from database...
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section ref={ref} className='py-12 px-4'>
+        <div className='container mx-auto max-w-7xl text-center'>
+          <div className='font-mono text-status-error'>
+            {error}
+          </div>
+          <p className='font-mono text-sm text-text-muted mt-4'>
+            Make sure the server is running on port 5000 and projects are seeded.
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={ref} className='py-12 px-4' style={{ perspective: 1000 }}>

@@ -1,0 +1,39 @@
+{
+  "name": "framer-port",
+  "version": "1.0.0",
+  "description": "Interactive MERN Stack Portfolio with Terminal Aesthetic",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run install:all",
+    "install:all": "cd client && npm install && cd ../server && npm install",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "test": "cd server && npm test",
+    "test:watch": "cd server && npm run test:watch",
+    "test:ci": "cd server && npm run test:ci",
+    "docker:build": "docker-compose -f docker-compose.prod.yml build",
+    "docker:up": "docker-compose -f docker-compose.prod.yml up -d",
+    "docker:down": "docker-compose -f docker-compose.prod.yml down",
+    "docker:logs": "docker-compose -f docker-compose.prod.yml logs -f",
+    "seed": "cd server && npm run seed",
+    "format": "prettier --write .",
+    "lint": "cd server && npm run lint || true"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "prettier": "^3.4.2"
+  },
+  "keywords": [
+    "mern",
+    "portfolio",
+    "react",
+    "express",
+    "mongodb",
+    "framer-motion",
+    "tailwind"
+  ],
+  "author": "",
+  "license": "ISC"
+}

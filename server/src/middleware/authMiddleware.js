@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 import { env } from '../config/index.js';
 
-export const protect = (req, res, next) => {
+// Protect routes - Verify JWT token
+export const protect = async (req, res, next) => {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -14,9 +16,32 @@ export const protect = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, env.jwtSecret);
-    req.user = decoded;
+    
+    // Get user from database to include role in req.user
+    const user = await User.findById(decoded.id).select('-password');
+    
+    if (!user) {
+      return res.status(401).json({ message: 'Not authorized, user not found' });
+    }
+    
+    // Attach user with role to request object
+    req.user = {
+      id: user._id,
+      email: user.email,
+      role: user.role,
+    };
+    
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Not authorized, invalid token' });
+  }
+};
+
+// Admin only middleware - Must be used after protect
+export const adminOnly = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    return res.status(403).json({ message: 'Not authorized as admin' });
   }
 };
