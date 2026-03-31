@@ -20,7 +20,11 @@ export const getProjects = async (req, res, next) => {
       .sort({ featured: -1, createdAt: -1 }) // Featured first, then newest
       .select('-__v');
     
-    res.json(projects);
+    res.json({
+      success: true,
+      data: projects,
+      count: projects.length,
+    });
   } catch (error) {
     next(error);
   }
