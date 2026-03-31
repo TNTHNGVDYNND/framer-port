@@ -109,3 +109,4 @@ const seedProjects = async () => {
 };
 
 seedProjects();
+.title ? And when the user hove
