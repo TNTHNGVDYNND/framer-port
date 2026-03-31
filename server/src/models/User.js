@@ -20,7 +20,12 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
+}, {
+  timestamps: true, // Adds createdAt and updatedAt fields
 });
+
+// Index for admin queries
+userSchema.index({ role: 1 });
 
 // Hash password before saving if it's new or modified
 userSchema.pre('save', async function () {
