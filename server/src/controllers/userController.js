@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
-import { env } from '../config/index.js';
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+import { env } from "../config/index.js";
 
 const generateToken = (id, role) => {
   return jwt.sign({ id, role }, env.jwtSecret, { expiresIn: env.jwtExpiresIn });
@@ -15,7 +15,7 @@ export const registerUser = async (req, res, next) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const user = await User.create({ email, password });
@@ -40,14 +40,14 @@ export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const isMatch = await user.correctPassword(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const token = generateToken(user._id, user.role);
@@ -70,7 +70,7 @@ export const getUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.json({
@@ -89,10 +89,14 @@ export const getUserProfile = async (req, res, next) => {
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find()
-      .select('-password -__v')
+      .select("-password -__v")
       .sort({ createdAt: -1 });
 
-    res.json(users);
+    res.json({
+      success: true,
+      data: users,
+      count: users.length,
+    });
   } catch (error) {
     next(error);
   }

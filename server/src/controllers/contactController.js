@@ -1,4 +1,4 @@
-import ContactMessage from '../models/ContactMessage.js';
+import ContactMessage from "../models/ContactMessage.js";
 
 // @desc    Submit contact form
 // @route   POST /api/contact
@@ -15,7 +15,7 @@ export const submitContactForm = async (req, res, next) => {
     });
 
     // Log for development/debugging (optional)
-    console.log('New Contact Message:', {
+    console.log("New Contact Message:", {
       id: contact._id,
       name: contact.name,
       email: contact.email,
@@ -23,7 +23,7 @@ export const submitContactForm = async (req, res, next) => {
     });
 
     res.status(201).json({
-      message: 'Message received successfully! We will get back to you soon.',
+      message: "Message received successfully! We will get back to you soon.",
       id: contact._id,
     });
   } catch (error) {
@@ -38,9 +38,13 @@ export const getAllContactMessages = async (req, res, next) => {
   try {
     const messages = await ContactMessage.find()
       .sort({ read: 1, createdAt: -1 }) // Unread first, then newest
-      .select('-__v');
+      .select("-__v");
 
-    res.json(messages);
+    res.json({
+      success: true,
+      data: messages,
+      count: messages.length,
+    });
   } catch (error) {
     next(error);
   }
@@ -57,15 +61,18 @@ export const markMessageAsRead = async (req, res, next) => {
     const message = await ContactMessage.findByIdAndUpdate(
       id,
       { read: read !== undefined ? read : true },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!message) {
-      return res.status(404).json({ error: 'Message not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Message not found" });
     }
 
     res.json({
-      message: `Message marked as ${message.read ? 'read' : 'unread'}`,
+      success: true,
+      message: `Message marked as ${message.read ? "read" : "unread"}`,
       data: message,
     });
   } catch (error) {
@@ -83,11 +90,14 @@ export const deleteContactMessage = async (req, res, next) => {
     const message = await ContactMessage.findByIdAndDelete(id);
 
     if (!message) {
-      return res.status(404).json({ error: 'Message not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Message not found" });
     }
 
     res.json({
-      message: 'Message deleted successfully',
+      success: true,
+      message: "Message deleted successfully",
       id: message._id,
     });
   } catch (error) {
