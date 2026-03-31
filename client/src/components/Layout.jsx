@@ -6,6 +6,7 @@ import AudioToggle from './AudioToggle';
 import { AudioProvider } from './AudioToggle';
 import CustomCursor from './CustomCursor';
 import HelpButton from './HelpButton';
+import Notification from './Notification';
 import { ReactLenis } from 'lenis/react';
 import { usePerformanceMetrics } from '../hooks';
 import '../styles/background-effects.css';
@@ -61,6 +62,7 @@ const Layout = () => {
           <AudioToggle />
           <CustomCursor />
           <HelpButton />
+          <Notification />
         </div>
       </ReactLenis>
     </AudioProvider>
