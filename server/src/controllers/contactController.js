@@ -1,19 +1,96 @@
-// @desc    Handle contact form submission
+import ContactMessage from '../models/ContactMessage.js';
+
+// @desc    Submit contact form
 // @route   POST /api/contact
 // @access  Public
-export const submitContactForm = (req, res) => {
-  const { name, email, message } = req.body;
+export const submitContactForm = async (req, res, next) => {
+  try {
+    const { name, email, message } = req.body;
 
-  // In a real application, you would typically:
-  // 1. Validate the input data
-  // 2. Save the data to a database
-  // 3. Send an email (e.g., using Nodemailer)
-  // 4. Integrate with a CRM or other service
+    // Create contact message in database
+    const contact = await ContactMessage.create({
+      name,
+      email,
+      message,
+    });
 
-  console.log('Contact Form Submission:');
-  console.log(`Name: ${name}`);
-  console.log(`Email: ${email}`);
-  console.log(`Message: ${message}`);
+    // Log for development/debugging (optional)
+    console.log('New Contact Message:', {
+      id: contact._id,
+      name: contact.name,
+      email: contact.email,
+      createdAt: contact.createdAt,
+    });
 
-  res.status(200).json({ message: 'Message received successfully!', data: { name, email, message } });
+    res.status(201).json({
+      message: 'Message received successfully! We will get back to you soon.',
+      id: contact._id,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Get all contact messages (Admin only)
+// @route   GET /api/contact/messages
+// @access  Private/Admin
+export const getAllContactMessages = async (req, res, next) => {
+  try {
+    const messages = await ContactMessage.find()
+      .sort({ read: 1, createdAt: -1 }) // Unread first, then newest
+      .select('-__v');
+
+    res.json(messages);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Mark message as read/unread (Admin only)
+// @route   PATCH /api/contact/:id/read
+// @access  Private/Admin
+export const markMessageAsRead = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { read } = req.body;
+
+    const message = await ContactMessage.findByIdAndUpdate(
+      id,
+      { read: read !== undefined ? read : true },
+      { new: true, runValidators: true }
+    );
+
+    if (!message) {
+      return res.status(404).json({ error: 'Message not found' });
+    }
+
+    res.json({
+      message: `Message marked as ${message.read ? 'read' : 'unread'}`,
+      data: message,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Delete contact message (Admin only)
+// @route   DELETE /api/contact/:id
+// @access  Private/Admin
+export const deleteContactMessage = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const message = await ContactMessage.findByIdAndDelete(id);
+
+    if (!message) {
+      return res.status(404).json({ error: 'Message not found' });
+    }
+
+    res.json({
+      message: 'Message deleted successfully',
+      id: message._id,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
