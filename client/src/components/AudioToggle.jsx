@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useCallback } from 'react';
+import { useState, createContext, useContext, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const AudioContext = createContext(null);
@@ -6,12 +6,24 @@ const AudioContext = createContext(null);
 export const AudioProvider = ({ children }) => {
   const [isAudioOn, setIsAudioOn] = useState(false);
   const [audioContext, setAudioContext] = useState(null);
+  const [isReady, setIsReady] = useState(false);
+
+  // Initialize safely after mount
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   const toggleAudio = useCallback(() => {
     if (!isAudioOn && !audioContext) {
-      // Initialize Web Audio API on first enable
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      setAudioContext(ctx);
+      try {
+        // Initialize Web Audio API on first enable
+        if (typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext)) {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          setAudioContext(ctx);
+        }
+      } catch (err) {
+        console.warn('AudioContext not supported:', err);
+      }
     }
     setIsAudioOn((prev) => !prev);
   }, [isAudioOn, audioContext]);
@@ -19,43 +31,53 @@ export const AudioProvider = ({ children }) => {
   const playHoverSound = useCallback(() => {
     if (!isAudioOn || !audioContext) return;
 
-    // Play subtle hover sound
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    try {
+      // Play subtle hover sound
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
 
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
 
-    oscillator.frequency.value = 800;
-    gainNode.gain.value = 0.05;
-    gainNode.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.05
-    );
+      oscillator.frequency.value = 800;
+      gainNode.gain.value = 0.05;
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.05
+      );
 
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.05);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.05);
+    } catch (err) {
+      // Silently fail if audio can't play
+      console.debug('Hover sound failed:', err);
+    }
   }, [isAudioOn, audioContext]);
 
   const playClickSound = useCallback(() => {
     if (!isAudioOn || !audioContext) return;
 
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    try {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
 
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
 
-    oscillator.frequency.value = 1200;
-    oscillator.type = 'sine';
-    gainNode.gain.value = 0.08;
-    gainNode.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.08
-    );
+      oscillator.frequency.value = 1200;
+      oscillator.type = 'sine';
+      gainNode.gain.value = 0.08;
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.08
+      );
 
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.08);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.08);
+    } catch (err) {
+      // Silently fail if audio can't play
+      console.debug('Click sound failed:', err);
+    }
   }, [isAudioOn, audioContext]);
 
   const value = {
@@ -63,23 +85,41 @@ export const AudioProvider = ({ children }) => {
     toggleAudio,
     playHoverSound,
     playClickSound,
+    isReady,
   };
 
-  return (
-    <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
-  );
+  // Wrap in try-catch to prevent breaking the app
+  try {
+    return (
+      <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
+    );
+  } catch (err) {
+    console.error('AudioProvider error:', err);
+    return <>{children}</>;
+  }
 };
 
 export const useAudio = () => {
   const context = useContext(AudioContext);
   if (!context) {
-    throw new Error('useAudio must be used within an AudioProvider');
+    // Return dummy functions instead of throwing
+    return {
+      isAudioOn: false,
+      toggleAudio: () => {},
+      playHoverSound: () => {},
+      playClickSound: () => {},
+      isReady: true,
+    };
   }
   return context;
 };
 
 const AudioToggle = () => {
-  const { isAudioOn, toggleAudio } = useAudio();
+  const { isAudioOn, toggleAudio, isReady } = useAudio();
+
+  if (!isReady) {
+    return null;
+  }
 
   return (
     <motion.button
