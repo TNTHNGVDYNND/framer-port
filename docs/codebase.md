@@ -60,12 +60,13 @@ server/
 
 **Purpose**: Centralized configuration management
 
-| File | Responsibility |
-|------|---------------|
-| `database.js` | MongoDB connection using Mongoose |
-| `index.js` | Environment variable loader with defaults |
+| File          | Responsibility                            |
+| ------------- | ----------------------------------------- |
+| `database.js` | MongoDB connection using Mongoose         |
+| `index.js`    | Environment variable loader with defaults |
 
 **Environment Variables**:
+
 ```javascript
 {
   mongoUri: process.env.MONGO_URI,
@@ -98,6 +99,7 @@ server/
 ```
 
 **Features**:
+
 - Automatic password hashing with bcrypt (cost: 12)
 - `correctPassword()` method for comparison
 - Role-based access control support
@@ -120,6 +122,7 @@ server/
 ```
 
 **Indexes**:
+
 - `{ category: 1, featured: -1 }` - Compound for filtering queries
 - `{ featured: -1 }` - For featured projects
 - `{ createdAt: -1 }` - For sorting by date
@@ -138,6 +141,7 @@ server/
 ```
 
 **Indexes**:
+
 - `{ read: 1, createdAt: -1 }` - Unread first, then newest (admin dashboard)
 - `{ email: 1 }` - For email lookups
 
@@ -149,37 +153,38 @@ server/
 
 #### User Controller
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `registerUser` | POST /users/register | Public | Create new user account |
-| `loginUser` | POST /users/login | Public | Authenticate and return JWT |
-| `getUserProfile` | GET /users/profile | Protected | Get current user data |
-| `getAllUsers` | GET /users | Admin | List all users |
+| Method           | Endpoint             | Access    | Description                 |
+| ---------------- | -------------------- | --------- | --------------------------- |
+| `registerUser`   | POST /users/register | Public    | Create new user account     |
+| `loginUser`      | POST /users/login    | Public    | Authenticate and return JWT |
+| `getUserProfile` | GET /users/profile   | Protected | Get current user data       |
+| `getAllUsers`    | GET /users           | Admin     | List all users              |
 
 **JWT Payload**: `{ id: user._id, role: user.role }`
 
 #### Project Controller
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `getProjects` | GET /projects | Public | List all (with query filters) |
-| `getProjectById` | GET /projects/:id | Public | Get single project |
-| `createProject` | POST /projects | Admin | Create new project |
-| `updateProject` | PUT /projects/:id | Admin | Update existing |
-| `deleteProject` | DELETE /projects/:id | Admin | Remove project |
+| Method           | Endpoint             | Access | Description                   |
+| ---------------- | -------------------- | ------ | ----------------------------- |
+| `getProjects`    | GET /projects        | Public | List all (with query filters) |
+| `getProjectById` | GET /projects/:id    | Public | Get single project            |
+| `createProject`  | POST /projects       | Admin  | Create new project            |
+| `updateProject`  | PUT /projects/:id    | Admin  | Update existing               |
+| `deleteProject`  | DELETE /projects/:id | Admin  | Remove project                |
 
 **Query Parameters**:
+
 - `?category=Frontend` - Filter by category
 - `?featured=true` - Show only featured
 
 #### Contact Controller
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `submitContactForm` | POST /contact | Public | Save message to DB |
-| `getAllContactMessages` | GET /contact/messages | Admin | List all messages |
-| `markMessageAsRead` | PATCH /contact/:id/read | Admin | Toggle read status |
-| `deleteContactMessage` | DELETE /contact/:id | Admin | Delete message |
+| Method                  | Endpoint                | Access | Description        |
+| ----------------------- | ----------------------- | ------ | ------------------ |
+| `submitContactForm`     | POST /contact           | Public | Save message to DB |
+| `getAllContactMessages` | GET /contact/messages   | Admin  | List all messages  |
+| `markMessageAsRead`     | PATCH /contact/:id/read | Admin  | Toggle read status |
+| `deleteContactMessage`  | DELETE /contact/:id     | Admin  | Delete message     |
 
 **Sorting**: Unread messages first, then by date (newest)
 
@@ -190,6 +195,7 @@ server/
 #### Authentication Middleware
 
 **`protect`** - JWT Verification
+
 - Extracts token from `Authorization: Bearer <token>` header
 - Verifies JWT signature
 - Fetches user from database (includes role)
@@ -197,23 +203,25 @@ server/
 - Returns 401 if token missing/invalid
 
 **`adminOnly`** - Role Check
+
 - Must be used AFTER `protect` middleware
 - Checks `req.user.role === 'admin'`
 - Returns 403 if not admin
 
 #### Rate Limiting Middleware
 
-| Limiter | Window | Max | Applied To |
-|---------|--------|-----|------------|
-| `authLimiter` | 15 min | 5 | Login, Register |
-| `contactLimiter` | 1 hour | 3 | Contact form |
-| `apiLimiter` | 15 min | 100 | All API routes |
+| Limiter          | Window | Max | Applied To      |
+| ---------------- | ------ | --- | --------------- |
+| `authLimiter`    | 15 min | 5   | Login, Register |
+| `contactLimiter` | 1 hour | 3   | Contact form    |
+| `apiLimiter`     | 15 min | 100 | All API routes  |
 
 **Headers**: Returns `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`
 
 #### Caching Middleware (V3 Performance)
 
 **`cacheMiddleware(duration)`** - API Response Caching
+
 - Caches GET requests with configurable TTL (default: 5 minutes)
 - Only caches successful responses (200-299 status codes)
 - Cache key based on URL + query parameters
@@ -221,41 +229,47 @@ server/
 
 **Applied To**:
 
-| Endpoint | Cache Duration | Purpose |
-|----------|---------------|---------|
-| `GET /api/projects` | 10 minutes | Project list (rarely changes) |
-| `GET /api/projects/:id` | 5 minutes | Individual project |
-| `GET /api/contact/messages` | 2 minutes | Admin messages (frequent updates) |
-| `GET /api/users` | 5 minutes | User list (admin only) |
+| Endpoint                    | Cache Duration | Purpose                           |
+| --------------------------- | -------------- | --------------------------------- |
+| `GET /api/projects`         | 10 minutes     | Project list (rarely changes)     |
+| `GET /api/projects/:id`     | 5 minutes      | Individual project                |
+| `GET /api/contact/messages` | 2 minutes      | Admin messages (frequent updates) |
+| `GET /api/users`            | 5 minutes      | User list (admin only)            |
 
 **`clearCache(pattern)`** - Cache Invalidation
+
 - Clears cache by pattern matching (string or RegExp)
 - Automatically called on POST/PUT/DELETE operations
 - Example: `clearCache('/projects')` clears all project-related cache
 
 **Cache Statistics**:
+
 ```javascript
-import { getCacheStats } from '../middleware/cache.js';
+import { getCacheStats } from "../middleware/cache.js";
 // Returns: { hits, misses, keys }
 ```
 
 #### Validation Middleware
 
 **`validateRegistration`**
+
 - Email: Valid format, normalized
 - Password: 8+ chars, 1 upper, 1 lower, 1 number
 - Role: Restricted to "user" only (prevents escalation)
 
 **`validateLogin`**
+
 - Email: Valid format
 - Password: Required
 
 **`validateContact`**
+
 - Name: 2-100 chars, XSS escaped
 - Email: Valid format
 - Message: 10-1000 chars, XSS escaped
 
 **`validateProject`**
+
 - Title: 3-100 chars, XSS escaped
 - Description: 10-500 chars, XSS escaped
 - ImageUrl/ProjectUrl: Valid URLs (optional)
@@ -267,6 +281,7 @@ import { getCacheStats } from '../middleware/cache.js';
 **`errorHandler`** - Centralized Error Processing
 
 Handles specific error types:
+
 - **ValidationError** (Mongoose): Returns 400 with field messages
 - **CastError**: Invalid ObjectId format → 400
 - **Duplicate key (11000)**: Unique constraint violation → 400
@@ -274,10 +289,12 @@ Handles specific error types:
 - **TokenExpiredError**: Expired token → 401
 
 **Production vs Development**:
+
 - Production: Generic "Internal server error" message
 - Development: Full error message and stack trace
 
 **`notFound`** - 404 Handler
+
 - Returns 404 for undefined routes
 - Includes requested URL in message
 
@@ -410,19 +427,19 @@ Return: { message: 'Success', id: contact._id }
 
 ### Security Checklist
 
-| Feature | Status | File |
-|---------|--------|------|
-| Rate Limiting | ✅ | `middleware/rateLimiter.js` |
-| Input Validation | ✅ | `middleware/validation.js` |
-| XSS Sanitization | ✅ | `middleware/validation.js` |
-| Helmet Headers | ✅ | `server.js` |
-| CORS Restriction | ✅ | `server.js` |
-| JWT Auth | ✅ | `middleware/authMiddleware.js` |
-| Role-based Access | ✅ | `middleware/authMiddleware.js` |
-| Error Handling | ✅ | `middleware/errorHandler.js` |
-| Request Logging | ✅ | `server.js` (Morgan) |
-| Password Hashing | ✅ | `models/User.js` |
-| Role Escalation Prevention | ✅ | `middleware/validation.js` |
+| Feature                    | Status | File                           |
+| -------------------------- | ------ | ------------------------------ |
+| Rate Limiting              | ✅     | `middleware/rateLimiter.js`    |
+| Input Validation           | ✅     | `middleware/validation.js`     |
+| XSS Sanitization           | ✅     | `middleware/validation.js`     |
+| Helmet Headers             | ✅     | `server.js`                    |
+| CORS Restriction           | ✅     | `server.js`                    |
+| JWT Auth                   | ✅     | `middleware/authMiddleware.js` |
+| Role-based Access          | ✅     | `middleware/authMiddleware.js` |
+| Error Handling             | ✅     | `middleware/errorHandler.js`   |
+| Request Logging            | ✅     | `server.js` (Morgan)           |
+| Password Hashing           | ✅     | `models/User.js`               |
+| Role Escalation Prevention | ✅     | `middleware/validation.js`     |
 
 ---
 
@@ -435,10 +452,12 @@ Return: { message: 'Success', id: contact._id }
 Get all projects with optional filtering.
 
 **Query Parameters**:
+
 - `category` (optional): Filter by category
 - `featured` (optional): `true` to show only featured
 
 **Response**:
+
 ```json
 [
   {
@@ -463,6 +482,7 @@ Submit contact form.
 **Rate Limit**: 3 per hour
 
 **Body**:
+
 ```json
 {
   "name": "John Doe",
@@ -472,6 +492,7 @@ Submit contact form.
 ```
 
 **Response**:
+
 ```json
 {
   "message": "Message received successfully!",
@@ -486,6 +507,7 @@ Register new user.
 **Rate Limit**: 5 per 15 minutes
 
 **Body**:
+
 ```json
 {
   "email": "user@example.com",
@@ -494,10 +516,12 @@ Register new user.
 ```
 
 **Validation**:
+
 - Email: Valid format
 - Password: 8+ chars, 1 upper, 1 lower, 1 number
 
 **Response**:
+
 ```json
 {
   "_id": "...",
@@ -510,6 +534,7 @@ Register new user.
 ### Protected Endpoints
 
 **Header Required**:
+
 ```
 Authorization: Bearer <jwt_token>
 ```
@@ -519,6 +544,7 @@ Authorization: Bearer <jwt_token>
 Get current user profile.
 
 **Response**:
+
 ```json
 {
   "_id": "...",
@@ -536,6 +562,7 @@ Get current user profile.
 Create new project.
 
 **Body**:
+
 ```json
 {
   "title": "New Project",
@@ -553,6 +580,7 @@ Create new project.
 Get all contact messages (sorted: unread first, then newest).
 
 **Response**:
+
 ```json
 [
   {
@@ -571,6 +599,7 @@ Get all contact messages (sorted: unread first, then newest).
 Mark message as read/unread.
 
 **Body**:
+
 ```json
 { "read": true }
 ```
@@ -580,6 +609,7 @@ Mark message as read/unread.
 Get all registered users.
 
 **Response**:
+
 ```json
 [
   {
@@ -607,17 +637,17 @@ All errors follow consistent format:
 
 ### Common Error Codes
 
-| Status | Error | Cause |
-|--------|-------|-------|
-| 400 | Validation Error | Invalid input data |
-| 400 | Duplicate Field | Email already exists |
-| 401 | Not authorized | Missing/invalid token |
-| 401 | Invalid Token | JWT signature failed |
-| 403 | Not authorized as admin | User lacks admin role |
-| 404 | Project not found | Invalid ObjectId |
-| 404 | Route not found | Undefined URL |
-| 429 | Too many requests | Rate limit exceeded |
-| 500 | Internal server error | Unexpected error |
+| Status | Error                   | Cause                 |
+| ------ | ----------------------- | --------------------- |
+| 400    | Validation Error        | Invalid input data    |
+| 400    | Duplicate Field         | Email already exists  |
+| 401    | Not authorized          | Missing/invalid token |
+| 401    | Invalid Token           | JWT signature failed  |
+| 403    | Not authorized as admin | User lacks admin role |
+| 404    | Project not found       | Invalid ObjectId      |
+| 404    | Route not found         | Undefined URL         |
+| 429    | Too many requests       | Rate limit exceeded   |
+| 500    | Internal server error   | Unexpected error      |
 
 ---
 
@@ -625,25 +655,25 @@ All errors follow consistent format:
 
 ### Production
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| express | ^5.1.0 | Web framework |
-| mongoose | ^9.0.0 | MongoDB ODM |
-| bcryptjs | ^3.0.2 | Password hashing |
-| jsonwebtoken | ^9.0.3 | JWT authentication |
-| helmet | ^7.1.0 | Security headers |
-| express-rate-limit | ^7.3.1 | Rate limiting |
-| express-validator | ^7.0.1 | Input validation |
-| morgan | ^1.10.0 | Request logging |
-| cors | ^2.8.5 | CORS handling |
-| dotenv | ^17.2.3 | Environment vars |
-| compression | ^1.8.0 | Gzip response compression |
-| node-cache | ^5.1.2 | API response caching |
+| Package            | Version | Purpose                   |
+| ------------------ | ------- | ------------------------- |
+| express            | ^5.1.0  | Web framework             |
+| mongoose           | ^9.0.0  | MongoDB ODM               |
+| bcryptjs           | ^3.0.2  | Password hashing          |
+| jsonwebtoken       | ^9.0.3  | JWT authentication        |
+| helmet             | ^7.1.0  | Security headers          |
+| express-rate-limit | ^7.3.1  | Rate limiting             |
+| express-validator  | ^7.0.1  | Input validation          |
+| morgan             | ^1.10.0 | Request logging           |
+| cors               | ^2.8.5  | CORS handling             |
+| dotenv             | ^17.2.3 | Environment vars          |
+| compression        | ^1.8.0  | Gzip response compression |
+| node-cache         | ^5.1.2  | API response caching      |
 
 ### Development
 
-| Package | Version | Purpose |
-|---------|---------|---------|
+| Package | Version | Purpose                 |
+| ------- | ------- | ----------------------- |
 | nodemon | ^3.1.11 | Auto-restart on changes |
 
 ---
@@ -660,6 +690,7 @@ All errors follow consistent format:
 ### Response Caching
 
 **Implementation**:
+
 - `node-cache` with 5-minute default TTL
 - GET endpoints cached with varying durations
 - Cache invalidation on write operations (POST/PUT/DELETE)
@@ -683,6 +714,7 @@ All errors follow consistent format:
 ### Monitoring
 
 **Health Check Endpoint**:
+
 - `GET /api/health` returns system status
 - Database connection status
 - Memory usage (heap used/total)
@@ -692,6 +724,7 @@ All errors follow consistent format:
 ### Docker Optimization
 
 **Multi-stage build**:
+
 - Stage 1: Install dependencies
 - Stage 2: Copy only necessary files, run as non-root
 - Image size optimized
@@ -727,11 +760,13 @@ server/
 ### Test Results
 
 **Model Tests**: 46/46 passing (100%)
+
 - User Model: Password hashing, validation, role management
 - Project Model: CRUD operations, validation, categories
 - ContactMessage Model: Persistence, read/unread status, validation
 
 **Coverage Configuration**:
+
 - Target: 75%+ overall
 - Models: 90%+
 - Controllers: 80%+
@@ -755,6 +790,7 @@ npm run test:ci       # CI mode with reporters
 ### Test Features
 
 **Model Tests Include**:
+
 - Happy path scenarios
 - Validation edge cases (required fields, length limits, enums)
 - Security checks (password hashing, field exclusion)
@@ -762,6 +798,7 @@ npm run test:ci       # CI mode with reporters
 - Timestamp verification
 
 **Integration Test Framework**:
+
 - Supertest for HTTP assertions
 - JWT token generation for authenticated routes
 - Database cleanup between tests
@@ -771,24 +808,24 @@ npm run test:ci       # CI mode with reporters
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| **Development** ||
-| `npm run dev` | Run client + server concurrently (root) |
-| `npm run dev:client` | Run React dev server only |
-| `npm run dev:server` | Run Express dev server only |
-| **Testing** ||
-| `npm test` | Run Jest test suite with coverage |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:ci` | Run tests for CI/CD pipeline |
-| **Production** ||
-| `npm start` | Production server |
-| `npm run seed` | Seed admin user from .env |
-| **Docker** ||
-| `npm run docker:build` | Build Docker images (root) |
-| `npm run docker:up` | Start production stack |
-| `npm run docker:down` | Stop production stack |
-| `npm run docker:logs` | View production logs |
+| Command                | Description                             |
+| ---------------------- | --------------------------------------- |
+| **Development**        |                                         |
+| `npm run dev`          | Run client + server concurrently (root) |
+| `npm run dev:client`   | Run React dev server only               |
+| `npm run dev:server`   | Run Express dev server only             |
+| **Testing**            |                                         |
+| `npm test`             | Run Jest test suite with coverage       |
+| `npm run test:watch`   | Run tests in watch mode                 |
+| `npm run test:ci`      | Run tests for CI/CD pipeline            |
+| **Production**         |                                         |
+| `npm start`            | Production server                       |
+| `npm run seed`         | Seed admin user from .env               |
+| **Docker**             |                                         |
+| `npm run docker:build` | Build Docker images (root)              |
+| `npm run docker:up`    | Start production stack                  |
+| `npm run docker:down`  | Stop production stack                   |
+| `npm run docker:logs`  | View production logs                    |
 
 ---
 
@@ -797,22 +834,26 @@ npm run test:ci       # CI mode with reporters
 ### GitHub Actions Workflows
 
 **CI Pipeline** (`.github/workflows/ci.yml`):
+
 - Triggers: Push/PR to main, develop branches
 - Jobs: Test (Node 18/20), Lint, Docker Build, Security Audit
 - Artifacts: Coverage reports uploaded
 
 **Deploy Pipeline** (`.github/workflows/deploy.yml`):
-- Triggers: Push to main, version tags (v*), manual dispatch
+
+- Triggers: Push to main, version tags (v\*), manual dispatch
 - Jobs: Build & push Docker image, deployment, health check
 - Environments: staging, production
 
 ### Docker Compose Production
 
 **Services**:
+
 - **mongo**: MongoDB 7 with authentication and persistent storage
 - **api**: Node.js server with health checks and resource limits
 
 **Usage**:
+
 ```bash
 # Start production stack
 docker-compose -f docker-compose.prod.yml up -d
@@ -827,6 +868,7 @@ docker-compose -f docker-compose.prod.yml down
 ### Secrets Configuration
 
 Required GitHub Secrets:
+
 - `DOCKER_USERNAME` / `DOCKER_PASSWORD` - Docker Hub credentials
 - `JWT_SECRET` - Production JWT signing key
 - `MONGO_ROOT_PASSWORD` - MongoDB admin password
@@ -858,6 +900,135 @@ Required GitHub Secrets:
 
 ---
 
+## Frontend Architecture
+
+### Admin Dashboard (AdminDashboard.jsx)
+
+**Location**: `client/src/pages/AdminDashboard.jsx`
+
+The admin dashboard provides a terminal-themed interface for managing portfolio content with full CRUD capabilities.
+
+#### Features
+
+**Tab Navigation**:
+
+- **Projects**: Create, read, update, delete projects
+- **Messages**: View and manage contact form submissions
+- **Users**: View registered users (admin only)
+- **Settings**: System status overview
+
+**Project Management**:
+
+```javascript
+// Create new project
+POST /api/projects
+{
+  title: String (3-100 chars),
+  description: String (10-500 chars),
+  category: Enum ['Frontend', 'Backend', 'MERN', 'APIs', 'Experiments', 'Other'],
+  imageUrl: String (URL),
+  projectUrl: String (URL),
+  tags: [String],
+  featured: Boolean
+}
+
+// Update existing project
+PUT /api/projects/:id
+// Same body as create
+
+// Delete project
+DELETE /api/projects/:id
+```
+
+**Contact Message Management**:
+
+```javascript
+// Get all messages (sorted: unread first, then newest)
+GET /api/contact/messages
+
+// Mark as read/unread
+PATCH /api/contact/:id/read
+{ read: Boolean }
+
+// Delete message
+DELETE /api/contact/:id
+```
+
+**UI Components**:
+
+- Modal forms for project create/edit with validation
+- Toast notifications for all actions
+- Stats cards showing project/message/user counts
+- Responsive terminal-themed design
+
+### Notification System (Notification.jsx)
+
+**Location**: `client/src/components/Notification.jsx`
+
+Toast notification component integrated with AuthProvider context.
+
+**Features**:
+
+- Framer Motion animations (slide in/out)
+- Auto-dismiss after 3 seconds
+- Success/error variants with color coding
+- Terminal-style messaging format: `[SUCCESS] Message` or `[ERROR] Message`
+- Fixed position at top-center of viewport
+- Z-index: 100 (above all other UI elements)
+
+**Usage**:
+
+```javascript
+const { showNotification } = useAuth();
+showNotification("[SUCCESS] Project created successfully");
+showNotification("[ERROR] Failed to save project", "error");
+```
+
+### API Service Layer (api.js)
+
+**Location**: `client/src/services/api.js`
+
+Centralized HTTP client with automatic authentication.
+
+**Generic Methods**:
+
+```javascript
+// All methods automatically include Bearer token from localStorage
+api.get("/projects"); // GET /api/projects
+api.post("/projects", data); // POST /api/projects
+api.put("/projects/:id", data); // PUT /api/projects/:id
+api.patch("/contact/:id/read", { read: true }); // PATCH
+api.delete("/projects/:id"); // DELETE /api/projects/:id
+```
+
+**Legacy Methods** (maintained for backward compatibility):
+
+```javascript
+api.projects.getAll(); // Public projects (no auth)
+api.contact.submit(data); // Contact form submission
+api.auth.login(email, pass); // Authentication
+api.auth.register(email, pass); // Registration
+```
+
+### ProjectCard Component
+
+**Location**: `client/src/components/ProjectCard.jsx`
+
+3D tilt project card with clickable links to project URLs.
+
+**Features**:
+
+- Entire card acts as link to `project.projectUrl`
+- Opens in new tab (`target="_blank"`)
+- Hover reveals description, tags, and "View Project →" text
+- Title badge always visible at top-left
+- Featured badge (★ FEATURED) for featured projects
+- Tags displayed with #prefix
+- Parallax image effect on hover
+- Barcode decoration at bottom-right
+
+---
+
 **Last Updated**: 2026-03-31  
-**Version**: V4 Complete - Security + Testing + Performance + DevOps  
-**Status**: Production Ready | 46+ Tests Passing | Docker Ready | CI/CD Configured | Performance Optimized
+**Version**: V4.1 Complete - Production Ready with Admin Dashboard | Security + Testing + Performance + DevOps + UI Polish  
+**Status**: Production Ready | 46+ Tests Passing | Docker Ready | CI/CD Configured | Performance Optimized | Admin CRUD Complete
