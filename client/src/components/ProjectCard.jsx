@@ -34,7 +34,7 @@ const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
       ref={ref}
-      className='relative group cursor-pointer'
+      className='relative group'
       variants={PROJECT_CARD_ENTRY}
       custom={index}
       initial='hidden'
@@ -46,8 +46,11 @@ const ProjectCard = ({ project, index }) => {
         transformStyle: 'preserve-3d',
       }}
     >
-      <motion.div
-        className='relative rounded-xl overflow-hidden glass-elevated'
+      <motion.a
+        href={project.projectUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='block relative rounded-xl overflow-hidden glass-elevated no-underline'
         style={{
           rotateX,
           rotateY,
@@ -78,7 +81,7 @@ const ProjectCard = ({ project, index }) => {
 
           {/* Gradient overlay on hover */}
           <motion.div
-            className='absolute inset-0'
+            className='absolute inset-0 pointer-events-none'
             style={{
               background: `linear-gradient(to top, var(--color-bg-body) 0%, transparent 60%)`,
             }}
@@ -98,7 +101,8 @@ const ProjectCard = ({ project, index }) => {
           }}
           transition={{ ...TRANSITION_NORMAL, delay: isHovered ? 0.1 : 0 }}
           style={{
-            background: `linear-gradient(to top, var(--color-bg-body) 0%, transparent 100%)`,
+            background: `linear-gradient(to top, var(--color-bg-body) 0%, var(--color-bg-body) 30%, transparent 100%)`,
+            pointerEvents: 'none',
           }}
         >
           <h3
@@ -116,7 +120,7 @@ const ProjectCard = ({ project, index }) => {
 
           {/* Tags */}
           <div className='flex flex-wrap gap-2 mb-4'>
-            {project.tags.slice(0, 3).map((tag, i) => (
+            {project.tags?.slice(0, 3).map((tag, i) => (
               <span
                 key={i}
                 className='px-2 py-1 rounded text-xs font-mono'
@@ -125,19 +129,15 @@ const ProjectCard = ({ project, index }) => {
                   color: 'var(--color-text-primary)',
                 }}
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
 
-          {/* View Project link */}
-          <a
-            href={project.projectUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 font-mono text-sm font-semibold transition-colors duration-300'
+          {/* View Project text */}
+          <span
+            className='inline-flex items-center gap-2 font-mono text-sm font-semibold'
             style={{ color: 'var(--color-brand-primary)' }}
-            onClick={(e) => e.stopPropagation()}
           >
             View Project
             <motion.span
@@ -146,11 +146,11 @@ const ProjectCard = ({ project, index }) => {
             >
               →
             </motion.span>
-          </a>
+          </span>
         </motion.div>
 
         {/* Barcode decoration */}
-        <div className='absolute bottom-2 right-2 opacity-40'>
+        <div className='absolute bottom-2 right-2 opacity-40 pointer-events-none'>
           <Barcode
             value={project._id}
             className='w-20'
@@ -159,21 +159,23 @@ const ProjectCard = ({ project, index }) => {
           />
         </div>
 
-        {/* ID badge */}
+        {/* Title badge - always visible */}
         <div
-          className='absolute top-4 left-4 px-2 py-1 rounded text-xs font-mono z-10'
+          className='absolute top-4 left-4 px-3 py-1.5 rounded text-xs font-mono z-10 max-w-[60%] truncate pointer-events-none'
           style={{
             backgroundColor: 'var(--color-surface-base)',
             color: 'var(--color-text-secondary)',
+            backdropFilter: 'blur(4px)',
           }}
+          title={project.title}
         >
-          PRJ-{String(project._id).padStart(3, '0')}
+          {project.title}
         </div>
 
         {/* Featured badge */}
         {project.featured && (
           <motion.div
-            className='absolute top-4 right-4 px-2 py-1 rounded text-xs font-mono z-10 flex items-center gap-1'
+            className='absolute top-4 right-4 px-2 py-1 rounded text-xs font-mono z-10 flex items-center gap-1 pointer-events-none'
             style={{
               backgroundColor: 'var(--color-brand-primary)',
               color: 'var(--color-text-base)',
@@ -186,7 +188,7 @@ const ProjectCard = ({ project, index }) => {
             <span>FEATURED</span>
           </motion.div>
         )}
-      </motion.div>
+      </motion.a>
     </motion.div>
   );
 };
