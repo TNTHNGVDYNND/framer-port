@@ -12,6 +12,64 @@ async function request(url, options = {}) {
 }
 
 export const api = {
+  // Generic HTTP methods
+  get: (endpoint) => {
+    const token = localStorage.getItem('token');
+    return request(`${API_BASE}/api${endpoint}`, {
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        'Content-Type': 'application/json',
+      },
+    });
+  },
+
+  post: (endpoint, data) => {
+    const token = localStorage.getItem('token');
+    return request(`${API_BASE}/api${endpoint}`, {
+      method: 'POST',
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  },
+
+  patch: (endpoint, data) => {
+    const token = localStorage.getItem('token');
+    return request(`${API_BASE}/api${endpoint}`, {
+      method: 'PATCH',
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  },
+
+  put: (endpoint, data) => {
+    const token = localStorage.getItem('token');
+    return request(`${API_BASE}/api${endpoint}`, {
+      method: 'PUT',
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  },
+
+  delete: (endpoint) => {
+    const token = localStorage.getItem('token');
+    return request(`${API_BASE}/api${endpoint}`, {
+      method: 'DELETE',
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        'Content-Type': 'application/json',
+      },
+    });
+  },
+
   projects: {
     getAll: () => request(`${API_BASE}/api/projects`),
   },
