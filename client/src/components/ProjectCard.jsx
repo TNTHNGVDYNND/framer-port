@@ -34,22 +34,24 @@ const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
       ref={ref}
-      className='relative group'
+      className='relative group cursor-pointer'
       variants={PROJECT_CARD_ENTRY}
       custom={index}
       initial='hidden'
       animate={isInView ? 'visible' : 'hidden'}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        if (project.projectUrl) {
+          window.open(project.projectUrl, '_blank', 'noopener,noreferrer');
+        }
+      }}
       style={{
         perspective: 1000,
         transformStyle: 'preserve-3d',
       }}
     >
-      <motion.a
-        href={project.projectUrl}
-        target='_blank'
-        rel='noopener noreferrer'
+      <motion.div
         className='block relative rounded-xl overflow-hidden glass-elevated no-underline'
         style={{
           rotateX,
@@ -102,7 +104,6 @@ const ProjectCard = ({ project, index }) => {
           transition={{ ...TRANSITION_NORMAL, delay: isHovered ? 0.1 : 0 }}
           style={{
             background: `linear-gradient(to top, var(--color-bg-body) 0%, var(--color-bg-body) 30%, transparent 100%)`,
-            pointerEvents: 'none',
           }}
         >
           <h3
@@ -188,7 +189,7 @@ const ProjectCard = ({ project, index }) => {
             <span>FEATURED</span>
           </motion.div>
         )}
-      </motion.a>
+      </motion.div>
     </motion.div>
   );
 };
