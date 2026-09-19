@@ -1,0 +1,95 @@
+# AGENTS.md
+
+Knowledge home for framer-port. Written 2026-09-20 from verified repo state; every command and path below was checked against the checkout at time of writing.
+
+## What this is
+
+Interactive MERN portfolio ("Zenfolio") — a cinematic, terminal-aesthetic portfolio site with an admin-managed project list and a persisted contact form. Client: React 19 + Vite 7 + Tailwind 4 + framer-motion. Server: Express 5 + Mongoose 9 + JWT auth (register/login, admin role). Database: MongoDB via `MONGO_URI` connection string (currently hosted on Atlas).
+
+## How to run it
+
+Root `npm install` cascades into both packages via `postinstall` → `install:all`. **The client leg requires `--legacy-peer-deps`** — `react-barcodes@1.2.0` is deprecated and declares peer `react@^17` / `react-dom@^17` against this repo's React 19, so plain `npm install` can fail with ERESOLVE. **The trap recurs:** any later plain `npm install` at root re-runs `postinstall` → `install:all`, whose client leg is again a plain `npm install` (no flag in the script — root `package.json:7-8`) — so install per-package (client always with the flag), or pass `--ignore-scripts` at root. The reliable cold start:
+
+```bash
+# client (flag required for any dependency operation — install, add, update)
+cd client && npm install --legacy-peer-deps
+
+# server
+cd ../server && npm install
+```
+
+Replacement candidate for the deprecated package: maintained `react-barcode`, or use `jsbarcode` directly (it is already `react-barcodes`' underlying dependency). The deprecation notice itself points at `next-barcode`.
+
+Dev servers (server API on :5000, client on :5173):
+
+```bash
+npm run dev            # root — both via concurrently
+npm run dev:server     # server only (nodemon)
+npm run dev:client     # client only (vite)
+```
+
+Seed scripts (server-side, need a reachable database):
+
+```bash
+npm run seed                      # root → server: seeds admin user (ADMIN_* env)
+cd server && npm run seed:projects  # seeds projects
+```
+
+## Environment
+
+`server/.env` is **required** — `server/src/config/database.js` connects via `mongoose.connect(process.env.MONGO_URI)` and exits (`process.exit(1)`) when the connect fails, so a missing `MONGO_URI` kills the server at boot. `client/.env` is **optional** — `VITE_API_URL` defaults to `http://localhost:5000` (`client/src/services/api.js:1`); add one only to point the client at a non-local API. Both are gitignored (root `.gitignore`); `server/.env.example` exists as the shape reference. Names and shapes only — never commit values, never paste them into docs or issues.
+
+`server/.env` (verified against `server/src/config/index.js`, `server/server.js`, `server/scripts/seedAdmin.js`):
+
+- `MONGO_URI` — MongoDB connection string (Atlas)
+- `JWT_SECRET` — signing key. **Must be set; never rely on the fallback default (see Sharp edges)**
+- `JWT_EXPIRES_IN` — token lifetime (defaults to `7d`)
+- `PORT` — server port (defaults to `5000`)
+- `CLIENT_URL` — allowed CORS origin (defaults to `http://localhost:5173`)
+- `ADMIN_EMAIL`, `ADMIN_PASSWORD` — consumed by `npm run seed`
+
+`client/.env` (verified against `client/src/services/api.js`):
+
+- `VITE_API_URL` — API base URL (defaults to `http://localhost:5000`)
+
+## Testing
+
+```bash
+npm test   # root → server: NODE_ENV=test node --experimental-vm-modules jest --coverage
+```
+
+- The `--experimental-vm-modules` flag is **required**: the server is ESM and `jest.setup.js` runs untransformed. Don't drop it.
+- Tests need a reachable MongoDB: `jest.setup.js` connects to `MONGO_URI` with the database name swapped to `test-framer-port`, falling back to `mongodb://localhost:27017/test-framer-port`. `mongodb-memory-server` is a devDependency but is **not wired into the setup file**.
+- Known state (2026-09-19): **14 test failures parked as "test suite reconciliation"**. Causes:
+  - List-endpoint assertions are stale vs the API's `{success, count, data}` envelope — e.g. `server/src/controllers/__tests__/projectController.test.js` asserts `response.body` is a raw array.
+  - An E11000 duplicate-key isolation issue between tests.
+  - Mongoose `new: true` deprecation in updates — wants `returnDocument: 'after'`.
+- `mongodb-memory-server` and `@parcel/watcher` have postinstall scripts blocked by the npm install-scripts guard. Approve them individually (e.g. `npm approve-builds`) when their features are actually needed.
+
+## API conventions
+
+- Base path `/api`; health check at `GET /api/health`.
+- List endpoints return the envelope `{success: true, count, data}` (projects, users, contact messages). Single-resource `GET` returns the raw document (no envelope). Write responses vary by endpoint: `POST`/`PUT /projects` and `PATCH /contact/:id/read` return `{success, message, data}`; `POST /contact` returns `{message, id}` (contactController.js:25-28); `POST /users/register` and `/login` return `{_id, email, role, token}` (userController.js:25-29, 55-59); `DELETE /projects/:id` returns `{success, message, id}` (projectController.js:105-109). Errors: `{message}` bodies come from controllers/middleware directly; the central error handler emits `{error}` or `{error, details}`.
+- Auth: `Authorization: Bearer <JWT>` (`protect` middleware); admin-only routes additionally require the user's `role === 'admin'` (`adminOnly`).
+- Rate limiting (`express-rate-limit`, standard `RateLimit-*` headers): general API 100 req/15 min, auth endpoints 5/15 min, contact form 3/hour. **Trust-proxy caveat:** `server.js` sets no `trust proxy`; behind a reverse proxy every client shares the proxy's IP, which makes the limits global. Set `app.set('trust proxy', <hops>)` when deploying behind one.
+- Read endpoints are cached in-process (`node-cache`): projects list 600s, project detail 300s, users 300s, contact messages 120s; write operations clear the affected keys.
+
+## Sharp edges
+
+1. **JWT_SECRET fallback** — `server/src/config/index.js:7` falls back to a hardcoded dev secret when `JWT_SECRET` is unset. Known security finding from a fleet-side security review (the review artifact is not in this repo — no in-repo record); planned remedy is a fail-closed boot check. Until then: always set `JWT_SECRET` explicitly; treat a boot without it as a misconfiguration, not a dev convenience.
+2. **Docker/CI artifacts are `.disabled`** — `docker-compose.prod.yml.disabled` (root), `server/Dockerfile.disabled`, `server/.dockerignore.disabled`, `.github/workflows/{ci,deploy}.yml.disabled`; root `docker:*` scripts echo placeholders. Re-enabling checklist: rename all four (compose references `Dockerfile`, not `Dockerfile.disabled`), restore the root `docker:*` scripts, **restore `.dockerignore` too** — the dotfile is easy to miss in `*.disabled` globs, and the Dockerfile's `COPY . .` would bake `.env` (secrets) into the image without it — and verify port bindings (server defaults to `:5000`; compose also publishes Mongo `:27017` — check that exposure before enabling).
+3. **Dependency refresh 2026-09-19/20** — both lockfiles were regenerated (delete + reinstall commits), taking `npm audit` from 14 vulnerabilities to 0. Re-run the audit after any dependency change, and remember the `--legacy-peer-deps` rule for the client.
+
+## Repo map
+
+- `client/` — React 19 + Vite SPA (`src/` app code, `src/services/api.js` API client, `src/context/AuthProvider.jsx` auth state)
+- `server/` — Express API (`src/config`, `src/controllers`, `src/middleware`, `src/models`, `src/routes`; `scripts/` seeds; `jest.config.js` / `jest.setup.js`)
+- `docs/` — project history: numbered phase docs (`01-`…`11-`), `codebase.md`, `decisions.md`, `security-assessment.md` (historical 2026-03-31 report — its findings are since fixed; read as history, not current state), `verification-report.md`
+- `references/` — design reference images
+- `documents/` — gitignored local docs (not on remote)
+- `.github/workflows/*.disabled` — disabled CI
+- `README.md` — product overview and quick start
+
+## Maintaining this file
+
+The authoritative copy is this file, `AGENTS.md` at the repo root. Prefer rewriting or pruning over appending; only knowledge useful to almost every future session belongs here. Deep history lives in `docs/` — link to it, don't duplicate it.
