@@ -8,17 +8,11 @@ Interactive MERN portfolio ("Zenfolio") — a cinematic, terminal-aesthetic port
 
 ## How to run it
 
-Root `npm install` cascades into both packages via `postinstall` → `install:all`. **The client leg requires `--legacy-peer-deps`** — `react-barcodes@1.2.0` is deprecated and declares peer `react@^17` / `react-dom@^17` against this repo's React 19, so plain `npm install` can fail with ERESOLVE. **The trap recurs:** any later plain `npm install` at root re-runs `postinstall` → `install:all`, whose client leg is again a plain `npm install` (no flag in the script — root `package.json:7-8`) — so install per-package (client always with the flag), or pass `--ignore-scripts` at root. The reliable cold start:
+Root `npm install` cascades into both packages via `postinstall` → `install:all` — plain, no flags, safe to run as-is. (That is new: until 2026-09-20 the client leg needed `--legacy-peer-deps` because of `react-barcodes`; history and the fix live in Sharp edges #2.) Cold start:
 
 ```bash
-# client (flag required for any dependency operation — install, add, update)
-cd client && npm install --legacy-peer-deps
-
-# server
-cd ../server && npm install
+npm install   # at root — postinstall cascades into client/ and server/
 ```
-
-Replacement candidate for the deprecated package: maintained `react-barcode`, or use `jsbarcode` directly (it is already `react-barcodes`' underlying dependency). The deprecation notice itself points at `next-barcode`.
 
 Dev servers (server API on :5000, client on :5173):
 
@@ -77,8 +71,9 @@ npm test   # root → server: NODE_ENV=test node --experimental-vm-modules jest 
 ## Sharp edges
 
 1. **JWT_SECRET fallback — FIXED (2026-09-20, `07533ce`+`71a588b`):** a fail-closed boot gate now throws at module load if `JWT_SECRET` or `MONGO_URI` is missing, empty, or whitespace — before the server listens, before any token is signed. The old hardcoded fallback is gone (originally flagged by a fleet-side security review; the review artifact is not in this repo). Design note: config modules throw; the entry point owns process death — rationale in `server/src/config/index.js` comments. Dev impact: `server/.env` with real values is mandatory — the app refuses to boot without them, by design.
-2. **Docker/CI artifacts are `.disabled`** — `docker-compose.prod.yml.disabled` (root), `server/Dockerfile.disabled`, `server/.dockerignore.disabled`, `.github/workflows/{ci,deploy}.yml.disabled`; root `docker:*` scripts echo placeholders. Re-enabling checklist: rename all four (compose references `Dockerfile`, not `Dockerfile.disabled`), restore the root `docker:*` scripts, **restore `.dockerignore` too** — the dotfile is easy to miss in `*.disabled` globs, and the Dockerfile's `COPY . .` would bake `.env` (secrets) into the image without it — and verify port bindings (server defaults to `:5000`; compose also publishes Mongo `:27017` — check that exposure before enabling).
-3. **Dependency refresh 2026-09-19/20** — both lockfiles were regenerated (delete + reinstall commits), taking `npm audit` from 14 vulnerabilities to 0. Re-run the audit after any dependency change, and remember the `--legacy-peer-deps` rule for the client.
+2. **`react-barcodes` ERESOLVE peer trap — FIXED (2026-09-20, branch `op/2026-0920-barcode-replacement`):** the deprecated `react-barcodes@1.2.0` declared peer `react@^17` / `react-dom@^17` against this repo's React 19, so any plain install touching the client could die with ERESOLVE — and because root `postinstall` → `install:all` re-runs the client leg on every root install, the `--legacy-peer-deps` flag (or root `--ignore-scripts`) had to be remembered forever. The fix: `client/src/components/Barcode.jsx` calls `jsbarcode` directly — the same underlying engine `react-barcodes` wrapped, so the rendered bars are identical by construction. Sequencing: the code change rides the branch above; the `package.json`/lockfile swap (`cd client && npm uninstall react-barcodes && npm install jsbarcode`) lands with the Captain's test sequence on that branch. `jsbarcode@3.12.x` was already in the lockfile as the wrapper's transitive dep, so the import resolves as soon as the swap runs. After it, plain root `npm install` is the only install command anyone needs.
+3. **Docker/CI artifacts are `.disabled`** — `docker-compose.prod.yml.disabled` (root), `server/Dockerfile.disabled`, `server/.dockerignore.disabled`, `.github/workflows/{ci,deploy}.yml.disabled`; root `docker:*` scripts echo placeholders. Re-enabling checklist: rename all four (compose references `Dockerfile`, not `Dockerfile.disabled`), restore the root `docker:*` scripts, **restore `.dockerignore` too** — the dotfile is easy to miss in `*.disabled` globs, and the Dockerfile's `COPY . .` would bake `.env` (secrets) into the image without it — and verify port bindings (server defaults to `:5000`; compose also publishes Mongo `:27017` — check that exposure before enabling).
+4. **Dependency refresh 2026-09-19/20** — both lockfiles were regenerated (delete + reinstall commits), taking `npm audit` from 14 vulnerabilities to 0. Re-run the audit after any dependency change (the barcode swap in Sharp edges #2 is exactly such a change).
 
 ## Repo map
 
