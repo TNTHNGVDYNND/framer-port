@@ -66,7 +66,7 @@
 ## Technical Improvements
 
 ### 1. Package Updates
-- Migrate from `react-barcodes` to `next-barcode`
+- ~~Migrate from `react-barcodes` to `next-barcode`~~ ✅ Done (2026-09-20), superseded: replaced with `jsbarcode` used directly (same underlying engine, maintained)
 - Keep dependencies current
 
 ### 2. Video Previews

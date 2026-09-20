@@ -23,14 +23,21 @@ It serves as both:
 ## Quick Start
 
 ```bash
-# Install all dependencies
+# Install all dependencies (cascades into client/ and server/ — no extra flags needed)
 npm install
+
+# Server environment — REQUIRED (the API refuses to boot without it)
+cp server/.env.example server/.env
+#   → set MONGO_URI and JWT_SECRET before starting the server
 
 # Frontend (Port 5173)
 cd client && npm run dev
 
 # Backend (Port 5000)
 cd server && npm run dev
+
+# Or run both from the root
+npm run dev
 ```
 
 ## AI-Assisted Development
@@ -339,29 +346,30 @@ Detailed documentation is organized in `/docs`:
 ## Tech Stack
 
 ### Frontend
-- React 19.2.0
-- Vite 7.2.4
-- Tailwind CSS v4.1.17
-- Framer Motion v12.23.24
-- React Router v7.9.6
-- Lenis v1.3.16 (smooth scroll)
+- React 19.2.4
+- Vite 7.3.1
+- Tailwind CSS v4.1.18
+- Framer Motion v12.34.0
+- React Router v7.13.0
+- Lenis v1.3.17 (smooth scroll)
+- jsbarcode v3.12.3 (barcode rendering)
 
 ### Backend
 - Node.js 20+
-- Express.js 5.1.0
-- MongoDB + Mongoose 9.0.0
-- bcryptjs 3.0.2 (password hashing)
+- Express.js 5.2.1
+- MongoDB + Mongoose 9.10.1
+- bcryptjs 3.0.3 (password hashing)
 - jsonwebtoken 9.0.3 (JWT)
-- helmet 7.1.0 (security headers)
-- express-rate-limit 7.3.1 (rate limiting)
-- express-validator 7.0.1 (input validation)
-- morgan 1.10.0 (request logging)
+- helmet 8.3.0 (security headers)
+- express-rate-limit 8.7.0 (rate limiting)
+- express-validator 7.3.2 (input validation)
+- morgan 1.12.1 (request logging)
 
 ## Environment Variables
 
-### Server (.env)
+### Server (.env) — required
 
-Copy `server/.env.example` to `server/.env`:
+The server refuses to boot without `MONGO_URI` and `JWT_SECRET`. Copy `server/.env.example` to `server/.env`:
 
 ```env
 # Server
@@ -379,10 +387,12 @@ JWT_SECRET=your-secret-key-here-minimum-32-characters-long
 JWT_EXPIRES_IN=7d
 ```
 
-### Client (.env)
+### Client (.env) — optional
+
+Not needed for local development: `VITE_API_URL` already defaults to `http://localhost:5000`. Add one only to point the client at a non-local API:
 
 ```env
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:5000
 ```
 
 ## Seeding Admin User
@@ -446,6 +456,6 @@ See `docs/timeline.md` for the complete development journey.
 
 ---
 
-**Last Updated**: 2026-03-31  
+**Last Updated**: 2026-09-20  
 **Status**: V2 Complete - Production Ready  
 **Security Rating**: 9/10 (all critical vulnerabilities addressed)
