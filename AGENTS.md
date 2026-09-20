@@ -42,7 +42,7 @@ cd server && npm run seed:projects  # seeds projects
 `server/.env` (verified against `server/src/config/index.js`, `server/server.js`, `server/scripts/seedAdmin.js`):
 
 - `MONGO_URI` — MongoDB connection string (Atlas)
-- `JWT_SECRET` — signing key. **Must be set; never rely on the fallback default (see Sharp edges)**
+- `JWT_SECRET` — signing key. **Required — the boot gate throws without it (see Sharp edges)**
 - `JWT_EXPIRES_IN` — token lifetime (defaults to `7d`)
 - `PORT` — server port (defaults to `5000`)
 - `CLIENT_URL` — allowed CORS origin (defaults to `http://localhost:5173`)
@@ -76,7 +76,7 @@ npm test   # root → server: NODE_ENV=test node --experimental-vm-modules jest 
 
 ## Sharp edges
 
-1. **JWT_SECRET fallback** — `server/src/config/index.js:7` falls back to a hardcoded dev secret when `JWT_SECRET` is unset. Known security finding from a fleet-side security review (the review artifact is not in this repo — no in-repo record); planned remedy is a fail-closed boot check. Until then: always set `JWT_SECRET` explicitly; treat a boot without it as a misconfiguration, not a dev convenience.
+1. **JWT_SECRET fallback — FIXED (2026-09-20, `07533ce`+`71a588b`):** a fail-closed boot gate now throws at module load if `JWT_SECRET` or `MONGO_URI` is missing, empty, or whitespace — before the server listens, before any token is signed. The old hardcoded fallback is gone (originally flagged by a fleet-side security review; the review artifact is not in this repo). Design note: config modules throw; the entry point owns process death — rationale in `server/src/config/index.js` comments. Dev impact: `server/.env` with real values is mandatory — the app refuses to boot without them, by design.
 2. **Docker/CI artifacts are `.disabled`** — `docker-compose.prod.yml.disabled` (root), `server/Dockerfile.disabled`, `server/.dockerignore.disabled`, `.github/workflows/{ci,deploy}.yml.disabled`; root `docker:*` scripts echo placeholders. Re-enabling checklist: rename all four (compose references `Dockerfile`, not `Dockerfile.disabled`), restore the root `docker:*` scripts, **restore `.dockerignore` too** — the dotfile is easy to miss in `*.disabled` globs, and the Dockerfile's `COPY . .` would bake `.env` (secrets) into the image without it — and verify port bindings (server defaults to `:5000`; compose also publishes Mongo `:27017` — check that exposure before enabling).
 3. **Dependency refresh 2026-09-19/20** — both lockfiles were regenerated (delete + reinstall commits), taking `npm audit` from 14 vulnerabilities to 0. Re-run the audit after any dependency change, and remember the `--legacy-peer-deps` rule for the client.
 
@@ -89,6 +89,10 @@ npm test   # root → server: NODE_ENV=test node --experimental-vm-modules jest 
 - `documents/` — gitignored local docs (not on remote)
 - `.github/workflows/*.disabled` — disabled CI
 - `README.md` — product overview and quick start
+
+## Workflow
+
+All changes ride branches; `main` never takes a direct commit from any desk. Crew work lands via `op/*` branches through the fleet pipeline (review before landing); hand edits ride short-lived `fix/*` or `docs/*` branches. `main` moves only by the Captain's local merge (`--no-ff` for hand edits keeps a visible labeled merge point) followed by push. The remote is the shared truth between desks.
 
 ## Maintaining this file
 
