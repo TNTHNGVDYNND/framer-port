@@ -22,7 +22,7 @@
     "lint": "cd server && npm run lint || true"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0",
+    "concurrently": "^10.0.5",
     "prettier": "^3.4.2"
   },
   "keywords": [
