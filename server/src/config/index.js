@@ -23,13 +23,26 @@ dotenv.config();
 const required = (name) => {
   const value = process.env[name];
   if (!value || !value.trim()) {
-    console.error(
+    throw new Error(
       `[boot] Missing required env var: ${name} — refusing to start (fail-closed)`,
     );
-    process.exit(1);
   }
-  return value;
+  return value.trim();
 };
+
+// == Why throw, not process.exit(1) (production-grade rationale) ==
+// An earlier draft of this gate called process.exit(1) directly. It works, but a
+// config module shouldn't own process lifecycle:
+//   1. Responsibility: config validates and reports; the ENTRY POINT (server.js)
+//      decides how the process dies. Node's default for an unhandled module error
+//      is still exit-nonzero — the fail-closed guarantee is identical.
+//   2. Testability: with exit(1), the first broken-env import kills the ENTIRE
+//      jest runner. With throw, each suite fails individually with this message —
+//      the runner survives to report everything.
+//   3. Future optionality: server.js may one day wrap boot in try/catch to format
+//      failures, run cleanup, or exit with a specific code — throw enables that;
+//      exit(1) forecloses it.
+// Rule of thumb: libraries/modules throw; applications/entry-points exit.
 
 export const env = {
   mongoUri: required("MONGO_URI"),
