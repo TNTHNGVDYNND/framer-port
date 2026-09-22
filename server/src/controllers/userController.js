@@ -26,33 +26,6 @@ const setAuthCookie = (res, token) => {
   });
 };
 
-// @desc    Register a new user
-// @route   POST /api/users/register
-// @access  Public
-export const registerUser = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    const user = await User.create({ email, password });
-
-    const token = generateToken(user._id, user.role, user.tokenVersion);
-    setAuthCookie(res, token);
-
-    res.status(201).json({
-      _id: user._id,
-      email: user.email,
-      role: user.role,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 // @desc    Authenticate user & get token
 // @route   POST /api/users/login
 // @access  Public

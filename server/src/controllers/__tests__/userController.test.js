@@ -50,63 +50,13 @@ describe('User Controller Integration Tests', () => {
     });
   });
 
-  describe('POST /api/users/register', () => {
-    it('should register a new user successfully', async () => {
+  describe('POST /api/users/register (removed — L-1/#33)', () => {
+    it('should 404 — public registration closed; provisioning is seed/admin-side', async () => {
       const response = await request(app)
         .post('/api/users/register')
-        .send({
-          email: 'newuser@test.com',
-          password: 'SecurePass123',
-        })
-        .expect(201);
-
-      expect(response.body).toHaveProperty('_id');
-      expect(response.body).toHaveProperty('email', 'newuser@test.com');
-      expect(response.body).toHaveProperty('role', 'user');
-      // M-2/#31: token no longer in the body — HttpOnly cookie instead
-      expect(response.body).not.toHaveProperty('token');
-      const cookieHeader = response.headers['set-cookie']?.[0] || '';
-      expect(cookieHeader).toMatch(/token=/);
-      expect(cookieHeader).toMatch(/HttpOnly/i);
-      expect(cookieHeader).toMatch(/SameSite=Strict/i);
-    });
-
-    it('should reject duplicate email', async () => {
-      const response = await request(app)
-        .post('/api/users/register')
-        .send({
-          email: 'admin@test.com',
-          password: 'AnotherPass123',
-        })
-        .expect(400);
-
-      expect(response.body).toHaveProperty('message', 'User already exists');
-    });
-
-    it('should reject weak password', async () => {
-      const response = await request(app)
-        .post('/api/users/register')
-        .send({
-          email: 'weak@test.com',
-          password: 'short',
-        })
-        .expect(400);
-
-      expect(response.body).toHaveProperty('error');
-    });
-
-    it('should prevent role escalation', async () => {
-      // Attempt to register as admin should fail validation
-      const response = await request(app)
-        .post('/api/users/register')
-        .send({
-          email: 'hacker@test.com',
-          password: 'SecurePass123',
-          role: 'admin',
-        })
-        .expect(400);
-
-      expect(response.body).toHaveProperty('error', 'Validation failed');
+        .send({ email: 'newuser@test.com', password: 'SecurePass123' })
+        .expect(404);
+      expect(response.body.error).toMatch(/Route not found/);
     });
   });
 

@@ -73,7 +73,6 @@ TerminalInput.propTypes = {
 };
 
 const TerminalAuthForm = ({ onSuccess }) => {
-  const [mode, setMode] = useState('login'); // 'login' or 'register'
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -83,8 +82,8 @@ const TerminalAuthForm = ({ onSuccess }) => {
   const [error, setError] = useState('');
   const [terminalOutput, setTerminalOutput] = useState([]);
 
-  // Use AuthContext for login/register
-  const { login, register } = useAuth();
+  // Use AuthContext for login (public registration closed — L-1/#33; provisioning is seed/admin-side)
+  const { login } = useAuth();
 
   const addTerminalLine = (text, type = 'system') => {
     setTerminalOutput((prev) => [...prev, { id: Date.now(), text, type }]);
@@ -106,15 +105,15 @@ const TerminalAuthForm = ({ onSuccess }) => {
     clearTerminal();
 
     // Simulate terminal output
-    addTerminalLine(`$ ./auth_${mode}.sh`, 'command');
+    addTerminalLine('$ ./auth_login.sh', 'command');
     addTerminalLine(
       '[SYSTEM] Initializing authentication protocol...',
       'system'
     );
-    addTerminalLine(`[PROCESSING] Validating ${mode} credentials...`, 'system');
+    addTerminalLine('[PROCESSING] Validating credentials...', 'system');
 
     try {
-      if (mode === 'login') {
+      {
         // Use AuthContext login function
         const data = await login(formData.email, formData.password);
 
@@ -129,21 +128,6 @@ const TerminalAuthForm = ({ onSuccess }) => {
         setTimeout(() => {
           if (onSuccess) onSuccess(data);
         }, 2000);
-      } else {
-        // Use AuthContext register function
-        await register(formData.email, formData.password);
-
-        addTerminalLine('[SUCCESS] Account created successfully!', 'success');
-        addTerminalLine('[INFO] Please login with your credentials', 'info');
-        setStatus('success');
-
-        // Switch to login mode after 2 seconds
-        setTimeout(() => {
-          setMode('login');
-          setStatus('idle');
-          setFormData({ email: '', password: '' });
-          clearTerminal();
-        }, 2000);
       }
     } catch (err) {
       addTerminalLine('[ERROR] Authentication failed!', 'error');
@@ -157,18 +141,11 @@ const TerminalAuthForm = ({ onSuccess }) => {
     }
   };
 
-  const toggleMode = () => {
-    setMode(mode === 'login' ? 'register' : 'login');
-    setError('');
-    clearTerminal();
-    setFormData({ email: '', password: '' });
-  };
-
   const getTerminalTitle = () => {
     if (status === 'submitting') return 'auth_process.exe — authenticating';
     if (status === 'success') return 'auth_process.exe — access_granted';
     if (status === 'error') return 'auth_process.exe — access_denied';
-    return `auth_${mode}.exe — ready`;
+    return 'auth_login.exe — ready';
   };
 
   return (
@@ -196,32 +173,11 @@ const TerminalAuthForm = ({ onSuccess }) => {
 
         {/* Terminal Body */}
         <div className='p-6 md:p-8'>
-          {/* Mode Toggle */}
+          {/* Mode Toggle (register removed — L-1/#33: single-admin site, provisioning is seed-side) */}
           <div className='flex gap-2 mb-6 font-mono text-xs'>
-            <button
-              type='button'
-              onClick={() => mode !== 'login' && toggleMode()}
-              className={`px-3 py-2 rounded transition-colors ${
-                mode === 'login'
-                  ? 'bg-brand-primary text-text-base'
-                  : 'text-text-secondary hover:text-text-primary'
-              }`}
-              disabled={status === 'submitting'}
-            >
+            <span className='px-3 py-2 rounded bg-brand-primary text-text-base'>
               [LOGIN]
-            </button>
-            <button
-              type='button'
-              onClick={() => mode !== 'register' && toggleMode()}
-              className={`px-3 py-2 rounded transition-colors ${
-                mode === 'register'
-                  ? 'bg-brand-primary text-text-base'
-                  : 'text-text-secondary hover:text-text-primary'
-              }`}
-              disabled={status === 'submitting'}
-            >
-              [REGISTER]
-            </button>
+            </span>
           </div>
 
           {/* Form */}
@@ -277,18 +233,12 @@ const TerminalAuthForm = ({ onSuccess }) => {
               >
                 <span>
                   {status === 'submitting'
-                    ? mode === 'login'
-                      ? '[AUTHENTICATING...]'
-                      : '[CREATING ACCOUNT...]'
+                    ? '[AUTHENTICATING...]'
                     : status === 'success'
-                      ? mode === 'login'
-                        ? '[ACCESS GRANTED]'
-                        : '[ACCOUNT CREATED]'
+                      ? '[ACCESS GRANTED]'
                       : status === 'error'
                         ? '[FAILED]'
-                        : mode === 'login'
-                          ? '> LOGIN'
-                          : '> REGISTER'}
+                        : '> LOGIN'}
                 </span>
                 {status === 'submitting' && (
                   <motion.span
@@ -355,16 +305,8 @@ const TerminalAuthForm = ({ onSuccess }) => {
 
           {/* Command hint */}
           <div className='mt-6 pt-4 border-t font-mono text-xs border-border-default text-text-secondary'>
-            <span className='text-brand-primary'>$</span>{' '}
-            {mode === 'login' ? 'New user?' : 'Have an account?'}{' '}
-            <button
-              type='button'
-              onClick={toggleMode}
-              disabled={status === 'submitting'}
-              className='text-brand-accent hover:underline disabled:opacity-50 disabled:cursor-not-allowed'
-            >
-              {mode === 'login' ? 'register here' : 'login here'}
-            </button>
+            <span className='text-brand-primary'>$</span> admin access only — account
+            provisioning is handled by the site administrator
           </div>
         </div>
       </motion.div>

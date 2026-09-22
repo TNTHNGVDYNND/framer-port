@@ -73,13 +73,6 @@ export const api = {
         body: JSON.stringify({ email, password }),
       }),
 
-    register: (email, password) =>
-      request(`${API_BASE}/api/users/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, role: 'user' }),
-      }),
-
     getProfile: () =>
       request(`${API_BASE}/api/users/profile`, {
         headers: { 'Content-Type': 'application/json' },
