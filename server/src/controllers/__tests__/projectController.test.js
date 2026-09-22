@@ -34,7 +34,7 @@ describe('Project Controller Integration Tests', () => {
       password: 'AdminPass123',
       role: 'admin',
     });
-    adminToken = jwt.sign({ id: adminUser._id, role: 'admin' }, process.env.JWT_SECRET, {
+    adminToken = jwt.sign({ id: adminUser._id, role: 'admin', ver: adminUser.tokenVersion }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
@@ -133,7 +133,7 @@ describe('Project Controller Integration Tests', () => {
         password: 'UserPass123',
         role: 'user',
       });
-      const userToken = jwt.sign({ id: regularUser._id, role: 'user' }, process.env.JWT_SECRET, {
+      const userToken = jwt.sign({ id: regularUser._id, role: 'user', ver: regularUser.tokenVersion }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       });
 
