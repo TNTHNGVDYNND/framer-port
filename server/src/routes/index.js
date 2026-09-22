@@ -60,6 +60,7 @@ router.post('/contact', contactLimiter, validateContact, contactController.submi
 // User authentication - Public (with auth rate limiting)
 router.post('/users/register', authLimiter, validateRegistration, userController.registerUser);
 router.post('/users/login', authLimiter, validateLogin, userController.loginUser);
+router.post('/users/logout', userController.logoutUser);
 
 // ===========================================
 // PROTECTED ENDPOINTS (Authentication Required)

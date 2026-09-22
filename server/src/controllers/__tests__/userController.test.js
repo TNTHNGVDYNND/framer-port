@@ -7,13 +7,16 @@ process.env.NODE_ENV = 'test';
 import { describe, it, expect, beforeEach } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 import apiRoutes from '../../routes/index.js';
 import User from '../../models/User.js';
 
-// Create test express app
+// Create test express app (W3: cookieParser mounted like production — the
+// cookie-first branch of protect is exercised by the roundtrip tests below)
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use('/api', apiRoutes);
 
 describe('User Controller Integration Tests', () => {
@@ -60,7 +63,12 @@ describe('User Controller Integration Tests', () => {
       expect(response.body).toHaveProperty('_id');
       expect(response.body).toHaveProperty('email', 'newuser@test.com');
       expect(response.body).toHaveProperty('role', 'user');
-      expect(response.body).toHaveProperty('token');
+      // M-2/#31: token no longer in the body — HttpOnly cookie instead
+      expect(response.body).not.toHaveProperty('token');
+      const cookieHeader = response.headers['set-cookie']?.[0] || '';
+      expect(cookieHeader).toMatch(/token=/);
+      expect(cookieHeader).toMatch(/HttpOnly/i);
+      expect(cookieHeader).toMatch(/SameSite=Strict/i);
     });
 
     it('should reject duplicate email', async () => {
@@ -113,7 +121,12 @@ describe('User Controller Integration Tests', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('email', 'admin@test.com');
-      expect(response.body).toHaveProperty('token');
+      // M-2/#31: token no longer in the body — HttpOnly cookie instead
+      expect(response.body).not.toHaveProperty('token');
+      const cookieHeader = response.headers['set-cookie']?.[0] || '';
+      expect(cookieHeader).toMatch(/token=/);
+      expect(cookieHeader).toMatch(/HttpOnly/i);
+      expect(cookieHeader).toMatch(/SameSite=Strict/i);
     });
 
     it('should reject invalid credentials', async () => {
@@ -130,6 +143,45 @@ describe('User Controller Integration Tests', () => {
       if (response.status === 401) {
         expect(response.body).toHaveProperty('message', 'Invalid credentials');
       }
+    });
+
+    // W3: cookie-first protect branch + full login→cookie→protected roundtrip
+    it('should authenticate via the HttpOnly cookie (login → profile roundtrip)', async () => {
+      const login = await request(app)
+        .post('/api/users/login')
+        .send({ email: 'admin@test.com', password: 'AdminPass123' })
+        .expect(200);
+
+      const cookies = login.headers['set-cookie'] || [];
+      const authCookie = cookies.find((c) => c.startsWith('token='));
+      expect(authCookie).toBeDefined();
+      expect(authCookie).toMatch(/HttpOnly/i);
+      expect(authCookie).toMatch(/SameSite=Strict/i);
+
+      const cookieHeader = cookies.map((c) => c.split(';')[0]).join('; ');
+      const profile = await request(app)
+        .get('/api/users/profile')
+        .set('Cookie', cookieHeader)
+        .expect(200);
+      expect(profile.body).toHaveProperty('email', 'admin@test.com');
+    });
+
+    it('should reject the cookie path with no cookie (protect 401)', async () => {
+      const response = await request(app).get('/api/users/profile').expect(401);
+      expect(response.body).toHaveProperty('message');
+    });
+  });
+
+  describe('POST /api/users/logout', () => {
+    it('should clear the auth cookie (W3: was zero-coverage)', async () => {
+      const response = await request(app).post('/api/users/logout').expect(200);
+      expect(response.body).toHaveProperty('message', 'Logged out');
+
+      const cookies = response.headers['set-cookie'] || [];
+      const cleared = cookies.find((c) => c.startsWith('token='));
+      expect(cleared).toBeDefined();
+      // expired/past-dated clear directive, POST-only
+      expect(cleared).toMatch(/token=;( |$)|Expires=Thu, 01 Jan 1970/);
     });
   });
 
@@ -160,8 +212,8 @@ describe('User Controller Integration Tests', () => {
         .set('Authorization', `Bearer ${adminToken}`)
         .expect(200);
 
-      expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body.length).toBeGreaterThanOrEqual(2);
+      expect(Array.isArray(response.body.data)).toBe(true);
+      expect(response.body.data.length).toBeGreaterThanOrEqual(2);
     });
 
     it('should reject non-admin access', async () => {

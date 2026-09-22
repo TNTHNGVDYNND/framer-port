@@ -5,7 +5,7 @@ import { api } from '../services/api';
 import { useAuth } from '../hooks/useAuth';
 
 const AdminDashboard = () => {
-  const { showNotification } = useAuth();
+  const { user, showNotification } = useAuth();
   const [activeTab, setActiveTab] = useState('projects');
   const [messages, setMessages] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -31,9 +31,6 @@ const AdminDashboard = () => {
     tags: '',
     featured: false,
   });
-
-  // Get user info
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   const tabs = [
     { id: 'projects', label: 'Projects', icon: '📁' },

@@ -67,11 +67,24 @@ export const parseTrustProxy = (raw) => {
   return n;
 };
 
+// W4 companion: the exact mis-set signature — trusting proxy hops while not in
+// production usually means NODE_ENV drifted on a real deploy (cookie `secure`
+// would silently drop). Warn loudly; the deploy checklist owns the fix.
+if (parseTrustProxy(process.env.TRUST_PROXY) !== false && process.env.NODE_ENV !== "production") {
+  console.warn(
+    "[boot] TRUST_PROXY is set while NODE_ENV !== 'production' — if this is really a deploy, fix NODE_ENV or the auth cookie's Secure flag is silently dropped",
+  );
+}
+
 export const env = {
   mongoUri: required("MONGO_URI"),
   port: process.env.PORT || 5000,
   jwtSecret: required("JWT_SECRET"),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  // W4 (PR #42 review): single source of truth for the cookie `secure` flag —
+  // duplicated NODE_ENV comparisons at use-sites drift and silently drop Secure
+  // on a mis-set prod deploy.
+  isProduction: process.env.NODE_ENV === "production",
   trustProxy: parseTrustProxy(process.env.TRUST_PROXY),
   admin: {
     email: process.env.ADMIN_EMAIL,

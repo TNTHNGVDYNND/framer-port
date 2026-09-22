@@ -7,26 +7,36 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState(null);
 
-  // Load auth state from localStorage on mount
+  // M-2/#31: no token in JS-land anymore — the JWT rides an HttpOnly cookie set by
+  // the server. Auth state bootstraps from /api/users/profile: cookie valid → user;
+  // anything else → guest. Legacy localStorage keys (pre-M-2 sessions) are cleared.
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
-
-    if (storedToken && storedUser) {
+    let cancelled = false;
+    (async () => {
+      localStorage.removeItem('token'); // legacy cleanup, one-time
+      localStorage.removeItem('user');
       try {
-        setToken(storedToken);
-        setUser(JSON.parse(storedUser));
+        const response = await fetch(`${API_BASE}/api/users/profile`, {
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (response.ok && !cancelled) {
+          const data = await response.json();
+          setUser(data);
+        }
       } catch (error) {
-        console.error('Error parsing stored user:', error);
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        // Network/server down: stay guest; profile check retries on next mount.
+        console.error('Auth bootstrap error:', error);
+      } finally {
+        if (!cancelled) setLoading(false);
       }
-    }
-    setLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const showNotification = useCallback((message, type = 'success') => {
@@ -38,6 +48,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(`${API_BASE}/api/users/login`, {
         method: 'POST',
+        credentials: 'include', // the server sets the HttpOnly auth cookie here
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
@@ -48,10 +59,6 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.message || 'Authentication failed');
       }
 
-      // Store auth data
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data));
-      setToken(data.token);
       setUser(data);
 
       showNotification('[ACCESS GRANTED] Login successful!');
@@ -66,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(`${API_BASE}/api/users/register`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, role: 'user' }),
       });
@@ -84,23 +92,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setToken(null);
+  const logout = async () => {
+    try {
+      // Server clears the HttpOnly cookie (JS cannot). Best-effort: state clears
+      // locally regardless of network outcome.
+      await fetch(`${API_BASE}/api/users/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Logout request failed (cookie expires with session anyway):', error);
+    }
     setUser(null);
     showNotification('[SESSION TERMINATED] Logged out successfully!');
   };
 
   const getProfile = async () => {
-    if (!token) return null;
-
     try {
       const response = await fetch(`${API_BASE}/api/users/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
       });
 
       const data = await response.json();
@@ -109,9 +120,7 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.message || 'Failed to fetch profile');
       }
 
-      // Update stored user data
-      localStorage.setItem('user', JSON.stringify({ ...user, ...data }));
-      setUser({ ...user, ...data });
+      setUser((current) => ({ ...current, ...data }));
       return data;
     } catch (error) {
       console.error('Profile fetch error:', error);
@@ -119,12 +128,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const isAuthenticated = !!token && !!user;
+  const isAuthenticated = !!user;
   const isAdmin = user?.role === 'admin';
 
   const value = {
     user,
-    token,
     loading,
     notification,
     isAuthenticated,
