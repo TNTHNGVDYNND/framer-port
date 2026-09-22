@@ -17,8 +17,19 @@ router.use(apiLimiter);
 // HEALTH CHECK
 // ===========================================
 
-// Health check endpoint - for monitoring and load balancers
+// Health check endpoints (L-3/#35 split):
+//   GET /health           — PUBLIC liveness: minimal shape, zero internals.
+//                           For LBs/monitors/compose (the api healthcheck spiders this).
+//                           Always 200 while the process serves — DB readiness is NOT
+//                           this endpoint's job (startup ordering is compose's
+//                           depends_on + mongo healthcheck; runtime depth is admin's).
+//   GET /health/detailed   — ADMIN readiness/depth: db state, memory, uptime,
+//                           version, environment. protect + adminOnly.
 router.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+router.get('/health/detailed', protect, adminOnly, (req, res) => {
   const dbState = mongoose.connection.readyState;
   const dbStatus =
     {
