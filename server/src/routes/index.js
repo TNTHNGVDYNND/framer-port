@@ -20,9 +20,10 @@ router.use(apiLimiter);
 // Health check endpoints (L-3/#35 split):
 //   GET /health           — PUBLIC liveness: minimal shape, zero internals.
 //                           For LBs/monitors/compose (the api healthcheck spiders this).
-//                           Always 200 while the process serves — DB readiness is NOT
-//                           this endpoint's job (startup ordering is compose's
-//                           depends_on + mongo healthcheck; runtime depth is admin's).
+//                           200 unless rate-limited — the global apiLimiter fronts it
+//                           (100 req/15min/IP, ERL counts rejected requests too), so a
+//                           hot poller can 429. Limiter exemption for this route is a
+//                           NAMED FOLLOW-UP (deploy/M-4 lap), not done here.
 //   GET /health/detailed   — ADMIN readiness/depth: db state, memory, uptime,
 //                           version, environment. protect + adminOnly.
 router.get('/health', (req, res) => {
