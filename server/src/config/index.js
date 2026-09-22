@@ -44,11 +44,35 @@ const required = (name) => {
 //      exit(1) forecloses it.
 // Rule of thumb: libraries/modules throw; applications/entry-points exit.
 
+// == TRUST_PROXY parse (M-1/#30, review-adjudicated contract) ==
+// Pure, exported for direct testing. dotenv delivers strings, and Express's
+// proxyaddr compiles a bare "1" as an IPv4 subnet (0.0.0.1/32) — silently
+// keeping req.ip = proxy IP, the exact DoS this setting exists to fix.
+//   integer string "0"/"1"/"2"… → hop count (strict number)
+//   unset/empty                    → false (Express default) — direct-serving,
+//                                   keeps express-rate-limit's forged-XFF
+//                                   fail-loud tripwire armed (=== false)
+//   anything else                  → [boot] throw (fail-closed, like required())
+// Strict form: String(n) must equal the trimmed input — parseInt truncation
+// ("1.5"→1, "12abc"→12, "0x10"→0 — the last would land on the
+// tripwire-silencing numeric 0) is rejected, not silently accepted.
+export const parseTrustProxy = (raw) => {
+  if (raw === undefined || raw.trim() === "") return false;
+  const n = Number.parseInt(raw, 10);
+  if (!Number.isInteger(n) || n < 0 || String(n) !== raw.trim()) {
+    throw new Error(
+      `[boot] TRUST_PROXY must be a non-negative integer hop count (got "${raw}") — refusing to start (fail-closed)`,
+    );
+  }
+  return n;
+};
+
 export const env = {
   mongoUri: required("MONGO_URI"),
   port: process.env.PORT || 5000,
   jwtSecret: required("JWT_SECRET"),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  trustProxy: parseTrustProxy(process.env.TRUST_PROXY),
   admin: {
     email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,
