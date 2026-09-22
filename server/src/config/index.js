@@ -49,10 +49,25 @@ export const env = {
   port: process.env.PORT || 5000,
   jwtSecret: required("JWT_SECRET"),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  // Proxy hops to trust for X-Forwarded-* headers (M-1/#30). 1 = single reverse
-  // proxy (nginx/Cloudflare-in-front-of-one). Behind no proxy this is harmless:
-  // absent X-Forwarded-For, Express falls back to the socket address.
-  trustProxy: process.env.TRUST_PROXY || 1,
+  // Proxy hops to trust for X-Forwarded-* (M-1/#30). Parsed, never passed raw:
+  // dotenv delivers strings, and Express's proxyaddr compiles a bare "1" as an
+  // IPv4 subnet (0.0.0.1/32) — silently keeping req.ip = proxy IP, i.e. the
+  // exact DoS this setting exists to fix. Contract (review FAIL H1/H2):
+  //   integer >= 0  → hop count (behind N proxies, set N)
+  //   unset/empty   → false (Express default) — direct-serving, and keeps
+  //                   express-rate-limit's forged-XFF fail-loud tripwire armed
+  //   anything else → [boot] throw (fail-closed, like required() above)
+  trustProxy: (() => {
+    const raw = process.env.TRUST_PROXY;
+    if (raw === undefined || raw.trim() === "") return false;
+    const n = Number.parseInt(raw, 10);
+    if (!Number.isInteger(n) || n < 0) {
+      throw new Error(
+        `[boot] TRUST_PROXY must be a non-negative integer hop count (got "${raw}") — refusing to start (fail-closed)`,
+      );
+    }
+    return n;
+  })(),
   admin: {
     email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,

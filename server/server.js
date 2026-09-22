@@ -12,10 +12,12 @@ import { errorHandler, notFound } from './src/middleware/errorHandler.js';
 const app = express();
 const PORT = env.port;
 
-// Trust proxy hops (M-1/#30): without this, behind a reverse proxy every request
-// shares the proxy's IP — the per-IP authLimiter (5/15min) degenerates into ONE
-// sitewide bucket, so a single attacker exhausts login for everyone. Must mount
-// before any rate-limited route. Tune TRUST_PROXY to the real hop count at deploy.
+// Trust proxy (M-1/#30): an app SETTING (not middleware — req.ip resolves it
+// lazily), set before serving traffic. Parsed hop count from TRUST_PROXY; unset
+// → false (direct-serving) which keeps express-rate-limit's forged-XFF fail-loud
+// tripwire armed. Behind a proxy, unset trust proxy means every request shares
+// the proxy's IP — the per-IP authLimiter (5/15min) degenerates into ONE
+// sitewide bucket, so a single attacker exhausts login for everyone.
 app.set("trust proxy", env.trustProxy);
 
 // Security Middleware
