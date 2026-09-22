@@ -12,6 +12,12 @@ import { errorHandler, notFound } from './src/middleware/errorHandler.js';
 const app = express();
 const PORT = env.port;
 
+// Trust proxy hops (M-1/#30): without this, behind a reverse proxy every request
+// shares the proxy's IP — the per-IP authLimiter (5/15min) degenerates into ONE
+// sitewide bucket, so a single attacker exhausts login for everyone. Must mount
+// before any rate-limited route. Tune TRUST_PROXY to the real hop count at deploy.
+app.set("trust proxy", env.trustProxy);
+
 // Security Middleware
 app.use(helmet());
 
