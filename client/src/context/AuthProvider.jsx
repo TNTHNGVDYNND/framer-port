@@ -69,29 +69,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (email, password) => {
-    try {
-      const response = await fetch(`${API_BASE}/api/users/register`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, role: 'user' }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
-      }
-
-      showNotification('[USER CREATED] Registration successful! Please login.');
-      return data;
-    } catch (error) {
-      showNotification(`[ERROR] ${error.message}`, 'error');
-      throw error;
-    }
-  };
-
   const logout = async () => {
     try {
       // Server clears the HttpOnly cookie (JS cannot). Best-effort: state clears
@@ -138,7 +115,6 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     isAdmin,
     login,
-    register,
     logout,
     getProfile,
     showNotification,

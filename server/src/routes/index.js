@@ -5,7 +5,7 @@ import * as contactController from '../controllers/contactController.js';
 import * as userController from '../controllers/userController.js';
 import { protect, adminOnly } from '../middleware/authMiddleware.js';
 import { authLimiter, contactLimiter, apiLimiter } from '../middleware/rateLimiter.js';
-import { validateRegistration, validateLogin, validateContact, validateProject } from '../middleware/validation.js';
+import { validateLogin, validateContact, validateProject } from '../middleware/validation.js';
 import { cacheMiddleware, clearCache } from '../middleware/cache.js';
 
 const router = express.Router();
@@ -58,7 +58,6 @@ router.get('/projects/:id', cacheMiddleware(300), projectController.getProjectBy
 router.post('/contact', contactLimiter, validateContact, contactController.submitContactForm);
 
 // User authentication - Public (with auth rate limiting)
-router.post('/users/register', authLimiter, validateRegistration, userController.registerUser);
 router.post('/users/login', authLimiter, validateLogin, userController.loginUser);
 router.post('/users/logout', userController.logoutUser);
 
