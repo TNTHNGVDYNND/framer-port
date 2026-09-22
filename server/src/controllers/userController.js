@@ -16,7 +16,7 @@ const setAuthCookie = (res, token) => {
   res.cookie(AUTH_COOKIE_NAME, token, {
     httpOnly: true,
     sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
+    secure: env.isProduction,
   });
 };
 
@@ -84,7 +84,7 @@ export const logoutUser = (req, res) => {
   res.clearCookie(AUTH_COOKIE_NAME, {
     httpOnly: true,
     sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
+    secure: env.isProduction,
   });
   res.json({ message: "Logged out" });
 };
