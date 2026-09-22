@@ -32,6 +32,12 @@ export const protect = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({ message: 'Not authorized, user not found' });
     }
+
+    // M-3/#32: revocation check — strict comparison, so pre-M-3 tokens (no ver)
+    // also die at deploy (one-time re-login, fail-closed).
+    if (decoded.ver !== user.tokenVersion) {
+      return res.status(401).json({ message: 'Session revoked' });
+    }
     
     // Attach user with role to request object
     req.user = {

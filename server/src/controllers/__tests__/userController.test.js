@@ -35,7 +35,7 @@ describe('User Controller Integration Tests', () => {
       password: 'AdminPass123',
       role: 'admin',
     });
-    adminToken = jwt.sign({ id: adminUser._id, role: 'admin' }, process.env.JWT_SECRET, {
+    adminToken = jwt.sign({ id: adminUser._id, role: 'admin', ver: adminUser.tokenVersion }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
@@ -45,7 +45,7 @@ describe('User Controller Integration Tests', () => {
       password: 'UserPass123',
       role: 'user',
     });
-    userToken = jwt.sign({ id: regularUser._id, role: 'user' }, process.env.JWT_SECRET, {
+    userToken = jwt.sign({ id: regularUser._id, role: 'user', ver: regularUser.tokenVersion }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
   });
@@ -169,6 +169,52 @@ describe('User Controller Integration Tests', () => {
     it('should reject the cookie path with no cookie (protect 401)', async () => {
       const response = await request(app).get('/api/users/profile').expect(401);
       expect(response.body).toHaveProperty('message');
+    });
+  });
+
+  describe('POST /api/users/:id/force-logout (M-3/#32)', () => {
+    it('should revoke all sessions of the target user (admin bumps tokenVersion)', async () => {
+      const response = await request(app)
+        .post(`/api/users/${regularUser._id}/force-logout`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .expect(200);
+
+      expect(response.body).toHaveProperty('success', true);
+      expect(response.body.data).toHaveProperty('tokenVersion', 1);
+
+      // The pre-bump token must now be rejected
+      const rejected = await request(app)
+        .get('/api/users/profile')
+        .set('Authorization', `Bearer ${userToken}`)
+        .expect(401);
+      expect(rejected.body).toHaveProperty('message', 'Session revoked');
+    });
+
+    it('should reject non-admin force-logout attempts', async () => {
+      const response = await request(app)
+        .post(`/api/users/${adminUser._id}/force-logout`)
+        .set('Authorization', `Bearer ${userToken}`)
+        .expect(403);
+      expect(response.body).toHaveProperty('message', 'Not authorized as admin');
+    });
+
+    it('should 404 on unknown user id', async () => {
+      const response = await request(app)
+        .post('/api/users/000000000000000000000000/force-logout')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .expect(404);
+      expect(response.body).toHaveProperty('message', 'User not found');
+    });
+
+    it('should reject pre-M-3 tokens (no ver claim) — fail-closed deploy', async () => {
+      const legacyToken = jwt.sign({ id: adminUser._id, role: 'admin' }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+      });
+      const response = await request(app)
+        .get('/api/users/profile')
+        .set('Authorization', `Bearer ${legacyToken}`)
+        .expect(401);
+      expect(response.body).toHaveProperty('message', 'Session revoked');
     });
   });
 

@@ -147,5 +147,6 @@ router.delete(
 // User management - Admin only
 // User list cached for 5 minutes (300s)
 router.get('/users', protect, adminOnly, cacheMiddleware(300), userController.getAllUsers);
+router.post('/users/:id/force-logout', protect, adminOnly, userController.forceLogoutUser);
 
 export default router;
