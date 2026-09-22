@@ -6,8 +6,13 @@ services:
     image: mongo:7
     container_name: framer-port-mongo-prod
     restart: unless-stopped
-    ports:
-      - "27017:27017"
+    # DURABLE DISARM (2026-09-22, issue #28): no host port publish on any
+    # interface — the api service reaches mongo over the internal network
+    # (mongodb://mongo:27017). Publishing 27017 to the host exposed root-auth
+    # Mongo to every interface. Do NOT re-add a ports mapping without an
+    # explicit loopback bind and a recorded reason.
+    expose:
+      - "27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-admin}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}

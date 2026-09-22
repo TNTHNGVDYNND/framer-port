@@ -1,10 +1,10 @@
 name: Deploy to Production
 
+# DURABLE DISARM (2026-09-22, issue #28): this workflow must NEVER auto-trigger.
+# The push/tags triggers were removed so a bare rename of this file back to
+# deploy.yml cannot re-arm auto-deploy-on-push against the production
+# environment's live secrets. Manual-only (workflow_dispatch), deliberately.
 on:
-  push:
-    branches: [main]
-    tags:
-      - "v*"
   workflow_dispatch:
     inputs:
       environment:
@@ -66,9 +66,10 @@ jobs:
       - name: Deployment Notification
         if: success()
         run: |
-          echo "✅ Deployment successful!"
+          echo "✅ Image build + push complete."
           echo "Version: ${{ github.sha }}"
           echo "Image: ${{ secrets.DOCKER_USERNAME }}/framer-port-api:${{ github.sha }}"
+          echo "NOTE: server deploy step is NOT configured (SSH block below) — images are built and pushed, nothing was deployed to a host."
 
   health-check:
     name: Health Check
@@ -81,10 +82,12 @@ jobs:
 
       - name: Check API health
         run: |
-          # Replace with your actual health check endpoint
-          # curl -f http://your-api-url/api/health || exit 1
-          echo "Health check endpoint: /api/health"
-          echo "Configure this with your actual deployment URL"
+          # REQUIRED-BEFORE-ENABLE (#28): this step must not fake-pass.
+          # Replace this block with the real endpoint check, e.g.:
+          #   curl -f "${{ secrets.API_HEALTH_URL }}" || exit 1
+          # Until then it fails loudly so an unconfigured re-enable cannot report green.
+          echo "::error::Health check NOT CONFIGURED — refusing to fake-pass (issue #28, REQUIRED-BEFORE-ENABLE)"
+          exit 1
 
       - name: Rollback notification
         if: failure()
