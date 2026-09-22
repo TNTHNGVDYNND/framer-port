@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
+  // M-3/#32: session revocation epoch. Embedded in every JWT (`ver`) and compared
+  // in `protect` — bumping invalidates ALL of the user's outstanding tokens/cookies
+  // (force-logout-all; future password-change will bump here too). Starts at 0.
+  tokenVersion: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
 }, {
   timestamps: true, // Adds createdAt and updatedAt fields
 });

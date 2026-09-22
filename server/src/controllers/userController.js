@@ -3,8 +3,14 @@ import User from "../models/User.js";
 import { env } from "../config/index.js";
 import { AUTH_COOKIE_NAME } from "../middleware/authMiddleware.js";
 
-const generateToken = (id, role) => {
-  return jwt.sign({ id, role }, env.jwtSecret, { expiresIn: env.jwtExpiresIn });
+const generateToken = (id, role, tokenVersion) => {
+  // M-3/#32: `ver` is the revocation epoch — protect rejects any token whose ver
+  // no longer matches the user's tokenVersion (bumped on force-logout / password
+  // change). Strict comparison: pre-M-3 tokens (no ver) die at deploy — one-time
+  // re-login, fail-closed by design.
+  return jwt.sign({ id, role, ver: tokenVersion }, env.jwtSecret, {
+    expiresIn: env.jwtExpiresIn,
+  });
 };
 
 // M-2/#31: the token rides an HttpOnly + SameSite=Strict cookie — XSS cannot read
@@ -34,7 +40,7 @@ export const registerUser = async (req, res, next) => {
 
     const user = await User.create({ email, password });
 
-    const token = generateToken(user._id, user.role);
+    const token = generateToken(user._id, user.role, user.tokenVersion);
     setAuthCookie(res, token);
 
     res.status(201).json({
@@ -64,7 +70,7 @@ export const loginUser = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const token = generateToken(user._id, user.role);
+    const token = generateToken(user._id, user.role, user.tokenVersion);
     setAuthCookie(res, token);
 
     res.json({
@@ -103,6 +109,32 @@ export const getUserProfile = async (req, res, next) => {
       _id: user._id,
       email: user.email,
       role: user.role,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Force-logout all sessions of a user (M-3/#32) — bumps tokenVersion,
+// invalidating every outstanding token/cookie for that user at next request.
+// @route   POST /api/users/:id/force-logout
+// @access  Private/Admin
+export const forceLogoutUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { tokenVersion: 1 } },
+      { new: true, runValidators: true },
+    ).select("email role tokenVersion");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      success: true,
+      message: `All sessions revoked for ${user.email}`,
+      data: { email: user.email, role: user.role, tokenVersion: user.tokenVersion },
     });
   } catch (error) {
     next(error);
