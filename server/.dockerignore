@@ -1,0 +1,33 @@
+# Restored 2026-09-22 (issue #28) — the server build context runs COPY . . (Dockerfile:30)
+# and .dockerignore was absent, meaning a re-enabled build would bake .env, logs, and
+# node_modules into the image. Keep this file; extend rather than delete.
+#
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# Dependencies (rebuilt inside the image)
+node_modules
+
+# VCS / CI
+.git
+.gitignore
+.github
+
+# Build artifacts / logs / temp
+dist
+build
+coverage
+*.log
+logs
+tmp
+temp
+
+# Disabled deployment artifacts (never belong in an image)
+Dockerfile.disabled
+docker-compose*.yml.disabled
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
