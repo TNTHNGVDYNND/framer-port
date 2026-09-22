@@ -2,7 +2,9 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 async function request(url, options = {}) {
   console.log('API Request:', url); // Debug log
-  const response = await fetch(url, options);
+  // M-2/#31: auth rides the HttpOnly cookie (credentials: 'include') — no token
+  // is read from or attached by JS.
+  const response = await fetch(url, { credentials: 'include', ...options });
   if (!response.ok) {
     const errorText = await response.text();
     console.error('API Error:', response.status, errorText.substring(0, 100));
@@ -14,59 +16,39 @@ async function request(url, options = {}) {
 export const api = {
   // Generic HTTP methods
   get: (endpoint) => {
-    const token = localStorage.getItem('token');
     return request(`${API_BASE}/api${endpoint}`, {
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     });
   },
 
   post: (endpoint, data) => {
-    const token = localStorage.getItem('token');
     return request(`${API_BASE}/api${endpoint}`, {
       method: 'POST',
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
   },
 
   patch: (endpoint, data) => {
-    const token = localStorage.getItem('token');
     return request(`${API_BASE}/api${endpoint}`, {
       method: 'PATCH',
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
   },
 
   put: (endpoint, data) => {
-    const token = localStorage.getItem('token');
     return request(`${API_BASE}/api${endpoint}`, {
       method: 'PUT',
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
   },
 
   delete: (endpoint) => {
-    const token = localStorage.getItem('token');
     return request(`${API_BASE}/api${endpoint}`, {
       method: 'DELETE',
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     });
   },
 
@@ -98,12 +80,9 @@ export const api = {
         body: JSON.stringify({ email, password, role: 'user' }),
       }),
 
-    getProfile: (token) =>
+    getProfile: () =>
       request(`${API_BASE}/api/users/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
       }),
   },
 

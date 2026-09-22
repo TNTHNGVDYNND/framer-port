@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import { connectDB } from './src/config/database.js';
 import apiRoutes from './src/routes/index.js';
 import { env } from './src/config/index.js';
@@ -43,6 +44,9 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+// Cookie parsing (M-2/#31): the auth JWT rides an HttpOnly cookie — JS can never
+// read it. Mounted before routes; protect reads req.cookies.token.
+app.use(cookieParser());
 
 // API Routes
 app.use('/api', apiRoutes);

@@ -60,7 +60,12 @@ describe('User Controller Integration Tests', () => {
       expect(response.body).toHaveProperty('_id');
       expect(response.body).toHaveProperty('email', 'newuser@test.com');
       expect(response.body).toHaveProperty('role', 'user');
-      expect(response.body).toHaveProperty('token');
+      // M-2/#31: token no longer in the body — HttpOnly cookie instead
+      expect(response.body).not.toHaveProperty('token');
+      const cookieHeader = response.headers['set-cookie']?.[0] || '';
+      expect(cookieHeader).toMatch(/token=/);
+      expect(cookieHeader).toMatch(/HttpOnly/i);
+      expect(cookieHeader).toMatch(/SameSite=Strict/i);
     });
 
     it('should reject duplicate email', async () => {
@@ -113,7 +118,12 @@ describe('User Controller Integration Tests', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('email', 'admin@test.com');
-      expect(response.body).toHaveProperty('token');
+      // M-2/#31: token no longer in the body — HttpOnly cookie instead
+      expect(response.body).not.toHaveProperty('token');
+      const cookieHeader = response.headers['set-cookie']?.[0] || '';
+      expect(cookieHeader).toMatch(/token=/);
+      expect(cookieHeader).toMatch(/HttpOnly/i);
+      expect(cookieHeader).toMatch(/SameSite=Strict/i);
     });
 
     it('should reject invalid credentials', async () => {

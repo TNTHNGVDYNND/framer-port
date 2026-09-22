@@ -2,11 +2,20 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import { env } from '../config/index.js';
 
-// Protect routes - Verify JWT token
+// M-2/#31: the auth JWT rides this HttpOnly cookie. Single constant shared with
+// userController (set/clear) — keep the two sides in lockstep.
+export const AUTH_COOKIE_NAME = 'token';
+
+// Protect routes - Verify JWT token.
+// Token source priority (M-2/#31): HttpOnly cookie first (browser flow); the
+// Authorization: Bearer header remains as an explicit fallback for programmatic
+// clients (curl/scripts with a cookie jar or an out-of-band token).
 export const protect = async (req, res, next) => {
   let token;
 
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+  if (req.cookies && req.cookies[AUTH_COOKIE_NAME]) {
+    token = req.cookies[AUTH_COOKIE_NAME];
+  } else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1];
   }
 
