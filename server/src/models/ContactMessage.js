@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
 
+// L-4/#36 data-class note: documents in this collection carry sender PII
+// (name + email + free-text message). Retention is ADMIN-MANAGED — the admin
+// UI's delete endpoint is the purge path; no automatic TTL window ships in
+// v1 (a TTL index is the documented upgrade if a fixed window is ever
+// required). Logs carry receipt-id only, never contents.
+
 const contactMessageSchema = new mongoose.Schema({
   name: {
     type: String,

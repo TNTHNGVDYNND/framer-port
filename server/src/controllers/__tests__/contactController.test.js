@@ -4,7 +4,7 @@ process.env.JWT_EXPIRES_IN = '7d';
 process.env.CLIENT_URL = 'http://localhost:5173';
 process.env.NODE_ENV = 'test';
 
-import { describe, it, expect, beforeEach } from '@jest/globals';
+import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -51,6 +51,35 @@ describe('Contact Controller Integration Tests', () => {
 
       expect(response.body).toHaveProperty('message');
       expect(response.body).toHaveProperty('id');
+    });
+
+    it('L-4/#36: logs receipt id only — no name/email PII in output', async () => {
+      // H-1 fix (review): spyOn preserves call-arg structure (manual console swap
+      // collapsed the payload object to '[object Object]', making the id assert
+      // deterministically red); non-strings are stringified for containment checks.
+      const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+      let lines;
+      try {
+        await request(app)
+          .post('/api/contact')
+          .send({
+            name: 'Jane Pii Doe',
+            email: 'jane.piitest@example.com',
+            message: 'Another test message that is long enough for validation',
+          })
+          .expect(201);
+        lines = spy.mock.calls.map((args) =>
+          args.map((a) => (typeof a === 'string' ? a : JSON.stringify(a))).join(' ')
+        );
+      } finally {
+        spy.mockRestore();
+      }
+
+      const contactLog = lines.find((l) => l.includes('Contact Message'));
+      expect(contactLog).toBeDefined();
+      expect(contactLog).toContain('id');
+      expect(contactLog).not.toContain('Jane Pii Doe');
+      expect(contactLog).not.toContain('jane.piitest@example.com');
     });
 
     it('should reject missing name', async () => {
