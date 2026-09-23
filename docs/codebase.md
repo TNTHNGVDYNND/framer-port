@@ -195,7 +195,7 @@ server/
 
 **`protect`** - JWT Verification
 
-- Extracts token from `Authorization: Bearer <token>` header
+- Extracts token from the HttpOnly `token` cookie first; `Authorization: Bearer <token>` header retained as programmatic fallback (M-2)
 - Verifies JWT signature
 - Fetches user from database (includes role)
 - Attaches `req.user = { id, email, role }`
@@ -250,9 +250,7 @@ import { getCacheStats } from "../middleware/cache.js";
 
 #### Validation Middleware
 
-**`validateRegistration`**
-
-- Email: Valid format, normalized
+**`validateRegistration` — REMOVED** (public registration closed, L-1/#33; the chain went with the route)
 - Password: 8+ chars, 1 upper, 1 lower, 1 number
 - Role: Restricted to "user" only (prevents escalation)
 
@@ -349,7 +347,7 @@ User.findOne({ email }) + password check
     ↓
 JWT.sign({ id, role }, secret, { expiresIn: '7d' })
     ↓
-Return: { _id, email, role, token }
+Return: { _id, email, role } — token rides HttpOnly Set-Cookie (M-2)
 ```
 
 ### Protected Route Flow
@@ -655,7 +653,7 @@ All errors follow consistent format:
 | mongoose           | ^9.0.0  | MongoDB ODM               |
 | bcryptjs           | ^3.0.2  | Password hashing          |
 | jsonwebtoken       | ^9.0.3  | JWT authentication        |
-| helmet             | ^7.1.0  | Security headers          |
+| helmet             | ^8.1.0  | Security headers          |
 | express-rate-limit | ^7.3.1  | Rate limiting             |
 | express-validator  | ^7.0.1  | Input validation          |
 | morgan             | ^1.10.0 | Request logging           |
@@ -827,7 +825,7 @@ npm run test:ci       # CI mode with reporters
 
 ### GitHub Actions Workflows
 
-**CI Pipeline** (`.github/workflows/ci.yml`):
+**CI Pipeline** (`.github/workflows/ci.yml.disabled` — DISABLED, see the repo AGENTS.md re-enable checklist):
 
 - Triggers: Push/PR to main, develop branches
 - Jobs: Test (Node 18/20), Lint, Docker Build, Security Audit
@@ -987,7 +985,7 @@ Centralized HTTP client with automatic authentication.
 **Generic Methods**:
 
 ```javascript
-// All methods automatically include Bearer token from localStorage
+// All methods send credentials: 'include' — auth rides the HttpOnly cookie (M-2; no JS-side token exists)
 api.get("/projects"); // GET /api/projects
 api.post("/projects", data); // POST /api/projects
 api.put("/projects/:id", data); // PUT /api/projects/:id
@@ -1001,7 +999,6 @@ api.delete("/projects/:id"); // DELETE /api/projects/:id
 api.projects.getAll(); // Public projects (no auth)
 api.contact.submit(data); // Contact form submission
 api.auth.login(email, pass); // Authentication
-api.auth.register(email, pass); // Registration
 ```
 
 ### ProjectCard Component
