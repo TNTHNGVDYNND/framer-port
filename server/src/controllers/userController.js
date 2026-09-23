@@ -1,7 +1,19 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import { env } from "../config/index.js";
 import { AUTH_COOKIE_NAME } from "../middleware/authMiddleware.js";
+
+// Timing side-channel dummy (drill L-7/#38 bundle, flagged in the #44 review):
+// login's user-absent path used to return before any bcrypt work — response
+// time distinguished registered emails. The dummy hash matches the real cost
+// factor (12); the absent-user path now burns the same compare before the
+// identical 401. Value is FIXED (hash of a fixed string) — the compare's result
+// is discarded (the 401 is unconditional); the hash only costs time.
+const DUMMY_HASH = bcrypt.hashSync(
+  "timing-equalizer-dummy-password",
+  12,
+);
 
 const generateToken = (id, role, tokenVersion) => {
   // M-3/#32: `ver` is the revocation epoch — protect rejects any token whose ver
@@ -35,6 +47,8 @@ export const loginUser = async (req, res, next) => {
 
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
+      // Timing-equalize with the user-present path: same bcrypt cost, same 401.
+      await bcrypt.compare(password, DUMMY_HASH);
       return res.status(401).json({ message: "Invalid credentials" });
     }
 

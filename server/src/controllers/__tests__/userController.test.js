@@ -95,6 +95,19 @@ describe('User Controller Integration Tests', () => {
       }
     });
 
+    // N1 (PR #48 review): the user-ABSENT path — exercises the timing-equalizer
+    // dummy-compare lines; identical 401 shape.
+    it('should 401 on unknown email (timing-equalized path)', async () => {
+      const response = await request(app)
+        .post('/api/users/login')
+        .send({ email: 'nobody-here@test.com', password: 'Whatever123' });
+
+      expect([401, 429]).toContain(response.status);
+      if (response.status === 401) {
+        expect(response.body).toHaveProperty('message', 'Invalid credentials');
+      }
+    });
+
     // W3: cookie-first protect branch + full login→cookie→protected roundtrip
     it('should authenticate via the HttpOnly cookie (login → profile roundtrip)', async () => {
       const login = await request(app)
@@ -165,6 +178,19 @@ describe('User Controller Integration Tests', () => {
         .set('Authorization', `Bearer ${legacyToken}`)
         .expect(401);
       expect(response.body).toHaveProperty('message', 'Session revoked');
+    });
+
+    it('L-7/#38: rejects a token signed with a different algorithm (HS512) — algo pinned to HS256', async () => {
+      const hs512Token = jwt.sign(
+        { id: adminUser._id, role: 'admin', ver: adminUser.tokenVersion },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN, algorithm: 'HS512' },
+      );
+      const response = await request(app)
+        .get('/api/users/profile')
+        .set('Authorization', `Bearer ${hs512Token}`)
+        .expect(401);
+      expect(response.body).toHaveProperty('message');
     });
   });
 
