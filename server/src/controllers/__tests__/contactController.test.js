@@ -53,6 +53,30 @@ describe('Contact Controller Integration Tests', () => {
       expect(response.body).toHaveProperty('id');
     });
 
+    it('L-4/#36: logs receipt id only — no name/email PII in output', async () => {
+      const logs = [];
+      const original = console.log;
+      console.log = (...args) => logs.push(args.map(String).join(' '));
+      try {
+        await request(app)
+          .post('/api/contact')
+          .send({
+            name: 'Jane Pii Doe',
+            email: 'jane.piitest@example.com',
+            message: 'Another test message that is long enough for validation',
+          })
+          .expect(201);
+      } finally {
+        console.log = original;
+      }
+
+      const contactLog = logs.find((l) => l.includes('Contact Message'));
+      expect(contactLog).toBeDefined();
+      expect(contactLog).toContain('id');
+      expect(contactLog).not.toContain('Jane Pii Doe');
+      expect(contactLog).not.toContain('jane.piitest@example.com');
+    });
+
     it('should reject missing name', async () => {
       const response = await request(app)
         .post('/api/contact')

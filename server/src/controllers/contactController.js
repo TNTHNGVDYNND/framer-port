@@ -14,11 +14,11 @@ export const submitContactForm = async (req, res, next) => {
       message,
     });
 
-    // Log for development/debugging (optional)
-    console.log("New Contact Message:", {
+    // L-4/#36: receipt-only log — id + timestamp, NEVER name/email/message.
+    // What remains in logs is non-PII; db-side retention is admin-managed
+    // (see the ContactMessage model header note).
+    console.log("New Contact Message received:", {
       id: contact._id,
-      name: contact.name,
-      email: contact.email,
       createdAt: contact.createdAt,
     });
 
