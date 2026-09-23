@@ -89,9 +89,9 @@ export const AudioProvider = ({ children }) => {
   };
 
   // (lint fix, react-hooks/error-boundaries): the old try/catch around JSX
-  // construction caught nothing — React does not render here. Real render
-  // errors belong in an Error Boundary, which this app doesn't wire; the
-  // honest minimal shape is the bare Provider.
+  // construction caught nothing — React does not render here. Render errors
+  // are already handled by the ErrorBoundary wrapping the route tree in
+  // App.jsx; the honest minimal shape is the bare Provider.
   return (
     <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
   );
