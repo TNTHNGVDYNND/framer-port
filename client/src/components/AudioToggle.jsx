@@ -88,18 +88,19 @@ export const AudioProvider = ({ children }) => {
     isReady,
   };
 
-  // Wrap in try-catch to prevent breaking the app
-  try {
-    return (
-      <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
-    );
-  } catch (err) {
-    console.error('AudioProvider error:', err);
-    return <>{children}</>;
-  }
+  // (lint fix, react-hooks/error-boundaries): the old try/catch around JSX
+  // construction caught nothing — React does not render here. Render errors
+  // are already handled by the ErrorBoundary wrapping the route tree in
+  // App.jsx; the honest minimal shape is the bare Provider.
+  return (
+    <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
+  );
 };
 
-export const useAudio = () => {
+// (lint fix, react-refresh/only-export-components): internal-only hook — zero
+// external importers (grep-verified); un-exported rather than split so Fast
+// Refresh keeps working on this file.
+const useAudio = () => {
   const context = useContext(AudioContext);
   if (!context) {
     // Return dummy functions instead of throwing
