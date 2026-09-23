@@ -1,10 +1,25 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+// I3 (#40, PR #48 review): a 401 means the session is gone/revoked (cookie
+// expired, force-logout, tokenVersion bump). Instead of error toasts on every
+// call, reload ONCE — the fresh page re-bootstraps auth from /profile into the
+// guest state and the UI reorients (login gate). The flag guards reload loops;
+// any successful response clears it so a future session's 401 reloads again.
+const RELOADED_FOR_401 = 'api.reloadedFor401';
+
 async function request(url, options = {}) {
   console.log('API Request:', url); // Debug log
   // M-2/#31: auth rides the HttpOnly cookie (credentials: 'include') — no token
   // is read from or attached by JS.
   const response = await fetch(url, { credentials: 'include', ...options });
+  if (response.status === 401 && !sessionStorage.getItem(RELOADED_FOR_401)) {
+    sessionStorage.setItem(RELOADED_FOR_401, '1');
+    window.location.assign(window.location.pathname + window.location.search);
+    throw new Error('HTTP 401: session expired — reloading');
+  }
+  if (response.ok) {
+    sessionStorage.removeItem(RELOADED_FOR_401);
+  }
   if (!response.ok) {
     const errorText = await response.text();
     console.error('API Error:', response.status, errorText.substring(0, 100));
