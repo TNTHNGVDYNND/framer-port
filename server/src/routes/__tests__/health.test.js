@@ -6,9 +6,15 @@ import { describe, it, expect } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import apiRoutes from '../../routes/index.js';
 
+// I-4 (#39): mirror the production middleware shape (server.js mounts helmet
+// first) so the helmet-v8 header set is confirmed on responses — the runtime
+// leg of the finding confirmable in-repo. SPA-side CSP compatibility stays a
+// deploy-checklist item (browser console on first prod load).
 const app = express();
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api', apiRoutes);
@@ -22,6 +28,14 @@ describe('GET /api/health (public, minimal)', () => {
     expect(response.body).not.toHaveProperty('memory');
     expect(response.body).not.toHaveProperty('environment');
     expect(response.body).not.toHaveProperty('uptime');
+  });
+
+  it('I-4/#39: responses carry the helmet v8 default header set', async () => {
+    const response = await request(app).get('/api/health').expect(200);
+    expect(response.headers['x-content-type-options']).toBe('nosniff');
+    expect(response.headers['x-frame-options']).toBeDefined();
+    expect(response.headers['content-security-policy']).toBeDefined();
+    expect(response.headers['strict-transport-security']).toBeDefined();
   });
 });
 

@@ -46,7 +46,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           onClick={(event) => event.stopPropagation()}
         >
-          <TerminalAuthForm onSuccess={handleSuccess} onClose={onClose} />
+          <TerminalAuthForm onSuccess={handleSuccess} />
         </motion.div>
       </motion.div>
     </>

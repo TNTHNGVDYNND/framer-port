@@ -121,7 +121,6 @@ See `/docs` for full evolution.
 | GET    | `/api/projects`       | Get all projects (with filters)      | 100 req / 15 min   |
 | GET    | `/api/projects/:id`   | Get single project by ID             | 100 req / 15 min   |
 | POST   | `/api/contact`        | Submit contact form                  | 3 req / 1 hour     |
-| POST   | `/api/users/register` | Register new user                    | 5 req / 15 min     |
 | POST   | `/api/users/login`    | User login                           | 5 req / 15 min     |
 
 **Query Parameters for `/api/projects`:**
@@ -186,7 +185,7 @@ Authorization: Bearer <jwt_token>
 ### Authentication System
 
 - JWT-based authentication with bcrypt password hashing
-- Terminal-styled login/register forms with animations
+- Terminal-styled login form with animations
 - Protected admin routes with role-based access control
 - Admin dashboard for managing projects, messages, and users
 - LocalStorage persistence with reactive state updates
@@ -283,7 +282,7 @@ Detailed documentation is organized in `/docs`:
 - Component architecture and refactoring (V2, V3)
 - **Authentication system** (JWT + bcrypt + MongoDB)
 - **Admin dashboard** with protected routes and role-based access
-- Terminal-styled login/register UI
+- Terminal-styled login UI
 - **Security hardening** (validation, rate limiting, Helmet, CORS)
 - **Contact form persistence** (MongoDB with full CRUD)
 - **Projects database integration** (no more hardcoded data)
@@ -315,7 +314,7 @@ Detailed documentation is organized in `/docs`:
 
 **Authentication System:**
 
-- `server/src/controllers/userController.js` - Login, register, profile, getAllUsers
+- `server/src/controllers/userController.js` - Login, profile, logout, force-logout, getAllUsers
 - `server/src/middleware/authMiddleware.js` - JWT verification + adminOnly guard
 - `server/src/middleware/rateLimiter.js` - Rate limiting configuration
 - `client/src/context/AuthProvider.jsx` - Global auth state management

@@ -1,6 +1,6 @@
 import rateLimit from 'express-rate-limit';
 
-// Rate limiter for authentication endpoints (login/register)
+// Rate limiter for authentication endpoints (login)
 export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, // 5 attempts per window

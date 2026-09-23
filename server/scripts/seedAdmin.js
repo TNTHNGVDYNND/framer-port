@@ -15,6 +15,21 @@ const seedAdmin = async () => {
       process.exit(1);
     }
 
+    // I-3 (#39): refuse weak/placeholder admin passwords at seed time — same
+    // strength contract the (removed) registration validator enforced: >=8,
+    // upper, lower, digit. Placeholder example values fail this by design.
+    const strongEnough =
+      adminPassword.length >= 8 &&
+      /[a-z]/.test(adminPassword) &&
+      /[A-Z]/.test(adminPassword) &&
+      /\d/.test(adminPassword);
+    if (!strongEnough) {
+      console.error(
+        'Error: ADMIN_PASSWORD must be at least 8 characters with upper, lower, and digit — refusing to seed a weak/placeholder admin credential',
+      );
+      process.exit(1);
+    }
+
     const existingAdmin = await User.findOne({ email: adminEmail });
 
     if (existingAdmin) {

@@ -155,7 +155,6 @@ server/
 
 | Method           | Endpoint             | Access    | Description                 |
 | ---------------- | -------------------- | --------- | --------------------------- |
-| `registerUser`   | POST /users/register | Public    | Create new user account     |
 | `loginUser`      | POST /users/login    | Public    | Authenticate and return JWT |
 | `getUserProfile` | GET /users/profile   | Protected | Get current user data       |
 | `getAllUsers`    | GET /users           | Admin     | List all users              |
@@ -212,7 +211,7 @@ server/
 
 | Limiter          | Window | Max | Applied To      |
 | ---------------- | ------ | --- | --------------- |
-| `authLimiter`    | 15 min | 5   | Login, Register |
+| `authLimiter`    | 15 min | 5   | Login          |
 | `contactLimiter` | 1 hour | 3   | Contact form    |
 | `apiLimiter`     | 15 min | 100 | All API routes  |
 
@@ -318,7 +317,6 @@ router.get('/health', (req, res) => {
 router.get('/projects', cacheMiddleware(600), projectController.getProjects);
 router.get('/projects/:id', cacheMiddleware(300), projectController.getProjectById);
 router.post('/contact', contactLimiter, validateContact, ...);
-router.post('/users/register', authLimiter, validateRegistration, ...);
 
 // Protected routes
 router.get('/users/profile', protect, userController.getUserProfile);
@@ -500,11 +498,7 @@ Submit contact form.
 }
 ```
 
-#### POST /api/users/register
-
-Register new user.
-
-**Rate Limit**: 5 per 15 minutes
+#### POST /api/users/register — REMOVED (registration closed; see the repo AGENTS.md Sharp edges)
 
 **Body**:
 

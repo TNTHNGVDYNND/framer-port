@@ -89,7 +89,7 @@ PORT=5000
 JWT_SECRET=your-super-secret-key
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=<strong-password-set-at-seed-time>
 ```
 
 #### 6. Admin Seeding
@@ -191,7 +191,7 @@ Creates or updates admin user with credentials from `.env`.
 ```bash
 curl -X POST http://localhost:5000/api/users/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"admin123"}'
+  -d '{"email":"admin@example.com","password":"<your-admin-password>"}'
 ```
 ✅ Returns: `{"_id":"...","email":"admin@example.com","role":"admin","token":"..."}`
 
@@ -286,14 +286,14 @@ curl http://localhost:5000/api/users/profile \
 
 ### Environment Setup
 
-**Server .env:**
+**Server .env** *(example values — replace every one before use; the seeder refuses weak/placeholder ADMIN_PASSWORD values)*:
 ```env
 PORT=5000
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/newport
 JWT_SECRET=your-secret-key-here
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=<strong-password-set-at-seed-time>
 ```
 
 **Client .env:**
