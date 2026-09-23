@@ -148,6 +148,28 @@ describe('Project Controller Integration Tests', () => {
 
       expect(response.body).toHaveProperty('message', 'Not authorized as admin');
     });
+
+    it('L-5/#37: create drops smuggled non-allowlisted fields (mass-assignment closed)', async () => {
+      const response = await request(app)
+        .post('/api/projects')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({
+          title: 'Smuggled Fields Project',
+          description: 'Attempts to write fields outside the project allowlist on create',
+          category: 'Other',
+          role: 'admin',
+          _id: '000000000000000000000000',
+          __v: 42,
+          createdAt: '1999-01-01T00:00:00.000Z',
+        })
+        .expect(201);
+
+      expect(response.body.data).toHaveProperty('title', 'Smuggled Fields Project');
+      expect(String(response.body.data._id)).not.toBe('000000000000000000000000');
+      // timestamps come from mongoose, not the request
+      expect(response.body.data.createdAt).not.toBe('1999-01-01T00:00:00.000Z');
+      expect(response.body.data).not.toHaveProperty('role');
+    });
   });
 
   describe('PUT /api/projects/:id', () => {
@@ -180,6 +202,33 @@ describe('Project Controller Integration Tests', () => {
         .expect(404);
 
       expect(response.body).toHaveProperty('error', 'Project not found');
+    });
+
+    it('L-5/#37 W1: update drops smuggled non-allowlisted fields (pre-fix this 500s on immutable _id)', async () => {
+      const projectId = testProjects[0]._id.toString();
+      const otherValidId = new mongoose.Types.ObjectId().toString();
+      const originalCreatedAt = testProjects[0].createdAt?.toISOString();
+
+      const response = await request(app)
+        .put(`/api/projects/${projectId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({
+          title: 'Update With Smuggled Fields',
+          description: 'Long enough description for the smuggled-fields update test',
+          role: 'admin',
+          _id: otherValidId,
+          createdAt: '1999-01-01T00:00:00.000Z',
+        })
+        .expect(200);
+
+      expect(response.body.data.title).toBe('Update With Smuggled Fields');
+      // _id unchanged (not the smuggled other-valid one); timestamps untouched
+      expect(response.body.data._id).toBe(projectId);
+      expect(response.body.data._id).not.toBe(otherValidId);
+      if (originalCreatedAt) {
+        expect(response.body.data.createdAt).not.toBe('1999-01-01T00:00:00.000Z');
+      }
+      expect(response.body.data).not.toHaveProperty('role');
     });
   });
 
