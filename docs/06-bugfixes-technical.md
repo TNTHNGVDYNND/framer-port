@@ -113,3 +113,16 @@ User decided to use English only for simplicity.
 
 ### Status
 **PENDING** - Needs immediate fix for backend integration
+
+## 2026-09 Security & Hygiene Drill — annotation
+
+The 2026-09-22/23 cross-desk drill (server-side security findings, one-finding-per-PR,
+cross-desk review, human-gated merges) is documented in the repo `AGENTS.md` (Sharp edges)
+and the PR trail (#29, #41–#49). Client-side items from that arc recorded here:
+
+- **Dependency refresh (this doc's domain):** client `npm audit fix` 2026-09-23 — 14
+  vulnerabilities (10 high: react-router/-dom, vite, postcss) → **0**, all semver-compatible
+  bumps, production build verified (brotli assets emitted).
+- **401 session handling:** `api.js` request layer now reloads once on 401 (session gone /
+  revoked / force-logged-out) instead of surfacing error toasts — the fresh page
+  re-bootstraps auth into the guest state. Loop-guarded via sessionStorage.

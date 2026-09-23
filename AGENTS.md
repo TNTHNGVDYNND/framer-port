@@ -51,6 +51,8 @@ cd server && npm run seed:projects  # seeds projects
 
 ```bash
 npm test   # root → server: NODE_ENV=test node --experimental-vm-modules jest --coverage
+
+**Test reconciliation (2026-09-23, drill #40):** no desk currently runs a local mongod — the Mongo-gated suites (user/contact/project controllers, models) are verified by review-desk code reads + named-skip posture both desks; the Mongo-free suites (config trustProxy 6, routes health 3) run green locally. The owed full-run path is the CI leg on re-enable (its jest-junit reporter dep is now present).
 ```
 
 - The `--experimental-vm-modules` flag is **required**: the server is ESM and `jest.setup.js` runs untransformed. Don't drop it.
