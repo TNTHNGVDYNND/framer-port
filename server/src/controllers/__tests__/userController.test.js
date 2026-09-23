@@ -95,6 +95,19 @@ describe('User Controller Integration Tests', () => {
       }
     });
 
+    // N1 (PR #48 review): the user-ABSENT path — exercises the timing-equalizer
+    // dummy-compare lines; identical 401 shape.
+    it('should 401 on unknown email (timing-equalized path)', async () => {
+      const response = await request(app)
+        .post('/api/users/login')
+        .send({ email: 'nobody-here@test.com', password: 'Whatever123' });
+
+      expect([401, 429]).toContain(response.status);
+      if (response.status === 401) {
+        expect(response.body).toHaveProperty('message', 'Invalid credentials');
+      }
+    });
+
     // W3: cookie-first protect branch + full login→cookie→protected roundtrip
     it('should authenticate via the HttpOnly cookie (login → profile roundtrip)', async () => {
       const login = await request(app)

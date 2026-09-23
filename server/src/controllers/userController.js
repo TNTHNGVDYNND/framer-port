@@ -8,8 +8,8 @@ import { AUTH_COOKIE_NAME } from "../middleware/authMiddleware.js";
 // login's user-absent path used to return before any bcrypt work — response
 // time distinguished registered emails. The dummy hash matches the real cost
 // factor (12); the absent-user path now burns the same compare before the
-// identical 401. Value is FIXED (hash of a fixed string) — it is never compared
-// against successfully, it only costs time.
+// identical 401. Value is FIXED (hash of a fixed string) — the compare's result
+// is discarded (the 401 is unconditional); the hash only costs time.
 const DUMMY_HASH = bcrypt.hashSync(
   "timing-equalizer-dummy-password",
   12,
