@@ -1,5 +1,28 @@
 import Project from "../models/Project.js";
 
+// L-5/#37: explicit allowlist — the ONLY project fields a request may write.
+// Mass-assignment surface closed: smuggled keys (role/_id/__v/createdAt/…)
+// never reach mongoose, on create OR update. Keep in lockstep with the schema.
+const PROJECT_WRITABLE_FIELDS = [
+  "title",
+  "description",
+  "imageUrl",
+  "projectUrl",
+  "tags",
+  "category",
+  "featured",
+];
+
+const pickProjectFields = (body) => {
+  const picked = {};
+  for (const field of PROJECT_WRITABLE_FIELDS) {
+    if (body && field in body) {
+      picked[field] = body[field];
+    }
+  }
+  return picked;
+};
+
 // @desc    Get all projects
 // @route   GET /api/projects
 // @access  Public
@@ -52,7 +75,7 @@ export const getProjectById = async (req, res, next) => {
 // @access  Private/Admin
 export const createProject = async (req, res, next) => {
   try {
-    const project = await Project.create(req.body);
+    const project = await Project.create(pickProjectFields(req.body));
 
     res.status(201).json({
       success: true,
@@ -69,10 +92,14 @@ export const createProject = async (req, res, next) => {
 // @access  Private/Admin
 export const updateProject = async (req, res, next) => {
   try {
-    const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const project = await Project.findByIdAndUpdate(
+      req.params.id,
+      pickProjectFields(req.body),
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     if (!project) {
       return res

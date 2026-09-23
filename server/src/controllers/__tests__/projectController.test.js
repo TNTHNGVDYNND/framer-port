@@ -148,6 +148,28 @@ describe('Project Controller Integration Tests', () => {
 
       expect(response.body).toHaveProperty('message', 'Not authorized as admin');
     });
+
+    it('L-5/#37: create drops smuggled non-allowlisted fields (mass-assignment closed)', async () => {
+      const response = await request(app)
+        .post('/api/projects')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({
+          title: 'Smuggled Fields Project',
+          description: 'Attempts to write fields outside the project allowlist on create',
+          category: 'Other',
+          role: 'admin',
+          _id: '000000000000000000000000',
+          __v: 42,
+          createdAt: '1999-01-01T00:00:00.000Z',
+        })
+        .expect(201);
+
+      expect(response.body.data).toHaveProperty('title', 'Smuggled Fields Project');
+      expect(String(response.body.data._id)).not.toBe('000000000000000000000000');
+      // timestamps come from mongoose, not the request
+      expect(response.body.data.createdAt).not.toBe('1999-01-01T00:00:00.000Z');
+      expect(response.body.data).not.toHaveProperty('role');
+    });
   });
 
   describe('PUT /api/projects/:id', () => {
