@@ -24,7 +24,9 @@ export const protect = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, env.jwtSecret);
+    // L-7/#38: algorithm pinned to the family the app signs with — blocks
+    // algorithm-confusion variants (e.g. alg:none / RS→HS key confusion).
+    const decoded = jwt.verify(token, env.jwtSecret, { algorithms: ['HS256'] });
     
     // Get user from database to include role in req.user
     const user = await User.findById(decoded.id).select('-password');

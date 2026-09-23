@@ -166,6 +166,19 @@ describe('User Controller Integration Tests', () => {
         .expect(401);
       expect(response.body).toHaveProperty('message', 'Session revoked');
     });
+
+    it('L-7/#38: rejects a token signed with a different algorithm (HS512) — algo pinned to HS256', async () => {
+      const hs512Token = jwt.sign(
+        { id: adminUser._id, role: 'admin', ver: adminUser.tokenVersion },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN, algorithm: 'HS512' },
+      );
+      const response = await request(app)
+        .get('/api/users/profile')
+        .set('Authorization', `Bearer ${hs512Token}`)
+        .expect(401);
+      expect(response.body).toHaveProperty('message');
+    });
   });
 
   describe('POST /api/users/logout', () => {
