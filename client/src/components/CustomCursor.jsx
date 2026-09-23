@@ -10,7 +10,9 @@ import {
 const CustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [cursorVariant, setCursorVariant] = useState('default');
+  // (lint fix, no-unused-vars): variant value is never rendered — setter kept
+  // for the hover-handlers' intent; elide the unread binding.
+  const [, setCursorVariant] = useState('default');
   const [ripples, setRipples] = useState([]);
 
   // Mouse position tracking
@@ -208,7 +210,10 @@ export const MagneticButton = ({
   className = '',
   strength = 0.3,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
+
+  // (lint fix, no-unused-vars): value never rendered — setter drives the
+  // hover handlers below; elide the unread binding.
+  const [, setIsHovered] = useState(false);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);

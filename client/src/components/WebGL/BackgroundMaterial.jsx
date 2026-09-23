@@ -5,7 +5,7 @@
  * Preserved for future WebGL background re-implementation
  */
 
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useFrame, extend } from '@react-three/fiber';
 import PropTypes from 'prop-types';
 import { FluidBackgroundMaterial } from './FluidShader';
@@ -42,10 +42,11 @@ const BackgroundMaterial = ({ uMouse, uScrollVelocity, uResolution }) => {
 
   // Cleanup
   useEffect(() => {
+    // (lint fix, exhaustive-deps): copy the ref value — it may have changed
+    // by the time the cleanup runs.
+    const material = materialRef.current;
     return () => {
-      if (materialRef.current) {
-        materialRef.current.dispose();
-      }
+      material?.dispose();
     };
   }, []);
 

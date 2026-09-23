@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TerminalHeader } from '../components/primitives';
 import { api } from '../services/api';
@@ -11,7 +11,9 @@ const AdminDashboard = () => {
   const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // (lint fix, no-unused-vars): error value never rendered — setter retained
+  // for the fetch catch-path; elide the unread binding.
+  const [, setError] = useState(null);
   const [stats, setStats] = useState({
     projects: 0,
     users: 0,
@@ -48,12 +50,9 @@ const AdminDashboard = () => {
     'Other',
   ];
 
-  // Fetch all data
-  useEffect(() => {
-    fetchAllData();
-  }, []);
-
-  const fetchAllData = async () => {
+  // Fetch all data (lint fix, exhaustive-deps): fetchAllData is stable
+  // (uses only state setters + the api singleton) — useCallback + honest deps.
+  const fetchAllData = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -96,7 +95,11 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification]);
+
+  useEffect(() => {
+    fetchAllData();
+  }, [fetchAllData]);
 
   const handleMarkAsRead = async (id, read) => {
     try {

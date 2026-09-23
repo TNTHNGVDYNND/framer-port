@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 const NotFound = () => {
   const [glitchText, setGlitchText] = useState('404');
-  const [typedCommand, setTypedCommand] = useState('');
+  // (lint fix, no-unused-vars): the value is only read inside the setter
+  // updater (easter-egg keypress buffer); elide the unread binding.
+  const [, setTypedCommand] = useState('');
   const [showHint, setShowHint] = useState(false);
 
   // Glitch effect for 404
