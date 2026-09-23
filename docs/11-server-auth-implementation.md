@@ -35,7 +35,7 @@ server/
 │   │   ├── database.js     # MongoDB connection with async/await
 │   │   └── index.js        # Environment variable management
 │   ├── controllers/
-│   │   ├── userController.js   # Auth: register, login, profile
+│   │   ├── userController.js   # Auth: login, profile, logout, force-logout
 │   │   ├── projectController.js # Enhanced with 7 sample projects
 │   │   ├── contactController.js   # Preserved existing logic
 │   │   └── index.js            # Centralized exports
@@ -59,13 +59,12 @@ server/
 |--------|----------|-------------|--------|
 | GET | `/api/projects` | Get all projects | Public |
 | POST | `/api/contact` | Submit contact form | Public |
-| POST | `/api/users/register` | Register new user | Public |
 | POST | `/api/users/login` | Authenticate user | Public |
 | GET | `/api/users/profile` | Get user profile | Protected (JWT) |
 
 #### 4. Authentication Flow
 
-1. **Registration**: POST `/api/users/register`
+1. **Registration — REMOVED** (closed; seed-provisioned, L-1/#33)
    - Validates email uniqueness
    - Hashes password with bcrypt (12 rounds)
    - Creates user with role (default: 'user')
@@ -89,7 +88,7 @@ PORT=5000
 JWT_SECRET=your-super-secret-key
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=<strong-password-set-at-seed-time>
 ```
 
 #### 6. Admin Seeding
@@ -105,7 +104,7 @@ Creates or updates admin user with credentials from `.env`.
 #### 1. New Components Created
 
 **Auth Components** (`client/src/components/auth/`):
-- **TerminalAuthForm.jsx**: Terminal-styled login/register form
+- **TerminalAuthForm.jsx**: Terminal-styled login form
   - Animated blinking cursor
   - Command prompt aesthetic (`> ` prefix)
   - Password visibility toggle [SHOW]/[HIDE]
@@ -122,8 +121,8 @@ Creates or updates admin user with credentials from `.env`.
 **Context**:
 - **AuthProvider.jsx**: Global auth state management
   - Reactive auth state (user, token, isAuthenticated, isAdmin)
-  - login(), register(), logout(), getProfile() functions
-  - localStorage persistence
+  - login(), logout(), getProfile() functions
+  - cookie-backed auth state (HttpOnly JWT)
   - Cross-component state updates
 
 **Pages**:
@@ -156,7 +155,6 @@ Creates or updates admin user with credentials from `.env`.
 **api.js**:
 - Added auth endpoints:
   - `api.auth.login(email, password)`
-  - `api.auth.register(email, password)`
   - `api.auth.getProfile(token)`
 - Updated all endpoints to use `/api` prefix
 - Added debug logging for API requests
@@ -191,17 +189,11 @@ Creates or updates admin user with credentials from `.env`.
 ```bash
 curl -X POST http://localhost:5000/api/users/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"admin123"}'
+  -d '{"email":"admin@example.com","password":"<your-admin-password>"}'
 ```
-✅ Returns: `{"_id":"...","email":"admin@example.com","role":"admin","token":"..."}`
+✅ Returns: `{"_id":"...","email":"admin@example.com","role":"admin"}` — the JWT rides an `HttpOnly` `Set-Cookie` (`token=…; HttpOnly; SameSite=Strict`), never the body (M-2)
 
-**User Registration:**
-```bash
-curl -X POST http://localhost:5000/api/users/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
-```
-✅ Returns: User created successfully
+**User Registration — REMOVED** (L-1/#33): public registration is closed; the single admin account is provisioned by `npm run seed`.
 
 **Protected Profile:**
 ```bash
@@ -228,7 +220,7 @@ curl http://localhost:5000/api/users/profile \
 
 **Logout:**
 1. Click Logout
-2. ✅ localStorage cleared
+2. ✅ server logout clears the HttpOnly cookie
 3. ✅ UI updates to show Login button
 4. ✅ Admin link disappears
 
@@ -286,14 +278,14 @@ curl http://localhost:5000/api/users/profile \
 
 ### Environment Setup
 
-**Server .env:**
+**Server .env** *(example values — replace every one before use; the seeder refuses weak/placeholder ADMIN_PASSWORD values)*:
 ```env
 PORT=5000
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/newport
 JWT_SECRET=your-secret-key-here
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=<strong-password-set-at-seed-time>
 ```
 
 **Client .env:**

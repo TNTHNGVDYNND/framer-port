@@ -4,7 +4,7 @@ Knowledge home for framer-port. Written 2026-09-20 from verified repo state; eve
 
 ## What this is
 
-Interactive MERN portfolio ("Zenfolio") — a cinematic, terminal-aesthetic portfolio site with an admin-managed project list and a persisted contact form. Client: React 19 + Vite 7 + Tailwind 4 + framer-motion. Server: Express 5 + Mongoose 9 + JWT auth (register/login, admin role). Database: MongoDB via `MONGO_URI` connection string (currently hosted on Atlas).
+Interactive MERN portfolio ("Zenfolio") — a cinematic, terminal-aesthetic portfolio site with an admin-managed project list and a persisted contact form. Client: React 19 + Vite 7 + Tailwind 4 + framer-motion. Server: Express 5 + Mongoose 9 + JWT auth (login-only, admin role — registration closed, seed-provisioned). Database: MongoDB via `MONGO_URI` connection string (currently hosted on Atlas).
 
 ## How to run it
 
@@ -40,7 +40,8 @@ cd server && npm run seed:projects  # seeds projects
 - `JWT_EXPIRES_IN` — token lifetime (defaults to `7d`)
 - `PORT` — server port (defaults to `5000`)
 - `CLIENT_URL` — allowed CORS origin (defaults to `http://localhost:5173`)
-- `ADMIN_EMAIL`, `ADMIN_PASSWORD` — consumed by `npm run seed`
+- `ADMIN_EMAIL`, `ADMIN_PASSWORD` — consumed by `npm run seed` (the seeder refuses weak/placeholder passwords: 8+ chars, upper/lower/digit)
+- `TRUST_PROXY` — proxy hops for X-Forwarded-* (integer string or unset). Unset → `false` (direct serving; forged-XFF tripwire armed); `1` behind one reverse proxy. Malformed values fail the boot gate (see Sharp edges).
 
 `client/.env` (verified against `client/src/services/api.js`):
 
@@ -63,9 +64,9 @@ npm test   # root → server: NODE_ENV=test node --experimental-vm-modules jest 
 ## API conventions
 
 - Base path `/api`; health check at `GET /api/health`.
-- List endpoints return the envelope `{success: true, count, data}` (projects, users, contact messages). Single-resource `GET` returns the raw document (no envelope). Write responses vary by endpoint: `POST`/`PUT /projects` and `PATCH /contact/:id/read` return `{success, message, data}`; `POST /contact` returns `{message, id}` (contactController.js:25-28); `POST /users/register` and `/login` return `{_id, email, role, token}` (userController.js:25-29, 55-59); `DELETE /projects/:id` returns `{success, message, id}` (projectController.js:105-109). Errors: `{message}` bodies come from controllers/middleware directly; the central error handler emits `{error}` or `{error, details}`.
+- List endpoints return the envelope `{success: true, count, data}` (projects, users, contact messages). Single-resource `GET` returns the raw document (no envelope). Write responses vary by endpoint: `POST`/`PUT /projects` and `PATCH /contact/:id/read` return `{success, message, data}`; `POST /contact` returns `{message, id}` (contactController.js:25-28); `POST /users/login` returns `{_id, email, role}` — the JWT rides an HttpOnly cookie, never the body (M-2); `POST /users/logout` returns `{message}`; `DELETE /projects/:id` returns `{success, message, id}` (projectController.js:105-109). Errors: `{message}` bodies come from controllers/middleware directly; the central error handler emits `{error}` or `{error, details}`.
 - Auth: `Authorization: Bearer <JWT>` (`protect` middleware); admin-only routes additionally require the user's `role === 'admin'` (`adminOnly`).
-- Rate limiting (`express-rate-limit`, standard `RateLimit-*` headers): general API 100 req/15 min, auth endpoints 5/15 min, contact form 3/hour. **Trust-proxy caveat:** `server.js` sets no `trust proxy`; behind a reverse proxy every client shares the proxy's IP, which makes the limits global. Set `app.set('trust proxy', <hops>)` when deploying behind one.
+- Rate limiting (`express-rate-limit`, standard `RateLimit-*` headers): general API 100 req/15 min, auth endpoints 5/15 min, contact form 3/hour. **Trust proxy** (M-1/#30): `server.js` sets `app.set('trust proxy', env.trustProxy)` — parsed from `TRUST_PROXY` (integer hop count; unset → `false`; malformed → fail-closed boot throw). Behind a reverse proxy, set it to the real hop count or every client shares the proxy's IP and the auth limits go global.
 - Read endpoints are cached in-process (`node-cache`): projects list 600s, project detail 300s, users 300s, contact messages 120s; write operations clear the affected keys.
 
 ## Sharp edges

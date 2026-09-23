@@ -25,6 +25,8 @@ It serves as both:
 ```bash
 # Install all dependencies (cascades into client/ and server/ — no extra flags needed)
 npm install
+# Deterministic alternative (lockfile-exact, both legs): npm run install:ci
+# To skip the cascade entirely: npm install --ignore-scripts
 
 # Server environment — REQUIRED (the API refuses to boot without it)
 cp server/.env.example server/.env
@@ -81,7 +83,7 @@ See `/docs` for full evolution.
 - Password complexity (8+ chars, upper/lower/number)
 - XSS sanitization via `.escape()` on text fields
 - Length limits (name: 2-100, message: 10-1000, title: 3-100, description: 10-500)
-- Role escalation prevention (role restricted to "user" on registration)
+- No public registration (removed; admin provisioned via seed — role fixed server-side)
 
 **Rate Limiting**
 - Authentication endpoints: 5 requests per 15 minutes (brute force protection)
@@ -121,7 +123,6 @@ See `/docs` for full evolution.
 | GET    | `/api/projects`       | Get all projects (with filters)      | 100 req / 15 min   |
 | GET    | `/api/projects/:id`   | Get single project by ID             | 100 req / 15 min   |
 | POST   | `/api/contact`        | Submit contact form                  | 3 req / 1 hour     |
-| POST   | `/api/users/register` | Register new user                    | 5 req / 15 min     |
 | POST   | `/api/users/login`    | User login                           | 5 req / 15 min     |
 
 **Query Parameters for `/api/projects`:**
@@ -186,10 +187,10 @@ Authorization: Bearer <jwt_token>
 ### Authentication System
 
 - JWT-based authentication with bcrypt password hashing
-- Terminal-styled login/register forms with animations
+- Terminal-styled login form with animations
 - Protected admin routes with role-based access control
 - Admin dashboard for managing projects, messages, and users
-- LocalStorage persistence with reactive state updates
+- Cookie-backed auth state (HttpOnly JWT) with reactive updates
 - Server-side token validation
 - Auto-redirect to login for protected routes
 
@@ -283,7 +284,7 @@ Detailed documentation is organized in `/docs`:
 - Component architecture and refactoring (V2, V3)
 - **Authentication system** (JWT + bcrypt + MongoDB)
 - **Admin dashboard** with protected routes and role-based access
-- Terminal-styled login/register UI
+- Terminal-styled login UI
 - **Security hardening** (validation, rate limiting, Helmet, CORS)
 - **Contact form persistence** (MongoDB with full CRUD)
 - **Projects database integration** (no more hardcoded data)
@@ -315,7 +316,7 @@ Detailed documentation is organized in `/docs`:
 
 **Authentication System:**
 
-- `server/src/controllers/userController.js` - Login, register, profile, getAllUsers
+- `server/src/controllers/userController.js` - Login, profile, logout, force-logout, getAllUsers
 - `server/src/middleware/authMiddleware.js` - JWT verification + adminOnly guard
 - `server/src/middleware/rateLimiter.js` - Rate limiting configuration
 - `client/src/context/AuthProvider.jsx` - Global auth state management
@@ -380,7 +381,7 @@ CLIENT_URL=http://localhost:5173
 
 # Admin (for seeding)
 ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=changeme123
+ADMIN_PASSWORD=CHANGE_ME_BEFORE_SEED   # must pass the seeder's strength gate: 8+, upper/lower/digit
 
 # Auth (change in production!)
 JWT_SECRET=your-secret-key-here-minimum-32-characters-long
